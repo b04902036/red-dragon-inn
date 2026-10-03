@@ -1,4 +1,6 @@
-# Architecture through step 12
+# Architecture through step 14
+
+Step 14 adds typed UI localization and immutable D1 translation records. Locale affects definition presentation only; it never changes WebSocket commands, canonical definitions or deterministic replay. See [localization](localization.md).
 
 The browser entry is `index.html` → `src/client/main.tsx`. React owns display state only; the home screen fetches `/api/health` and represents checking, healthy, and unavailable states. It validates the response and cancels obsolete requests when the component unmounts or retries. `src/shared/health.ts` contains the small public API type and no runtime-specific code.
 
@@ -16,7 +18,7 @@ Separate strict TypeScript configurations prevent the Worker from relying on bro
 - `src/shared/ids.ts` and `version.ts`: namespaced branded identities and the safe monotonic version counter contract. Brands prevent accidental mixing in TypeScript; runtime validation also distinguishes ID namespaces.
 - `worker/durable/`: authoritative rooms, persisted membership/state, and session-bound WebSocket Hibernation API handlers.
 - `worker/repositories/`: server-only interfaces and D1 content, match, and append-only event/snapshot repositories.
-- `migrations/` and `seeds/`: fifteen D1 tables, version/ownership/history guards, and original sample data.
+- `migrations/` and `seeds/`: seventeen D1 tables, version/ownership/history/channel guards, and explicit development/test sample data.
 - `tests/engine/`, `tests/content/`, `tests/protocol/`, `tests/worker/`, `tests/client/`, `tests/e2e/`: contract/version, content/effects, protocol/privacy, Workers runtime, React, and browser tests respectively. `tests/fixtures/` contains original sample state only.
 - `public/`: public static assets only.
 
@@ -63,3 +65,5 @@ The Node suites exercise every command/event discriminator, ID namespace, malfor
 - [Cloudflare Vitest integration](https://developers.cloudflare.com/workers/testing/vitest-integration/write-your-first-test/)
 
 Step 11 adds native Cloudflare create/entry throttles, durable per-seat command budgets, hibernatable socket abuse counters, streamed HTTP body limits and browser security headers. See [security and deployment](security-deployment.md) for policies and account setup. Production artifacts are checked for repeat-build equality; CI remains sample-only.
+
+Step 13 removes sample pack/presentation imports from production Workers. Rooms pin a published D1 production edition before character selection. Definition-only presentation loads that pin; future channel updates affect future rooms. A separate fixture environment supports tests/local demonstrations, while normal development/build/deployment requires production content. The 76-character supplied public catalog is metadata; strict completeness separates that coverage from executable owned/licensed cards. See [production content](production-content.md).

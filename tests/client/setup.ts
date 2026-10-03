@@ -4,5 +4,7 @@ import { afterEach, vi } from 'vitest';
 
 afterEach(() => {
   cleanup();
+  localStorage.clear();
+  document.documentElement.lang = 'en-US';
   vi.unstubAllGlobals();
 });

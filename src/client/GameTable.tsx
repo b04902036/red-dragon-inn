@@ -10,20 +10,27 @@ import type { RoomClientState } from './room-state';
 import { phaseName } from './room-state';
 import { contextualActions, cardAction } from './game-actions';
 import { Modal } from './Modal';
+import { useLocale } from './i18n/context';
+import type { MessageKey } from '../shared/ui-messages';
+import { useAttentionChime } from './audio/use-attention-chime';
+import { HandCard } from './cards/HandCard';
+import { CardPreview } from './cards/CardPreview';
+import { useCardSelection } from './cards/useCardSelection';
+import { useCardPreview } from './cards/useCardPreview';
 
 type Send = (
   type: StateChangingCommand['type'],
   fields?: Record<string, unknown>,
 ) => void;
-const labels: Partial<Record<StateChangingCommand['type'], string>> = {
-  DISCARD: 'Discard and draw',
-  SKIP_ACTION: 'Skip action',
-  ORDER_DRINK: 'Order a Drink',
-  TAKE_DRINK: 'Take a Drink',
-  ADVANCE_PHASE: 'Continue turn',
-  PASS_RESPONSE: 'Pass response',
-  GAMBLING_PASS: 'Pass gambling',
-  GAMBLING_LEAVE: 'Leave gambling',
+const labels: Partial<Record<StateChangingCommand['type'], MessageKey>> = {
+  DISCARD: 'action.DISCARD',
+  SKIP_ACTION: 'action.SKIP_ACTION',
+  ORDER_DRINK: 'action.ORDER_DRINK',
+  TAKE_DRINK: 'action.TAKE_DRINK',
+  ADVANCE_PHASE: 'action.ADVANCE_PHASE',
+  PASS_RESPONSE: 'action.PASS_RESPONSE',
+  GAMBLING_PASS: 'action.GAMBLING_PASS',
+  GAMBLING_LEAVE: 'action.GAMBLING_LEAVE',
 };
 
 export function PlayerPanel({
@@ -32,69 +39,79 @@ export function PlayerPanel({
   own,
   active,
   connected,
+  mechanicName = (name) => name,
 }: {
   player: PublicGameView['players'][number];
   characterName: string;
   own: boolean;
   active: boolean;
   connected: boolean;
+  mechanicName?: (name: string) => string;
 }) {
+  const { t } = useLocale();
   return (
     <article
       className={`player-panel${own ? ' own-player' : ''}${active ? ' active-player' : ''}${player.eliminated ? ' eliminated' : ''}`}
-      aria-label={`${player.displayName}${own ? ' (you)' : ''}`}
+      aria-label={
+        own
+          ? t('room.youAria', { name: player.displayName })
+          : player.displayName
+      }
     >
       <div className="player-heading">
         <span className="portrait" aria-hidden="true">
-          {characterName.replace('Sample ', '').slice(0, 1)}
+          {characterName.slice(0, 1)}
         </span>
         <div>
           <h3>
             {player.displayName}
-            {own ? ' · You' : ''}
+            {own ? t('room.you') : ''}
           </h3>
           <p>{characterName}</p>
         </div>
       </div>
       <p className="seat-state">
-        Seat {player.seat + 1} ·{' '}
+        {t('room.seat', { seat: player.seat + 1 })} ·{' '}
         {player.eliminated
-          ? 'Eliminated'
+          ? t('player.eliminated')
           : active
-            ? 'Active turn'
+            ? t('player.active')
             : connected
-              ? 'Connected'
-              : 'Disconnected'}
+              ? t('status.connected')
+              : t('status.offline')}
       </p>
       <dl className="stats">
         <div>
-          <dt>Fortitude</dt>
+          <dt>{t('player.fortitude')}</dt>
           <dd>{player.fortitude}</dd>
         </div>
         <div>
-          <dt>Alcohol</dt>
+          <dt>{t('player.alcohol')}</dt>
           <dd>{player.alcoholContent}</dd>
         </div>
         <div>
-          <dt>Gold</dt>
+          <dt>{t('player.gold')}</dt>
           <dd>{player.gold}</dd>
         </div>
       </dl>
       <p className="pile-counts">
-        <span aria-label={`Hand count ${player.handCount}`}>
-          Hand: {player.handCount}
+        <span aria-label={t('player.handCount', { count: player.handCount })}>
+          {t('player.hand', { count: player.handCount })}
         </span>
-        <span>Drink Me!: {player.drinkPileCount}</span>
+        <span>{t('player.drinkPile', { count: player.drinkPileCount })}</span>
       </p>
       {Object.entries(player.resources).map(([name, value]) => (
         <p key={name}>
-          Resource {name}: {value}
+          {t('player.resource', { name: mechanicName(name), value })}
         </p>
       ))}
       {Object.entries(player.sideDecks).map(([name, pile]) => (
         <p key={name}>
-          Side deck {name}: {pile.deckCount} cards · {pile.discardCount}{' '}
-          discarded
+          {t('player.sideDeck', {
+            name: mechanicName(name),
+            deck: pile.deckCount,
+            discard: pile.discardCount,
+          })}
         </p>
       ))}
     </article>
@@ -104,12 +121,24 @@ function ChoicePicker({
   choice,
   send,
   disabled,
+  optionLabel,
+  definitionFor,
 }: {
   choice: NonNullable<PrivatePlayerView['pendingChoice']>;
   send: Send;
   disabled: boolean;
+  optionLabel: (
+    option: NonNullable<PrivatePlayerView['pendingChoice']>['options'][number],
+  ) => string;
+  definitionFor: (id: string) => Presentation['cards'][number] | undefined;
 }) {
-  const [selected, setSelected] = useState<string[]>([]);
+  const { t } = useLocale();
+  const selection = useCardSelection(
+    choice.options.map((option) => option.id),
+    choice.max,
+  );
+  const { selected } = selection;
+  const preview = useCardPreview();
   const type =
     choice.kind === 'TARGET'
       ? 'CHOOSE_TARGET'
@@ -117,39 +146,66 @@ function ChoicePicker({
         ? 'CHOOSE_CARDS'
         : 'CHOOSE_OPTION';
   return (
-    <Modal
-      title="Choose how to resolve this effect"
-      mandatory
-      onClose={() => {}}
-    >
+    <Modal title={t('choice.title')} mandatory onClose={() => {}}>
       <p>
-        Select{' '}
-        {choice.min === choice.max ? choice.min : `${choice.min}–${choice.max}`}{' '}
-        {choice.kind.toLowerCase()} choice(s).
+        {t('choice.count', {
+          count:
+            choice.min === choice.max
+              ? choice.min
+              : `${choice.min}–${choice.max}`,
+          kind: t(`choice.${choice.kind}`),
+        })}
       </p>
       <fieldset>
-        <legend>Available choices</legend>
-        {choice.options.map((option) => (
-          <label className="choice-option" key={option.id}>
-            <input
-              type="checkbox"
-              checked={selected.includes(option.id)}
-              disabled={
-                disabled ||
-                (!selected.includes(option.id) && selected.length >= choice.max)
-              }
-              onChange={() =>
-                setSelected((previous) =>
-                  previous.includes(option.id)
-                    ? previous.filter((id) => id !== option.id)
-                    : [...previous, option.id],
-                )
-              }
-            />
-            {option.label}
-          </label>
-        ))}
+        <legend>{t('choice.available')}</legend>
+        {choice.options.map((option) => {
+          const card =
+            choice.kind === 'CARD' ? definitionFor(option.id) : undefined;
+          if (card)
+            return (
+              <HandCard
+                key={option.id}
+                id={option.id}
+                definition={card}
+                selectable
+                selected={selected.includes(option.id)}
+                disabled={
+                  disabled ||
+                  (!selected.includes(option.id) &&
+                    selected.length >= choice.max)
+                }
+                onToggle={selection.toggle}
+                onPreview={preview.show}
+                onLeave={preview.hide}
+                onInspect={preview.pin}
+                onClosePreview={preview.close}
+              />
+            );
+          return (
+            <label className="choice-option" key={option.id}>
+              <input
+                type="checkbox"
+                checked={selected.includes(option.id)}
+                disabled={
+                  disabled ||
+                  (!selected.includes(option.id) &&
+                    selected.length >= choice.max)
+                }
+                onChange={() => selection.toggle(option.id)}
+              />
+              {optionLabel(option)}
+            </label>
+          );
+        })}
       </fieldset>
+      <CardPreview
+        card={choice.options
+          .map((option) => definitionFor(option.id))
+          .find((card) => card?.id === preview.id)}
+        onClose={preview.close}
+        onEngage={() => preview.pin(preview.id!)}
+        embedded
+      />
       <button
         disabled={
           disabled ||
@@ -167,7 +223,7 @@ function ChoicePicker({
           })
         }
       >
-        Confirm choice
+        {t('choice.confirm')}
       </button>
     </Modal>
   );
@@ -186,12 +242,15 @@ export function GameTable({
   send: Send;
   reconnect: () => void;
 }) {
+  const { locale, t, message } = useLocale();
   const view = state.publicView!;
+  useAttentionChime(view, playerId);
   const own = view.players.find((player) => player.id === playerId)!;
-  const [selected, setSelected] = useState<string[]>([]);
-  const [inspect, setInspect] = useState<Presentation['cards'][number] | null>(
-    null,
+  const selection = useCardSelection(
+    state.privateView?.hand.map((card) => card.id) ?? [],
   );
+  const { selected } = selection;
+  const preview = useCardPreview();
   const [target, setTarget] = useState<{
     type: 'ORDER_DRINK' | 'PLAY_CARD' | 'PLAY_RESPONSE' | 'GAMBLING_PLAY';
     cardId?: string;
@@ -200,10 +259,34 @@ export function GameTable({
     state.status !== 'synced' ||
     state.pendingCommandId !== null ||
     state.privateView === null;
-  const cards = new Map(presentation.cards.map((card) => [card.id, card]));
+  const cards = new Map<string, Presentation['cards'][number]>(
+    presentation.cards.map((card) => [card.id, card]),
+  );
   const character = (id: string | null) =>
     presentation.characters.find((character) => character.id === id)?.name ??
-    'Sample adventurer';
+    t('player.adventurer');
+  const mechanicName = (key: string) =>
+    presentation.mechanics?.find((mechanic) => mechanic.id === key)?.name ??
+    key;
+  const optionLabel = (
+    option: NonNullable<PrivatePlayerView['pendingChoice']>['options'][number],
+  ) => {
+    if (state.privateView?.pendingChoice?.kind === 'CARD') {
+      const reference = hand.find((card) => card.id === option.id);
+      if (reference)
+        return cards.get(reference.definitionId)?.name ?? option.label;
+    }
+    if (state.privateView?.pendingChoice?.kind === 'OPTION') {
+      const source = view.resolutionStack.at(-1)?.sourceCard?.definitionId;
+      return (
+        presentation.choiceOptions?.find(
+          (item) =>
+            item.cardDefinitionId === source && item.optionId === option.id,
+        )?.label ?? option.label
+      );
+    }
+    return option.label;
+  };
   const actions = contextualActions(view, playerId);
   const hand = state.privateView?.hand ?? [];
   const perform = (type: StateChangingCommand['type']) => {
@@ -215,7 +298,7 @@ export function GameTable({
       send(type, {
         cardIds: selected.filter((id) => hand.some((card) => card.id === id)),
       });
-      setSelected([]);
+      selection.clear();
       return;
     }
     send(
@@ -254,48 +337,42 @@ export function GameTable({
     <main className="game-page">
       <header className="table-header">
         <div>
-          <p className="eyebrow">Red Dragon Inn · Sample table</p>
+          <p className="eyebrow">{t('app.title')}</p>
           <h1>
             {view.lifecycle === 'FINISHED'
-              ? 'The night is over'
-              : 'An evening at the inn'}
+              ? t('table.over')
+              : t('table.evening')}
           </h1>
         </div>
         <div className="connection">
-          <p role="status">
-            {state.status === 'synced'
-              ? 'Synced'
-              : state.status === 'resyncing'
-                ? 'Refreshing table…'
-                : state.status === 'connecting'
-                  ? 'Connecting…'
-                  : state.status === 'reconnecting'
-                    ? 'Reconnecting…'
-                    : 'Disconnected'}
-          </p>
+          <p role="status">{t(`status.${state.status}`)}</p>
           {state.status !== 'synced' && (
-            <button onClick={reconnect}>Reconnect</button>
+            <button onClick={reconnect}>{t('status.reconnect')}</button>
           )}
         </div>
       </header>
       {state.error && (
         <p role="alert" className="notice">
-          {state.error}
+          {message(state.error)}
         </p>
       )}
       {view.lifecycle === 'FINISHED' && (
         <section className="winner-banner">
           <h2>
             {view.winners.length === 0
-              ? 'The match is a tie'
-              : `${view.players.find((player) => view.winners.includes(player.id))!.displayName} wins!`}
+              ? t('table.tie')
+              : t('table.winner', {
+                  name: view.players.find((player) =>
+                    view.winners.includes(player.id),
+                  )!.displayName,
+                })}
           </h2>
-          <p>Thanks for sharing the table.</p>
+          <p>{t('table.thanks')}</p>
         </section>
       )}
       <div className="table-layout">
-        <section className="play-space" aria-label="Game table">
-          <div className="opponents" aria-label="Other players">
+        <section className="play-space" aria-label={t('table.label')}>
+          <div className="opponents" aria-label={t('table.opponents')}>
             {view.players
               .filter((player) => player.id !== playerId)
               .map((player) => (
@@ -303,6 +380,7 @@ export function GameTable({
                   key={player.id}
                   player={player}
                   characterName={character(player.characterId)}
+                  mechanicName={mechanicName}
                   own={false}
                   active={player.id === view.activePlayerId}
                   connected={state.presence.some(
@@ -312,28 +390,28 @@ export function GameTable({
                 />
               ))}
           </div>
-          <section className="inn-center" aria-label="The Inn">
+          <section className="inn-center" aria-label={t('table.inn')}>
             <div className="inn-piles">
               <div className="deck-back">
-                <span>Inn Drink deck</span>
+                <span>{t('table.deck')}</span>
                 <strong>{view.innDrinkDeckCount}</strong>
-                <small>Face down</small>
+                <small>{t('table.faceDown')}</small>
               </div>
               <div className="discard-pile">
-                <span>Drink discard</span>
+                <span>{t('table.discard')}</span>
                 <strong>{view.innDrinkDiscardCount}</strong>
-                <small>Resolved Drinks</small>
+                <small>{t('table.resolvedDrinks')}</small>
               </div>
               <div className="pot">
-                <span>Gambling pot</span>
+                <span>{t('table.pot')}</span>
                 <strong>{view.gambling?.pot ?? 0}</strong>
-                <small>Gold</small>
+                <small>{t('player.gold')}</small>
               </div>
             </div>
             <h2>
               {view.resolutionStack.length > 0
-                ? 'Resolving at the table'
-                : 'The table is clear'}
+                ? t('table.resolving')
+                : t('table.clear')}
             </h2>
             <ol className="stack">
               {view.resolutionStack.map((frame) => (
@@ -344,16 +422,19 @@ export function GameTable({
                   )
                     .map(
                       (source) =>
-                        cards.get(source.definitionId)?.name ?? 'Revealed card',
+                        cards.get(source.definitionId)?.name ??
+                        t('table.revealed'),
                     )
-                    .join(' → ') || 'Empty Drink pile'}
+                    .join(' → ') || t('table.emptyDrink')}
                   <span>
-                    {frame.kind === 'DRINK_EVENT'
-                      ? 'Drink Event'
-                      : frame.kind === 'DRINK'
-                        ? 'Drink chain'
-                        : 'Card'}{' '}
-                    · awaiting resolution
+                    {t('table.awaiting', {
+                      kind:
+                        frame.kind === 'DRINK_EVENT'
+                          ? t('term.drinkEvent')
+                          : frame.kind === 'DRINK'
+                            ? t('table.drinkChain')
+                            : t('table.card'),
+                    })}
                   </span>
                 </li>
               ))}
@@ -366,6 +447,7 @@ export function GameTable({
               sideDecks: { ...own.sideDecks, ...state.privateView?.sideDecks },
             }}
             characterName={character(own.characterId)}
+            mechanicName={mechanicName}
             own
             active={own.id === view.activePlayerId}
             connected={state.status === 'synced'}
@@ -373,61 +455,72 @@ export function GameTable({
         </section>
         <aside className="table-rail">
           <section className="turn-panel">
-            <p className="eyebrow">Current phase</p>
-            <h2>{phaseName(view.phase)}</h2>
+            <p className="eyebrow">{t('table.phase')}</p>
+            <h2>{phaseName(view.phase, locale)}</h2>
             <p>
-              Active player:{' '}
-              <strong>
-                {view.players.find(
-                  (player) => player.id === view.activePlayerId,
-                )?.displayName ?? 'None'}
-              </strong>
+              {t('table.active', {
+                name:
+                  view.players.find(
+                    (player) => player.id === view.activePlayerId,
+                  )?.displayName ?? t('table.none'),
+              })}
             </p>
             {view.responseWindow && (
               <div className="response-panel">
-                <h3>Response window</h3>
+                <h3>{t('table.response')}</h3>
                 <p>
                   {view.responseWindow.choicePlayerId
-                    ? 'An effect needs a choice.'
+                    ? t('table.choiceNeeded')
                     : waiting === playerId
-                      ? 'Your response priority. Play a response or pass.'
-                      : `Waiting for ${waitingName}'s response.`}
+                      ? t('table.yourResponse')
+                      : t('table.waitResponse', {
+                          name: waitingName ?? t('table.none'),
+                        })}
                 </p>
                 <p>
-                  {view.responseWindow.passedPlayerIds.length} /{' '}
-                  {view.responseWindow.eligiblePlayerIds.length} players passed
+                  {t('table.passed', {
+                    passed: view.responseWindow.passedPlayerIds.length,
+                    eligible: view.responseWindow.eligiblePlayerIds.length,
+                  })}
                 </p>
               </div>
             )}
             {view.gambling && (
               <div className="gambling-panel">
-                <h3>Gambling round</h3>
+                <h3>{t('table.gambling')}</h3>
                 <p>
-                  Controller:{' '}
-                  {
-                    view.players.find(
+                  {t('table.controller', {
+                    name: view.players.find(
                       (player) => player.id === view.gambling!.controlPlayerId,
-                    )!.displayName
-                  }
+                    )!.displayName,
+                  })}
                 </p>
                 <p>
                   {waiting === playerId
-                    ? 'Your gambling priority.'
-                    : 'Waiting for ' + waitingName + '.'}
+                    ? t('table.yourGambling')
+                    : t('table.waitGambling', {
+                        name: waitingName ?? t('table.none'),
+                      })}
                 </p>
-                <p>Pot: {view.gambling.pot} Gold</p>
+                <p>{t('table.potValue', { gold: view.gambling.pot })}</p>
               </div>
             )}
             {!view.responseWindow &&
               !view.gambling &&
               view.lifecycle === 'PLAYING' &&
-              waiting !== playerId && <p>Waiting for {waitingName}'s turn.</p>}
+              waiting !== playerId && (
+                <p>
+                  {t('table.waitTurn', {
+                    name: waitingName ?? t('table.none'),
+                  })}
+                </p>
+              )}
           </section>
-          <section className="event-log" aria-label="Table log">
-            <h2>At the table</h2>
+          <section className="event-log" aria-label={t('table.logAria')}>
+            <h2>{t('table.logTitle')}</h2>
             <ol>
               {state.log.map((line, index) => (
-                <li key={`${index}_${line}`}>{line}</li>
+                <li key={`${index}_${line.key}`}>{message(line)}</li>
               ))}
             </ol>
           </section>
@@ -437,30 +530,30 @@ export function GameTable({
         <div className="action-bar">
           <p>
             {own.eliminated
-              ? 'You are eliminated. Watch the rest of the match.'
+              ? t('table.eliminatedHelp')
               : busy
-                ? 'Waiting for the table…'
+                ? t('table.waiting')
                 : actions.length === 0
-                  ? 'Cards marked playable can be used now.'
-                  : 'Choose your next move.'}
+                  ? t('table.playableHelp')
+                  : t('table.nextMove')}
           </p>
           <div>
             {actions.map((type) => (
               <button key={type} disabled={busy} onClick={() => perform(type)}>
-                {labels[type]}
+                {t(labels[type]!)}
               </button>
             ))}
           </div>
         </div>
-        <section aria-label="Your hand">
+        <section aria-label={t('table.yourHand')}>
           <div className="hand-heading">
             <h2>
-              Your hand <span>({hand.length})</span>
+              {t('table.yourHand')} <span>({hand.length})</span>
             </h2>
             <p>
               {view.phase === 'DISCARD_DRAW' && view.activePlayerId === playerId
-                ? 'Select cards to discard, then draw. Zero discards is allowed.'
-                : 'Tap a card to read it.'}
+                ? t('table.discardHelp')
+                : t('table.inspectHelp')}
             </p>
           </div>
           <div className="hand-row">
@@ -474,69 +567,51 @@ export function GameTable({
                 presentation.cards,
               );
               return (
-                <article
-                  className={`hand-card${selected.includes(reference.id) ? ' selected-card' : ''}`}
+                <HandCard
                   key={reference.id}
-                  data-card-id={reference.id}
+                  id={reference.id}
+                  definition={definition}
+                  selectable={actions.includes('DISCARD')}
+                  selected={selected.includes(reference.id)}
+                  disabled={busy}
+                  onToggle={selection.toggle}
+                  onPreview={preview.show}
+                  onLeave={preview.hide}
+                  onInspect={preview.pin}
+                  onClosePreview={preview.close}
                 >
-                  <p className="card-kind">
-                    {definition.type.replace('_', ' ')}
-                  </p>
-                  <h3>{definition.name}</h3>
-                  <button
-                    className="card-read"
-                    onClick={() => setInspect(definition)}
-                  >
-                    Read {definition.name}
-                  </button>
-                  {actions.includes('DISCARD') && (
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selected.includes(reference.id)}
-                        disabled={busy}
-                        onChange={() =>
-                          setSelected((previous) =>
-                            previous.includes(reference.id)
-                              ? previous.filter((id) => id !== reference.id)
-                              : [...previous, reference.id],
-                          )
-                        }
-                      />
-                      Discard {definition.name}
-                    </label>
-                  )}
                   {playable && (
                     <button
                       disabled={busy}
                       onClick={() => play(reference, definition)}
                     >
-                      {playable === 'PLAY_RESPONSE'
-                        ? 'Respond with '
-                        : playable === 'GAMBLING_PLAY'
-                          ? 'Control with '
-                          : 'Play '}
-                      {definition.name}
+                      {t(
+                        playable === 'PLAY_RESPONSE'
+                          ? 'card.respond'
+                          : playable === 'GAMBLING_PLAY'
+                            ? 'card.control'
+                            : 'card.play',
+                        { name: definition.name },
+                      )}
                     </button>
                   )}
-                </article>
+                </HandCard>
               );
             })}
           </div>
         </section>
       </footer>
-      {inspect && (
-        <Modal title={inspect.name} onClose={() => setInspect(null)}>
-          <p className="card-kind">{inspect.type.replace('_', ' ')}</p>
-          <p>{inspect.rulesText}</p>
-        </Modal>
-      )}
+      <CardPreview
+        card={cards.get(preview.id ?? '')}
+        onClose={preview.close}
+        onEngage={() => preview.pin(preview.id!)}
+      />
       {target && (
         <Modal
           title={
             target.type === 'ORDER_DRINK'
-              ? 'Who gets a Drink?'
-              : 'Choose a target'
+              ? t('target.drink')
+              : t('target.title')
           }
           onClose={() => setTarget(null)}
         >
@@ -566,10 +641,18 @@ export function GameTable({
       )}
       {state.privateView?.pendingChoice && (
         <ChoicePicker
-          key={state.privateView.pendingChoice.responseWindowId}
+          key={
+            view.attention?.key ??
+            state.privateView.pendingChoice.responseWindowId
+          }
           choice={state.privateView.pendingChoice}
           send={send}
           disabled={busy}
+          optionLabel={optionLabel}
+          definitionFor={(id) => {
+            const reference = hand.find((card) => card.id === id);
+            return reference ? cards.get(reference.definitionId) : undefined;
+          }}
         />
       )}
     </main>

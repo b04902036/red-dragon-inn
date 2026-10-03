@@ -21,7 +21,7 @@ npm run content:import -- --input content-private/imports/my-pack.json --write
 
 This creates a draft version and graph in one atomic transaction. Add `--publish` to publish inside that same transaction after validation. Published definitions are immutable. For review, leave the version as a draft; drafts are unavailable through play-loading repositories. A failed statement rolls back all prior statements, including version creation. The CLI always uses local D1 and cannot target a remote account.
 
-Imported packs can be supplied to the pure engine's `createMatch` setup, which pins the version, rules, quantities and definitions for that match. Runtime tests load an imported published deck and start a match with the same pack. The current public lobby continues to offer the original sample catalog; selecting private catalogs in that UI and uploading artwork are later product work.
+Imported packs can be supplied to the pure engine's `createMatch` setup, which pins the version, rules, quantities and definitions for that match. Runtime rooms now resolve the published production channel at creation and use its pinned catalog for lobby selection and match start. Explicit fixture mode uses a published D1 fixture edition. Production activation requires completeness; artwork uploading remains later product work. See [production setup](production-content.md).
 
 ## Adapters and trusted mechanics
 

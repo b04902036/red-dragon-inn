@@ -8,6 +8,9 @@ import {
 } from '../../src/protocol/projections';
 import { started } from '../fixtures/core-match';
 import { playerIdSchema } from '../../src/shared/ids';
+import { formatMessage } from '../../src/shared/ui-messages';
+import { LocaleProvider } from '../../src/client/i18n/LocaleProvider';
+import { useLocale } from '../../src/client/i18n/context';
 
 class Socket {
   static OPEN = 1;
@@ -63,9 +66,37 @@ beforeEach(() => {
 });
 afterEach(() => vi.useRealTimers());
 describe('room transport', () => {
+  it('changes presentation locale without reconnecting, sending commands, or changing authoritative state', async () => {
+    const { result } = renderHook(
+      () => ({ room: useRoom(credentials), language: useLocale() }),
+      { wrapper: LocaleProvider },
+    );
+    await waitFor(() =>
+      expect(result.current.room.presentation).toEqual(content),
+    );
+    const socket = Socket.instances[0]!;
+    act(() => ready(socket));
+    const before = result.current.room.state;
+    const sent = [...socket.sent];
+    act(() => result.current.language.setLocale('zh-TW'));
+    await waitFor(() =>
+      expect(fetch).toHaveBeenLastCalledWith(
+        `/api/rooms/${credentials.roomId}/presentation?locale=zh-TW`,
+        expect.objectContaining({ signal: expect.any(AbortSignal) }),
+      ),
+    );
+    expect(Socket.instances).toHaveLength(1);
+    expect(socket.closed).toBe(false);
+    expect(socket.sent).toEqual(sent);
+    expect(result.current.room.state).toBe(before);
+  });
   it('reports history failure and reconnects with the same seat and private hand', async () => {
     const { result } = renderHook(() => useRoom(credentials));
     await waitFor(() => expect(result.current.presentation).toEqual(content));
+    expect(fetch).toHaveBeenCalledWith(
+      `/api/rooms/${credentials.roomId}/presentation?locale=en-US`,
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
+    );
     vi.useFakeTimers();
     const old = Socket.instances[0]!;
     act(() => ready(old));
@@ -78,7 +109,9 @@ describe('room transport', () => {
         stateVersion: game.version,
       }),
     );
-    expect(result.current.state.error).toContain('Match history');
+    expect(formatMessage('en-US', result.current.state.error!.key)).toContain(
+      'Match history',
+    );
     act(() => old.onclose?.({ code: 1013 }));
     expect(result.current.state.status).toBe('reconnecting');
     act(() => vi.advanceTimersByTime(1000));
@@ -164,7 +197,9 @@ describe('room transport', () => {
     act(() => ready(socket));
     act(() => socket.onclose?.({ code: 1008 }));
     expect(result.current.state.status).toBe('offline');
-    expect(result.current.state.error).toContain('another tab');
+    expect(formatMessage('en-US', result.current.state.error!.key)).toContain(
+      'another tab',
+    );
     act(() => result.current.reconnect());
     expect(Socket.instances).toHaveLength(2);
     expect(socket.closed).toBe(true);
@@ -179,12 +214,16 @@ describe('room transport', () => {
     vi.stubGlobal('fetch', fetchMock);
     const { result } = renderHook(() => useRoom(credentials));
     await waitFor(() =>
-      expect(result.current.state.error).toContain('Card information'),
+      expect(formatMessage('en-US', result.current.state.error!.key)).toContain(
+        'Card information',
+      ),
     );
     act(() =>
       Socket.instances[0]!.message({ type: 'PUBLIC_STATE', view: { seed: 1 } }),
     );
-    expect(result.current.state.error).toContain('could not be read');
+    expect(formatMessage('en-US', result.current.state.error!.key)).toContain(
+      'could not be read',
+    );
     act(() => result.current.reconnect());
     await waitFor(() => expect(result.current.presentation).toEqual(content));
     expect(fetchMock).toHaveBeenCalledTimes(2);
@@ -199,6 +238,8 @@ describe('room transport', () => {
     act(() => result.current.send('DISCARD', { cardIds: [], gold: 999 }));
     expect(socket.sent).toHaveLength(1);
     expect(result.current.state.pendingCommandId).toBeNull();
-    expect(result.current.state.error).toContain('could not be sent');
+    expect(formatMessage('en-US', result.current.state.error!.key)).toContain(
+      'could not be sent',
+    );
   });
 });

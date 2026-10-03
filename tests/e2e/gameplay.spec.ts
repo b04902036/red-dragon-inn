@@ -71,11 +71,7 @@ test('two players use the table, reactions, Drinks, gambling, refresh and mobile
     await expect(guest.getByLabel('Your character')).toHaveValue(
       'character_sample_3',
     );
-    await act(
-      host,
-      roomId,
-      host.getByRole('button', { name: 'Start sample match' }),
-    );
+    await act(host, roomId, host.getByRole('button', { name: 'Start match' }));
     for (const page of pages)
       await expect(page.locator('[data-card-id]')).toHaveCount(7);
     const initial = await metadata(host, roomId);
@@ -103,19 +99,33 @@ test('two players use the table, reactions, Drinks, gambling, refresh and mobile
     expect(ids[0]!.filter((id) => ids[1]!.includes(id))).toEqual([]);
     await expect(host.locator('.opponents [data-card-id]')).toHaveCount(0);
     await expect(guest.locator('.opponents [data-card-id]')).toHaveCount(0);
-    await host
-      .getByRole('button', { name: 'Read Sample Friendly Shove' })
-      .first()
-      .click();
-    await expect(host.getByRole('dialog')).toContainText('Fortitude');
-    await host.keyboard.press('Escape');
-    await expect(host.getByRole('dialog')).toHaveCount(0);
+    const shove = host
+      .locator('.hand-card')
+      .filter({
+        has: host.getByRole('heading', {
+          name: 'Sample Friendly Shove',
+          exact: true,
+        }),
+      })
+      .first();
+    await shove.hover();
     await expect(
-      host.getByRole('button', { name: 'Read Sample Friendly Shove' }).first(),
-    ).toBeFocused();
-    await host
-      .getByRole('checkbox', { name: 'Discard Sample Quiet Breather' })
-      .check();
+      host.getByRole('region', { name: 'Card details' }),
+    ).toContainText('Fortitude');
+    await shove.locator('.card-body').focus();
+    await host.keyboard.press('Escape');
+    await expect(
+      host.getByRole('region', { name: 'Card details' }),
+    ).toHaveCount(0);
+    await expect(shove.locator('.card-body')).toBeFocused();
+    const breather = host.locator('.hand-card').filter({
+      has: host.getByRole('heading', {
+        name: 'Sample Quiet Breather',
+        exact: true,
+      }),
+    });
+    await breather.getByRole('heading').click();
+    await expect(breather.getByRole('checkbox')).toBeChecked();
     await act(
       host,
       roomId,

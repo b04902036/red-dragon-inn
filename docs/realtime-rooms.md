@@ -12,7 +12,7 @@ The Worker routes requests to one SQLite-backed `GameRoom` Durable Object per op
 | `/api/rooms/:roomId`           | GET              | Public metadata and current projection                   |
 | `/api/rooms/:roomId/ws`        | GET with Upgrade | Open a hibernatable WebSocket                            |
 | `/api/rooms/:roomId/character` | PATCH            | Select an available character before starting            |
-| `/api/content/sample`          | GET              | Public character/card display metadata                   |
+| `/api/rooms/:id/presentation`  | GET              | Room-pinned public character/card display metadata       |
 
 Character selection uses `Authorization: Bearer <resumeToken>` and strict JSON `{characterId, expectedStateVersion}`. The token identifies the acting seat; callers cannot submit a player ID. Stale, occupied, unknown or post-start choices reject without mutations. New joins receive unused sample characters. Successful selection persists an incremented lobby version and broadcasts its public projection. Authenticated `ROOM_PRESENCE` messages describe which seats have active sessions after join/authentication/close; they contain no credentials.
 

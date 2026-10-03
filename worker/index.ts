@@ -3,20 +3,11 @@ import { roomJoinSchema } from '../src/protocol/rooms';
 import { roomIdSchema } from '../src/shared/ids';
 import { opaqueId } from './durable/room-record';
 import { apiError, requestJson } from './http';
-import { samplePresentation } from '../src/content/sample-presentation';
 import { allowRoomRequest, secureResponse } from './security';
 export { GameRoom } from './durable/game-room';
 
 async function route(request: Request, env: Env): Promise<Response> {
   const { pathname, origin } = new URL(request.url);
-  if (pathname === '/api/content/sample') {
-    if (request.method !== 'GET')
-      return apiError('METHOD_NOT_ALLOWED', 405, 'GET');
-    return Response.json(samplePresentation, {
-      headers: { 'Cache-Control': 'no-store' },
-    });
-  }
-
   if (pathname === '/api/health') {
     if (request.method !== 'GET') {
       return Response.json(
@@ -54,9 +45,10 @@ async function route(request: Request, env: Env): Promise<Response> {
         }),
       );
     }
-    const match = /^\/api\/rooms\/([^/]+)(?:\/(join|ws|character))?$/.exec(
-      pathname,
-    );
+    const match =
+      /^\/api\/rooms\/([^/]+)(?:\/(join|ws|character|presentation))?$/.exec(
+        pathname,
+      );
     if (match === null) return apiError('NOT_FOUND', 404);
     const parsed = roomIdSchema.safeParse(match[1]);
     if (!parsed.success) return apiError('NOT_FOUND', 404);
@@ -67,6 +59,7 @@ async function route(request: Request, env: Env): Promise<Response> {
       return apiError('METHOD_NOT_ALLOWED', 405, method);
     if (
       action !== 'metadata' &&
+      action !== 'presentation' &&
       !(await allowRoomRequest(
         request,
         env,
@@ -74,7 +67,10 @@ async function route(request: Request, env: Env): Promise<Response> {
       ))
     )
       return apiError('RATE_LIMITED', 429);
-    const forwarded = new Request(`https://room/${action}`, request);
+    const forwarded = new Request(
+      `https://room/${action}${new URL(request.url).search}`,
+      request,
+    );
     return env.ROOMS.getByName(parsed.data).fetch(forwarded);
   }
 

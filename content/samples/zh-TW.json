@@ -1,0 +1,272 @@
+[
+  {
+    "entityType": "PRODUCT",
+    "entityId": "product_sample",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "原創虛構示範牌組",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CHARACTER",
+    "entityId": "character_sample_0",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範林地守護者",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CHARACTER",
+    "entityId": "character_sample_1",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範鐘錶匠",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CHARACTER",
+    "entityId": "character_sample_2",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範地圖師",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CHARACTER",
+    "entityId": "character_sample_3",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範逐雲者",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_shove",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範友善推擠",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_shove",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_ignore",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範輕鬆化解",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_ignore",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_negate",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範取消效果",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_negate",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_breather",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範安靜休息",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_breather",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_gamble",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範提高賭注",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_gamble",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_cheat",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範作弊奪權",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_cheat",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_fizz",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範氣泡飲料",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_fizz",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_tea",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範溫熱茶飲",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_tea",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_toast",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範共同乾杯",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_toast",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_token",
+    "field": "name",
+    "locale": "zh-TW",
+    "text": "示範資源標記",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "CARD",
+    "entityId": "carddef_sample_token",
+    "field": "rulesText",
+    "locale": "zh-TW",
+    "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "RULE_MODULE",
+    "entityId": "rule_sample_core",
+    "field": "summary",
+    "locale": "zh-TW",
+    "text": "原創虛構測試規則模組。",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  },
+  {
+    "entityType": "MECHANIC",
+    "entityId": "tokens",
+    "field": "label",
+    "locale": "zh-TW",
+    "text": "資源標記",
+    "sourceKind": "MANUAL",
+    "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+    "status": "MANUAL_REVIEWED"
+  }
+]

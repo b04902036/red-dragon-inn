@@ -9,7 +9,7 @@ describe('D1 migration and seed workflow in Workers', () => {
   beforeEach(async () => {
     await reset();
   });
-  it('creates all fifteen tables from empty D1 and reapplies without changing data or schema', async () => {
+  it('creates all eighteen tables from empty D1 and reapplies without changing data or schema', async () => {
     const before = await env.DB.prepare(
       "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'content_versions'",
     ).all();
@@ -22,6 +22,9 @@ describe('D1 migration and seed workflow in Workers', () => {
       'assets',
       'cards',
       'characters',
+      'content_channels',
+      'content_metadata',
+      'content_translations',
       'content_versions',
       'deck_cards',
       'decks',
@@ -58,7 +61,7 @@ describe('D1 migration and seed workflow in Workers', () => {
           count: number;
         }>()
       )?.count,
-    ).toBe(10);
+    ).toBe(20);
   });
   it('seeds original content idempotently and round-trips every character, card, quantity, rule, and drink', async () => {
     await applyD1Migrations(env.DB, env.TEST_MIGRATIONS);
@@ -98,14 +101,16 @@ describe('D1 migration and seed workflow in Workers', () => {
       );
     }
     const quantities = await env.DB.prepare(
-      'SELECT quantity FROM deck_cards WHERE deck_id = ? AND card_id = ?',
+      "SELECT quantity FROM deck_cards WHERE content_version_id = 'content_sample_v1' AND deck_id = ? AND card_id = ?",
     )
       .bind('deck_sample_0', 'carddef_sample_shove')
       .all();
     expect(quantities.results).toEqual([{ quantity: 2 }]);
     expect(
       (
-        await env.DB.prepare('SELECT COUNT(*) AS count FROM cards WHERE id = ?')
+        await env.DB.prepare(
+          "SELECT COUNT(*) AS count FROM cards WHERE content_version_id = 'content_sample_v1' AND id = ?",
+        )
           .bind('carddef_sample_shove')
           .first<{ count: number }>()
       )?.count,

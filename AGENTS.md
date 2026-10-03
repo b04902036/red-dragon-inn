@@ -132,3 +132,70 @@ Before stopping:
    - whether next step is safe to begin
 
 Do not automatically begin the next step unless explicitly instructed.
+
+# AGENTS production addendum
+
+These rules supersede the earlier MVP/sample-content assumptions.
+
+## Production status
+
+The MVP steps are complete. The repository is now moving from a sample/demo build to a production-content-capable build.
+
+### Sample fixture policy
+
+- `content/samples/` remains valid for automated tests and explicit fixture/demo mode.
+- Sample content MUST NOT be the default production runtime content.
+- Production Worker/Durable Object code MUST NOT directly import `sampleContentPack` or `samplePresentation`.
+- UI strings such as "Sample table", "Start sample match", and "Original sample cards" must not appear in production mode.
+- Do not mechanically strip the word `Sample` from test fixture identities. Keep tests explicit and isolated.
+
+## Official/private content policy
+
+- Publicly available product names, character names, rules summaries, and terminology may be used as catalog/reference data.
+- Do not scrape or republish a complete proprietary card-text database from websites.
+- Complete official card names/text/effects must come from user-owned/licensed input under `content-private/` or another explicitly authorized source.
+- Never invent missing official card effects.
+- A release must fail content completeness checks when required production content is missing.
+
+## Localization
+
+- UI supports at least `en-US` and `zh-TW`.
+- `zh-TW` is Traditional Chinese, not Simplified Chinese.
+- Use `reference/zh-TW-glossary.md` as the terminology authority unless a later verified official Traditional Chinese source supersedes a term.
+- Game engine identifiers remain locale-independent.
+- Player locale is presentation-only and must not alter authoritative game state, RNG, legality, replay, or event semantics.
+- Card/character translations must preserve an English canonical identifier/name for debugging and fallback.
+
+## Audio
+
+- Bundle audio locally; do not hotlink runtime game audio.
+- Store source URL, author, filename, license, and retrieval date in an audio asset manifest.
+- Prefer CC0/public-domain assets.
+- Background music and sound effects need separate volume/mute controls.
+- Respect browser autoplay policy. Audio must unlock only after a user gesture.
+- Turn/attention audio must be event/transition driven and must not replay merely because React rerendered, the client resynced, or the page reconnected.
+
+## UI interaction
+
+- During card-selection modes, clicking/tapping anywhere on an eligible card toggles selection.
+- Embedded action buttons must not accidentally toggle selection through event bubbling.
+- Desktop pointer hover and keyboard focus automatically expose card details.
+- Do not use a hover-triggered blocking modal that causes pointer flicker.
+- Mobile/touch must retain an accessible way to inspect a card without depending on hover.
+- All card interactions require keyboard-accessible semantics and visible focus.
+
+## Required checks
+
+Every new production-upgrade step must run:
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm run test:e2e
+```
+
+If a step introduces a new validator/script, run it explicitly too.
+
+No step passes while a required production-completeness, localization-consistency, audio-behavior, or accessibility test is failing.

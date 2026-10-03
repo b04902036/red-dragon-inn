@@ -1,12 +1,17 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { freshDatabase, seedDatabase } from './database-helpers';
 import { roomRecordSchema } from '../../worker/durable/room-record';
 import { newRoom, storedRoom } from './room-helpers';
 import { joinRoom } from './room-helpers';
 import { createMatch } from '../../src/engine/setup';
-import { sampleContentPack } from '../../src/content/sample';
+import { localizedFixturePack } from '../../src/content/fixture-localized';
 import { matchIdSchema } from '../../src/shared/ids';
 
 describe('trusted room storage validation', () => {
+  beforeEach(async () => {
+    await freshDatabase();
+    await seedDatabase();
+  });
   it('binds restored engine snapshots to the stored room, version, host, and roster', async () => {
     const created = await newRoom();
     await joinRoom(created.roomId);
@@ -17,7 +22,7 @@ describe('trusted room storage validation', () => {
       hostPlayerId: room.hostPlayerId,
       seed: room.seed,
       version: room.version,
-      content: sampleContentPack,
+      content: localizedFixturePack,
       players: room.players.map(({ id, seat, displayName, characterId }) => ({
         id,
         seat,
@@ -29,6 +34,7 @@ describe('trusted room storage validation', () => {
     expect(roomRecordSchema.parse(record)).toEqual(record);
     for (const corrupt of [
       { ...record, roomId: 'room_wrong' },
+      { ...record, contentVersionId: 'content_wrong' },
       { ...record, version: room.version + 1 },
       { ...record, hostPlayerId: room.players[1]!.id },
       { ...record, players: [...room.players].reverse() },

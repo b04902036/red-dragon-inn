@@ -8,6 +8,11 @@ import {
   roomJoinResponseSchema,
 } from '../protocol/rooms';
 import { roomIdSchema } from '../shared/ids';
+import { useLocale } from './i18n/context';
+import { LocaleProvider, LanguageSelector } from './i18n/LocaleProvider';
+import { uiMessage } from '../shared/ui-messages';
+import type { UiMessage } from '../shared/ui-messages';
+import { AudioProvider, AudioControls } from './audio/AudioProvider';
 
 function roomCode(value: string) {
   try {
@@ -36,6 +41,19 @@ function restoreSeat() {
 }
 
 export default function App() {
+  return (
+    <LocaleProvider>
+      <AudioProvider>
+        <header className="preferences">
+          <LanguageSelector />
+          <AudioControls />
+        </header>
+        <Application />
+      </AudioProvider>
+    </LocaleProvider>
+  );
+}
+function Application() {
   const [credentials, setCredentials] = useState<RoomCredentials | null>(
     restoreSeat,
   );
@@ -53,6 +71,7 @@ export default function App() {
   return <Landing enter={setCredentials} />;
 }
 function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
+  const { t, message } = useLocale();
   const [health, setHealth] = useState<HealthState>({ status: 'checking' });
   const [attempt, setAttempt] = useState(0);
   const [name, setName] = useState('');
@@ -60,11 +79,11 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
     new URLSearchParams(location.search).get('room') ?? '',
   );
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<UiMessage | null>(null);
   async function join(create: boolean) {
     const id = create ? null : roomCode(code);
     if (!create && !id) {
-      setError('Enter a valid room code or invite link.');
+      setError(uiMessage('landing.invalidCode'));
       return;
     }
     setBusy(true);
@@ -80,11 +99,15 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
       );
       if (!response.ok) {
         setError(
-          response.status === 409
-            ? 'This table is full or its match has started.'
-            : response.status === 404
-              ? 'That room could not be found.'
-              : 'The room could not be opened. Please try again.',
+          uiMessage(
+            response.status === 409
+              ? 'landing.full'
+              : response.status === 404
+                ? 'landing.missing'
+                : response.status === 503
+                  ? 'landing.content'
+                  : 'landing.failed',
+          ),
         );
         return;
       }
@@ -96,7 +119,7 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
       history.replaceState(null, '', `/?room=${result.roomId}`);
       enter(result.credentials);
     } catch {
-      setError('The room could not be opened. Please try again.');
+      setError(uiMessage('landing.failed'));
     } finally {
       setBusy(false);
     }
@@ -123,11 +146,9 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
 
   return (
     <main className="home">
-      <p className="eyebrow">Welcome to the inn</p>
-      <h1>Red Dragon Inn</h1>
-      <p className="intro">
-        A place to gather, play cards, and share an adventure.
-      </p>
+      <p className="eyebrow">{t('landing.welcome')}</p>
+      <h1>{t('app.title')}</h1>
+      <p className="intro">{t('landing.intro')}</p>
       <form
         className="room-form"
         onSubmit={(event) => {
@@ -136,7 +157,7 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
         }}
       >
         <label>
-          Your name
+          {t('landing.name')}
           <input
             required
             maxLength={80}
@@ -152,10 +173,10 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
             void join(true);
           }}
         >
-          Create room
+          {t('landing.create')}
         </button>
         <label>
-          Room code or invite link
+          {t('landing.code')}
           <input
             value={code}
             onChange={(event) => setCode(event.target.value)}
@@ -167,32 +188,31 @@ function Landing({ enter }: { enter: (credentials: RoomCredentials) => void }) {
             busy || name.trim().length === 0 || code.trim().length === 0
           }
         >
-          Join room
+          {t('landing.join')}
         </button>
         {error && (
           <p role="alert" className="notice">
-            {error}
+            {message(error)}
           </p>
         )}
       </form>
       <section className="health-card" aria-labelledby="health-heading">
-        <h2 id="health-heading">Backend status</h2>
+        <h2 id="health-heading">{t('health.title')}</h2>
         <p role="status" aria-live="polite">
-          {health.status === 'checking' && 'Checking backend…'}
-          {health.status === 'healthy' && 'Backend is healthy'}
-          {health.status === 'unavailable' &&
-            'Backend is unavailable. Please try again.'}
+          {health.status === 'checking' && t('health.checking')}
+          {health.status === 'healthy' && t('health.healthy')}
+          {health.status === 'unavailable' && t('health.failed')}
         </p>
         {health.status === 'healthy' && (
-          <p className="service">Service: {health.health.service}</p>
+          <p className="service">
+            {t('health.service', { service: health.health.service })}
+          </p>
         )}
         <button onClick={checkAgain} disabled={health.status === 'checking'}>
-          Check again
+          {t('health.retry')}
         </button>
       </section>
-      <p className="footnote">
-        Original sample cards · Gather 2–4 friends for a game.
-      </p>
+      <p className="footnote">{t('landing.footnote')}</p>
     </main>
   );
 }

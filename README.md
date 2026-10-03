@@ -1,6 +1,6 @@
 # Red Dragon Inn
 
-Steps 00–12: a playable React + TypeScript sample game with a Cloudflare Worker API, authoritative Durable Object rooms, validated projections, transactional D1 history, and a deterministic engine with responses, gambling, Drinks/Chasers/Drink Events, elimination, and victory. Create a room, share its invite and play from desktop or mobile. Each player receives only their own private projection. See [the visual checklist](docs/game-ui.md), [the realtime room guide](docs/realtime-rooms.md), and [persistence/replay verification](docs/persistence-replay.md).
+Steps 00–17: a React + TypeScript game with a Cloudflare Worker API, authoritative Durable Object rooms, validated projections, transactional D1 history, and a deterministic engine with responses, gambling, Drinks/Chasers/Drink Events, elimination, and victory. Production rooms pin a published D1 content edition. Each player receives only their own private projection and can independently choose English or Traditional Chinese. Optional gesture-unlocked music and prompt sounds have independent persisted controls. Cards support whole-card selection, keyboard controls, hover previews and touch inspection. See the [production upgrade audit and release status](docs/production-upgrade-status.md), [card interactions](docs/card-interactions.md), [audio setup](docs/audio.md), [localization and translation workflow](docs/localization.md), [production content setup](docs/production-content.md), [the visual checklist](docs/game-ui.md), [the realtime room guide](docs/realtime-rooms.md), and [persistence/replay verification](docs/persistence-replay.md).
 
 ## Local development
 
@@ -11,10 +11,10 @@ npm ci
 npx playwright install chromium
 npm run db:migrate
 npm run db:seed
-npm run dev
+npm run dev:fixture
 ```
 
-Open the local URL printed by Vite (normally `http://127.0.0.1:5173`). The home screen fetches the same-origin Worker health endpoint and lets you check again. The Worker runs locally in workerd through the Cloudflare Vite plugin. No secrets, Cloudflare login, public IP, or hosted database are needed.
+Open the local URL printed by Vite (normally `http://127.0.0.1:5173`). This explicitly selects the development fixture environment. The Worker runs locally in workerd through the Cloudflare Vite plugin. No secrets, Cloudflare login, public IP, or hosted database are needed. Normal `npm run dev` selects production content and fails clearly when no published production edition is configured.
 
 If browser installation needs Linux system libraries, use `npx playwright install --with-deps chromium`.
 
@@ -25,7 +25,9 @@ npm run db:migrate
 npm run db:seed
 ```
 
-These local commands can be repeated. The seed contains four fictional characters and ten sample definitions. See [the database guide](docs/database.md) for inspection commands and [the content format](docs/content-format.md) for JSON packs. Current rooms pin the bundled sample pack and save accepted history, snapshots and final results in D1.
+These local commands can be repeated. The development/test seed contains four fictional characters and ten sample definitions; it never configures production. See [the database guide](docs/database.md) for inspection commands and [the content format](docs/content-format.md) for JSON packs. Rooms pin published D1 editions and save accepted history, snapshots and final results in D1.
+
+Put owned/licensed complete card data in ignored `content-private/imports/`. Run the import dry run, write/publish, and `npm run content:verify:production -- --activate content_your_version` as documented in [production content](docs/production-content.md). `npm run content:verify:production` exits nonzero while required content is absent. All 76 supplied characters are cataloged as metadata; official playable cards have not been fabricated or bundled.
 
 ## Visually verify the turn engine
 

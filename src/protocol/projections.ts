@@ -1,4 +1,5 @@
 import type { AuthoritativeGameState, PlayerState } from '../engine/model';
+import { actionAttention } from './attention';
 import type { CardInstanceId, PlayerId } from '../shared/ids';
 import {
   privatePlayerViewSchema,
@@ -53,9 +54,11 @@ function visibleSideDecks(player: PlayerState, owner: boolean) {
 
 /** Spectators and players receive the same public whitelist. Never spread internal state. */
 export function projectPublicGame(
-  state: AuthoritativeGameState,
+  state: AuthoritativeGameState & {
+    readonly control?: { readonly turnNumber: number };
+  },
 ): PublicGameView {
-  return publicGameViewSchema.parse({
+  const view = publicGameViewSchema.parse({
     schemaVersion: state.schemaVersion,
     roomId: state.roomId,
     matchId: state.matchId,
@@ -138,6 +141,16 @@ export function projectPublicGame(
           },
     winners: [...state.winners],
   });
+  return state.control === undefined
+    ? view
+    : {
+        ...view,
+        attention: actionAttention(
+          view,
+          state.control.turnNumber,
+          state.resolutionStack.at(-1)?.nextEffectIndex,
+        ),
+      };
 }
 
 /** requesterId must come from the authenticated server session, not a command payload. */

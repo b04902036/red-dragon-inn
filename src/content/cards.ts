@@ -13,7 +13,15 @@ const definitionFields = {
   id: cardDefinitionIdSchema,
   name: z.string().min(1).max(160),
   rulesText: z.string().max(4000),
-  source: z.enum(['SAMPLE', 'PRIVATE']),
+  // Legacy provenance remains readable for pinned matches and explicit fixtures.
+  source: z.enum([
+    'SAMPLE',
+    'PRIVATE',
+    'TEST_FIXTURE',
+    'USER_OWNED',
+    'LICENSED',
+    'OFFICIAL_CATALOG_REFERENCE',
+  ]),
   characterId: characterIdSchema.optional(),
   effects: z.array(effectSchema).max(32),
 };

@@ -8,6 +8,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { GameTable } from '../../src/client/GameTable';
+import { formatMessage } from '../../src/shared/ui-messages';
 import { contextualActions, cardAction } from '../../src/client/game-actions';
 import {
   initialRoomState,
@@ -80,7 +81,7 @@ describe('playable table', () => {
     expect(
       screen.getByRole('heading', { name: 'Discard and draw' }),
     ).toBeVisible();
-    expect(screen.getByText('Active player:')).toHaveTextContent(
+    expect(screen.getByText(/^Active player:/)).toHaveTextContent(
       'Sample player 0',
     );
     expect(
@@ -90,16 +91,21 @@ describe('playable table', () => {
       screen.queryByRole('button', { name: 'Take a Drink' }),
     ).not.toBeInTheDocument();
   });
-  it('reads card text in a keyboard accessible dialog and sends only selected discard ids', async () => {
+  it('previews card text on focus without a dialog and sends only whole-card selected discard ids', async () => {
     const { send } = display();
     const user = userEvent.setup();
-    const first = screen.getAllByRole('button', { name: /^Read / })[0]!;
-    await user.click(first);
-    expect(screen.getByRole('dialog')).toBeVisible();
+    const first = screen.getAllByRole('checkbox')[0]!;
+    first.focus();
     expect(
-      within(screen.getByRole('dialog')).getByRole('heading'),
+      within(
+        await screen.findByRole('region', { name: 'Card details' }),
+      ).getByRole('heading'),
     ).toBeVisible();
-    await user.click(screen.getByRole('button', { name: 'Close' }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    await user.keyboard('{Escape}');
+    expect(
+      screen.queryByRole('region', { name: 'Card details' }),
+    ).not.toBeInTheDocument();
     expect(first).toHaveFocus();
     await user.click(screen.getAllByRole('checkbox')[0]!);
     await user.click(screen.getByRole('button', { name: 'Discard and draw' }));
@@ -304,7 +310,9 @@ describe('view based action and connection rules', () => {
       'player_0',
     );
     expect(rejected.status).toBe('resyncing');
-    expect(rejected.error).toContain('table changed');
+    expect(formatMessage('en-US', rejected.error!.key)).toContain(
+      'table changed',
+    );
     expect(rejectionText('NOT_ALLOWED', 'NOT_ACTIVE_PLAYER')).toBe(
       'Wait for your turn.',
     );

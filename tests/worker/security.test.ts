@@ -19,6 +19,13 @@ beforeEach(async () => {
 });
 const close = (peer: Awaited<ReturnType<typeof connect>>) =>
   peer.socket.close(1000, 'Done');
+async function stableNativeRateLimitWindow() {
+  // Miniflare's actual binding uses epoch-aligned minute buckets, outside Vitest's clock.
+  // Leave enough real time for exact-quota assertions under coverage instrumentation.
+  const remaining = 60_000 - (Date.now() % 60_000);
+  if (remaining < 10_000)
+    await new Promise((resolve) => setTimeout(resolve, remaining + 20));
+}
 it('serves safe headers on success, errors and disables every debug/admin history route', async () => {
   for (const path of [
     '/api/health',
@@ -36,10 +43,27 @@ it('serves safe headers on success, errors and disables every debug/admin histor
     );
   }
 });
-it('throttles create spam using the actual Cloudflare binding and isolates another address', async () => {
-  const ip = crypto.randomUUID();
-  for (let i = 0; i < 20; i++) {
-    const response = await exports.default.fetch(
+it(
+  'throttles create spam using the actual Cloudflare binding and isolates another address',
+  { timeout: 20_000 },
+  async () => {
+    await stableNativeRateLimitWindow();
+    const ip = crypto.randomUUID();
+    for (let i = 0; i < 20; i++) {
+      const response = await exports.default.fetch(
+        'https://example.com/api/rooms',
+        {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'CF-Connecting-IP': ip,
+          },
+          body: '{}',
+        },
+      );
+      expect(response.status).toBe(400);
+    }
+    const denied = await exports.default.fetch(
       'https://example.com/api/rooms',
       {
         method: 'POST',
@@ -47,25 +71,21 @@ it('throttles create spam using the actual Cloudflare binding and isolates anoth
         body: '{}',
       },
     );
-    expect(response.status).toBe(400);
-  }
-  const denied = await exports.default.fetch('https://example.com/api/rooms', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', 'CF-Connecting-IP': ip },
-    body: '{}',
-  });
-  expect(denied.status).toBe(429);
-  expect(denied.headers.get('retry-after')).toBe('60');
-  expect(await denied.json()).toEqual({
-    ok: false,
-    error: { code: 'RATE_LIMITED' },
-  });
-  const other = await env.CREATE_LIMIT.limit({ key: 'CREATE:other-address' });
-  expect(other.success).toBe(true);
-});
+    expect(denied.status).toBe(429);
+    expect(denied.headers.get('retry-after')).toBe('60');
+    expect(await denied.json()).toEqual({
+      ok: false,
+      error: { code: 'RATE_LIMITED' },
+    });
+    const other = await env.CREATE_LIMIT.limit({ key: 'CREATE:other-address' });
+    expect(other.success).toBe(true);
+  },
+);
 it.each(['join', 'ws', 'character'])(
   'throttles %s attempts before dispatch, including unknown rooms',
+  { timeout: 20_000 },
   async (action) => {
+    await stableNativeRateLimitWindow();
     const ip = crypto.randomUUID();
     const method =
       action === 'join' ? 'POST' : action === 'character' ? 'PATCH' : 'GET';

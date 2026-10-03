@@ -18,7 +18,14 @@ export const resourceAdjustmentParamsSchema = z.strictObject({
   resource: resourceKeySchema,
   delta: deltaSchema,
 });
-export const registeredEffectKeySchema = z.enum(['sample.adjust-resource']);
+export const registeredEffectKeySchema = z.enum([
+  'sample.adjust-resource',
+  'core.adjust-resource',
+]);
+export const registeredSpecialRuleKeySchema = z.enum([
+  'sample.resources',
+  'core.resources',
+]);
 
 export const effectSchema = z.discriminatedUnion('op', [
   z.strictObject({

@@ -11,36 +11,46 @@ import {
   type Presentation,
 } from '../protocol/presentation';
 import { initialRoomState, receiveRoomMessage } from './room-state';
+import { useLocale } from './i18n/context';
+import { uiMessage } from '../shared/ui-messages';
 
 export type RoomCredentials = z.infer<typeof roomCredentialsSchema>;
 export function useRoom(credentials: RoomCredentials) {
+  const { locale } = useLocale();
   const [state, setState] = useState(initialRoomState);
   const [presentation, setPresentation] = useState<Presentation | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   const reconnectRef = useRef<() => void>(() => {});
   const pendingRef = useRef(false);
+  const [presentationAttempt, setPresentationAttempt] = useState(0);
+  useEffect(() => {
+    let disposed = false;
+    const controller = new AbortController();
+    void fetch(
+      `/api/rooms/${credentials.roomId}/presentation?locale=${locale}`,
+      { signal: controller.signal },
+    )
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Unavailable');
+        const content = presentationSchema.parse(await response.json());
+        if (!disposed) setPresentation(content);
+      })
+      .catch(() => {
+        if (!disposed)
+          setState((previous) => ({
+            ...previous,
+            error: uiMessage('transport.content'),
+          }));
+      });
+    return () => {
+      disposed = true;
+      controller.abort();
+    };
+  }, [credentials.roomId, locale, presentationAttempt]);
   useEffect(() => {
     let disposed = false;
     let reconnectTimer: ReturnType<typeof setTimeout> | undefined;
     let attempts = 0;
-    const controller = new AbortController();
-    const loadPresentation = () => {
-      void fetch('/api/content/sample', { signal: controller.signal })
-        .then(async (response) => {
-          if (!response.ok) throw new Error('Unavailable');
-          const content = presentationSchema.parse(await response.json());
-          if (!disposed) setPresentation(content);
-        })
-        .catch(() => {
-          if (!disposed)
-            setState((previous) => ({
-              ...previous,
-              error:
-                'Card information could not be loaded. Reconnect to try again.',
-            }));
-        });
-    };
-    loadPresentation();
     const connect = () => {
       if (disposed) return;
       clearTimeout(reconnectTimer);
@@ -76,8 +86,7 @@ export function useRoom(credentials: RoomCredentials) {
         } catch {
           setState((previous) => ({
             ...previous,
-            error:
-              'An update could not be read. Reconnect to refresh the table.',
+            error: uiMessage('transport.unreadable'),
           }));
         }
       };
@@ -89,8 +98,7 @@ export function useRoom(credentials: RoomCredentials) {
             ...previous,
             status: 'offline',
             pendingCommandId: null,
-            error:
-              'This seat was opened in another tab. Reconnect here to resume.',
+            error: uiMessage('transport.replaced'),
           }));
           return;
         }
@@ -115,13 +123,12 @@ export function useRoom(credentials: RoomCredentials) {
         error: null,
       }));
       pendingRef.current = false;
-      loadPresentation();
+      setPresentationAttempt((previous) => previous + 1);
       connect();
     };
     connect();
     return () => {
       disposed = true;
-      controller.abort();
       clearTimeout(reconnectTimer);
       socketRef.current?.close(1000, 'Leaving table');
     };
@@ -160,7 +167,7 @@ export function useRoom(credentials: RoomCredentials) {
         setState((previous) => ({
           ...previous,
           pendingCommandId: null,
-          error: 'The action could not be sent. Reconnect and try again.',
+          error: uiMessage('transport.sendFailed'),
         }));
       }
     },

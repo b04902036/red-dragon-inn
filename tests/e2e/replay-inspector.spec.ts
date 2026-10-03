@@ -26,7 +26,7 @@ test('local-only replay inspector verifies a persisted browser match and exports
     await guest.getByLabel('Your name').fill('Replay guest');
     await guest.getByRole('button', { name: 'Join room' }).click();
     await expect(host.locator('.lobby-seats li')).toHaveCount(2);
-    await host.getByRole('button', { name: 'Start sample match' }).click();
+    await host.getByRole('button', { name: 'Start match' }).click();
     await expect(
       host.getByRole('button', { name: 'Discard and draw' }),
     ).toBeEnabled();

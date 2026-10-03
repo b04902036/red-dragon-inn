@@ -16,10 +16,40 @@ export function contentImportStatements(input: ContentPack) {
   ];
   const insert = (sql: string, values: unknown[]) =>
     statements.push({ sql, values });
+  if (pack.requirements !== undefined || pack.translations !== undefined)
+    insert(
+      'INSERT INTO content_metadata (content_version_id, metadata_json) VALUES (?, ?)',
+      [
+        version,
+        JSON.stringify({
+          ...(pack.requirements === undefined
+            ? {}
+            : { requirements: pack.requirements }),
+          ...(pack.translations === undefined
+            ? {}
+            : { translations: pack.translations }),
+        }),
+      ],
+    );
   for (const p of pack.products)
     insert(
       'INSERT INTO products (content_version_id, id, slug, name, release_year) VALUES (?, ?, ?, ?, ?)',
       [version, p.id, p.slug, p.name, p.releaseYear],
+    );
+  for (const t of pack.translations ?? [])
+    insert(
+      'INSERT INTO content_translations (content_version_id,entity_type,entity_id,field,locale,text,source_kind,source_ref,status) VALUES (?,?,?,?,?,?,?,?,?)',
+      [
+        version,
+        t.entityType,
+        t.entityId,
+        t.field,
+        t.locale,
+        t.text,
+        t.sourceKind,
+        t.sourceRef,
+        t.status,
+      ],
     );
   for (const c of pack.characters)
     insert(

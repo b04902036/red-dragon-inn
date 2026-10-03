@@ -1,6 +1,9 @@
 import type { PublicGameView, PrivatePlayerView } from '../protocol/views';
 import type { ServerMessage } from '../protocol/messages';
 import type { Presence } from '../protocol/presentation';
+import { uiMessage, formatMessage } from '../shared/ui-messages';
+import type { UiMessage, MessageKey } from '../shared/ui-messages';
+import type { Locale } from '../shared/locales';
 
 export type ConnectionStatus =
   'connecting' | 'synced' | 'reconnecting' | 'resyncing' | 'offline';
@@ -11,8 +14,8 @@ export interface RoomClientState {
   hostPlayerId: string | null;
   presence: Presence;
   pendingCommandId: string | null;
-  error: string | null;
-  log: string[];
+  error: UiMessage | null;
+  log: UiMessage[];
 }
 export const initialRoomState: RoomClientState = {
   status: 'connecting',
@@ -24,35 +27,33 @@ export const initialRoomState: RoomClientState = {
   error: null,
   log: [],
 };
-export function phaseName(phase: PublicGameView['phase']) {
-  return phase === null
-    ? 'Waiting'
-    : (
-        {
-          DISCARD_DRAW: 'Discard and draw',
-          ACTION: 'Action',
-          ORDER_DRINK: 'Order a Drink',
-          DRINK: 'Take a Drink',
-          ELIMINATION_CHECK: 'Elimination check',
-          NEXT_TURN: 'Next turn',
-        } as const
-      )[phase];
+export function phaseKey(phase: PublicGameView['phase']): MessageKey {
+  return phase === null ? 'phase.waiting' : `phase.${phase}`;
 }
-export function rejectionText(code: string, reason?: string) {
-  if (code === 'RATE_LIMITED')
-    return 'Too many requests. Wait a moment before reconnecting.';
-  if (code === 'PERSISTENCE_UNAVAILABLE')
-    return 'Match history is temporarily unavailable. Reconnecting will recover the table.';
-  if (code === 'VERSION_CONFLICT')
-    return 'The table changed. Your view has been refreshed; try your action again.';
+export function phaseName(
+  phase: PublicGameView['phase'],
+  locale: Locale = 'en-US',
+) {
+  return formatMessage(locale, phaseKey(phase));
+}
+export function rejectionKey(code: string, reason?: string): MessageKey {
+  if (code === 'RATE_LIMITED') return 'reject.rate';
+  if (code === 'PERSISTENCE_UNAVAILABLE') return 'reject.history';
+  if (code === 'VERSION_CONFLICT') return 'reject.version';
   if (code === 'INVALID_SESSION' || code === 'AUTH_REQUIRED')
-    return 'Your seat could not be resumed. Rejoin the room or reconnect.';
-  if (code === 'NOT_ENOUGH_PLAYERS')
-    return 'At least two players must join before starting.';
-  if (reason === 'NOT_ACTIVE_PLAYER') return 'Wait for your turn.';
+    return 'reject.session';
+  if (code === 'NOT_ENOUGH_PLAYERS') return 'reject.players';
+  if (reason === 'NOT_ACTIVE_PLAYER') return 'reject.turn';
   if (reason === 'WRONG_PHASE' || reason === 'RESOLUTION_PENDING')
-    return 'That action is unavailable while the table is waiting for another step.';
-  return 'That action was not accepted. Choose an available action and try again.';
+    return 'reject.phase';
+  return 'reject.other';
+}
+export function rejectionText(
+  code: string,
+  reason?: string,
+  locale: Locale = 'en-US',
+) {
+  return formatMessage(locale, rejectionKey(code, reason));
 }
 export function receiveRoomMessage(
   state: RoomClientState,
@@ -83,7 +84,7 @@ export function receiveRoomMessage(
         view.version < (state.publicView?.version ?? 0)
       )
         return state;
-      const lines: string[] = [];
+      const lines: UiMessage[] = [];
       if (view.version !== (state.publicView?.version ?? -1)) {
         for (const player of view.players) {
           const previous = state.publicView?.players.find(
@@ -91,32 +92,63 @@ export function receiveRoomMessage(
           );
           if (previous && previous.fortitude !== player.fortitude)
             lines.push(
-              `${player.displayName}: Fortitude ${previous.fortitude} → ${player.fortitude}.`,
+              uiMessage('log.stat', {
+                name: player.displayName,
+                stat: 'player.fortitude',
+                before: previous.fortitude,
+                after: player.fortitude,
+              }),
             );
           if (previous && previous.alcoholContent !== player.alcoholContent)
             lines.push(
-              `${player.displayName}: Alcohol ${previous.alcoholContent} → ${player.alcoholContent}.`,
+              uiMessage('log.stat', {
+                name: player.displayName,
+                stat: 'player.alcohol',
+                before: previous.alcoholContent,
+                after: player.alcoholContent,
+              }),
             );
           if (previous && previous.gold !== player.gold)
             lines.push(
-              `${player.displayName}: Gold ${previous.gold} → ${player.gold}.`,
+              uiMessage('log.stat', {
+                name: player.displayName,
+                stat: 'player.gold',
+                before: previous.gold,
+                after: player.gold,
+              }),
             );
           if (player.eliminated && !previous?.eliminated)
-            lines.push(`${player.displayName} is eliminated.`);
+            lines.push(
+              uiMessage('log.eliminated', { name: player.displayName }),
+            );
         }
         if (view.lifecycle === 'FINISHED')
           lines.push(
             view.winners.length === 0
-              ? 'The match ends in a tie.'
-              : `${view.players.find((player) => view.winners.includes(player.id))!.displayName} wins!`,
+              ? uiMessage('log.tie')
+              : uiMessage('table.winner', {
+                  name: view.players.find((player) =>
+                    view.winners.includes(player.id),
+                  )!.displayName,
+                }),
           );
         else if (view.gambling !== null && state.publicView?.gambling === null)
-          lines.push('A gambling round has begun.');
+          lines.push(uiMessage('log.gamblingStarted'));
         else if (state.publicView?.gambling && view.gambling === null)
-          lines.push('The gambling pot has been paid.');
+          lines.push(uiMessage('log.gamblingPaid'));
         else if (view.phase !== state.publicView?.phase)
           lines.push(
-            `${phaseName(view.phase)}${view.activePlayerId ? ` · ${view.players.find((player) => player.id === view.activePlayerId)!.displayName}` : ''}.`,
+            view.activePlayerId
+              ? uiMessage('log.phasePlayer', {
+                  phase: phaseKey(view.phase),
+                  name: view.players.find(
+                    (player) => player.id === view.activePlayerId,
+                  )!.displayName,
+                })
+              : uiMessage('log.phase', {
+                  phase: phaseKey(view.phase),
+                  player: '',
+                }),
           );
       }
       return {
@@ -147,7 +179,7 @@ export function receiveRoomMessage(
       return {
         ...state,
         pendingCommandId: null,
-        error: rejectionText(message.code, message.reason),
+        error: uiMessage(rejectionKey(message.code, message.reason)),
         status:
           message.code === 'VERSION_CONFLICT' ? 'resyncing' : state.status,
       };

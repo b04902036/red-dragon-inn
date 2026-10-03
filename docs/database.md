@@ -1,4 +1,6 @@
-# D1 database through step 12
+# D1 database through step 14
+
+Migration 0007 adds immutable `content_translations`, including source/status metadata and backfill from previous edition metadata. `db:seed` now installs both original and translated fixture editions; each contains the same ten canonical definitions and four characters. Fixture rooms explicitly pin `content_sample_localized_v1`; neither fixture activates the production channel. See [localization](localization.md).
 
 The Worker binds local D1 as `env.DB`. Only server repositories access it; React and the pure engine have no D1 dependency. All repository inputs and returned JSON pass runtime schemas, and SQL values use bound parameters. There are no content or history HTTP endpoints yet.
 
@@ -62,7 +64,9 @@ Snapshots accept sequence zero and later sequences, a matching state version, a 
 
 ## Verification
 
-Step 09 adds three tables: `match_manifests` pins the complete validated setup/content; `match_commands` stores immutable accepted command/event batches with contiguous event ranges and unique command/state versions; `match_results` stores winner IDs, public player results, end time and final sequence/version once. There are fifteen application tables in total. `D1ReplayRepository` writes these records together with events, snapshots and match advancement in one transaction, validates command causation and supports latest-snapshot or full-history recovery. The room now assigns strictly increasing sequences and drains its durable outbox before acknowledging. See [persistence and replay](persistence-replay.md) for the current recovery strategy and visual checks.
+Step 09 adds three tables: `match_manifests` pins the complete validated setup/content; `match_commands` stores immutable accepted command/event batches with contiguous event ranges and unique command/state versions; `match_results` stores winner IDs, public player results, end time and final sequence/version once. `D1ReplayRepository` writes these records together with events, snapshots and match advancement in one transaction, validates command causation and supports latest-snapshot or full-history recovery. The room assigns strictly increasing sequences and drains its durable outbox before acknowledging. See [persistence and replay](persistence-replay.md) for the recovery strategy and visual checks.
+
+Step 13 adds `content_channels` (production-to-published-edition mapping) and `content_metadata` (immutable per-edition requirements/translations JSON), for seventeen application tables. Publication and provenance triggers prevent invalid channel targets. Published metadata rejects insert/update/delete/replacement writes. `loadPack` reconstructs a validated complete published graph, preserving shared card definitions and physical quantities. Every room pins that edition before choosing characters; future channel changes do not alter it. The sample seed remains explicit development/test data and does not set a production channel. See [production content](production-content.md).
 
 The Workers project in `vitest.config.ts` reads SQL via `readD1Migrations`, injects it as test-only bindings, resets local test storage, and applies it with `cloudflare:test`'s `applyD1Migrations`. Integration tests exercise actual D1 SQL, transactions, FKs, uniqueness, JSON, publication triggers, migration reapplication, seed parity, and repositories. These tests use isolated storage and never reset the CLI development database.
 

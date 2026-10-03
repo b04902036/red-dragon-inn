@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from 'react';
 import type { ReactNode } from 'react';
+import { useLocale } from './i18n/context';
 
 export function Modal({
   title,
@@ -12,6 +13,7 @@ export function Modal({
   onClose: () => void;
   mandatory?: boolean;
 }) {
+  const { t } = useLocale();
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   useEffect(() => {
@@ -40,7 +42,7 @@ export function Modal({
       {children}
       {!mandatory && (
         <button className="secondary" onClick={onClose}>
-          Close
+          {t('modal.close')}
         </button>
       )}
     </dialog>

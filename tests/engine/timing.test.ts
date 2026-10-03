@@ -609,45 +609,50 @@ describe('validated effect operations and choices', () => {
       passWindow(ignored.state).state.players.map((player) => player.gold),
     ).toEqual([10, 10, 10, 10]);
   });
-  it('runs custom effects only through the registered handler with validated resource params', () => {
-    const queued = playAction(
-      responseEffects(actionState(), [
+  it.each(['sample.adjust-resource', 'core.adjust-resource'] as const)(
+    'runs %s only through the registered handler with validated resource params',
+    (effectKey) => {
+      const queued = playAction(
+        responseEffects(actionState(), [
+          {
+            op: 'CUSTOM',
+            target: 'SELF',
+            effect_key: effectKey,
+            params: { resource: 'tokens', delta: 2 },
+          },
+        ]),
+      );
+      const complete = passWindow(response(queued.state, 1, 'breather').state);
+      expect(complete.state.players[1]!.special.resources.tokens!.value).toBe(
+        2,
+      );
+      expect(complete.events).toContainEqual(
+        expect.objectContaining({
+          type: 'RESOURCE_CHANGED',
+          resource: 'tokens',
+          delta: 2,
+          value: 2,
+        }),
+      );
+      const bad = responseEffects(queued.state, [
         {
           op: 'CUSTOM',
           target: 'SELF',
           effect_key: 'sample.adjust-resource',
-          params: { resource: 'tokens', delta: 2 },
+          params: { resource: 'missing', delta: 1 },
         },
-      ]),
-    );
-    const complete = passWindow(response(queued.state, 1, 'breather').state);
-    expect(complete.state.players[1]!.special.resources.tokens!.value).toBe(2);
-    expect(complete.events).toContainEqual(
-      expect.objectContaining({
-        type: 'RESOURCE_CHANGED',
-        resource: 'tokens',
-        delta: 2,
-        value: 2,
-      }),
-    );
-    const bad = responseEffects(queued.state, [
-      {
-        op: 'CUSTOM',
-        target: 'SELF',
-        effect_key: 'sample.adjust-resource',
-        params: { resource: 'missing', delta: 1 },
-      },
-    ]);
-    reject(
-      bad,
-      'PLAY_RESPONSE',
-      {
-        responseWindowId: bad.responseWindow!.id,
-        cardId: cardInHand(bad, 1, 'breather'),
-      },
-      'INVALID_EFFECT',
-    );
-  });
+      ]);
+      reject(
+        bad,
+        'PLAY_RESPONSE',
+        {
+          responseWindowId: bad.responseWindow!.id,
+          cardId: cardInHand(bad, 1, 'breather'),
+        },
+        'INVALID_EFFECT',
+      );
+    },
+  );
   it('modifies only an unexecuted stat operation on the immediate parent', () => {
     const queued = playAction(
       responseEffects(actionState(), [

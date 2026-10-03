@@ -1,6 +1,12 @@
 import { DurableObject } from 'cloudflare:workers';
 import { z } from 'zod';
-import { sampleContentPack } from '../../src/content/sample';
+import {
+  resolveRuntimePack,
+  loadRuntimePack,
+  assertRuntimePack,
+  ContentUnavailable,
+} from '../runtime-content';
+import { contentPresentation } from '../../src/content/presentation';
 import { applyCommand } from '../../src/engine/commands';
 import { createMatch } from '../../src/engine/setup';
 import {
@@ -133,16 +139,25 @@ export class GameRoom extends DurableObject<Env> {
         }
         if (!this.ctx.id.equals(this.env.ROOMS.idFromName(input.roomId)))
           return apiError('INVALID_REQUEST', 400);
+        let pack;
+        try {
+          pack = await resolveRuntimePack(this.env);
+        } catch (error) {
+          if (error instanceof ContentUnavailable)
+            return apiError('CONTENT_UNAVAILABLE', 503);
+          return apiError('CONTENT_INVALID', 503);
+        }
         const token = issueToken();
         const host = await this.member(
           input.displayName,
           0,
           token,
-          sampleContentPack.characters[0]!.id,
+          assertRuntimePack(pack, this.env.CONTENT_MODE === 'fixture')[0]!.id,
         );
         const created: RoomRecord = {
           schemaVersion: 1,
           roomId: input.roomId,
+          contentVersionId: pack.version.id,
           version: stateVersionSchema.parse(0),
           hostPlayerId: host.id,
           seed: crypto.getRandomValues(new Uint32Array(1))[0]!,
@@ -153,6 +168,36 @@ export class GameRoom extends DurableObject<Env> {
         return this.joinResponse(created, host.id, token, 201);
       }
       if (room === null) return apiError('NOT_FOUND', 404);
+      if (path === '/presentation' && request.method === 'GET') {
+        const locale =
+          new URL(request.url).searchParams.get('locale') ?? 'en-US';
+        if (locale !== 'en-US' && locale !== 'zh-TW')
+          return apiError('INVALID_LOCALE', 400);
+        try {
+          const pack = await loadRuntimePack(this.env, room.contentVersionId);
+          const presentation = contentPresentation(
+            pack,
+            this.env.CONTENT_MODE === 'fixture',
+            locale,
+          );
+          const playable = new Set(
+            assertRuntimePack(pack, this.env.CONTENT_MODE === 'fixture').map(
+              (character) => character.id,
+            ),
+          );
+          return Response.json(
+            {
+              ...presentation,
+              characters: presentation.characters.filter((character) =>
+                playable.has(character.id),
+              ),
+            },
+            { headers: { 'Cache-Control': 'no-store' } },
+          );
+        } catch {
+          return apiError('CONTENT_UNAVAILABLE', 503);
+        }
+      }
       if (path === '/metadata' && request.method === 'GET')
         return Response.json(roomMetadata(room), {
           headers: { 'Cache-Control': 'no-store' },
@@ -166,17 +211,26 @@ export class GameRoom extends DurableObject<Env> {
         } catch {
           return apiError('INVALID_REQUEST', 400);
         }
+        let pack;
+        try {
+          pack = await loadRuntimePack(this.env, room.contentVersionId);
+        } catch {
+          return apiError('CONTENT_UNAVAILABLE', 503);
+        }
+        const available = assertRuntimePack(
+          pack,
+          this.env.CONTENT_MODE === 'fixture',
+        ).find(
+          (character) =>
+            !room.players.some((player) => player.characterId === character.id),
+        );
+        if (!available) return apiError('NO_AVAILABLE_CHARACTER', 409);
         const token = issueToken();
         const player = await this.member(
           input.displayName,
           room.players.length as 0 | 1 | 2 | 3,
           token,
-          sampleContentPack.characters.find(
-            (character) =>
-              !room.players.some(
-                (player) => player.characterId === character.id,
-              ),
-          )!.id,
+          available.id,
         );
         const joined = {
           ...room,
@@ -208,8 +262,14 @@ export class GameRoom extends DurableObject<Env> {
         }
         if (selection.expectedStateVersion !== room.version)
           return apiError('VERSION_CONFLICT', 409);
+        let pack;
+        try {
+          pack = await loadRuntimePack(this.env, room.contentVersionId);
+        } catch {
+          return apiError('CONTENT_UNAVAILABLE', 503);
+        }
         if (
-          !sampleContentPack.characters.some(
+          !assertRuntimePack(pack, this.env.CONTENT_MODE === 'fixture').some(
             (character) => character.id === selection.characterId,
           )
         )
@@ -457,6 +517,13 @@ export class GameRoom extends DurableObject<Env> {
         this.reject(ws, room, 'NOT_ENOUGH_PLAYERS', command.commandId);
         return;
       }
+      let content;
+      try {
+        content = await loadRuntimePack(this.env, room.contentVersionId);
+      } catch {
+        this.reject(ws, room, 'NOT_ALLOWED', command.commandId);
+        return;
+      }
       manifest = replayManifestSchema.parse({
         schemaVersion: 1,
         setup: {
@@ -465,7 +532,7 @@ export class GameRoom extends DurableObject<Env> {
           hostPlayerId: room.hostPlayerId,
           seed: room.seed,
           version: room.version,
-          content: sampleContentPack,
+          content,
           players: room.players.map(
             ({ id, seat, displayName, characterId }) => ({
               id,

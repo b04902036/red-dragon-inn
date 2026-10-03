@@ -4,6 +4,9 @@ import { useRoom } from './use-room';
 import { GameTable } from './GameTable';
 import { characterSelectionSchema } from '../protocol/presentation';
 import { roomMetadataSchema } from '../protocol/rooms';
+import { useLocale } from './i18n/context';
+import { uiMessage } from '../shared/ui-messages';
+import type { UiMessage } from '../shared/ui-messages';
 
 export function RoomScreen({
   credentials,
@@ -13,16 +16,17 @@ export function RoomScreen({
   leave: () => void;
 }) {
   const { state, presentation, send, reconnect } = useRoom(credentials);
-  const [notice, setNotice] = useState<string | null>(null);
+  const { t, message } = useLocale();
+  const [notice, setNotice] = useState<UiMessage | null>(null);
   const [selecting, setSelecting] = useState(false);
   const view = state.publicView;
   const invite = `${location.origin}/?room=${credentials.roomId}`;
   const copyInvite = async () => {
     try {
       await navigator.clipboard.writeText(invite);
-      setNotice('Invite link copied.');
+      setNotice(uiMessage('room.copied'));
     } catch {
-      setNotice('Select and copy the invite link above.');
+      setNotice(uiMessage('room.copyFailed'));
     }
   };
   const selectCharacter = async (characterId: string) => {
@@ -49,21 +53,19 @@ export function RoomScreen({
       if (!response.ok) throw new Error('Unavailable');
       roomMetadataSchema.parse(await response.json());
     } catch {
-      setNotice(
-        'That character could not be selected. The seat or table may have changed.',
-      );
+      setNotice(uiMessage('room.characterFailed'));
     } finally {
       setSelecting(false);
     }
   };
   return (
     <>
-      <nav className="room-nav" aria-label="Room">
+      <nav className="room-nav" aria-label={t('room.nav')}>
         <span>
-          Room <code>{credentials.roomId}</code>
+          {t('room.nav')} <code>{credentials.roomId}</code>
         </span>
         <button className="secondary" onClick={leave}>
-          Leave table
+          {t('room.leave')}
         </button>
       </nav>
       {view !== null && presentation !== null && view.lifecycle !== 'LOBBY' ? (
@@ -76,26 +78,18 @@ export function RoomScreen({
         />
       ) : (
         <main className="lobby-page">
-          <p className="eyebrow">Gather your party</p>
-          <h1>Your table at the inn</h1>
-          <p role="status">
-            {state.status === 'synced'
-              ? 'Synced'
-              : state.status === 'offline'
-                ? 'Disconnected'
-                : state.status === 'reconnecting'
-                  ? 'Reconnecting…'
-                  : 'Connecting…'}
-          </p>
+          <p className="eyebrow">{t('room.gather')}</p>
+          <h1>{t('room.title')}</h1>
+          <p role="status">{t(`status.${state.status}`)}</p>
           {(state.error || notice) && (
             <p role="alert" className="notice">
-              {notice ?? state.error}
+              {message((notice ?? state.error)!)}
             </p>
           )}
           <section className="invite-panel">
-            <h2>Invite your friends</h2>
+            <h2>{t('room.inviteTitle')}</h2>
             <label>
-              Invite link
+              {t('room.inviteLink')}
               <input
                 readOnly
                 value={invite}
@@ -107,32 +101,32 @@ export function RoomScreen({
                 void copyInvite();
               }}
             >
-              Copy invite link
+              {t('room.copy')}
             </button>
           </section>
           <section>
-            <h2>Seats at the table</h2>
+            <h2>{t('room.seats')}</h2>
             <ol className="lobby-seats">
               {view?.players.map((player) => (
                 <li key={player.id}>
                   <strong>
                     {player.displayName}
-                    {player.id === credentials.playerId ? ' · You' : ''}
+                    {player.id === credentials.playerId ? t('room.you') : ''}
                   </strong>
                   <span>
-                    Seat {player.seat + 1} ·{' '}
+                    {t('room.seat', { seat: player.seat + 1 })} ·{' '}
                     {state.presence.some(
                       (presence) =>
                         presence.playerId === player.id && presence.connected,
                     )
-                      ? 'Connected'
-                      : 'Disconnected'}
-                    {player.id === state.hostPlayerId ? ' · Host' : ''}
+                      ? t('status.connected')
+                      : t('status.offline')}
+                    {player.id === state.hostPlayerId ? t('room.host') : ''}
                   </span>
                   <span>
                     {presentation?.characters.find(
                       (character) => character.id === player.characterId,
-                    )?.name ?? 'Loading character…'}
+                    )?.name ?? t('room.loadingCharacter')}
                   </span>
                 </li>
               ))}
@@ -140,7 +134,7 @@ export function RoomScreen({
           </section>
           {view && presentation && (
             <label className="character-select">
-              Your character
+              {t('room.character')}
               <select
                 value={
                   view.players.find(
@@ -180,19 +174,16 @@ export function RoomScreen({
                 }
                 onClick={() => send('START_MATCH')}
               >
-                Start sample match
+                {t('room.start')}
               </button>
             ) : (
-              <p>Waiting for the host to start.</p>
+              <p>{t('room.waitHost')}</p>
             )}
             <button className="secondary" onClick={reconnect}>
-              Reconnect
+              {t('status.reconnect')}
             </button>
           </div>
-          <p className="footnote">
-            Original sample cards · 2–4 players · Each tab keeps its own seat
-            for refreshes.
-          </p>
+          <p className="footnote">{t('room.footnote')}</p>
         </main>
       )}
     </>

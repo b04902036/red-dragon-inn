@@ -122,6 +122,10 @@ describe('room entry and refresh credentials', () => {
       await user.type(screen.getByLabelText('Your name'), 'Guest');
       await user.click(screen.getByRole('button', { name: 'Create room' }));
       await waitFor(() => expect(screen.getByRole('alert')).toBeVisible());
+      if (status === 503)
+        expect(screen.getByRole('alert')).toHaveTextContent(
+          'configure a published content version',
+        );
       expect(sessionStorage.length).toBe(0);
       expect(screen.getByRole('button', { name: 'Create room' })).toBeEnabled();
     },

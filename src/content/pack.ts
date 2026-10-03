@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { cardDefinitionSchema } from './cards';
-import { resourceKeySchema } from './effects';
+import { resourceKeySchema, registeredSpecialRuleKeySchema } from './effects';
 import {
   assetIdSchema,
   cardDefinitionIdSchema,
@@ -47,7 +47,7 @@ export const characterSchema = z.strictObject({
   name,
   villain: z.boolean(),
   complexity: z.number().int().min(1).max(5).nullable(),
-  specialRuleKey: z.literal('sample.resources').nullable(),
+  specialRuleKey: registeredSpecialRuleKeySchema.nullable(),
   rules: characterRulesSchema,
 });
 export type Character = z.infer<typeof characterSchema>;
@@ -78,7 +78,7 @@ export const ruleModuleSchema = z.strictObject({
   ruleKey: resourceKeySchema,
   summary: z.string().max(4000),
   rules: z.strictObject({
-    kind: z.literal('SAMPLE_CORE'),
+    kind: z.string().regex(/^[A-Z][A-Z0-9_]{0,63}$/),
     notes: z.string().max(4000),
   }),
 });
@@ -110,6 +110,62 @@ export const assetSchema = z.strictObject({
 });
 export type Asset = z.infer<typeof assetSchema>;
 
+export const contentTranslationSchema = z.strictObject({
+  entityType: z.enum([
+    'PRODUCT',
+    'CHARACTER',
+    'CARD',
+    'RULE_MODULE',
+    'MECHANIC',
+    'CHOICE_OPTION',
+  ]),
+  entityId: z.string().min(1).max(320),
+  field: z.enum(['name', 'rulesText', 'summary', 'label']),
+  locale: z.enum(['en-US', 'zh-TW']),
+  text: z.string().min(1).max(5000),
+  sourceKind: z.enum([
+    'OFFICIAL',
+    'AUTHORIZED',
+    'COMMUNITY',
+    'USER_OWNED',
+    'MANUAL',
+    'MACHINE',
+  ]),
+  sourceRef: z.string().max(1000).nullable(),
+  status: z.enum([
+    'VERIFIED',
+    'COMMUNITY_REFERENCE',
+    'MACHINE_DRAFT',
+    'MANUAL_DRAFT',
+    'MANUAL_REVIEWED',
+  ]),
+});
+export const contentRequirementSchema = z.strictObject({
+  characterId: characterIdSchema,
+  primaryDeckCount: z.number().int().min(1).max(256),
+  sideDecks: z
+    .array(
+      z.strictObject({
+        deckId: deckIdSchema,
+        quantity: z.number().int().min(1).max(256),
+      }),
+    )
+    .max(32),
+  components: z
+    .array(
+      z.strictObject({
+        key: resourceKeySchema,
+        label: name,
+        mechanicKey: registeredSpecialRuleKeySchema,
+      }),
+    )
+    .max(32),
+});
+export const contentMetadataSchema = z.strictObject({
+  requirements: z.array(contentRequirementSchema).max(256).optional(),
+  translations: z.array(contentTranslationSchema).max(50_000).optional(),
+});
+
 export const contentPackSchema = z
   .strictObject({
     schemaVersion: z.literal(1),
@@ -125,6 +181,8 @@ export const contentPackSchema = z
     deckCards: z.array(deckCardSchema).max(20_000),
     ruleModules: z.array(ruleModuleSchema).max(256),
     assets: z.array(assetSchema).max(10_000),
+    requirements: z.array(contentRequirementSchema).max(256).optional(),
+    translations: z.array(contentTranslationSchema).max(50_000).optional(),
   })
   .superRefine((pack, ctx) => {
     const issue = (message: string) =>
@@ -203,6 +261,58 @@ export const contentPackSchema = z
       CARD: new Set(cards.keys()),
       RULE_MODULE: new Set(pack.ruleModules.map((row) => row.id)),
     };
+    unique(
+      (pack.requirements ?? []).map((row) => row.characterId),
+      'character requirement',
+    );
+    unique(
+      (pack.translations ?? []).map(
+        (row) => `${row.entityType}/${row.entityId}/${row.field}/${row.locale}`,
+      ),
+      'translation',
+    );
+    for (const requirement of pack.requirements ?? []) {
+      if (!characters.has(requirement.characterId))
+        issue('Missing requirement character');
+      for (const side of requirement.sideDecks) {
+        const deck = decks.get(side.deckId);
+        if (
+          !deck ||
+          deck.characterId !== requirement.characterId ||
+          deck.type !== 'SPECIAL'
+        )
+          issue('Missing required side deck');
+      }
+    }
+    for (const translation of pack.translations ?? []) {
+      if (translation.entityType === 'CHOICE_OPTION') {
+        if (
+          !pack.cards.some((card) =>
+            card.effects.some(
+              (effect) =>
+                effect.op === 'OPEN_OPTION' &&
+                effect.options.some(
+                  (option) =>
+                    `${card.id}/${option.id}` === translation.entityId,
+                ),
+            ),
+          )
+        )
+          issue('Missing translation choice option');
+      } else if (translation.entityType === 'MECHANIC') {
+        if (
+          !pack.characters.some(
+            (character) => translation.entityId in character.rules.resources,
+          )
+        )
+          issue('Missing translation mechanic');
+      } else if (
+        !(owners[translation.entityType] as ReadonlySet<string>).has(
+          translation.entityId,
+        )
+      )
+        issue('Missing translation entity');
+    }
     for (const asset of pack.assets)
       if (!(owners[asset.ownerType] as ReadonlySet<string>).has(asset.ownerId))
         issue('Missing asset owner');

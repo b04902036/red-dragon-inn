@@ -5,6 +5,8 @@ import {
   assetSchema,
   characterSchema,
   contentPackSchema,
+  contentMetadataSchema,
+  contentTranslationSchema,
   contentVersionSchema,
   deckSchema,
   productSchema,
@@ -23,6 +25,7 @@ import type {
 import type { ContentPack } from '../../src/content/pack';
 import type { ContentRepository, DeckGraph } from './contracts';
 import { parseJsonColumn } from './schemas';
+import type { ContentDatabase } from '../../src/content/database';
 
 type Row = Record<string, unknown>;
 const rowSchema = z.record(z.string(), z.unknown());
@@ -56,7 +59,7 @@ const toAsset = (r: Row) =>
   });
 
 export class D1ContentRepository implements ContentRepository {
-  constructor(private readonly db: D1Database) {}
+  constructor(private readonly db: ContentDatabase) {}
 
   async saveDraft(input: ContentPack): Promise<void> {
     const pack = contentPackSchema.parse(input);
@@ -91,6 +94,130 @@ export class D1ContentRepository implements ContentRepository {
           createdAt: r.created_at,
           publishedAt: r.published_at,
         });
+  }
+
+  /** Reassemble the entire immutable edition, never a fixture or latest-channel fallback. */
+  async loadPack(id: ContentVersionId): Promise<ContentPack | null> {
+    const version = await this.getVersion(contentVersionIdSchema.parse(id));
+    if (version === null || version.publishedAt === null) return null;
+    const tables = [
+      'products',
+      'characters',
+      'decks',
+      'cards',
+      'deck_cards',
+      'rule_modules',
+      'assets',
+      'content_metadata',
+      'content_translations',
+    ] as const;
+    const [
+      products,
+      characters,
+      decks,
+      cards,
+      deckCards,
+      rules,
+      assets,
+      metadata,
+      translations,
+    ] = await Promise.all(
+      tables.map((table) =>
+        this.db
+          .prepare(
+            `SELECT * FROM ${table} WHERE content_version_id = ? ORDER BY rowid`,
+          )
+          .bind(id)
+          .all<Row>(),
+      ),
+    );
+    const extras = metadata!.results[0];
+    const parsedExtras =
+      extras === undefined
+        ? {}
+        : contentMetadataSchema.parse(parseJsonColumn(extras.metadata_json));
+    return contentPackSchema.parse({
+      schemaVersion: 1,
+      version: {
+        id: version.id,
+        name: version.name,
+        createdAt: version.createdAt,
+      },
+      products: products!.results.map((r) =>
+        productSchema.parse({
+          id: r.id,
+          slug: r.slug,
+          name: r.name,
+          releaseYear: r.release_year,
+        }),
+      ),
+      characters: characters!.results.map(toCharacter),
+      decks: decks!.results.map(toDeck),
+      cards: cards!.results.map((r) =>
+        cardDefinitionSchema.parse(parseJsonColumn(r.definition_json)),
+      ),
+      deckCards: deckCards!.results.map((r) => ({
+        deckId: r.deck_id,
+        cardId: r.card_id,
+        quantity: r.quantity,
+      })),
+      ruleModules: rules!.results.map((r) => ({
+        id: r.id,
+        ruleKey: r.rule_key,
+        summary: r.summary,
+        rules: parseJsonColumn(r.rules_json),
+      })),
+      assets: assets!.results.map(toAsset),
+      ...parsedExtras,
+      ...(translations!.results.length === 0 &&
+      parsedExtras.translations === undefined
+        ? {}
+        : {
+            translations: translations!.results.map((r) =>
+              contentTranslationSchema.parse({
+                entityType: r.entity_type,
+                entityId: r.entity_id,
+                field: r.field,
+                locale: r.locale,
+                text: r.text,
+                sourceKind: r.source_kind,
+                sourceRef: r.source_ref,
+                status: r.status,
+              }),
+            ),
+          }),
+    });
+  }
+
+  async productionVersion() {
+    const row = await this.db
+      .prepare(
+        "SELECT content_version_id FROM content_channels WHERE name = 'production'",
+      )
+      .first<Row>();
+    return row === null
+      ? null
+      : contentVersionIdSchema.parse(row.content_version_id);
+  }
+
+  async setProductionVersion(id: ContentVersionId) {
+    const pack = await this.loadPack(id);
+    if (pack === null)
+      throw new RangeError('Production requires a published version');
+    if (
+      pack.cards.some(
+        (card) => card.source !== 'USER_OWNED' && card.source !== 'LICENSED',
+      )
+    )
+      throw new RangeError(
+        'Production requires user-owned or licensed playable cards',
+      );
+    await this.db
+      .prepare(
+        "INSERT INTO content_channels (name, content_version_id) VALUES ('production', ?) ON CONFLICT(name) DO UPDATE SET content_version_id = excluded.content_version_id",
+      )
+      .bind(id)
+      .run();
   }
 
   private async deckGraph(

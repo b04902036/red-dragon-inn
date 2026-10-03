@@ -75,6 +75,14 @@ export const publicGameViewSchema = z.strictObject({
   roomId: roomIdSchema,
   matchId: matchIdSchema.nullable(),
   version: stateVersionSchema,
+  attention: z
+    .strictObject({
+      key: z.string().min(1).max(4000),
+      playerId: playerIdSchema,
+      kind: z.enum(['TURN', 'RESPONSE', 'CHOICE', 'GAMBLING']),
+    })
+    .nullable()
+    .optional(),
   lifecycle: z.enum(MATCH_LIFECYCLES),
   phase: z.enum(TURN_PHASES).nullable(),
   activePlayerId: playerIdSchema.nullable(),

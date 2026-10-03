@@ -3,6 +3,7 @@ import { assertCoreInvariants } from '../../src/engine/invariants';
 import type { CoreGameState } from '../../src/engine/types';
 import {
   characterIdSchema,
+  contentVersionIdSchema,
   playerIdSchema,
   roomIdSchema,
 } from '../../src/shared/ids';
@@ -14,6 +15,7 @@ export const roomRecordSchema = z
   .strictObject({
     schemaVersion: z.literal(1),
     roomId: roomIdSchema,
+    contentVersionId: contentVersionIdSchema,
     version: stateVersionSchema,
     hostPlayerId: playerIdSchema,
     seed: z.number().int().min(0).max(0xffffffff),
@@ -55,6 +57,7 @@ export const roomRecordSchema = z
       !room.players.some((player) => player.id === room.hostPlayerId) ||
       (room.game !== null &&
         (room.game.roomId !== room.roomId ||
+          room.game.contentVersionId !== room.contentVersionId ||
           room.game.version !== room.version ||
           room.game.control.hostPlayerId !== room.hostPlayerId ||
           JSON.stringify(room.game.players.map((player) => player.id)) !==

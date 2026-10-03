@@ -4,29 +4,33 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": "\u003e=24.15.0"
+    "node": ">=24.15.0"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "dev:fixture": "node scripts/fixture-dev.mjs",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "deploy": "npm run build \u0026\u0026 wrangler deploy",
+    "deploy": "node scripts/require-production.mjs && npm run content:verify:production && npm run build && wrangler deploy",
     "types": "wrangler types",
-    "typecheck": "npm run types \u0026\u0026 tsc -p tsconfig.engine.json \u0026\u0026 tsc -p tsconfig.client.json \u0026\u0026 tsc -p tsconfig.worker.json \u0026\u0026 tsc -p tsconfig.node.json \u0026\u0026 tsc -p tsconfig.tests.json",
-    "lint": "eslint . \u0026\u0026 prettier --check .",
+    "typecheck": "npm run types && tsc -p tsconfig.engine.json && tsc -p tsconfig.client.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.node.json && tsc -p tsconfig.tests.json",
+    "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "npm run demo:engine \u0026\u0026 npm run replay:build \u0026\u0026 playwright test",
+    "test:e2e": "npm run demo:engine && npm run replay:build && playwright test",
     "replay:build": "vite build --config vite.replay.config.ts",
-    "replay:inspect": "npm run replay:build \u0026\u0026 node .tools/replay-inspector/replay-inspector.js",
-    "demo:engine": "vite build --config vite.engine-demo.config.ts \u0026\u0026 node .tools/engine-demo/engine-demo.js",
+    "replay:inspect": "npm run replay:build && node .tools/replay-inspector/replay-inspector.js",
+    "demo:engine": "vite build --config vite.engine-demo.config.ts && node .tools/engine-demo/engine-demo.js",
     "db:migrate": "wrangler d1 migrations apply DB --local",
-    "db:seed": "wrangler d1 execute DB --local --file seeds/0001_sample.sql",
+    "db:seed": "wrangler d1 execute DB --local --file seeds/0001_sample.sql && wrangler d1 execute DB --local --file seeds/0002_fixture_localized.sql",
     "content:build": "vite build --config vite.content-import.config.ts",
-    "content:import": "npm run content:build \u0026\u0026 node .tools/content-import/content-import.js",
-    "verify:build": "node scripts/verify-build.mjs"
+    "content:import": "npm run content:build && node .tools/content-import/content-import.js",
+    "content:verify:production": "vite build --config vite.production-content.config.ts && node .tools/production-content/production-content.js",
+    "verify:build": "node scripts/verify-build.mjs",
+    "content:translate:zh-TW": "vite build --config vite.localization.config.ts && node .tools/localization/localization.js --translate",
+    "content:verify:zh-TW": "vite build --config vite.localization.config.ts && node .tools/localization/localization.js"
   },
   "dependencies": {
     "react": "^19.3.0",

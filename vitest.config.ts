@@ -11,6 +11,10 @@ export default defineConfig({
       provider: 'istanbul',
       exclude: ['tests/**', 'scripts/**', '**/*.d.ts'],
       include: [
+        'src/client/audio/audio-engine.ts',
+        'src/client/audio/settings.ts',
+        'src/client/cards/**/*.ts',
+        'src/client/cards/**/*.tsx',
         'src/engine/**/*.ts',
         'src/content/**/*.ts',
         'src/protocol/**/*.ts',
@@ -54,6 +58,8 @@ export default defineConfig({
             wrangler: { configPath: './wrangler.jsonc' },
             miniflare: {
               bindings: {
+                CONTENT_MODE: 'fixture',
+                FIXTURE_CONTENT_VERSION: 'content_sample_localized_v1',
                 TEST_MIGRATIONS: migrations,
                 TEST_SAMPLE_SEED: sampleSeed,
               },
@@ -63,6 +69,26 @@ export default defineConfig({
         test: {
           name: 'worker',
           include: ['tests/worker/**/*.test.ts'],
+          exclude: ['tests/worker/production-content.test.ts'],
+        },
+      },
+      {
+        plugins: [
+          cloudflareTest({
+            wrangler: { configPath: './wrangler.jsonc' },
+            miniflare: {
+              bindings: {
+                CONTENT_MODE: 'production',
+                FIXTURE_CONTENT_VERSION: '',
+                TEST_MIGRATIONS: migrations,
+                TEST_SAMPLE_SEED: sampleSeed,
+              },
+            },
+          }),
+        ],
+        test: {
+          name: 'production-worker',
+          include: ['tests/worker/production-content.test.ts'],
         },
       },
     ],

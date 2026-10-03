@@ -32,8 +32,9 @@ describe('safe table presentation and lobby choices', () => {
     await seedDatabase();
   });
   it('publishes original card text and target hints without deck lists or effects', async () => {
+    const host = await newRoom();
     const response = await exports.default.fetch(
-      'https://example.com/api/content/sample',
+      `https://example.com/api/rooms/${host.roomId}/presentation?locale=en-US`,
     );
     expect(response.status).toBe(200);
     expect(response.headers.get('Cache-Control')).toBe('no-store');
@@ -42,7 +43,9 @@ describe('safe table presentation and lobby choices', () => {
     expect(content.characters).toHaveLength(4);
     expect(content.cards).toHaveLength(10);
     for (const card of content.cards) {
-      expect(card.rulesText).toContain('Original fictional sample card.');
+      expect(card.rulesText).toContain(
+        'Original fictional test content; not an official game card.',
+      );
       expect(card.rulesText).not.toContain('undefined');
     }
     expect(content.cards.find((card) => card.type === 'ACTION')).toMatchObject({
@@ -56,9 +59,12 @@ describe('safe table presentation and lobby choices', () => {
     );
     expect(
       (
-        await exports.default.fetch('https://example.com/api/content/sample', {
-          method: 'POST',
-        })
+        await exports.default.fetch(
+          `https://example.com/api/rooms/${host.roomId}/presentation`,
+          {
+            method: 'POST',
+          },
+        )
       ).status,
     ).toBe(405);
   });

@@ -1,7 +1,10 @@
 import { z } from 'zod';
 import { contentPackSchema } from './pack';
 import type { ContentPack } from './pack';
-import { registeredEffectKeySchema } from './effects';
+import {
+  registeredEffectKeySchema,
+  registeredSpecialRuleKeySchema,
+} from './effects';
 
 /** Adapters decode user-supplied local sources; validation and persistence remain shared. */
 export interface ContentSourceAdapter {
@@ -20,6 +23,7 @@ export interface CompatibilityReport {
   uniqueCards: number;
   physicalCards: number;
   unsupportedEffects: string[];
+  unsupportedSpecialRules: string[];
   missingAssets: string[];
   warnings: string[];
   errors: string[];
@@ -37,6 +41,7 @@ export function validateContentImport(
     uniqueCards: 0,
     physicalCards: 0,
     unsupportedEffects: [],
+    unsupportedSpecialRules: [],
     missingAssets: [],
     warnings: [],
     errors: [],
@@ -67,6 +72,23 @@ export function validateContentImport(
     report.unsupportedEffects = [...new Set(report.unsupportedEffects)];
   }
   const parsed = contentPackSchema.safeParse(raw);
+  const characters = z
+    .object({
+      characters: z.array(z.object({ specialRuleKey: z.string().nullable() })),
+    })
+    .safeParse(raw);
+  if (characters.success)
+    report.unsupportedSpecialRules = [
+      ...new Set(
+        characters.data.characters.flatMap((character) =>
+          character.specialRuleKey !== null &&
+          !registeredSpecialRuleKeySchema.safeParse(character.specialRuleKey)
+            .success
+            ? [character.specialRuleKey]
+            : [],
+        ),
+      ),
+    ];
   if (!parsed.success) {
     report.errors = parsed.error.issues.map(
       (issue) => `${issue.path.join('.') || 'pack'}: ${issue.message}`,
