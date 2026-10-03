@@ -2,6 +2,8 @@ import { test, expect, type Page, type Locator } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
 import { presentationSchema } from '../../src/protocol/presentation';
 import { mockPlayback, playbackCount } from './audio-helpers';
+import { passPhaseEnd } from './timing-helpers';
+const peers = new Map<string, Page[]>();
 async function view(page: Page, id: string) {
   return roomMetadataSchema.parse(
     await (await page.request.get(`/api/rooms/${id}`)).json(),
@@ -13,6 +15,7 @@ async function command(page: Page, id: string, button: Locator) {
   await expect
     .poll(async () => (await view(page, id)).version)
     .toBeGreaterThan(version);
+  if (peers.has(id)) await passPhaseEnd(peers.get(id)!, id);
 }
 async function resolveResponses(host: Page, guest: Page, id: string) {
   for (let limit = 0; limit < 16; limit++) {
@@ -93,6 +96,7 @@ test('mixed-locale gambling priorities chime once; Chinese card details scroll, 
     await expect(host.getByRole('status')).toHaveText('已同步');
     const invite = await host.getByLabel('邀請連結').inputValue(),
       id = new URL(invite).searchParams.get('room')!;
+    peers.set(id, [host, guest]);
     await guest.goto(invite);
     expect(await playbackCount(guest, 'music')).toBe(0);
     await guest.getByText('Sound', { exact: true }).click();
@@ -196,8 +200,8 @@ test('mixed-locale gambling priorities chime once; Chinese card details scroll, 
       id,
       guest.getByRole('button', { name: '以示範作弊奪權取得主導權' }),
     );
-    await expect.poll(() => playbackCount(host, 'chime')).toBe(remote + 1);
-    expect(await playbackCount(guest, 'chime')).toBe(stable);
+    await expect.poll(() => playbackCount(guest, 'chime')).toBe(stable + 1);
+    expect(await playbackCount(host, 'chime')).toBe(remote);
     await resolveResponses(host, guest, id);
     expect((await view(host, id)).attention!.kind).toBe('GAMBLING');
     expect(await playbackCount(host, 'music')).toBe(1);

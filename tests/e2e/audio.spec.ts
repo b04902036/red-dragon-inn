@@ -1,6 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
 import { mockPlayback, playbackCount } from './audio-helpers';
+import { passPhaseEnd } from './timing-helpers';
 test('gesture unlocks one music loop; remote response priority chimes once; resync/locale/refresh deduplicate and audio-disabled gameplay works', async ({
   browser,
 }) => {
@@ -22,6 +23,7 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
     await host.getByRole('button', { name: 'Create room' }).click();
     await expect(host.getByRole('status')).toHaveText('Synced');
     const invite = await host.getByLabel('Invite link').inputValue();
+    const id = new URL(invite).searchParams.get('room')!;
     await guest.goto(invite);
     await guest.getByLabel('Your name').fill('Guest');
     await guest.getByRole('button', { name: 'Join room' }).click();
@@ -33,6 +35,7 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
     await host
       .getByRole('button', { name: 'Discard and draw', exact: true })
       .click();
+    await passPhaseEnd(pages, id);
     await expect(
       host.getByRole('heading', { name: 'Action', exact: true }),
     ).toBeVisible();
@@ -45,15 +48,27 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
       .getByRole('button', { name: 'Guest', exact: true })
       .click();
     await expect(
+      host.getByRole('button', { name: 'Pass response' }),
+    ).toBeEnabled();
+    const hostBeforePass = await playbackCount(host, 'chime');
+    const guestBeforePass = await playbackCount(guest, 'chime');
+    await host.getByRole('button', { name: 'Pass response' }).click();
+    await expect(
       guest.getByRole('button', { name: 'Pass response' }),
     ).toBeEnabled();
-    await expect.poll(() => playbackCount(guest, 'chime')).toBe(1);
+    await expect
+      .poll(() => playbackCount(guest, 'chime'))
+      .toBe(guestBeforePass + 1);
     const before = await playbackCount(host, 'chime');
+    await guest
+      .getByRole('button', { name: 'Respond with Sample Brush It Off' })
+      .click();
     await guest.getByRole('button', { name: 'Pass response' }).click();
     await expect(
       host.getByRole('button', { name: 'Pass response' }),
     ).toBeEnabled();
     await expect.poll(() => playbackCount(host, 'chime')).toBe(before + 1);
+    expect(before).toBe(hostBeforePass);
     const stable = await playbackCount(host, 'chime');
     await host.getByLabel('Language').selectOption('zh-TW');
     await expect(host.getByRole('heading', { name: '回應時機' })).toBeVisible();
@@ -87,6 +102,7 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
       await local.getByRole('button', { name: 'Pass response' }).click();
       await expect(local.getByRole('status')).toHaveText('Synced');
     }
+    await passPhaseEnd(pages, roomId);
     await expect(
       host.getByRole('heading', { name: 'Order a Drink', exact: true }),
     ).toBeVisible();

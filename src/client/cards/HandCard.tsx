@@ -7,6 +7,7 @@ export function HandCard({
   selectable = false,
   selected = false,
   disabled = false,
+  playable = false,
   onToggle,
   onPreview,
   onLeave,
@@ -19,6 +20,7 @@ export function HandCard({
   selectable?: boolean;
   selected?: boolean;
   disabled?: boolean;
+  playable?: boolean;
   onToggle?: (id: string) => void;
   onPreview: (id: string) => void;
   onLeave: (id: string) => void;
@@ -32,8 +34,9 @@ export function HandCard({
   };
   return (
     <article
-      className={`hand-card${selected ? ' selected-card' : ''}${selectable ? ' selectable-card' : ''}`}
+      className={`hand-card${selected ? ' selected-card' : ''}${selectable ? ' selectable-card' : ''}${playable ? ' playable-card' : ''}`}
       data-card-id={id}
+      data-playable={playable ? 'true' : 'false'}
       onClick={toggle}
       onPointerEnter={(event) => {
         if (event.pointerType !== 'touch') onPreview(definition.id);
@@ -62,6 +65,7 @@ export function HandCard({
         }
         aria-checked={selectable ? selected : undefined}
         aria-disabled={selectable ? disabled : undefined}
+        aria-description={playable ? t('card.playable') : undefined}
         onKeyDown={(event) => {
           if (event.key === 'Escape') {
             event.preventDefault();
@@ -75,6 +79,11 @@ export function HandCard({
       >
         <p className="card-kind">{t(`card.${definition.type}`)}</p>
         <h3>{definition.name}</h3>
+        {playable && (
+          <span className="playable-indicator" aria-hidden="true">
+            ▶ {t('card.playable')}
+          </span>
+        )}
         {selected && (
           <span className="selection-indicator" aria-hidden="true">
             ✓ {t('card.selected')}

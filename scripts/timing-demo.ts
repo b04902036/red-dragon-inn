@@ -53,12 +53,24 @@ export function timingDemo(
       state.players[0]!.id,
     );
     accept(
+      'PASS_RESPONSE',
+      'Source actor passes',
+      { responseWindowId: state.responseWindow!.id },
+      state.players[0]!.id,
+    );
+    accept(
       'PLAY_RESPONSE',
       'Player 2 plays Ignore',
       { responseWindowId: state.responseWindow!.id, cardId: card(1, 'ignore') },
       state.players[1]!.id,
     );
     if (nested) {
+      accept(
+        'PASS_RESPONSE',
+        'Response actor passes',
+        { responseWindowId: state.responseWindow!.id },
+        state.players[1]!.id,
+      );
       accept(
         'PLAY_RESPONSE',
         'Player 3 negates Ignore',

@@ -8,6 +8,7 @@ import {
   resolutionIdSchema,
 } from '../shared/ids';
 import { effectSchema, resourceKeySchema } from './effects';
+import { responseTriggerSchema } from './reaction-triggers';
 
 const definitionFields = {
   id: cardDefinitionIdSchema,
@@ -24,6 +25,7 @@ const definitionFields = {
   ]),
   characterId: characterIdSchema.optional(),
   effects: z.array(effectSchema).max(32),
+  negatable: z.boolean().optional(),
 };
 const gamblingMetadata = z.strictObject({
   allowedNextCategories: z
@@ -40,6 +42,7 @@ export const cardDefinitionSchema = z.discriminatedUnion('type', [
     ...definitionFields,
     type: z.literal('SOMETIMES'),
     responseKind: z.enum(['SOMETIMES', 'IGNORE', 'NEGATE']),
+    responseTrigger: responseTriggerSchema.optional(),
   }),
   z.strictObject({ ...definitionFields, type: z.literal('ANYTIME') }),
   z.strictObject({

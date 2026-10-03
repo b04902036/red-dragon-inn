@@ -8,6 +8,7 @@ export function checkEliminations(state: MutableGameState, emit: EmitEvent) {
   if (
     state.lifecycle !== 'PLAYING' ||
     state.gambling !== null ||
+    state.control.phaseEnd !== null ||
     state.resolutionStack.length > 0 ||
     state.responseWindow !== null
   )

@@ -1,5 +1,12 @@
 import type { AuthoritativeGameState, PlayerState } from '../engine/model';
+import type { CoreGameState } from '../engine/types';
+import {
+  legalResponsesForPlayer,
+  reactionContext,
+} from '../engine/reaction-legality';
 import { actionAttention } from './attention';
+import { legalAnytimeCards } from '../engine/timed-prompts';
+import { legalCardPlays } from '../engine/card-play-legality';
 import type { CardInstanceId, PlayerId } from '../shared/ids';
 import {
   privatePlayerViewSchema,
@@ -64,6 +71,20 @@ export function projectPublicGame(
     matchId: state.matchId,
     version: state.version,
     lifecycle: state.lifecycle,
+    ...('rules' in state
+      ? {
+          timedPrompt: (state as CoreGameState).control.timedPrompt,
+          phaseEnd:
+            (state as CoreGameState).control.phaseEnd === null
+              ? null
+              : {
+                  id: (state as CoreGameState).control.phaseEnd!.id,
+                  phase: (state as CoreGameState).control.phaseEnd!.phase,
+                  priorityPlayerId: (state as CoreGameState).control.phaseEnd!
+                    .priorityPlayerId,
+                },
+        }
+      : {}),
     phase: state.phase,
     activePlayerId: state.activePlayerId,
     players: state.players.map((player) => ({
@@ -132,7 +153,10 @@ export function projectPublicGame(
             id: state.responseWindow.id,
             kind: state.responseWindow.kind,
             resolutionId: state.responseWindow.resolutionId,
-            eligiblePlayerIds: [...state.responseWindow.eligiblePlayerIds],
+            eligiblePlayerIds: state.players
+              .filter((player) => !player.eliminated)
+              .sort((a, b) => a.seat - b.seat)
+              .map((player) => player.id),
             passedPlayerIds: [...state.responseWindow.passedPlayerIds],
             priorityPlayerId: state.responseWindow.priorityPlayerId,
             submittedResponses: [...state.responseWindow.submittedResponses],
@@ -145,11 +169,17 @@ export function projectPublicGame(
     ? view
     : {
         ...view,
-        attention: actionAttention(
-          view,
-          state.control.turnNumber,
-          state.resolutionStack.at(-1)?.nextEffectIndex,
-        ),
+        attention: view.timedPrompt
+          ? {
+              key: view.timedPrompt.promptId,
+              playerId: view.timedPrompt.priorityPlayerId,
+              kind: 'RESPONSE' as const,
+            }
+          : actionAttention(
+              view,
+              state.control.turnNumber,
+              state.resolutionStack.at(-1)?.nextEffectIndex,
+            ),
       };
 }
 
@@ -169,6 +199,57 @@ export function projectPrivatePlayer(
     matchId: state.matchId,
     version: state.version,
     playerId: player.id,
+    ...('definitions' in state
+      ? {
+          legalPlayVersion: state.version,
+          legalPlays: legalCardPlays(state as CoreGameState, requesterId),
+        }
+      : {}),
+    ...('definitions' in state
+      ? {
+          responsePrompt:
+            (state as CoreGameState).control.timedPrompt?.priorityPlayerId ===
+            requesterId
+              ? {
+                  ...(state as CoreGameState).control.timedPrompt!,
+                  hasLegalSometimes:
+                    window !== null &&
+                    window.pendingChoice === null &&
+                    legalResponsesForPlayer(
+                      state as CoreGameState,
+                      requesterId,
+                      reactionContext(
+                        state as CoreGameState,
+                        state.resolutionStack.at(-1)!,
+                      ),
+                    ).some(
+                      (c) =>
+                        (state as CoreGameState).definitions[
+                          state.cards[c.cardId]!.definitionId
+                        ]!.type === 'SOMETIMES',
+                    ),
+                }
+              : null,
+          legalAnytime:
+            (state as CoreGameState).control.phaseEnd?.priorityPlayerId ===
+              requesterId && state.resolutionStack.length === 0
+              ? legalAnytimeCards(state as CoreGameState, requesterId)
+              : [],
+        }
+      : {}),
+    legalResponses:
+      'definitions' in state &&
+      window?.priorityPlayerId === requesterId &&
+      window.pendingChoice === null
+        ? legalResponsesForPlayer(
+            state as CoreGameState,
+            requesterId,
+            reactionContext(
+              state as CoreGameState,
+              state.resolutionStack.at(-1)!,
+            ),
+          )
+        : [],
     hand: player.hand.map((id) => {
       const card = state.cards[id];
       if (

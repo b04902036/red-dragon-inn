@@ -22,6 +22,7 @@ import {
   pass,
   passWindow,
   responseEffects,
+  priorityFor,
 } from '../fixtures/timing-match';
 
 it('repeated Ignore operations in one validated response exclude the player only once', () => {
@@ -46,6 +47,17 @@ function reject(
   code: string,
   seat = 1,
 ) {
+  if (
+    type === 'PLAY_RESPONSE' &&
+    ![
+      'NOT_PRIORITY',
+      'ALREADY_PASSED',
+      'NOT_ELIGIBLE',
+      'WRONG_WINDOW',
+      'VERSION_CONFLICT',
+    ].includes(code)
+  )
+    state = priorityFor(state, seat);
   const before = JSON.stringify(state);
   const result = applyCommand(state, intent(state, type, fields), {
     actorId: state.players[seat]!.id,
@@ -78,8 +90,8 @@ describe('response priority and source resolution', () => {
   it('resolves a simple Action after every living player passes in seat order', () => {
     const queued = playAction();
     expect(queued.state.responseWindow).toMatchObject({
-      eligiblePlayerIds: ['player_1', 'player_2', 'player_3', 'player_0'],
-      priorityPlayerId: 'player_1',
+      eligiblePlayerIds: ['player_0', 'player_1', 'player_2', 'player_3'],
+      priorityPlayerId: 'player_0',
       passedPlayerIds: [],
       kind: 'SOMETIMES',
     });
@@ -89,7 +101,7 @@ describe('response priority and source resolution', () => {
       complete.events
         .filter((event) => event.type === 'RESPONSE_PASSED')
         .map((event) => event.playerId),
-    ).toEqual(['player_1', 'player_2', 'player_3', 'player_0']);
+    ).toEqual(['player_0', 'player_1', 'player_2', 'player_3']);
     expect(complete.state.responseWindow).toBeNull();
     expect(complete.state.resolutionStack).toEqual([]);
     expect(complete.state.players[1]!.fortitude).toBe(18);
@@ -127,14 +139,14 @@ describe('response priority and source resolution', () => {
     expect(child.state.players[1]!.hand).toEqual(state.players[1]!.hand);
     expect(child.state.resolutionStack[0]!.window).toMatchObject({
       passedPlayerIds: [],
-      priorityPlayerId: 'player_3',
+      priorityPlayerId: 'player_2',
       submittedResponses: [child.state.resolutionStack[1]!.id],
     });
     state = passWindow(child.state).state;
     expect(state.players[2]!.alcoholContent).toBe(2);
     expect(state.players[1]!.fortitude).toBe(20);
     expect(state.resolutionStack).toHaveLength(1);
-    expect(state.responseWindow!.priorityPlayerId).toBe('player_3');
+    expect(state.responseWindow!.priorityPlayerId).toBe('player_0');
     expect(state.cards[replyCard]!.location.zone).toBe('CHARACTER_DISCARD');
     expect(passWindow(state).state.players[1]!.fortitude).toBe(18);
   });
@@ -296,15 +308,17 @@ describe('validation, privacy, retries, and reconnect state', () => {
       'PASS_RESPONSE',
       { responseWindowId: passed.responseWindow!.id },
       'ALREADY_PASSED',
+      0,
     );
     reject(
       passed,
       'PLAY_RESPONSE',
       {
         responseWindowId: passed.responseWindow!.id,
-        cardId: cardInHand(passed, 1, 'ignore'),
+        cardId: cardInHand(passed, 0, 'ignore'),
       },
       'ALREADY_PASSED',
+      0,
     );
   });
   it('eligibility excludes eliminated players and is independent of secret hands', () => {
@@ -312,9 +326,9 @@ describe('validation, privacy, retries, and reconnect state', () => {
     state.players[2]!.eliminated = true;
     const queued = playAction(state).state;
     expect(queued.responseWindow!.eligiblePlayerIds).toEqual([
+      'player_0',
       'player_1',
       'player_3',
-      'player_0',
     ]);
     reject(
       queued,
@@ -416,7 +430,7 @@ describe('validation, privacy, retries, and reconnect state', () => {
     );
   });
   it('retries an accepted nested response after child commands without executing it again', () => {
-    const queued = playAction().state;
+    const queued = pass(playAction().state).state;
     const command = intent(queued, 'PLAY_RESPONSE', {
       responseWindowId: queued.responseWindow!.id,
       cardId: cardInHand(queued, 1, 'ignore'),
@@ -439,7 +453,7 @@ describe('validation, privacy, retries, and reconnect state', () => {
     const nested = response(playAction().state, 1, 'ignore').state;
     const view = projectPublicGame(nested);
     expect(view.responseWindow).toMatchObject({
-      priorityPlayerId: 'player_2',
+      priorityPlayerId: 'player_1',
       kind: 'IGNORE',
     });
     expect(view.resolutionStack).toHaveLength(2);
@@ -602,8 +616,7 @@ describe('validated effect operations and choices', () => {
         { op: 'TRANSFER_GOLD', target: 'CHOSEN_PLAYER', amount: 3 },
       ]),
     );
-    let state = queued.state;
-    for (let i = 0; i < 3; i += 1) state = pass(state).state;
+    const state = queued.state;
     const ignored = passWindow(response(state, 0, 'ignore').state);
     expect(
       passWindow(ignored.state).state.players.map((player) => player.gold),
@@ -857,7 +870,9 @@ describe('validated effect operations and choices', () => {
       1,
     ).state;
     expect(targeted.players[3]!.fortitude).toBe(18);
-    expect(targeted.responseWindow!.id).toBe(queued.state.responseWindow!.id);
+    expect(targeted.responseWindow!.id).not.toBe(
+      queued.state.responseWindow!.id,
+    );
     expect(passWindow(targeted).state.players[1]!.fortitude).toBe(18);
   });
   it('skips choices for ignored targets and empty hands while preserving operation events', () => {
@@ -943,19 +958,23 @@ describe('validated effect operations and choices', () => {
 });
 
 describe('bounded stack and invariant replay', () => {
-  it('rejects a 33rd frame without losing a response card', () => {
+  it('auto-skips further responses at depth 32 without losing unplayed cards', () => {
     const input = setupInput(1, 22);
     for (const entry of input.content.deckCards)
       if (entry.cardId === 'carddef_sample_breather') entry.quantity = 16;
     let state = accepted(createMatch(input), 'START_MATCH').state;
     state = accepted(state, 'DISCARD', { cardIds: [] }).state;
     state = playAction(state).state;
-    while (state.resolutionStack.length < 32) {
+    while (state.resolutionStack.length < 31) {
       const actor = state.responseWindow!.priorityPlayerId!;
       const player = state.players.find((player) => player.id === actor)!;
       const cardId = player.hand.find(
         (id) => state.cards[id]!.definitionId === 'carddef_sample_breather',
-      )!;
+      );
+      if (cardId === undefined) {
+        state = pass(state).state;
+        continue;
+      }
       state = accepted(
         state,
         'PLAY_RESPONSE',
@@ -963,20 +982,30 @@ describe('bounded stack and invariant replay', () => {
         actor,
       ).state;
     }
-    const seat = state.players.findIndex(
-      (player) => player.id === state.responseWindow!.priorityPlayerId,
-    );
-    reject(
+    const actor = state.responseWindow!.priorityPlayerId!;
+    const cardId = state.players
+      .find((player) => player.id === actor)!
+      .hand.find(
+        (id) => state.cards[id]!.definitionId === 'carddef_sample_breather',
+      )!;
+    const result = accepted(
       state,
       'PLAY_RESPONSE',
-      {
-        responseWindowId: state.responseWindow!.id,
-        cardId: cardInHand(state, seat, 'breather'),
-      },
-      'STACK_LIMIT',
-      seat,
+      { responseWindowId: state.responseWindow!.id, cardId },
+      actor,
     );
-    assertCoreInvariants(state);
+    const child = result.events.find(
+      (event) => event.type === 'RESOLUTION_STARTED',
+    )!;
+    expect(result.events).toContainEqual(
+      expect.objectContaining({
+        type: 'RESOLUTION_COMPLETED',
+        resolutionId: child.resolutionId,
+      }),
+    );
+    expect(result.state.resolutionStack).toHaveLength(31);
+    expect(result.state.cards[cardId]!.location.zone).toBe('CHARACTER_DISCARD');
+    assertCoreInvariants(result.state);
   });
   it('bounds per-window submitted history and preserves the current source on rejection', () => {
     const state = mutable(playAction().state);

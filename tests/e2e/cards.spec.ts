@@ -1,6 +1,8 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
 import { decodeClientRoomMessage } from '../../src/protocol/codec';
+import { passPhaseEnd } from './timing-helpers';
+const peers = new Map<string, Page[]>();
 async function metadata(page: Page, id: string) {
   return roomMetadataSchema.parse(
     await (await page.request.get(`/api/rooms/${id}`)).json(),
@@ -13,6 +15,7 @@ async function act(page: Page, id: string, button: Locator) {
     .poll(async () => (await metadata(page, id)).version)
     .toBeGreaterThan(version);
   await expect(page.getByRole('status')).toHaveText('Synced');
+  if (peers.has(id)) await passPhaseEnd(peers.get(id)!, id);
 }
 test('whole-card selection/deselection, hover/focus, no button bubbling, mobile details and reduced motion preserve server intents', async ({
   browser,
@@ -39,6 +42,7 @@ test('whole-card selection/deselection, hover/focus, no button bubbling, mobile 
     await expect(host.getByRole('status')).toHaveText('Synced');
     const invite = await host.getByLabel('Invite link').inputValue(),
       id = new URL(invite).searchParams.get('room')!;
+    peers.set(id, [host, guest]);
     await guest.goto(invite);
     await guest.getByLabel('Your name').fill('Guest');
     await guest.getByRole('button', { name: 'Join room' }).click();

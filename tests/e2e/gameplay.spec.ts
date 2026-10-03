@@ -1,5 +1,7 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
+import { passPhaseEnd } from './timing-helpers';
+const peers = new Map<string, Page[]>();
 
 async function metadata(page: Page, roomId: string) {
   const response = await page.request.get(`/api/rooms/${roomId}`);
@@ -12,6 +14,7 @@ async function act(page: Page, roomId: string, button: Locator) {
     .poll(async () => (await metadata(page, roomId)).version)
     .toBeGreaterThan(version);
   await expect(page.getByRole('status')).toHaveText('Synced');
+  if (peers.has(roomId)) await passPhaseEnd(peers.get(roomId)!, roomId);
 }
 async function passResponses(pages: Page[], roomId: string) {
   for (let limit = 0; limit < 24; limit++) {
@@ -53,6 +56,7 @@ test('two players use the table, reactions, Drinks, gambling, refresh and mobile
     await expect(host.getByRole('status')).toHaveText('Synced');
     const invite = await host.getByLabel('Invite link').inputValue();
     const roomId = new URL(invite).searchParams.get('room')!;
+    peers.set(roomId, pages);
     expect(invite).not.toMatch(/token|player_/);
     await host.getByLabel('Your character').selectOption('character_sample_2');
     await expect(host.getByLabel('Your character')).toHaveValue(
@@ -149,6 +153,11 @@ test('two players use the table, reactions, Drinks, gambling, refresh and mobile
     await expect(
       guest.getByRole('heading', { name: 'Response window' }),
     ).toBeVisible();
+    await act(
+      host,
+      roomId,
+      host.getByRole('button', { name: 'Pass response' }),
+    );
     await act(
       guest,
       roomId,

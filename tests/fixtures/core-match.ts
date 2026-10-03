@@ -24,7 +24,12 @@ export function setupInput(
     hostPlayerId: playerIdSchema.parse(`player_${seats[0]}`),
     seed,
     content: contentPackSchema.parse(sampleContentPack),
-    rules: { ...DEFAULT_RULES, handSize },
+    // Existing rule fixtures isolate untimed mechanics; timed-prompt tests inject real deadlines.
+    rules: {
+      ...DEFAULT_RULES,
+      handSize,
+      timing: { responseMs: 0, phaseEndMs: 0 },
+    },
     players: seats.map((seat) => ({
       id: playerIdSchema.parse(`player_${seat}`),
       characterId: sampleContentPack.characters[seat]!.id,

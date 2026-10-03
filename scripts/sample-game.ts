@@ -79,7 +79,7 @@ export function runSampleGame(initial: CoreGameState = sampleGameSetup()) {
     events.some((event) => event.type === 'GAMBLING_STARTED') ||
     state.control.turnNumber > 1;
   while (state.lifecycle !== 'FINISHED') {
-    if (commands.length >= 1000) throw new Error('Sample game command limit');
+    if (commands.length >= 3000) throw new Error('Sample game command limit');
     if (state.responseWindow !== null) {
       accept(
         'PASS_RESPONSE',
@@ -90,6 +90,14 @@ export function runSampleGame(initial: CoreGameState = sampleGameSetup()) {
     }
     if (state.gambling !== null) {
       accept('GAMBLING_PASS', {}, state.gambling.priorityPlayerId!);
+      continue;
+    }
+    if (state.control.phaseEnd !== null) {
+      accept(
+        'PASS_ANYTIME',
+        { responseWindowId: state.control.phaseEnd.id },
+        state.control.phaseEnd.priorityPlayerId!,
+      );
       continue;
     }
     const actor = state.players.find(

@@ -18,6 +18,7 @@ export default defineConfig({
     },
     {
       name: 'chromium-replay',
+      dependencies: ['chromium'],
       testMatch: ['**/replay-inspector.spec.ts', '**/localization.spec.ts'],
       // These CLI probes open the same local D1 file in independent Miniflare runtimes.
       // Serialize the probes; all browser assertions and other journeys remain parallel.

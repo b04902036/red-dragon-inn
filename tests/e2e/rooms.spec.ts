@@ -110,7 +110,7 @@ test('two browser contexts join a live room, receive private hands, reject stale
     });
     await expect
       .poll(async () => (await snapshot(b)).public?.phase)
-      .toBe('ACTION');
+      .toBe('DISCARD_DRAW');
     await send(a, {
       type: 'SKIP_ACTION',
       roomId: host.roomId,
@@ -143,7 +143,7 @@ test('two browser contexts join a live room, receive private hands, reject stale
         };
       });
     }, host.credentials);
-    expect((await snapshot(a)).public?.phase).toBe('ACTION');
+    expect((await snapshot(a)).public?.phase).toBe('DISCARD_DRAW');
     expect((await snapshot(a)).private?.playerId).toBe(
       host.credentials.playerId,
     );

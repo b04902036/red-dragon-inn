@@ -72,13 +72,29 @@ it('persists a three-level response stack in D1 and resumes with identical event
     )!;
   accept('START_MATCH');
   accept('DISCARD', { cardIds: [] });
+  while (state.control.phaseEnd !== null)
+    accept(
+      'PASS_ANYTIME',
+      { responseWindowId: state.control.phaseEnd.id },
+      state.control.phaseEnd.priorityPlayerId!,
+    );
   accept('PLAY_CARD', {
     cardId: card(0, 'shove'),
     targetPlayerId: match.players[1]!.playerId,
   });
   accept(
+    'PASS_RESPONSE',
+    { responseWindowId: state.responseWindow!.id },
+    match.players[0]!.playerId,
+  );
+  accept(
     'PLAY_RESPONSE',
     { responseWindowId: state.responseWindow!.id, cardId: card(1, 'ignore') },
+    match.players[1]!.playerId,
+  );
+  accept(
+    'PASS_RESPONSE',
+    { responseWindowId: state.responseWindow!.id },
     match.players[1]!.playerId,
   );
   accept(
@@ -105,17 +121,25 @@ it('persists a three-level response stack in D1 and resumes with identical event
   const finish = (input: CoreGameState) => {
     let current = input;
     const emitted: DomainEvent[] = [];
-    while (current.responseWindow !== null) {
+    while (
+      current.responseWindow !== null ||
+      current.control.phaseEnd !== null
+    ) {
       const result = applyCommand(
         current,
         {
-          type: 'PASS_RESPONSE',
-          responseWindowId: current.responseWindow.id,
+          type: current.responseWindow ? 'PASS_RESPONSE' : 'PASS_ANYTIME',
+          responseWindowId:
+            current.responseWindow?.id ?? current.control.phaseEnd!.id,
           roomId: current.roomId,
           commandId: `command_${current.version + 1}`,
           expectedStateVersion: current.version,
         },
-        { actorId: current.responseWindow.priorityPlayerId! },
+        {
+          actorId:
+            current.responseWindow?.priorityPlayerId ??
+            current.control.phaseEnd!.priorityPlayerId!,
+        },
       );
       expect(result.status).toBe('ACCEPTED');
       emitted.push(...result.events);

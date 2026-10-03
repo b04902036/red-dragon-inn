@@ -18,7 +18,11 @@ function prepare(handSize: number) {
     hostPlayerId: playerIdSchema.parse('player_0'),
     seed: 1,
     content: sampleContentPack,
-    rules: { ...DEFAULT_RULES, handSize },
+    rules: {
+      ...DEFAULT_RULES,
+      handSize,
+      timing: { responseMs: 0, phaseEndMs: 0 },
+    },
     players: sampleContentPack.characters.map((character, seat) => ({
       id: playerIdSchema.parse(`player_${seat}`),
       characterId: character.id,

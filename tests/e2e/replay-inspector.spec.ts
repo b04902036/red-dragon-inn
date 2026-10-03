@@ -3,6 +3,7 @@ import { promisify } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
+import { passPhaseEnd } from './timing-helpers';
 
 test('local-only replay inspector verifies a persisted browser match and exports an ignored debug report', async ({
   browser,
@@ -31,10 +32,11 @@ test('local-only replay inspector verifies a persisted browser match and exports
       host.getByRole('button', { name: 'Discard and draw' }),
     ).toBeEnabled();
     await host.getByRole('button', { name: 'Discard and draw' }).click();
+    const roomId = new URL(invite).searchParams.get('room')!;
+    await passPhaseEnd([host, guest], roomId);
     await expect(
       host.getByRole('heading', { name: 'Action', exact: true }),
     ).toBeVisible();
-    const roomId = new URL(invite).searchParams.get('room')!;
     const response = await host.request.get(`/api/rooms/${roomId}`);
     const metadata = roomMetadataSchema.parse(await response.json());
     const matchId = metadata.view.matchId!;
@@ -47,7 +49,7 @@ test('local-only replay inspector verifies a persisted browser match and exports
     const raw = JSON.parse(
       await readFile(`.tools/replay-inspector/${matchId}.json`, 'utf8'),
     ) as { entries: unknown[]; replay: { state: { version: number } } };
-    expect(raw.entries).toHaveLength(2);
+    expect(raw.entries).toHaveLength(4);
     expect(raw.replay.state.version).toBe(metadata.view.version);
     expect(JSON.stringify(raw)).not.toMatch(
       /resumeToken|tokenHash|activeSessionId/,

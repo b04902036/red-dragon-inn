@@ -3,6 +3,8 @@ import { roomMetadataSchema } from '../../src/protocol/rooms';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFile } from 'node:fs/promises';
+import { passPhaseEnd } from './timing-helpers';
+const peers = new Map<string, Page[]>();
 async function persistedReplay(matchId: string) {
   const { stdout } = await promisify(execFile)(
     process.execPath,
@@ -38,6 +40,7 @@ async function action(
   await expect(page.getByRole('status')).toHaveText(
     locale === 'zh-TW' ? '已同步' : 'Synced',
   );
+  if (peers.has(id)) await passPhaseEnd(peers.get(id)!, id);
 }
 test('a full Traditional Chinese turn shares unchanged protocol with an English player and language switches preserve the socket and hand', async ({
   browser,
@@ -63,6 +66,7 @@ test('a full Traditional Chinese turn shares unchanged protocol with an English 
     await expect(host.getByRole('status')).toHaveText('已同步');
     const invite = await host.getByLabel('邀請連結').inputValue(),
       id = new URL(invite).searchParams.get('room')!;
+    peers.set(id, [host, guest]);
     await guest.goto(invite);
     await guest.getByLabel('Your name').fill('Guest');
     await guest.getByRole('button', { name: 'Join room' }).click();

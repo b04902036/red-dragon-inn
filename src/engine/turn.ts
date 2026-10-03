@@ -2,6 +2,7 @@ import type { StateChangingCommand } from '../protocol/commands';
 import { requireCommand, CommandError } from './errors';
 import { drawHand } from './card-moves';
 import { playAction, startDrink } from './timing';
+import { completePhase } from './timed-prompts';
 import type { PlayerId } from '../shared/ids';
 
 import { drawFromPiles } from './decks';
@@ -129,6 +130,7 @@ export function executeTurnCommand(
 ) {
   requireCommand(
     state.gambling === null &&
+      state.control.phaseEnd === null &&
       state.responseWindow === null &&
       state.resolutionStack.length === 0,
     'RESOLUTION_PENDING',
@@ -165,7 +167,7 @@ export function executeTurnCommand(
           cardIds: command.cardIds,
         });
       drawHand(state, player, emit, rng);
-      setPhase(state, 'ACTION', emit);
+      completePhase(state, 'ACTION', emit);
       return;
     }
     case 'PLAY_CARD':
@@ -173,7 +175,7 @@ export function executeTurnCommand(
       return;
     case 'SKIP_ACTION':
       requireCommand(state.phase === 'ACTION', 'WRONG_PHASE');
-      setPhase(state, 'ORDER_DRINK', emit);
+      completePhase(state, 'ORDER_DRINK', emit);
       return;
     case 'ORDER_DRINK': {
       requireCommand(state.phase === 'ORDER_DRINK', 'WRONG_PHASE');
@@ -197,7 +199,7 @@ export function executeTurnCommand(
           targetPlayerId: target.id,
           cardId: drawn[0]!,
         });
-      setPhase(state, 'DRINK', emit);
+      completePhase(state, 'DRINK', emit);
       return;
     }
     case 'TAKE_DRINK':

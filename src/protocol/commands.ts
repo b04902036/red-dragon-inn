@@ -24,13 +24,22 @@ const playerIds = z
     'Duplicate target player ID',
   );
 const mutationFields = {
-  commandId: commandIdSchema,
+  commandId: commandIdSchema.refine(
+    (id) => !id.startsWith('command_system_'),
+    'Reserved system command identity',
+  ),
   roomId: roomIdSchema,
   expectedStateVersion: stateVersionSchema,
+  promptId: z.string().min(1).max(128).optional(),
 };
 
 // Identity after joining is supplied by the authenticated connection, never by a payload actorId.
 export const clientCommandSchema = z.discriminatedUnion('type', [
+  z.strictObject({
+    type: z.literal('PASS_ANYTIME'),
+    ...mutationFields,
+    responseWindowId: responseWindowIdSchema,
+  }),
   z.strictObject({
     type: z.literal('JOIN_ROOM'),
     commandId: commandIdSchema,

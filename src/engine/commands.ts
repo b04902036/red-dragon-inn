@@ -9,11 +9,14 @@ import { eventWriter } from './event-writer';
 import { mulberry32 } from './rng';
 import type { RandomSource } from './rng';
 import { executeTurnCommand } from './turn';
-import { executeTimingCommand } from './timing';
+import { executeTimingCommand, drain } from './timing';
 import { checkEliminations } from './elimination';
 import { CommandError } from './errors';
 import type { RejectionCode } from './errors';
 import type { CoreGameState, MutableGameState } from './types';
+import { synchronizePrompt } from './timed-prompts';
+import type { Clock } from './timed-prompts';
+import { systemActionSchema } from './system-actions';
 
 export type CommandResult =
   | {
@@ -37,12 +40,42 @@ export type CommandResult =
 export interface CommandContext {
   actorId: PlayerId;
   rng?: RandomSource;
+  clock?: Clock;
 }
 /** actorId is trusted server session context. Untrusted payloads pass strict parsing here. */
 export function applyCommand(
   state: CoreGameState,
   input: unknown,
   context: CommandContext,
+): CommandResult {
+  return transact(state, input, context, false);
+}
+/** This boundary is callable only by the server alarm/replay, never by the socket parser. */
+export function applyTimeout(
+  state: CoreGameState,
+  input: unknown,
+): CommandResult {
+  const parsed = systemActionSchema.safeParse(input);
+  const prompt = state.control.timedPrompt;
+  if (
+    !parsed.success ||
+    prompt === null ||
+    parsed.data.promptId !== prompt.promptId ||
+    parsed.data.now < prompt.deadlineAt
+  )
+    return { status: 'REJECTED', state, events: [], code: 'WRONG_WINDOW' };
+  return transact(
+    state,
+    parsed.data,
+    { actorId: prompt.priorityPlayerId, clock: { now: () => parsed.data.now } },
+    true,
+  );
+}
+function transact(
+  state: CoreGameState,
+  input: unknown,
+  context: CommandContext,
+  system: boolean,
 ): CommandResult {
   assertCoreInvariants(state);
   const reject = (code: RejectionCode): CommandResult => ({
@@ -51,9 +84,12 @@ export function applyCommand(
     events: [],
     code,
   });
-  const parsed = clientCommandSchema.safeParse(input);
+  const parsed = system
+    ? systemActionSchema.safeParse(input)
+    : clientCommandSchema.safeParse(input);
   if (!parsed.success) return reject('INVALID_COMMAND');
   const command = parsed.data;
+  const now = context.clock?.now() ?? 0;
   if (command.roomId !== state.roomId) return reject('WRONG_ROOM');
   const actor = playerIdSchema.safeParse(context.actorId);
   if (!actor.success || !state.players.some((p) => p.id === actor.data))
@@ -73,18 +109,51 @@ export function applyCommand(
   if (command.type === 'JOIN_ROOM') return reject('UNSUPPORTED_COMMAND');
   if (command.expectedStateVersion !== state.version)
     return reject('VERSION_CONFLICT');
+  if (
+    'promptId' in command &&
+    command.type !== 'EXPIRE_PROMPT' &&
+    command.promptId !== undefined &&
+    command.promptId !== state.control.timedPrompt?.promptId
+  )
+    return reject('WRONG_WINDOW');
   if (state.version === Number.MAX_SAFE_INTEGER)
     return reject('VERSION_EXHAUSTED');
+  if (
+    !system &&
+    context.clock !== undefined &&
+    state.control.timedPrompt !== null &&
+    now >= state.control.timedPrompt.deadlineAt
+  )
+    return reject('WRONG_WINDOW');
   const version = nextStateVersion(state.version);
   // Work on a detached transaction draft. Errors cannot partially mutate the caller's state or RNG.
   const draft = JSON.parse(JSON.stringify(state)) as MutableGameState;
   draft.version = version;
   const writer = eventWriter(draft, command.commandId, version);
   try {
+    const dispatched =
+      command.type === 'EXPIRE_PROMPT'
+        ? {
+            type:
+              draft.control.timedPrompt!.kind === 'RESPONSE_DECISION'
+                ? ('PASS_RESPONSE' as const)
+                : ('PASS_ANYTIME' as const),
+            commandId: command.commandId,
+            roomId: command.roomId,
+            expectedStateVersion: command.expectedStateVersion,
+            responseWindowId: draft.control.timedPrompt!.windowId,
+          }
+        : command;
+    if (command.type === 'EXPIRE_PROMPT')
+      writer.emit({
+        type: 'TIMED_PROMPT_EXPIRED',
+        promptId: command.promptId,
+        expiredAt: now,
+      });
     if (
       !executeTimingCommand(
         draft,
-        command,
+        dispatched,
         actor.data,
         writer.emit,
         context.rng ?? mulberry32,
@@ -92,11 +161,13 @@ export function applyCommand(
     )
       executeTurnCommand(
         draft,
-        command,
+        dispatched,
         actor.data,
         writer.emit,
         context.rng ?? mulberry32,
       );
+    drain(draft, writer.emit, context.rng ?? mulberry32);
+    synchronizePrompt(draft, now, writer.emit);
     checkEliminations(draft, writer.emit);
   } catch (error) {
     if (error instanceof CommandError) return reject(error.code);

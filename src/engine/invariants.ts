@@ -21,6 +21,12 @@ import { rngStateSchema } from './rng';
 import type { CoreGameState } from './types';
 import { assertResolutionState } from './resolution-state';
 import { assertGamblingState } from './gambling-state';
+import { systemActionSchema } from './system-actions';
+import { timedPromptSchema, phaseEndSchema } from './timed-prompts';
+const acceptedCommandSchema = z.union([
+  clientCommandSchema,
+  systemActionSchema,
+]);
 
 function requireInvariant(
   condition: boolean,
@@ -56,6 +62,37 @@ export function assertCoreInvariants(state: CoreGameState): void {
   assertGamblingState(state);
   requireInvariant(ids.has(state.control.hostPlayerId), 'host is not a player');
   safeInteger.nonnegative().parse(state.control.turnNumber);
+  if (state.control.phaseEnd !== null) {
+    const grace = phaseEndSchema.parse(state.control.phaseEnd);
+    requireInvariant(
+      state.lifecycle === 'PLAYING' &&
+        grace.phase === state.phase &&
+        grace.origin === state.activePlayerId &&
+        grace.passedPlayerIds.every((id) => ids.has(id)),
+      'invalid phase-end window',
+    );
+    requireInvariant(
+      grace.priorityPlayerId === null ||
+        (ids.has(grace.priorityPlayerId) &&
+          !grace.passedPlayerIds.includes(grace.priorityPlayerId)),
+      'invalid phase-end priority',
+    );
+  }
+  if (state.control.timedPrompt !== null) {
+    const prompt = timedPromptSchema.parse(state.control.timedPrompt);
+    requireInvariant(
+      ids.has(prompt.priorityPlayerId) && state.lifecycle === 'PLAYING',
+      'invalid prompt player',
+    );
+    requireInvariant(
+      prompt.kind === 'RESPONSE_DECISION'
+        ? state.responseWindow?.id === prompt.windowId &&
+            state.responseWindow.priorityPlayerId === prompt.priorityPlayerId
+        : state.control.phaseEnd?.id === prompt.windowId &&
+            state.control.phaseEnd.priorityPlayerId === prompt.priorityPlayerId,
+      'prompt does not match priority',
+    );
+  }
   if (state.lifecycle === 'PLAYING') {
     z.enum(TURN_PHASES).parse(state.phase);
     requireInvariant(
@@ -210,7 +247,7 @@ export function assertCoreInvariants(state: CoreGameState): void {
   for (const [key, receipt] of Object.entries(state.control.acceptedCommands)) {
     commandIdSchema.parse(key);
     stateVersionSchema.parse(receipt.acceptedVersion);
-    const command = clientCommandSchema.parse(
+    const command = acceptedCommandSchema.parse(
       JSON.parse(receipt.fingerprint) as unknown,
     );
     requireInvariant(

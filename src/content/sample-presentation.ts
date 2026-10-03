@@ -1,6 +1,6 @@
 import { sampleContentPack } from './sample';
 import { presentationSchema } from '../protocol/presentation';
-import { hasChosenTarget } from '../engine/timing';
+import { hasChosenTarget } from '../engine/card-effects-validation';
 
 // Original player-facing guidance. Published engine definitions remain immutable.
 const guidance: Record<string, string> = {

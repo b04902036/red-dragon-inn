@@ -146,9 +146,8 @@ export function assertResolutionState(state: CoreGameState) {
     );
     if (window.pendingChoice === null) {
       assert(
-        frame.stage === 'RESPONSES' &&
-          window.eligiblePlayerIds.length === living.length,
-        'response eligibility must include every living player',
+        frame.stage === 'RESPONSES' && window.eligiblePlayerIds.length > 0,
+        'response requires an eligible player',
       );
       assert(
         window.priorityPlayerId !== null &&

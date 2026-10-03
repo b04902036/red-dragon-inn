@@ -12,6 +12,7 @@ import {
   roomIdSchema,
 } from '../shared/ids';
 import { stateVersionSchema } from '../shared/version';
+import { timedPromptSchema } from '../engine/timed-prompts';
 
 const count = z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER);
 const value = z
@@ -84,6 +85,15 @@ export const publicGameViewSchema = z.strictObject({
     .nullable()
     .optional(),
   lifecycle: z.enum(MATCH_LIFECYCLES),
+  timedPrompt: timedPromptSchema.nullable().optional(),
+  phaseEnd: z
+    .strictObject({
+      id: responseWindowIdSchema,
+      phase: z.enum(TURN_PHASES),
+      priorityPlayerId: playerIdSchema.nullable(),
+    })
+    .nullable()
+    .optional(),
   phase: z.enum(TURN_PHASES).nullable(),
   activePlayerId: playerIdSchema.nullable(),
   players: z.array(publicPlayerViewSchema).max(4),
@@ -117,6 +127,17 @@ export const publicGameViewSchema = z.strictObject({
 
 export type PublicGameView = z.infer<typeof publicGameViewSchema>;
 
+export const legalResponseSchema = z.strictObject({
+  cardId: cardInstanceIdSchema,
+  commandType: z.literal('PLAY_RESPONSE'),
+  requiresTarget: z.boolean(),
+  legalTargetPlayerIds: playerIds,
+});
+export const legalPlaySchema = legalResponseSchema.extend({
+  commandType: z.enum(['PLAY_CARD', 'PLAY_RESPONSE', 'GAMBLING_PLAY']),
+  promptId: z.string().min(1).max(128).optional(),
+});
+
 export const privatePlayerViewSchema = z.strictObject({
   schemaVersion: z.literal(1),
   roomId: roomIdSchema,
@@ -124,6 +145,14 @@ export const privatePlayerViewSchema = z.strictObject({
   version: stateVersionSchema,
   playerId: playerIdSchema,
   hand: z.array(cardReferenceSchema),
+  legalPlayVersion: stateVersionSchema.optional(),
+  legalPlays: z.array(legalPlaySchema).default([]),
+  responsePrompt: timedPromptSchema
+    .safeExtend({ hasLegalSometimes: z.boolean() })
+    .nullable()
+    .optional(),
+  legalAnytime: z.array(legalResponseSchema).default([]),
+  legalResponses: z.array(legalResponseSchema).default([]),
   resources,
   sideDecks: sideDeckCounts,
   pendingChoice: z

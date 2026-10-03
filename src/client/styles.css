@@ -460,6 +460,27 @@ button:disabled {
   box-shadow: 0 0 0 2px #edb876;
   transform: translateY(-5px);
 }
+.hand-card.playable-card {
+  border: 3px dashed #21614f;
+  box-shadow:
+    inset 0 0 0 2px #fff6e7,
+    0 0 0 2px #21614f;
+}
+.hand-card.playable-card.selected-card {
+  box-shadow:
+    inset 0 0 0 2px #fff6e7,
+    0 0 0 3px #edb876;
+}
+.playable-indicator {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #21614f;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
 dialog {
   max-width: min(520px, calc(100vw - 32px));
   width: 100%;

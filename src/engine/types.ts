@@ -9,6 +9,7 @@ import type {
 import type { StateVersion } from '../shared/version';
 import type { AuthoritativeGameState, DeterministicRngState } from './model';
 import type { RulesConfig } from './rules';
+import type { TimedPrompt, PhaseEndWindow } from './timed-prompts';
 
 export interface CommandReceipt {
   readonly actorId: PlayerId;
@@ -26,6 +27,8 @@ export interface CoreGameState extends AuthoritativeGameState {
     readonly hostPlayerId: PlayerId;
     readonly turnNumber: number;
     readonly eliminationCheckPending: boolean;
+    readonly timedPrompt: TimedPrompt | null;
+    readonly phaseEnd: PhaseEndWindow | null;
     readonly acceptedCommands: Readonly<Record<CommandId, CommandReceipt>>;
   };
 }

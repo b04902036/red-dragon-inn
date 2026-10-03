@@ -1,5 +1,5 @@
 import { presentationSchema } from '../protocol/presentation';
-import { hasChosenTarget } from '../engine/timing';
+import { hasChosenTarget } from '../engine/card-effects-validation';
 import type { ContentPack } from './pack';
 import {
   localizedField,

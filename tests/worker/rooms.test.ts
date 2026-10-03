@@ -307,7 +307,7 @@ describe('real hibernatable WebSocket authentication and engine dispatch', () =>
       (await roomApi(`/${host.roomId}/join`, { displayName: 'Late' })).status,
     ).toBe(409);
   });
-  it('changes only the affected private view while all connected players receive the accepted public state', async () => {
+  it('refreshes private legal-play versions while all connected players receive the accepted public state', async () => {
     const { a, b } = await playing();
     const aCount = a.messages.filter(
       (message) => message.type === 'PRIVATE_STATE',
@@ -321,13 +321,16 @@ describe('real hibernatable WebSocket authentication and engine dispatch', () =>
     ).toBe('COMMAND_ACCEPTED');
     await b.ping();
     expect(latestPublic(a)).toEqual(latestPublic(b));
-    expect(latestPublic(a).phase).toBe('ACTION');
+    expect(latestPublic(a).phase).toBe('DISCARD_DRAW');
+    expect(latestPublic(a).phaseEnd?.phase).toBe('DISCARD_DRAW');
     expect(
       a.messages.filter((message) => message.type === 'PRIVATE_STATE'),
     ).toHaveLength(aCount + 1);
     expect(
       b.messages.filter((message) => message.type === 'PRIVATE_STATE'),
-    ).toHaveLength(bCount);
+    ).toHaveLength(bCount + 1);
+    expect(latestPrivate(a).legalPlayVersion).toBe(latestPublic(a).version);
+    expect(latestPrivate(b).legalPlayVersion).toBe(latestPublic(b).version);
   });
   it('rejects invalid command context, hidden-stat input, foreign room, reserved joins, and foreign card ownership without mutation', async () => {
     const { host, a, b } = await playing();

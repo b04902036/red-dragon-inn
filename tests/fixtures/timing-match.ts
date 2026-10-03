@@ -29,7 +29,11 @@ export function playAction(
   });
 }
 export function response(state: CoreGameState, seat: number, suffix: string) {
-  return accepted(
+  while (state.responseWindow!.priorityPlayerId !== state.players[seat]!.id) {
+    const result = pass(state);
+    state = result.state;
+  }
+  const result = accepted(
     state,
     'PLAY_RESPONSE',
     {
@@ -38,6 +42,12 @@ export function response(state: CoreGameState, seat: number, suffix: string) {
     },
     state.players[seat]!.id,
   );
+  return result;
+}
+export function priorityFor(state: CoreGameState, seat: number) {
+  while (state.responseWindow!.priorityPlayerId !== state.players[seat]!.id)
+    state = pass(state).state;
+  return state;
 }
 export function pass(
   state: CoreGameState,
@@ -67,6 +77,7 @@ export function responseEffects(state: CoreGameState, effects: Effect[]) {
     ...copy.definitions[id],
     type: 'SOMETIMES',
     responseKind: 'SOMETIMES',
+    responseTrigger: { event: 'ANY', alternatives: [[]] },
     effects,
   });
   return copy;

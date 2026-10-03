@@ -1,4 +1,9 @@
-import type { CardDefinition } from '../content/cards';
+import { hasChosenTarget, validateEffects } from './card-effects-validation';
+import {
+  legalResponsesForPlayer,
+  reactionContext,
+  timingOrder,
+} from './reaction-legality';
 import type { Effect } from '../content/effects';
 import type { StateChangingCommand } from '../protocol/commands';
 import {
@@ -10,9 +15,8 @@ import type { PlayerId } from '../shared/ids';
 import { matchNamespace } from './identity';
 import { requireCommand } from './errors';
 import {
-  affectedPlayers,
-  effectTargets,
   executeOperation,
+  effectTargets,
   discardCards,
 } from './effect-operations';
 import type { MutableFrame } from './effect-operations';
@@ -20,10 +24,11 @@ import type { EmitEvent } from './event-writer';
 import type { PendingChoice, ResponseKind } from './model';
 import type { RandomSource } from './rng';
 import type { MutableGameState } from './types';
-import { buildDrinkFrame, drinkModifierEffects } from './drinks';
+import { buildDrinkFrame } from './drinks';
+import { completePhase, legalAnytimeCards, passAnytime } from './timed-prompts';
+import { cardDefinitionForPlay } from './card-play-legality';
 import {
   activeGamblers,
-  validateGamblingStart,
   settleGambling,
   passGambling,
   leaveGambling,
@@ -54,17 +59,26 @@ function openWindow(
   kind: ResponseKind,
   emit: EmitEvent,
 ) {
-  const eligiblePlayerIds = seatsAfter(state, frame.actorId!);
+  const order = timingOrder(state, frame.actorId!);
+  const context = reactionContext(state, frame);
+  const eligiblePlayerIds = order.filter(
+    (id) => legalResponsesForPlayer(state, id, context).length > 0,
+  );
+  if (eligiblePlayerIds.length === 0) {
+    frame.stage = 'OPERATIONS';
+    setWindow(state, frame, null);
+    return;
+  }
   const window = {
     id: responseWindowIdSchema.parse(
-      `window_${matchNamespace(state.matchId)}_${state.version}`,
+      `window_${matchNamespace(state.matchId)}_${state.version}_${state.resolutionStack.length}`,
     ),
     kind,
     resolutionId: frame.id,
     eligiblePlayerIds,
     passedPlayerIds: [],
     priorityPlayerId: eligiblePlayerIds[0]!,
-    submittedResponses: [],
+    submittedResponses: frame.window?.submittedResponses ?? [],
     pendingChoice: null,
   };
   setWindow(state, frame, window);
@@ -73,117 +87,10 @@ function openWindow(
     responseWindowId: window.id,
     resolutionId: frame.id,
     kind,
-    eligiblePlayerIds,
+    // Public history must not disclose the hidden eligible-hand calculation.
+    eligiblePlayerIds: order,
     priorityPlayerId: window.priorityPlayerId,
   });
-}
-export function hasChosenTarget(effects: readonly Effect[]) {
-  for (const effect of effects) {
-    if (effect.op === 'OPEN_CHOICE') return false;
-    if ('target' in effect && effect.target === 'CHOSEN_PLAYER') return true;
-  }
-  return false;
-}
-function validateEffects(
-  state: MutableGameState,
-  frame: MutableFrame,
-  parent: MutableFrame | undefined,
-) {
-  requireCommand(
-    frame.effects.filter((effect) => effect.op === 'START_GAMBLING').length <=
-      1,
-    'INVALID_EFFECT',
-  );
-  for (const [index, effect] of frame.effects.entries()) {
-    if (effect.op === 'START_GAMBLING') validateGamblingStart(state, frame);
-    if (effect.op === 'TAKE_GAMBLING_CONTROL' || effect.op === 'WIN_GAMBLING') {
-      requireCommand(
-        state.gambling !== null &&
-          frame.parentId === state.gambling.suspended.resolutionId &&
-          activeGamblers(state).includes(frame.actorId!),
-        'ILLEGAL_TIMING',
-      );
-      if (effect.op === 'WIN_GAMBLING')
-        requireCommand(index === frame.effects.length - 1, 'INVALID_EFFECT');
-    }
-    if (effect.op === 'LEAVE_GAMBLING') {
-      requireCommand(
-        state.gambling !== null &&
-          activeGamblers(state).includes(frame.actorId!) &&
-          activeGamblers(state).length > 1,
-        'NOT_ELIGIBLE',
-      );
-      requireCommand(state.rules.gambling.allowLeave, 'LEAVE_NOT_ALLOWED');
-    }
-  }
-  const pendingEffects =
-    parent === undefined
-      ? []
-      : (JSON.parse(JSON.stringify(parent.effects)) as Effect[]);
-  for (const effect of frame.effects) {
-    if (effect.op === 'IGNORE')
-      requireCommand(
-        parent !== undefined &&
-          affectedPlayers(state, parent).includes(frame.actorId!),
-        'ILLEGAL_TIMING',
-      );
-    if (effect.op === 'NEGATE')
-      requireCommand(parent !== undefined, 'ILLEGAL_TIMING');
-    if (effect.op === 'MODIFY_PENDING_EFFECT') {
-      const pending = pendingEffects[effect.effectIndex];
-      requireCommand(
-        parent !== undefined &&
-          (parent.kind !== 'DRINK_EVENT' || effect.allowDrinkEvents === true) &&
-          pending?.op === 'CHANGE_STAT' &&
-          effect.effectIndex >= parent.nextEffectIndex &&
-          Number.isSafeInteger(pending.delta + effect.delta),
-        'INVALID_EFFECT',
-      );
-      pending.delta += effect.delta;
-    }
-    if (effect.op === 'MODIFY_DRINK') {
-      requireCommand(parent !== undefined, 'ILLEGAL_TIMING');
-      const { alcohol, fortitude } = drinkModifierEffects(
-        { ...parent, effects: pendingEffects },
-        effect.allowDrinkEvents,
-      );
-      requireCommand(
-        Number.isSafeInteger(alcohol.delta + effect.alcoholDelta) &&
-          Number.isSafeInteger(fortitude.delta + effect.fortitudeDelta),
-        'INVALID_EFFECT',
-      );
-      alcohol.delta += effect.alcoholDelta;
-      fortitude.delta += effect.fortitudeDelta;
-    }
-    if (
-      effect.op === 'OPEN_CHOICE' ||
-      effect.op === 'OPEN_OPTION' ||
-      effect.op === 'DISCARD_CARDS'
-    ) {
-      // A single choice owner per operation; multi-owner choices require separate operations.
-      requireCommand(
-        effectTargets(state, frame, effect.target).length <= 1,
-        'INVALID_EFFECT',
-      );
-      if (effect.op === 'OPEN_CHOICE')
-        requireCommand(
-          state.players.some(
-            (player) =>
-              !player.eliminated &&
-              player.id !== effectTargets(state, frame, effect.target)[0]?.id,
-          ),
-          'INVALID_EFFECT',
-        );
-    }
-    if (effect.op === 'CUSTOM')
-      for (const player of effectTargets(state, frame, effect.target)) {
-        const resource = player.special.resources[effect.params.resource];
-        requireCommand(
-          resource !== undefined && Number.isSafeInteger(resource.value),
-          'INVALID_EFFECT',
-        );
-      }
-  }
 }
 function queueCard(
   state: MutableGameState,
@@ -192,10 +99,15 @@ function queueCard(
     { type: 'PLAY_CARD' | 'PLAY_RESPONSE' | 'GAMBLING_PLAY' }
   >,
   actorId: PlayerId,
-  definition: CardDefinition,
   continuation: MutableFrame['continuation'],
   emit: EmitEvent,
 ) {
+  const definition = cardDefinitionForPlay(
+    state,
+    actorId,
+    command.cardId,
+    command.type,
+  );
   const player = state.players.find((player) => player.id === actorId)!;
   const parent = state.resolutionStack.at(-1);
   requireCommand(definition.effects.length <= 32, 'INVALID_EFFECT');
@@ -230,6 +142,18 @@ function queueCard(
     selectedOptionId: null,
   };
   validateEffects(state, frame, parent);
+  if (
+    command.type === 'PLAY_CARD' &&
+    definition.type === 'ANYTIME' &&
+    state.control.phaseEnd !== null
+  ) {
+    const grace = state.control.phaseEnd;
+    grace.passedPlayerIds = [];
+    grace.priorityPlayerId = null;
+    grace.id = responseWindowIdSchema.parse(
+      `window_grace_${state.version}_${grace.phase}`,
+    );
+  }
   player.hand.splice(player.hand.indexOf(command.cardId), 1);
   state.cards[command.cardId]!.location = {
     zone: 'RESOLUTION',
@@ -246,7 +170,6 @@ function queueCard(
     requireCommand(window.submittedResponses.length < 256, 'STACK_LIMIT');
     window.submittedResponses.push(frame.id);
     window.passedPlayerIds = [];
-    window.priorityPlayerId = seatsAfter(state, actorId)[0]!;
     emit({
       type: 'RESPONSE_SUBMITTED',
       responseWindowId: window.id,
@@ -313,19 +236,7 @@ export function playAction(
     definition.type === 'ACTION' || definition.type === 'GAMBLING',
     'UNSUPPORTED_CARD',
   );
-  queueCard(
-    state,
-    command,
-    actorId,
-    definition.type === 'GAMBLING'
-      ? {
-          ...definition,
-          effects: [{ op: 'START_GAMBLING' }, ...definition.effects],
-        }
-      : definition,
-    'ORDER_DRINK',
-    emit,
-  );
+  queueCard(state, command, actorId, 'ORDER_DRINK', emit);
 }
 
 function openChoice(
@@ -397,8 +308,12 @@ function choiceForEffect(
   };
 }
 
-/** Drain ready operations, pop children first, then restore the parent's saved priority. */
-function drain(state: MutableGameState, emit: EmitEvent, rng: RandomSource) {
+/** Drain children first and recompute the parent's legal responses from its timing origin. */
+export function drain(
+  state: MutableGameState,
+  emit: EmitEvent,
+  rng: RandomSource,
+) {
   while (state.resolutionStack.length > 0) {
     const frame = state.resolutionStack.at(-1)!;
     if (
@@ -488,21 +403,20 @@ function drain(state: MutableGameState, emit: EmitEvent, rng: RandomSource) {
       frame.continuation === 'ORDER_DRINK' ||
       frame.continuation === 'ELIMINATION_CHECK'
     ) {
-      state.phase = frame.continuation;
-      emit({
-        type: 'PHASE_CHANGED',
-        phase: frame.continuation,
-        activePlayerId: state.activePlayerId!,
-      });
+      completePhase(state, frame.continuation, emit);
     } else if (
       state.responseWindow !== null &&
       !state.resolutionStack.at(-1)!.canceled
-    )
+    ) {
+      const parent = state.resolutionStack.at(-1)!;
+      const kind = state.responseWindow.kind;
       emit({
-        type: 'RESPONSE_PRIORITY_CHANGED',
+        type: 'RESPONSE_WINDOW_CLOSED',
         responseWindowId: state.responseWindow.id,
-        priorityPlayerId: state.responseWindow.priorityPlayerId!,
+        reason: 'REEVALUATED',
       });
+      openWindow(state, parent, kind, emit);
+    }
   }
 }
 
@@ -588,6 +502,10 @@ export function executeTimingCommand(
   emit: EmitEvent,
   rng: RandomSource,
 ): boolean {
+  if (command.type === 'PASS_ANYTIME') {
+    passAnytime(state, actorId, command.responseWindowId, emit);
+    return true;
+  }
   if (
     command.type === 'GAMBLING_PLAY' ||
     command.type === 'GAMBLING_PASS' ||
@@ -616,26 +534,7 @@ export function executeTimingCommand(
         state.gambling.allowedControlCategories.includes(definition.type),
         'CONTROL_RESTRICTED',
       );
-      const effects: Effect[] = [
-        {
-          op: 'TAKE_GAMBLING_CONTROL',
-          allowedNextCategories: definition.gambling?.allowedNextCategories ?? [
-            'GAMBLING',
-            'CHEATING',
-          ],
-        },
-        ...definition.effects,
-      ];
-      if (definition.gambling?.immediateWin)
-        effects.push({ op: 'WIN_GAMBLING' });
-      queueCard(
-        state,
-        command,
-        actorId,
-        { ...definition, effects },
-        'RESUME',
-        emit,
-      );
+      queueCard(state, command, actorId, 'RESUME', emit);
     } else {
       if (command.type === 'GAMBLING_PASS') passGambling(state, actorId, emit);
       else leaveGambling(state, actorId, emit);
@@ -665,7 +564,22 @@ export function executeTimingCommand(
     );
     requireCommand(!player.eliminated, 'NOT_ELIGIBLE');
     requireCommand(player.hand.includes(command.cardId), 'CARD_NOT_IN_HAND');
-    queueCard(state, command, actorId, definition, 'RESUME', emit);
+    if (state.control.phaseEnd !== null) {
+      const grace = state.control.phaseEnd;
+      requireCommand(grace.priorityPlayerId === actorId, 'NOT_PRIORITY');
+      const legal = legalAnytimeCards(state, actorId).find(
+        (c) => c.cardId === command.cardId,
+      );
+      requireCommand(legal !== undefined, 'ILLEGAL_TIMING');
+      requireCommand(
+        legal.requiresTarget
+          ? command.targetPlayerId !== undefined &&
+              legal.legalTargetPlayerIds.includes(command.targetPlayerId)
+          : command.targetPlayerId === undefined,
+        'INVALID_TARGET',
+      );
+    }
+    queueCard(state, command, actorId, 'RESUME', emit);
     return true;
   }
   requireCommand(state.lifecycle === 'PLAYING', 'WRONG_LIFECYCLE');
@@ -722,19 +636,40 @@ export function executeTimingCommand(
     return true;
   }
   requireCommand(command.type === 'PLAY_RESPONSE', 'UNSUPPORTED_COMMAND');
-  const player = state.players.find((player) => player.id === actorId)!;
-  requireCommand(player.hand.includes(command.cardId), 'CARD_NOT_IN_HAND');
-  const definition =
-    state.definitions[state.cards[command.cardId]!.definitionId]!;
-  requireCommand(
-    definition.type === 'SOMETIMES' || definition.type === 'ANYTIME',
-    'ILLEGAL_TIMING',
+  const definition = cardDefinitionForPlay(
+    state,
+    actorId,
+    command.cardId,
+    command.type,
   );
-  if (definition.type === 'SOMETIMES' && definition.responseKind === 'IGNORE')
-    requireCommand(
-      affectedPlayers(state, frame).includes(actorId),
-      'ILLEGAL_TIMING',
+  const legal = legalResponsesForPlayer(
+    state,
+    actorId,
+    reactionContext(state, frame),
+  ).find((response) => response.cardId === command.cardId);
+  if (legal === undefined)
+    validateEffects(
+      state,
+      {
+        ...frame,
+        actorId,
+        sourceCardId: command.cardId,
+        effects: JSON.parse(JSON.stringify(definition.effects)) as Effect[],
+        nextEffectIndex: 0,
+        parentId: frame.id,
+        targetPlayerIds:
+          command.targetPlayerId === undefined ? [] : [command.targetPlayerId],
+      },
+      frame,
     );
-  queueCard(state, command, actorId, definition, 'RESUME', emit);
+  requireCommand(legal !== undefined, 'ILLEGAL_TIMING');
+  requireCommand(
+    legal.requiresTarget
+      ? command.targetPlayerId !== undefined &&
+          legal.legalTargetPlayerIds.includes(command.targetPlayerId)
+      : command.targetPlayerId === undefined,
+    'INVALID_TARGET',
+  );
+  queueCard(state, command, actorId, 'RESUME', emit);
   return true;
 }

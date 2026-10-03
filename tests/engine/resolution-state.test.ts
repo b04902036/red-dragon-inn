@@ -68,9 +68,9 @@ describe('serializable resolution invariants', () => {
       },
     ],
     [
-      'missing living player',
+      'empty response eligibility',
       (state: MutableGameState) => {
-        state.resolutionStack[0]!.window!.eligiblePlayerIds.pop();
+        state.resolutionStack[0]!.window!.eligiblePlayerIds = [];
       },
     ],
     [

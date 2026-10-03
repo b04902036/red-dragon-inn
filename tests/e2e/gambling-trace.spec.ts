@@ -38,8 +38,8 @@ test('gambling report shows antes, both control categories, clockwise passes, on
       `Sample player ${priority}`,
     );
   }
-  await expect(rows.nth(1).locator('td').nth(4)).toHaveText('Sample player 3');
-  await expect(rows.nth(3).locator('td').nth(4)).toHaveText('Sample player 4');
+  await expect(rows.nth(1).locator('td').nth(4)).toHaveText('Sample player 2');
+  await expect(rows.nth(3).locator('td').nth(4)).toHaveText('Sample player 3');
   await expect(rows.last().locator('td').nth(1)).toHaveText('0');
   await expect(rows.last().locator('td').nth(2)).toHaveText('None');
   await expect(rows.last().locator('td').nth(5)).toHaveText('9 / 9 / 13 / 9');

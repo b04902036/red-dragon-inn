@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { applyCommand } from '../../src/engine/commands';
 import { assertCoreInvariants } from '../../src/engine/invariants';
 import { accepted, intent, mutable } from '../fixtures/core-match';
-import { cardInHand, passWindow } from '../fixtures/timing-match';
+import { cardInHand, passWindow, priorityFor } from '../fixtures/timing-match';
 import {
   gamblingActionState,
   startRound,
@@ -246,7 +246,7 @@ describe('safe-boundary elimination, simultaneous selection, distribution, and v
     const queued = accepted(state, 'PLAY_CARD', {
       cardId: cardInHand(state, 0, 'shove'),
     }).state;
-    const configured = mutable(queued);
+    const configured = mutable(priorityFor(queued, 1));
     configured.definitions[
       configured.cards[cardInHand(configured, 1, 'breather')]!.definitionId
     ]!.effects = [

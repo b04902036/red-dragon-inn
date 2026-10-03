@@ -88,15 +88,15 @@ test('nested response report shows priority, child cancellation, and final visib
     'Nested replay and snapshot resume: passed.',
   );
   const rows = trace.locator('tbody tr');
-  await expect(rows).toHaveCount(11);
+  await expect(rows).toHaveCount(13);
   await expect(rows.nth(0).locator('td').nth(1)).toHaveText('1');
-  await expect(rows.nth(1).locator('td').nth(1)).toHaveText('2');
-  await expect(rows.nth(2).locator('td').nth(1)).toHaveText('3');
-  await expect(rows.nth(2).locator('td').nth(3)).toHaveText('Sample player 4');
-  for (let index = 0; index < 10; index += 1)
+  await expect(rows.nth(2).locator('td').nth(1)).toHaveText('2');
+  await expect(rows.nth(4).locator('td').nth(1)).toHaveText('3');
+  await expect(rows.nth(4).locator('td').nth(3)).toHaveText('Sample player 3');
+  for (let index = 0; index < 12; index += 1)
     await expect(rows.nth(index).locator('td').nth(4)).toHaveText('20');
-  await expect(rows.nth(6).locator('td').nth(1)).toHaveText('1');
-  await expect(rows.nth(6)).toContainText('SOURCE_NEGATED');
+  await expect(rows.nth(8).locator('td').nth(1)).toHaveText('1');
+  await expect(rows.nth(8)).toContainText('SOURCE_NEGATED');
   await expect(page.locator('#unwind-order')).toHaveText(
     'Negate → Ignore (canceled) → Shove',
   );
@@ -112,7 +112,7 @@ test('nested response report shows priority, child cancellation, and final visib
     .getByText('Inspect public timing view', { exact: true })
     .click();
   await expect(rows.nth(2).locator('pre')).toContainText(
-    '"priorityPlayerId": "player_3"',
+    '"priorityPlayerId": "player_1"',
   );
   const publicView = JSON.parse(
     (await rows.nth(2).locator('pre').textContent())!,

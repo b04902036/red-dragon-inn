@@ -17,6 +17,12 @@ export const rulesConfigSchema = z
     }),
     handSize: z.number().int().min(1).max(64),
     initialDrinkCount: z.number().int().min(0).max(4),
+    timing: z
+      .strictObject({
+        responseMs: z.number().int().min(0).max(30000),
+        phaseEndMs: z.number().int().min(0).max(15000),
+      })
+      .prefault({ responseMs: 30000, phaseEndMs: 15000 }),
     drinks: z
       .strictObject({
         emptyPile: z.enum(['SOBER', 'SKIP']),

@@ -15,6 +15,7 @@ import {
 } from '../shared/ids';
 import { stateVersionSchema } from '../shared/version';
 import { rulesConfigSchema } from '../engine/rules';
+import { timedPromptSchema } from '../engine/timed-prompts';
 
 const eventFields = {
   eventId: eventIdSchema,
@@ -40,6 +41,34 @@ const controlCategories = z
 
 /** Append-only internal events can contain hidden data; they are not socket messages. */
 export const domainEventSchema = z.discriminatedUnion('type', [
+  z.strictObject({
+    type: z.literal('TIMED_PROMPT_OPENED'),
+    ...eventFields,
+    ...timedPromptSchema.shape,
+  }),
+  z.strictObject({
+    type: z.literal('TIMED_PROMPT_EXPIRED'),
+    ...eventFields,
+    promptId: z.string().min(1).max(128),
+    expiredAt: z.number().int().nonnegative().safe(),
+  }),
+  z.strictObject({
+    type: z.literal('PHASE_END_WINDOW_OPENED'),
+    ...eventFields,
+    windowId: responseWindowIdSchema,
+    phase: z.enum(TURN_PHASES),
+  }),
+  z.strictObject({
+    type: z.literal('PHASE_END_WINDOW_CLOSED'),
+    ...eventFields,
+    windowId: responseWindowIdSchema,
+  }),
+  z.strictObject({
+    type: z.literal('ANYTIME_PASSED'),
+    ...eventFields,
+    windowId: responseWindowIdSchema,
+    playerId: playerIdSchema,
+  }),
   z.strictObject({
     type: z.literal('DRINK_EMPTY'),
     ...eventFields,
@@ -341,7 +370,12 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     type: z.literal('RESPONSE_WINDOW_CLOSED'),
     ...eventFields,
     responseWindowId: responseWindowIdSchema,
-    reason: z.enum(['ALL_PASSED', 'CANCELED', 'CHOICE_COMPLETED']),
+    reason: z.enum([
+      'ALL_PASSED',
+      'CANCELED',
+      'CHOICE_COMPLETED',
+      'REEVALUATED',
+    ]),
   }),
   z.strictObject({
     type: z.literal('RESPONSE_SUBMITTED'),

@@ -5,7 +5,11 @@
   "compatibility_date": "2026-10-02",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
-  "vars": { "CONTENT_MODE": "production", "FIXTURE_CONTENT_VERSION": "" },
+  "vars": {
+    "CONTENT_MODE": "production",
+    "FIXTURE_CONTENT_VERSION": "",
+    "FIXTURE_TIMING_MS": "",
+  },
   "ratelimits": [
     {
       "name": "CREATE_LIMIT",
@@ -41,6 +45,7 @@
       "vars": {
         "CONTENT_MODE": "fixture",
         "FIXTURE_CONTENT_VERSION": "content_sample_localized_v1",
+        "FIXTURE_TIMING_MS": "10000,5000",
       },
       "durable_objects": {
         "bindings": [{ "name": "ROOMS", "class_name": "GameRoom" }],

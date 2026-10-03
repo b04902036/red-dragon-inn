@@ -1,5 +1,7 @@
 # Audio provenance
 
+The reaction voice is the user's existing `voice/en-US/sometimes-response.mp3`, supplied for this integration on 2026-10-03. Both UI locales use these same bytes. Creator, source page, license and original creation/retrieval date were not supplied; no third-party provenance is inferred. No conversion or modification was performed. SHA-256: `ffc0cfc1981dc4dee03c39e5ee4f4ca47819b1814407c2ce4d767aa7e614909c`.
+
 The user supplied both local WAV files on 2026-10-03, after the initial audio implementation. Their original download dates and any prior edits were not recorded. This integration preserves the supplied bytes; no runtime hotlinks are used.
 
 | Local filename              | Title                                  | Author     | Source page                                                | License | Attribution required | Retrieval date                                           | Modifications            |

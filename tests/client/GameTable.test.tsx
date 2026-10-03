@@ -23,7 +23,12 @@ import {
 import { samplePresentation as presentation } from '../../src/content/sample-presentation';
 import type { RoomClientState } from '../../src/client/room-state';
 import { started } from '../fixtures/core-match';
-import { playAction } from '../fixtures/timing-match';
+import {
+  actionState,
+  cardInHand,
+  playAction,
+  priorityFor,
+} from '../fixtures/timing-match';
 import { startRound } from '../fixtures/gambling-match';
 
 const core = started(1, 7);
@@ -221,16 +226,20 @@ describe('playable table', () => {
 
 describe('view based action and connection rules', () => {
   it('offers Ignore only to players affected by the current sample source', () => {
-    const view = stateFor(playAction().state).publicView!;
-    const ignore = presentation.cards.find(
-      (card) => card.responseKind === 'IGNORE',
-    )!;
-    view.responseWindow!.priorityPlayerId = playerIdSchema.parse('player_0');
-    expect(cardAction(view, 'player_0', ignore, presentation.cards)).toBeNull();
-    view.responseWindow!.priorityPlayerId = playerIdSchema.parse('player_1');
-    expect(cardAction(view, 'player_1', ignore, presentation.cards)).toBe(
-      'PLAY_RESPONSE',
-    );
+    const source = playAction().state;
+    expect(
+      cardAction(
+        projectPrivatePlayer(source, source.players[0]!.id).legalPlays,
+        cardInHand(source, 0, 'ignore'),
+      ),
+    ).toBeNull();
+    const next = priorityFor(source, 1);
+    expect(
+      cardAction(
+        projectPrivatePlayer(next, next.players[1]!.id).legalPlays,
+        cardInHand(next, 1, 'ignore'),
+      ),
+    ).toBe('PLAY_RESPONSE');
   });
   it.each([
     ['DISCARD_DRAW', 'DISCARD'],
@@ -246,19 +255,38 @@ describe('view based action and connection rules', () => {
     expect(contextualActions(view, 'player_1')).toEqual([]);
   });
   it('limits action, gambling and reaction card buttons to their turn or priority', () => {
-    const view = stateFor().publicView!;
-    view.phase = 'ACTION';
-    const action = presentation.cards.find((card) => card.type === 'ACTION')!;
-    expect(cardAction(view, 'player_0', action)).toBe('PLAY_CARD');
-    expect(cardAction(view, 'player_1', action)).toBeNull();
-    const gambling = stateFor(startRound().state).publicView!;
-    const cheat = presentation.cards.find((card) => card.type === 'CHEATING')!;
+    const action = actionState();
     expect(
-      cardAction(gambling, gambling.gambling!.priorityPlayerId!, cheat),
+      cardAction(
+        projectPrivatePlayer(action, action.players[0]!.id).legalPlays,
+        cardInHand(action, 0, 'shove'),
+      ),
+    ).toBe('PLAY_CARD');
+    expect(
+      cardAction(
+        projectPrivatePlayer(action, action.players[1]!.id).legalPlays,
+        cardInHand(action, 1, 'shove'),
+      ),
+    ).toBeNull();
+    const gambling = startRound().state;
+    const actor = gambling.players.find(
+      (p) => p.id === gambling.gambling!.priorityPlayerId,
+    )!;
+    expect(
+      cardAction(
+        projectPrivatePlayer(gambling, actor.id).legalPlays,
+        cardInHand(gambling, actor.seat, 'cheat'),
+      ),
     ).toBe('GAMBLING_PLAY');
-    const response = stateFor(playAction().state).publicView!;
+    const response = playAction().state;
+    const priority = response.players.find(
+      (p) => p.id === response.responseWindow!.priorityPlayerId,
+    )!;
     expect(
-      cardAction(response, response.responseWindow!.priorityPlayerId!, action),
+      cardAction(
+        projectPrivatePlayer(response, priority.id).legalPlays,
+        cardInHand(response, priority.seat, 'shove'),
+      ),
     ).toBeNull();
   });
   it('rejects foreign or stale projections and never updates stats on acknowledgements', () => {

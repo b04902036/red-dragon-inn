@@ -7,8 +7,11 @@ import {
   ContentUnavailable,
 } from '../runtime-content';
 import { contentPresentation } from '../../src/content/presentation';
-import { applyCommand } from '../../src/engine/commands';
+import { applyCommand, applyTimeout } from '../../src/engine/commands';
+import type { Clock } from '../../src/engine/timed-prompts';
+import { commandIdSchema } from '../../src/shared/ids';
 import { createMatch } from '../../src/engine/setup';
+import { DEFAULT_RULES, rulesConfigSchema } from '../../src/engine/rules';
 import {
   matchIdSchema,
   playerIdSchema,
@@ -63,11 +66,88 @@ type Rejection = Extract<ServerMessage, { type: 'COMMAND_REJECTED' }>;
 
 /** One authoritative room, persisted before acknowledgement; connections use hibernation. */
 export class GameRoom extends DurableObject<Env> {
+  private clock: Clock = { now: () => Date.now() };
   private historyAvailable = true;
   private async readRoom() {
     this.historyAvailable = await this.flushHistory(true);
     const value = await this.ctx.storage.get(ROOM_STORAGE_KEY);
-    return value === undefined ? null : roomRecordSchema.parse(value);
+    const room = value === undefined ? null : roomRecordSchema.parse(value);
+    if (room === null || !this.historyAvailable) return room;
+    const game = room.game;
+    const prompt = game?.control.timedPrompt;
+    const now = this.clock.now();
+    if (!game || !prompt || now < prompt.deadlineAt) return room;
+    const action = {
+      type: 'EXPIRE_PROMPT',
+      commandId: commandIdSchema.parse(
+        `command_system_timeout_${game.version}`,
+      ),
+      roomId: room.roomId,
+      expectedStateVersion: game.version,
+      promptId: prompt.promptId,
+      now,
+    };
+    const result = applyTimeout(game, action);
+    if (result.status !== 'ACCEPTED') return room;
+    const updated = {
+      ...room,
+      game: result.state,
+      version: result.state.version,
+    };
+    const sequence = replaySequenceSchema.parse(
+      (await this.ctx.storage.get<number>('history:sequence')) ?? 0,
+    );
+    const entry = replayEntrySchema.parse({
+      actorId: prompt.priorityPlayerId,
+      command: action,
+      firstSequence: sequence + 1,
+      lastSequence: sequence + result.events.length,
+      events: result.events,
+      acceptedAt: new Date(now).toISOString(),
+      clockTime: now,
+    });
+    const outbox = persistenceBatchSchema.parse({
+      manifest: null,
+      entry,
+      state: result.state,
+      saveSnapshot: true,
+    });
+    await this.commitStorage(
+      {
+        [ROOM_STORAGE_KEY]: updated,
+        [`events:${updated.version}`]: result.events,
+        'history:outbox': outbox,
+        'history:sequence': entry.lastSequence,
+        [`history:command:${updated.version}`]: entry,
+      },
+      updated,
+    );
+    this.historyAvailable = await this.flushHistory();
+    if (this.historyAvailable) await this.broadcast(updated);
+    else await this.ctx.storage.setAlarm(now + 1000);
+    return updated;
+  }
+  private async commitStorage(
+    values: Record<string, unknown>,
+    room: RoomRecord,
+  ) {
+    await this.ctx.storage.transaction(async (tx) => {
+      await tx.put(values);
+      const prompt = room.game?.control.timedPrompt;
+      if (prompt) await tx.setAlarm(prompt.deadlineAt);
+      else await tx.deleteAlarm();
+    });
+  }
+  async alarm() {
+    await this.ctx.blockConcurrencyWhile(async () => {
+      const room = await this.readRoom();
+      if (!this.historyAvailable) {
+        await this.ctx.storage.setAlarm(this.clock.now() + 1000);
+        return;
+      }
+      const prompt = room?.game?.control.timedPrompt;
+      if (prompt) await this.ctx.storage.setAlarm(prompt.deadlineAt);
+    });
   }
   private async flushHistory(recover = false) {
     const pending = await this.ctx.storage.get('history:outbox');
@@ -533,6 +613,20 @@ export class GameRoom extends DurableObject<Env> {
           seed: room.seed,
           version: room.version,
           content,
+          rules:
+            this.env.CONTENT_MODE === 'fixture' && this.env.FIXTURE_TIMING_MS
+              ? rulesConfigSchema.parse({
+                  ...DEFAULT_RULES,
+                  timing: {
+                    responseMs: Number(
+                      this.env.FIXTURE_TIMING_MS.split(',')[0],
+                    ),
+                    phaseEndMs: Number(
+                      this.env.FIXTURE_TIMING_MS.split(',')[1],
+                    ),
+                  },
+                })
+              : DEFAULT_RULES,
           players: room.players.map(
             ({ id, seat, displayName, characterId }) => ({
               id,
@@ -545,7 +639,11 @@ export class GameRoom extends DurableObject<Env> {
       });
       game = createMatch(manifest.setup);
     }
-    const result = applyCommand(game, command, { actorId: session.playerId });
+    const clockTime = this.clock.now();
+    const result = applyCommand(game, command, {
+      actorId: session.playerId,
+      clock: { now: () => clockTime },
+    });
     if (result.status === 'REJECTED') {
       this.reject(
         ws,
@@ -586,6 +684,7 @@ export class GameRoom extends DurableObject<Env> {
       lastSequence: sequence + result.events.length,
       events: result.events,
       acceptedAt: new Date().toISOString(),
+      clockTime,
     });
     const outbox = persistenceBatchSchema.parse({
       manifest,
@@ -594,14 +693,17 @@ export class GameRoom extends DurableObject<Env> {
       saveSnapshot: shouldSaveSnapshot(game, result.state),
     });
     // Durable storage atomically commits the snapshot and append-only accepted batch together.
-    await this.ctx.storage.put({
-      [ROOM_STORAGE_KEY]: updated,
-      [`events:${updated.version}`]: result.events,
-      'history:outbox': outbox,
-      'history:sequence': entry.lastSequence,
-      [`history:command:${updated.version}`]: entry,
-      ...(manifest === null ? {} : { 'history:manifest': manifest }),
-    });
+    await this.commitStorage(
+      {
+        [ROOM_STORAGE_KEY]: updated,
+        [`events:${updated.version}`]: result.events,
+        'history:outbox': outbox,
+        'history:sequence': entry.lastSequence,
+        [`history:command:${updated.version}`]: entry,
+        ...(manifest === null ? {} : { 'history:manifest': manifest }),
+      },
+      updated,
+    );
     if (!(await this.flushHistory())) {
       this.reject(ws, updated, 'PERSISTENCE_UNAVAILABLE', command.commandId);
       ws.close(1013, 'History temporarily unavailable');

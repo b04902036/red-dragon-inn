@@ -8,11 +8,13 @@ import type { Presentation } from '../protocol/presentation';
 import type { StateChangingCommand } from '../protocol/commands';
 import type { RoomClientState } from './room-state';
 import { phaseName } from './room-state';
-import { contextualActions, cardAction } from './game-actions';
+import { contextualActions, currentLegalPlays } from './game-actions';
 import { Modal } from './Modal';
 import { useLocale } from './i18n/context';
 import type { MessageKey } from '../shared/ui-messages';
 import { useAttentionChime } from './audio/use-attention-chime';
+import { useResponseVoice } from './audio/use-response-voice';
+import { PromptCountdown } from './PromptCountdown';
 import { HandCard } from './cards/HandCard';
 import { CardPreview } from './cards/CardPreview';
 import { useCardSelection } from './cards/useCardSelection';
@@ -29,6 +31,7 @@ const labels: Partial<Record<StateChangingCommand['type'], MessageKey>> = {
   TAKE_DRINK: 'action.TAKE_DRINK',
   ADVANCE_PHASE: 'action.ADVANCE_PHASE',
   PASS_RESPONSE: 'action.PASS_RESPONSE',
+  PASS_ANYTIME: 'action.PASS_ANYTIME',
   GAMBLING_PASS: 'action.GAMBLING_PASS',
   GAMBLING_LEAVE: 'action.GAMBLING_LEAVE',
 };
@@ -245,6 +248,7 @@ export function GameTable({
   const { locale, t, message } = useLocale();
   const view = state.publicView!;
   useAttentionChime(view, playerId);
+  useResponseVoice(state.privateView, playerId);
   const own = view.players.find((player) => player.id === playerId)!;
   const selection = useCardSelection(
     state.privateView?.hand.map((card) => card.id) ?? [],
@@ -254,11 +258,13 @@ export function GameTable({
   const [target, setTarget] = useState<{
     type: 'ORDER_DRINK' | 'PLAY_CARD' | 'PLAY_RESPONSE' | 'GAMBLING_PLAY';
     cardId?: string;
+    version: number;
   } | null>(null);
   const busy =
     state.status !== 'synced' ||
     state.pendingCommandId !== null ||
-    state.privateView === null;
+    state.privateView === null ||
+    state.privateView.legalPlayVersion !== view.version;
   const cards = new Map<string, Presentation['cards'][number]>(
     presentation.cards.map((card) => [card.id, card]),
   );
@@ -289,9 +295,21 @@ export function GameTable({
   };
   const actions = contextualActions(view, playerId);
   const hand = state.privateView?.hand ?? [];
+  const legalPlays = busy
+    ? []
+    : currentLegalPlays(view, state.privateView, playerId);
+  const legalFor = (cardId: string) =>
+    legalPlays.find((play) => play.cardId === cardId);
+  const playFields = (legal: PrivatePlayerView['legalPlays'][number]) => ({
+    cardId: legal.cardId,
+    ...(legal.promptId === undefined ? {} : { promptId: legal.promptId }),
+    ...(legal.commandType === 'PLAY_RESPONSE'
+      ? { responseWindowId: view.responseWindow!.id }
+      : {}),
+  });
   const perform = (type: StateChangingCommand['type']) => {
     if (type === 'ORDER_DRINK') {
-      setTarget({ type });
+      setTarget({ type, version: view.version });
       return;
     }
     if (type === 'DISCARD') {
@@ -304,37 +322,45 @@ export function GameTable({
     send(
       type,
       type === 'PASS_RESPONSE'
-        ? { responseWindowId: view.responseWindow!.id }
-        : {},
+        ? {
+            responseWindowId: view.responseWindow!.id,
+            ...(view.timedPrompt
+              ? { promptId: view.timedPrompt.promptId }
+              : {}),
+          }
+        : type === 'PASS_ANYTIME'
+          ? {
+              responseWindowId: view.phaseEnd!.id,
+              promptId: view.timedPrompt!.promptId,
+            }
+          : {},
     );
   };
-  const play = (
-    reference: CardReference,
-    definition: Presentation['cards'][number],
-  ) => {
-    const type = cardAction(view, playerId, definition, presentation.cards);
-    if (type === null) return;
-    if (definition.requiresTarget) {
-      setTarget({ type, cardId: reference.id });
+  const play = (reference: CardReference) => {
+    const legal = legalFor(reference.id);
+    if (legal === undefined) return;
+    if (legal.requiresTarget) {
+      setTarget({
+        type: legal.commandType,
+        cardId: reference.id,
+        version: view.version,
+      });
       return;
     }
-    send(type, {
-      cardId: reference.id,
-      ...(type === 'PLAY_RESPONSE'
-        ? { responseWindowId: view.responseWindow!.id }
-        : {}),
-    });
+    send(legal.commandType, playFields(legal));
   };
   const waiting =
     view.responseWindow?.choicePlayerId ??
     view.responseWindow?.priorityPlayerId ??
     view.gambling?.priorityPlayerId ??
+    view.phaseEnd?.priorityPlayerId ??
     view.activePlayerId;
   const waitingName = view.players.find(
     (player) => player.id === waiting,
   )?.displayName;
   return (
     <main className="game-page">
+      <PromptCountdown prompt={view.timedPrompt} />
       <header className="table-header">
         <div>
           <p className="eyebrow">{t('app.title')}</p>
@@ -560,12 +586,7 @@ export function GameTable({
             {hand.map((reference) => {
               const definition = cards.get(reference.definitionId);
               if (!definition) return null;
-              const playable = cardAction(
-                view,
-                playerId,
-                definition,
-                presentation.cards,
-              );
+              const playable = legalFor(reference.id)?.commandType;
               return (
                 <HandCard
                   key={reference.id}
@@ -574,6 +595,7 @@ export function GameTable({
                   selectable={actions.includes('DISCARD')}
                   selected={selected.includes(reference.id)}
                   disabled={busy}
+                  playable={playable !== undefined}
                   onToggle={selection.toggle}
                   onPreview={preview.show}
                   onLeave={preview.hide}
@@ -581,10 +603,7 @@ export function GameTable({
                   onClosePreview={preview.close}
                 >
                   {playable && (
-                    <button
-                      disabled={busy}
-                      onClick={() => play(reference, definition)}
-                    >
+                    <button disabled={busy} onClick={() => play(reference)}>
                       {t(
                         playable === 'PLAY_RESPONSE'
                           ? 'card.respond'
@@ -606,39 +625,53 @@ export function GameTable({
         onClose={preview.close}
         onEngage={() => preview.pin(preview.id!)}
       />
-      {target && (
-        <Modal
-          title={
-            target.type === 'ORDER_DRINK'
-              ? t('target.drink')
-              : t('target.title')
-          }
-          onClose={() => setTarget(null)}
-        >
-          <div className="target-options">
-            {view.players
-              .filter((player) => !player.eliminated && player.id !== playerId)
-              .map((player) => (
-                <button
-                  key={player.id}
-                  disabled={busy}
-                  onClick={() => {
-                    send(target.type, {
-                      targetPlayerId: player.id,
-                      ...(target.cardId ? { cardId: target.cardId } : {}),
-                      ...(target.type === 'PLAY_RESPONSE'
-                        ? { responseWindowId: view.responseWindow!.id }
-                        : {}),
-                    });
-                    setTarget(null);
-                  }}
-                >
-                  {player.displayName}
-                </button>
-              ))}
-          </div>
-        </Modal>
-      )}
+      {target &&
+        !busy &&
+        target.version === view.version &&
+        (target.type === 'ORDER_DRINK'
+          ? actions.includes('ORDER_DRINK')
+          : legalFor(target.cardId!)?.commandType === target.type) && (
+          <Modal
+            title={
+              target.type === 'ORDER_DRINK'
+                ? t('target.drink')
+                : t('target.title')
+            }
+            onClose={() => setTarget(null)}
+          >
+            <div className="target-options">
+              {view.players
+                .filter((player) =>
+                  target.type === 'ORDER_DRINK'
+                    ? !player.eliminated && player.id !== playerId
+                    : legalFor(target.cardId!)!.legalTargetPlayerIds.includes(
+                        player.id,
+                      ),
+                )
+                .map((player) => (
+                  <button
+                    key={player.id}
+                    disabled={busy}
+                    onClick={() => {
+                      if (target.type === 'ORDER_DRINK')
+                        send(target.type, { targetPlayerId: player.id });
+                      else {
+                        const legal = legalFor(target.cardId!);
+                        if (legal?.legalTargetPlayerIds.includes(player.id))
+                          send(legal.commandType, {
+                            ...playFields(legal),
+                            targetPlayerId: player.id,
+                          });
+                      }
+                      setTarget(null);
+                    }}
+                  >
+                    {player.displayName}
+                  </button>
+                ))}
+            </div>
+          </Modal>
+        )}
       {state.privateView?.pendingChoice && (
         <ChoicePicker
           key={

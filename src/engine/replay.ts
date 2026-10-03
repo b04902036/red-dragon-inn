@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createMatch, matchSetupSchema } from './setup';
-import { applyCommand } from './commands';
+import { applyCommand, applyTimeout } from './commands';
+import { systemActionSchema } from './system-actions';
 import { assertCoreInvariants } from './invariants';
 import type { CoreGameState } from './types';
 import { playerIdSchema } from '../shared/ids';
@@ -28,14 +29,17 @@ export const replayManifestSchema = z.strictObject({
 export const replayEntrySchema = z
   .strictObject({
     actorId: playerIdSchema,
-    command: clientCommandSchema.refine(
-      (command) => command.type !== 'JOIN_ROOM',
-      'Join is not a match command',
-    ),
+    command: z
+      .union([clientCommandSchema, systemActionSchema])
+      .refine(
+        (command) => command.type !== 'JOIN_ROOM',
+        'Join is not a match command',
+      ),
     firstSequence: replaySequenceSchema.min(1),
     lastSequence: replaySequenceSchema.min(1),
     events: z.array(domainEventSchema).min(1).max(1000),
     acceptedAt: z.iso.datetime(),
+    clockTime: z.number().int().nonnegative().safe().optional(),
   })
   .refine(
     (entry) =>
@@ -57,9 +61,15 @@ export function replayFromSnapshot(
     const entry = replayEntrySchema.parse(raw);
     if (entry.firstSequence !== sequence + 1)
       throw new RangeError('Replay history sequence gap or duplicate');
-    const result = applyCommand(state, entry.command, {
-      actorId: entry.actorId,
-    });
+    const result =
+      entry.command.type === 'EXPIRE_PROMPT'
+        ? applyTimeout(state, entry.command)
+        : applyCommand(state, entry.command, {
+            actorId: entry.actorId,
+            ...(entry.clockTime === undefined
+              ? {}
+              : { clock: { now: () => entry.clockTime! } }),
+          });
     if (result.status !== 'ACCEPTED')
       throw new RangeError('Replay command was not accepted');
     if (JSON.stringify(result.events) !== JSON.stringify(entry.events))

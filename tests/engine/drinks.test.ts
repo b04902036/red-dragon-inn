@@ -9,9 +9,9 @@ import { projectPublicGame } from '../../src/protocol/projections';
 import { accepted, intent, mutable } from '../fixtures/core-match';
 import {
   cardInHand,
-  pass,
   response,
   passWindow,
+  priorityFor,
 } from '../fixtures/timing-match';
 import {
   drinkState,
@@ -20,7 +20,7 @@ import {
 } from '../fixtures/drink-match';
 
 function configureResponse(input: CoreGameState, effects: Effect[]) {
-  const state = mutable(input);
+  const state = mutable(priorityFor(input, 1));
   state.definitions[
     state.cards[cardInHand(state, 1, 'breather')]!.definitionId
   ]!.effects = effects;
@@ -430,11 +430,10 @@ describe('Drink Events, reactions, modifiers, and reconnect safety', () => {
     );
   });
   it('Ignore suppresses the complete Drink chain, Negate can restore it, and snapshots resume identically', () => {
-    let queued: CoreGameState = accepted(
+    const queued: CoreGameState = accepted(
       drinkState(['tea', 'fizz']),
       'TAKE_DRINK',
     ).state;
-    for (let i = 0; i < 3; i += 1) queued = pass(queued).state;
     const ignored = response(queued, 0, 'ignore').state;
     expect(resolveResponses(ignored).state.players[0]).toMatchObject({
       fortitude: 20,

@@ -1,5 +1,4 @@
-import type { PublicGameView } from '../protocol/views';
-import type { Presentation } from '../protocol/presentation';
+import type { PublicGameView, PrivatePlayerView } from '../protocol/views';
 import type { StateChangingCommand } from '../protocol/commands';
 
 export function contextualActions(
@@ -25,6 +24,8 @@ export function contextualActions(
         ]
       : [];
   if (view.resolutionStack.length > 0) return [];
+  if (view.phaseEnd)
+    return view.phaseEnd.priorityPlayerId === playerId ? ['PASS_ANYTIME'] : [];
   if (view.activePlayerId !== playerId) return [];
   switch (view.phase) {
     case 'DISCARD_DRAW':
@@ -42,52 +43,34 @@ export function contextualActions(
       return [];
   }
 }
-export function cardAction(
+/** Presentation consumes server authority; card types/text never infer legality here. */
+export function currentLegalPlays(
   view: PublicGameView,
+  privateView: PrivatePlayerView | null,
   playerId: string,
-  card: Presentation['cards'][number],
-  definitions: Presentation['cards'] = [],
-): 'PLAY_CARD' | 'PLAY_RESPONSE' | 'GAMBLING_PLAY' | null {
-  const player = view.players.find((player) => player.id === playerId);
-  if (view.lifecycle !== 'PLAYING' || player === undefined || player.eliminated)
-    return null;
-  if (view.responseWindow !== null) {
-    if (
-      view.responseWindow.priorityPlayerId !== playerId ||
-      !['SOMETIMES', 'ANYTIME'].includes(card.type)
-    )
-      return null;
-    const frame = view.resolutionStack.at(-1)!;
-    if (
-      card.responseKind === 'IGNORE' &&
-      !frame.targetPlayerIds.includes(player.id) &&
-      !(
-        frame.actorId === player.id &&
-        (frame.kind === 'DRINK' ||
-          definitions.some(
-            (definition) =>
-              definition.id === frame.sourceCard?.definitionId &&
-              definition.affectsSelf,
-          ))
-      )
-    )
-      return null;
-    return 'PLAY_RESPONSE';
-  }
-  if (view.gambling !== null)
-    return card.type === 'ANYTIME'
-      ? 'PLAY_CARD'
-      : view.gambling.priorityPlayerId === playerId &&
-          view.gambling.allowedControlCategories.some(
-            (type) => type === card.type,
-          )
-        ? 'GAMBLING_PLAY'
-        : null;
-  if (view.resolutionStack.length > 0) return null;
-  if (card.type === 'ANYTIME') return 'PLAY_CARD';
-  return view.phase === 'ACTION' &&
-    view.activePlayerId === playerId &&
-    ['ACTION', 'GAMBLING'].includes(card.type)
-    ? 'PLAY_CARD'
-    : null;
+) {
+  if (
+    view.lifecycle !== 'PLAYING' ||
+    privateView?.playerId !== playerId ||
+    privateView.matchId !== view.matchId ||
+    privateView.legalPlayVersion !== view.version ||
+    view.players.find((p) => p.id === playerId)?.eliminated !== false ||
+    (view.responseWindow !== null &&
+      view.responseWindow.priorityPlayerId !== playerId) ||
+    (view.phaseEnd &&
+      view.resolutionStack.length === 0 &&
+      view.phaseEnd.priorityPlayerId !== playerId)
+  )
+    return [];
+  return privateView.legalPlays.filter(
+    (play) =>
+      play.promptId === undefined ||
+      play.promptId === view.timedPrompt?.promptId,
+  );
+}
+export function cardAction(
+  plays: PrivatePlayerView['legalPlays'],
+  cardId: string,
+) {
+  return plays.find((play) => play.cardId === cardId)?.commandType ?? null;
 }

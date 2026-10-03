@@ -335,8 +335,10 @@ describe('real room persistence, reconnect and revocation', () => {
   });
   it('runs a long live match through nested responses, gambling, chasers, disconnect/reconnect, eviction, elimination, finish and replay equality', async () => {
     // Model normal human pacing while executing the complete match without wall-clock sleeps.
+    const testEpoch = Date.now() + 3600000;
     vi.useFakeTimers({ toFake: ['Date'] });
-    vi.setSystemTime(new Date('2026-10-03T00:00:00.000Z'));
+    // Keep native alarms in the future while advancing logical time without wall-clock sleeps.
+    vi.setSystemTime(testEpoch);
     const repository = new D1ReplayRepository(env.DB);
     const host = await newRoom();
     const members = [host];
@@ -430,12 +432,25 @@ describe('real room persistence, reconnect and revocation', () => {
         ),
       ).toBe(true);
       await accept(hostId, 'DISCARD', { cardIds: [] });
+      while (latestPublic(byId.get(hostId)!).phaseEnd) {
+        const grace = latestPublic(byId.get(hostId)!).phaseEnd!;
+        await accept(grace.priorityPlayerId!, 'PASS_ANYTIME', {
+          responseWindowId: grace.id,
+        });
+      }
       await accept(hostId, 'PLAY_CARD', {
         cardId: card(hostId, 'shove'),
         targetPlayerId: firstGuest,
       });
+      await accept(hostId, 'PASS_RESPONSE', {
+        responseWindowId: latestPublic(byId.get(hostId)!).responseWindow!.id,
+      });
       await accept(firstGuest, 'PLAY_RESPONSE', {
         cardId: card(firstGuest, 'ignore'),
+        responseWindowId: latestPublic(byId.get(firstGuest)!).responseWindow!
+          .id,
+      });
+      await accept(firstGuest, 'PASS_RESPONSE', {
         responseWindowId: latestPublic(byId.get(firstGuest)!).responseWindow!
           .id,
       });
@@ -461,7 +476,7 @@ describe('real room persistence, reconnect and revocation', () => {
       let gambled = false;
       let commands = 5;
       while (latestPublic(byId.get(hostId)!).lifecycle !== 'FINISHED') {
-        expect(commands++).toBeLessThan(1000);
+        expect(commands++).toBeLessThan(3000);
         const view = latestPublic(byId.get(hostId)!);
         if (view.responseWindow) {
           await accept(view.responseWindow.priorityPlayerId!, 'PASS_RESPONSE', {
@@ -471,6 +486,12 @@ describe('real room persistence, reconnect and revocation', () => {
         }
         if (view.gambling) {
           await accept(view.gambling.priorityPlayerId!, 'GAMBLING_PASS');
+          continue;
+        }
+        if (view.phaseEnd) {
+          await accept(view.phaseEnd.priorityPlayerId!, 'PASS_ANYTIME', {
+            responseWindowId: view.phaseEnd.id,
+          });
           continue;
         }
         const actorId = view.activePlayerId!;
@@ -534,13 +555,20 @@ describe('real room persistence, reconnect and revocation', () => {
       );
       expect((await repository.restore(final.matchId)).state).toEqual(final);
       expect(replayFromBeginning(manifest, history).state).toEqual(final);
+      const checkpointEntry = history.find(
+        (entry) =>
+          entry.command.expectedStateVersion === checkpoint.version - 1,
+      )!;
       const snapshotTail = history.filter(
-        (entry) => entry.firstSequence > history[4]!.lastSequence,
+        (entry) => entry.firstSequence > checkpointEntry.lastSequence,
       );
       const { replayFromSnapshot } = await import('../../src/engine/replay');
       expect(
-        replayFromSnapshot(checkpoint, history[4]!.lastSequence, snapshotTail)
-          .state,
+        replayFromSnapshot(
+          checkpoint,
+          checkpointEntry.lastSequence,
+          snapshotTail,
+        ).state,
       ).toEqual(final);
       const saved = await repository.result(final.matchId);
       expect(saved).toMatchObject({
@@ -579,7 +607,7 @@ describe('real room persistence, reconnect and revocation', () => {
       await Promise.all(clients.map(close));
       vi.useRealTimers();
     }
-  }, 120000);
+  }, 600000);
   it('recovers a committed outbox after eviction and deduplicates the interrupted command', async () => {
     const host = await newRoom();
     await joinRoom(host.roomId);

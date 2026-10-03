@@ -2,6 +2,7 @@ import type { AudioSettings } from './settings';
 export const audioPaths = {
   music: '/audio/bgm/the-old-tower-inn.wav',
   chime: '/audio/sfx/turn-chime.wav',
+  voice: '/audio/voice/en-US/sometimes-response.mp3',
 };
 export interface AudioElement {
   loop: boolean;
@@ -17,6 +18,7 @@ export type AudioStatus = 'locked' | 'ready' | 'unavailable';
 export class AudioEngine {
   private music: AudioElement | null = null;
   private chime: AudioElement | null = null;
+  private voice: AudioElement | null = null;
   private musicPlaying = false;
   private unlocked = false;
   private disposed = false;
@@ -99,6 +101,11 @@ export class AudioEngine {
     if (this.chime) this.chime.volume = settings.sfxVolume;
     if (!settings.enabled || settings.sfxMuted || settings.sfxVolume === 0)
       this.chime?.pause();
+    if (this.voice) {
+      this.voice.volume = settings.sfxVolume;
+      if (!settings.enabled || settings.sfxMuted || settings.sfxVolume === 0)
+        this.voice.pause();
+    }
     if (
       !settings.enabled ||
       settings.musicMuted ||
@@ -124,7 +131,7 @@ export class AudioEngine {
         .catch(this.playbackError);
     }
   }
-  observe(key: string | null, local: boolean) {
+  observe(key: string | null, local: boolean, voice = false) {
     if (!key || !local || this.seen.has(key)) return;
     this.seen.add(key);
     try {
@@ -141,21 +148,35 @@ export class AudioEngine {
       !this.settings.enabled ||
       this.settings.sfxMuted ||
       this.settings.sfxVolume === 0 ||
-      !this.chime ||
       this.status !== 'ready'
     )
       return;
-    this.chime.currentTime = 0;
-    void this.chime.play().catch(this.playbackError);
+    try {
+      if (voice && !this.voice) this.voice = this.factory(audioPaths.voice);
+      const audio = voice ? this.voice : this.chime;
+      if (!audio) return;
+      audio.volume = this.settings.sfxVolume;
+      audio.currentTime = 0;
+      void audio.play().catch(
+        voice
+          ? () => {
+              /* Optional voice failure never blocks gameplay/music. */
+            }
+          : this.playbackError,
+      );
+    } catch {
+      /* Missing optional voice does not affect gameplay. */
+    }
   }
   dispose() {
     this.disposed = true;
-    for (const audio of [this.music, this.chime]) {
+    for (const audio of [this.music, this.chime, this.voice]) {
       audio?.pause();
       audio?.removeEventListener('error', this.mediaError);
     }
     this.music = null;
     this.chime = null;
+    this.voice = null;
     this.musicPlaying = false;
     this.unlocked = false;
     this.status = 'locked';

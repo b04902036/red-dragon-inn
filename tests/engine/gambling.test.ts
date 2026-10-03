@@ -15,6 +15,7 @@ import {
   pass,
   passWindow,
   response,
+  priorityFor,
 } from '../fixtures/timing-match';
 import {
   startRound,
@@ -31,6 +32,17 @@ function reject(
   code: string,
   seat = 1,
 ) {
+  if (
+    type === 'PLAY_RESPONSE' &&
+    ![
+      'NOT_PRIORITY',
+      'ALREADY_PASSED',
+      'NOT_ELIGIBLE',
+      'WRONG_WINDOW',
+      'VERSION_CONFLICT',
+    ].includes(code)
+  )
+    state = priorityFor(state, seat);
   const before = JSON.stringify(state);
   const result = applyCommand(state, intent(state, type, fields), {
     actorId: state.players[seat]!.id,
@@ -388,7 +400,7 @@ describe('control cards, restrictions, reactions, and leaving', () => {
       );
     let playing = gamblingPlay(left, 2, 'gamble').state;
     for (let i = 0; i < 2; i += 1) playing = pass(playing).state;
-    expect(playing.responseWindow!.priorityPlayerId).toBe('player_1');
+    expect(playing.responseWindow!.priorityPlayerId).toBe('player_0');
     const reaction = response(playing, 1, 'breather');
     const resumed = passWindow(reaction.state).state;
     expect(resumed.players[1]!.fortitude).toBe(21);
@@ -459,8 +471,7 @@ describe('control cards, restrictions, reactions, and leaving', () => {
     expect(passWindow(leaf).state.gambling!.controlPlayerId).toBe('player_1');
   });
   it('a pending control source is canceled when its actor leaves via a nested response', () => {
-    let playing = gamblingPlay(startRound().state, 1, 'cheat').state;
-    for (let i = 0; i < 3; i += 1) playing = pass(playing).state;
+    const playing = gamblingPlay(startRound().state, 1, 'cheat').state;
     const configured = chooseReaction(playing, 1, {
       op: 'LEAVE_GAMBLING',
       target: 'SELF',
@@ -513,7 +524,6 @@ describe('control cards, restrictions, reactions, and leaving', () => {
       },
     );
     state = response(state, 2, 'breather').state;
-    for (let i = 0; i < 3; i += 1) state = pass(state).state;
     state = passWindow(response(state, 2, 'ignore').state).state;
     const completed = passWindow(state);
     expect(completed.state.gambling!.leftPlayerIds).toEqual([]);
@@ -631,7 +641,6 @@ describe('suspension, authority, idempotency, and Gold boundaries', () => {
     let queued = accepted(gamblingActionState(), 'PLAY_CARD', {
       cardId: cardInHand(gamblingActionState(), 0, 'gamble'),
     }).state;
-    queued = pass(pass(pass(queued).state).state).state;
     queued = chooseReaction(queued, 0, {
       op: 'PAY_INN',
       target: 'SELF',

@@ -144,6 +144,8 @@ export function createMatch(input: MatchSetup): CoreGameState {
       hostPlayerId: setup.hostPlayerId,
       turnNumber: 0,
       eliminationCheckPending: false,
+      timedPrompt: null,
+      phaseEnd: null,
       acceptedCommands: {},
     },
   };
