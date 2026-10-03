@@ -1,0 +1,62 @@
+{
+  "name": "red-dragon-inn",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": "\u003e=24.15.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "deploy": "npm run build \u0026\u0026 wrangler deploy",
+    "types": "wrangler types",
+    "typecheck": "npm run types \u0026\u0026 tsc -p tsconfig.engine.json \u0026\u0026 tsc -p tsconfig.client.json \u0026\u0026 tsc -p tsconfig.worker.json \u0026\u0026 tsc -p tsconfig.node.json \u0026\u0026 tsc -p tsconfig.tests.json",
+    "lint": "eslint . \u0026\u0026 prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "npm run demo:engine \u0026\u0026 npm run replay:build \u0026\u0026 playwright test",
+    "replay:build": "vite build --config vite.replay.config.ts",
+    "replay:inspect": "npm run replay:build \u0026\u0026 node .tools/replay-inspector/replay-inspector.js",
+    "demo:engine": "vite build --config vite.engine-demo.config.ts \u0026\u0026 node .tools/engine-demo/engine-demo.js",
+    "db:migrate": "wrangler d1 migrations apply DB --local",
+    "db:seed": "wrangler d1 execute DB --local --file seeds/0001_sample.sql",
+    "content:build": "vite build --config vite.content-import.config.ts",
+    "content:import": "npm run content:build \u0026\u0026 node .tools/content-import/content-import.js",
+    "verify:build": "node scripts/verify-build.mjs"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.62.4",
+    "@cloudflare/vitest-plugin": "^1.3.5",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^24.19.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/coverage-istanbul": "^4.1.11",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.13.0",
+    "jsdom": "^30.1.1",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vite": "^8.3.2",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.146.0"
+  }
+}

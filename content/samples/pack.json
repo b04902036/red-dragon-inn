@@ -1,0 +1,399 @@
+{
+  "schemaVersion": 1,
+  "version": {
+    "id": "content_sample_v1",
+    "name": "Original sample pack v1",
+    "createdAt": "2026-10-02T00:00:00.000Z"
+  },
+  "products": [
+    {
+      "id": "product_sample",
+      "slug": "original-sample-pack",
+      "name": "Original Fictional Sample Pack",
+      "releaseYear": 2026
+    }
+  ],
+  "characters": [
+    {
+      "id": "character_sample_0",
+      "productId": "product_sample",
+      "slug": "sample-grovekeeper",
+      "name": "Sample Grovekeeper",
+      "villain": false,
+      "complexity": 1,
+      "specialRuleKey": null,
+      "rules": {
+        "resources": {},
+        "sideDeckKeys": []
+      }
+    },
+    {
+      "id": "character_sample_1",
+      "productId": "product_sample",
+      "slug": "sample-clocksmith",
+      "name": "Sample Clocksmith",
+      "villain": false,
+      "complexity": 2,
+      "specialRuleKey": "sample.resources",
+      "rules": {
+        "resources": {
+          "tokens": {
+            "initialValue": 0,
+            "visibility": "PUBLIC"
+          }
+        },
+        "sideDeckKeys": ["tokens"]
+      }
+    },
+    {
+      "id": "character_sample_2",
+      "productId": "product_sample",
+      "slug": "sample-mapmaker",
+      "name": "Sample Mapmaker",
+      "villain": false,
+      "complexity": 1,
+      "specialRuleKey": null,
+      "rules": {
+        "resources": {},
+        "sideDeckKeys": []
+      }
+    },
+    {
+      "id": "character_sample_3",
+      "productId": "product_sample",
+      "slug": "sample-cloudrunner",
+      "name": "Sample Cloudrunner",
+      "villain": false,
+      "complexity": 1,
+      "specialRuleKey": null,
+      "rules": {
+        "resources": {},
+        "sideDeckKeys": []
+      }
+    }
+  ],
+  "decks": [
+    {
+      "id": "deck_sample_0",
+      "characterId": "character_sample_0",
+      "type": "CHARACTER",
+      "slug": "sample-character-0",
+      "name": "Sample Grovekeeper test deck"
+    },
+    {
+      "id": "deck_sample_1",
+      "characterId": "character_sample_1",
+      "type": "CHARACTER",
+      "slug": "sample-character-1",
+      "name": "Sample Clocksmith test deck"
+    },
+    {
+      "id": "deck_sample_2",
+      "characterId": "character_sample_2",
+      "type": "CHARACTER",
+      "slug": "sample-character-2",
+      "name": "Sample Mapmaker test deck"
+    },
+    {
+      "id": "deck_sample_3",
+      "characterId": "character_sample_3",
+      "type": "CHARACTER",
+      "slug": "sample-character-3",
+      "name": "Sample Cloudrunner test deck"
+    },
+    {
+      "id": "deck_sample_inn",
+      "characterId": null,
+      "type": "INN_DRINK",
+      "slug": "sample-inn",
+      "name": "Sample Inn Drinks"
+    },
+    {
+      "id": "deck_sample_tokens",
+      "characterId": "character_sample_1",
+      "type": "SPECIAL",
+      "slug": "sample-tokens",
+      "name": "Sample Token Side Deck"
+    }
+  ],
+  "cards": [
+    {
+      "id": "carddef_sample_shove",
+      "name": "Sample Friendly Shove",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "ACTION",
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "CHOSEN_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -2
+        }
+      ]
+    },
+    {
+      "id": "carddef_sample_ignore",
+      "name": "Sample Brush It Off",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "SOMETIMES",
+      "effects": [
+        {
+          "op": "IGNORE",
+          "scope": "CURRENT_EFFECT"
+        }
+      ],
+      "responseKind": "IGNORE"
+    },
+    {
+      "id": "carddef_sample_negate",
+      "name": "Sample Cancel That",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "SOMETIMES",
+      "effects": [
+        {
+          "op": "NEGATE",
+          "scope": "TOP_STACK"
+        }
+      ],
+      "responseKind": "NEGATE"
+    },
+    {
+      "id": "carddef_sample_breather",
+      "name": "Sample Quiet Breather",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "ANYTIME",
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "SELF",
+          "stat": "FORTITUDE",
+          "delta": 1
+        }
+      ]
+    },
+    {
+      "id": "carddef_sample_gamble",
+      "name": "Sample Raise the Stakes",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "GAMBLING",
+      "effects": []
+    },
+    {
+      "id": "carddef_sample_cheat",
+      "name": "Sample Sleeve Trick",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "CHEATING",
+      "effects": []
+    },
+    {
+      "id": "carddef_sample_fizz",
+      "name": "Sample Berry Fizz",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "DRINK",
+      "effects": [],
+      "alcoholContent": 2,
+      "fortitudeChange": 0,
+      "chaser": false
+    },
+    {
+      "id": "carddef_sample_tea",
+      "name": "Sample Spiced Tea",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "DRINK",
+      "effects": [],
+      "alcoholContent": 1,
+      "fortitudeChange": 1,
+      "chaser": true
+    },
+    {
+      "id": "carddef_sample_toast",
+      "name": "Sample House Toast",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "DRINK_EVENT",
+      "effects": []
+    },
+    {
+      "id": "carddef_sample_token",
+      "name": "Sample Spare Token",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "type": "SPECIAL",
+      "effects": [
+        {
+          "op": "CUSTOM",
+          "target": "SELF",
+          "effect_key": "sample.adjust-resource",
+          "params": {
+            "resource": "tokens",
+            "delta": 1
+          }
+        }
+      ],
+      "characterId": "character_sample_1",
+      "sideDeckKey": "tokens"
+    }
+  ],
+  "deckCards": [
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_inn",
+      "cardId": "carddef_sample_fizz",
+      "quantity": 3
+    },
+    {
+      "deckId": "deck_sample_inn",
+      "cardId": "carddef_sample_tea",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_inn",
+      "cardId": "carddef_sample_toast",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_tokens",
+      "cardId": "carddef_sample_token",
+      "quantity": 3
+    }
+  ],
+  "ruleModules": [
+    {
+      "id": "rule_sample_core",
+      "ruleKey": "sample_core",
+      "summary": "Fictional fixture module; gameplay handlers are future work.",
+      "rules": {
+        "kind": "SAMPLE_CORE",
+        "notes": "Original sample data only. No official rule text or artwork."
+      }
+    }
+  ],
+  "assets": []
+}

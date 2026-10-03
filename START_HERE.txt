@@ -1,0 +1,9 @@
+RDI Codex Prompt Pack
+
+1. Copy AGENTS.md and the codex-prompts/ folder to your project repository root.
+2. Open Codex from that repository root.
+3. Run one step at a time, starting with step-00-bootstrap.md.
+4. Use the invocation text in codex-prompts/README.md.
+5. Do not proceed to the next step until all required tests/checks pass.
+
+This pack deliberately does not include copyrighted complete RDI card/deck text.

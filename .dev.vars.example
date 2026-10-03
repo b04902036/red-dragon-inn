@@ -1,0 +1,2 @@
+# No variables or secrets are required for step 00 local development.
+# Future Worker-only variables belong in .dev.vars (ignored by Git).
