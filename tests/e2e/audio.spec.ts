@@ -15,19 +15,14 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
       await mockPlayback(page);
       await page.goto('/');
       expect(await playbackCount(page, 'music')).toBe(0);
-      await page.getByText('Sound', { exact: true }).click();
-      await page.getByRole('button', { name: 'Enable sound' }).click();
+      await page.getByLabel('Your name').click();
       expect(await playbackCount(page, 'music')).toBe(1);
-      await page.getByText('Sound', { exact: true }).click();
     }
     await host.getByLabel('Your name').fill('Host');
     await host.getByRole('button', { name: 'Create room' }).click();
     await expect(host.getByRole('status')).toHaveText('Synced');
     const invite = await host.getByLabel('Invite link').inputValue();
     await guest.goto(invite);
-    await guest.getByText('Sound', { exact: true }).click();
-    await guest.getByRole('button', { name: 'Enable sound' }).click();
-    await guest.getByText('Sound', { exact: true }).click();
     await guest.getByLabel('Your name').fill('Guest');
     await guest.getByRole('button', { name: 'Join room' }).click();
     await expect(host.locator('.lobby-seats li')).toHaveCount(2);
@@ -70,7 +65,9 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
     await host.reload();
     await expect(host.getByRole('status')).toHaveText('Synced');
     await host.getByText('Sound', { exact: true }).click();
-    await host.getByRole('button', { name: 'Enable sound' }).click();
+    await expect(
+      host.getByRole('button', { name: 'Sound enabled' }),
+    ).toBeVisible();
     expect(await playbackCount(host, 'chime')).toBe(0);
     expect(await playbackCount(host, 'music')).toBe(1);
     await host.getByLabel('Enable audio', { exact: true }).uncheck();
@@ -96,5 +93,45 @@ test('gesture unlocks one music loop; remote response priority chimes once; resy
     expect(await playbackCount(host, 'chime')).toBe(0);
   } finally {
     for (const context of contexts) await context.close();
+  }
+});
+
+test('saved disabled audio stays silent through reload and keyboard interaction until enabled', async ({
+  page,
+}) => {
+  await mockPlayback(page);
+  await page.goto('/');
+  await page.evaluate(() =>
+    localStorage.setItem('rdi:audio', JSON.stringify({ enabled: false })),
+  );
+  await page.reload();
+  await page.getByLabel('Your name').focus();
+  await page.getByLabel('Your name').press('A');
+  await page.getByText('Sound', { exact: true }).click();
+  expect(await playbackCount(page, 'music')).toBe(0);
+  await page.getByLabel('Enable audio', { exact: true }).check();
+  await expect.poll(() => playbackCount(page, 'music')).toBe(1);
+  await page.getByLabel('Enable audio', { exact: true }).uncheck();
+  await page.reload();
+  await page.getByLabel('Your name').click();
+  await page.getByLabel('Your name').press('B');
+  expect(await playbackCount(page, 'music')).toBe(0);
+});
+
+test('ordinary touch interaction unlocks default audio once', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ hasTouch: true });
+  try {
+    const page = await context.newPage();
+    await mockPlayback(page);
+    await page.goto('/');
+    expect(await playbackCount(page, 'music')).toBe(0);
+    await page.getByLabel('Your name').tap();
+    await expect.poll(() => playbackCount(page, 'music')).toBe(1);
+    await page.getByText('Sound', { exact: true }).tap();
+    expect(await playbackCount(page, 'music')).toBe(1);
+  } finally {
+    await context.close();
   }
 });

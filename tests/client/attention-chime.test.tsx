@@ -58,7 +58,6 @@ it.each(['RESPONSE', 'CHOICE', 'GAMBLING'] as const)(
     const rendered = render(tree({ ...view, attention: null }));
     const user = userEvent.setup();
     await user.click(screen.getByText('Sound', { exact: true }));
-    await user.click(screen.getByRole('button', { name: 'Enable sound' }));
     expect(play).toHaveBeenCalledTimes(1);
     rendered.rerender(tree(view, 'remote'));
     expect(play).toHaveBeenCalledTimes(1);

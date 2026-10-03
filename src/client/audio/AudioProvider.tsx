@@ -27,7 +27,49 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<AudioStatus>('locked');
   useEffect(() => {
     const unsubscribe = engine.subscribe(setStatus);
+    const unlockOnInteraction = () => {
+      if (engine.status === 'locked') void engine.unlock();
+    };
+    const unlockOnClickCapture = (event: MouseEvent) => {
+      // Card buttons can stop bubbling; sound controls must apply settings first.
+      if (
+        event.target instanceof Element &&
+        event.target.closest('.audio-settings')
+      )
+        return;
+      unlockOnInteraction();
+    };
+    const unlockOnSoundControlClick = (event: MouseEvent) => {
+      if (
+        event.target instanceof Element &&
+        event.target.closest('.audio-settings')
+      )
+        unlockOnInteraction();
+    };
+    const unlockOnPointerUp = (event: PointerEvent) => {
+      if (event.button === 0) unlockOnClickCapture(event);
+    };
+    const unlockOnKey = (event: KeyboardEvent) => {
+      if (
+        event.repeat ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.metaKey ||
+        ['Escape', 'Tab', 'Shift', 'Control', 'Alt', 'Meta'].includes(event.key)
+      )
+        return;
+      unlockOnInteraction();
+    };
+    // Bubble after React controls so disabling audio never starts playback.
+    document.addEventListener('click', unlockOnClickCapture, true);
+    document.addEventListener('click', unlockOnSoundControlClick);
+    document.addEventListener('pointerup', unlockOnPointerUp, true);
+    document.addEventListener('keydown', unlockOnKey, true);
     return () => {
+      document.removeEventListener('click', unlockOnClickCapture, true);
+      document.removeEventListener('click', unlockOnSoundControlClick);
+      document.removeEventListener('pointerup', unlockOnPointerUp, true);
+      document.removeEventListener('keydown', unlockOnKey, true);
       unsubscribe();
       engine.dispose();
     };

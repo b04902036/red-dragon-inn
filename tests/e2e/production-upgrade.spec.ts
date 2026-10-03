@@ -84,7 +84,9 @@ test('mixed-locale gambling priorities chime once; Chinese card details scroll, 
     await host.goto('/');
     expect(await playbackCount(host, 'music')).toBe(0);
     await host.getByText('聲音', { exact: true }).click();
-    await host.getByRole('button', { name: '啟用聲音' }).click();
+    await expect(
+      host.getByRole('button', { name: '聲音已啟用' }),
+    ).toBeVisible();
     await host.getByText('聲音', { exact: true }).click();
     await host.getByLabel('你的名字').fill('Host');
     await host.getByRole('button', { name: '建立房間' }).click();
@@ -94,7 +96,9 @@ test('mixed-locale gambling priorities chime once; Chinese card details scroll, 
     await guest.goto(invite);
     expect(await playbackCount(guest, 'music')).toBe(0);
     await guest.getByText('Sound', { exact: true }).click();
-    await guest.getByRole('button', { name: 'Enable sound' }).click();
+    await expect(
+      guest.getByRole('button', { name: 'Sound enabled' }),
+    ).toBeVisible();
     await guest.getByText('Sound', { exact: true }).click();
     await guest.getByLabel('Your name').fill('Guest');
     await guest.getByRole('button', { name: 'Join room' }).click();

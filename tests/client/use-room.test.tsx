@@ -62,11 +62,27 @@ function ready(socket: Socket) {
 beforeEach(() => {
   Socket.instances = [];
   vi.stubGlobal('WebSocket', Socket);
-  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(content)));
+  vi.stubGlobal(
+    'fetch',
+    vi.fn().mockImplementation(() => Promise.resolve(Response.json(content))),
+  );
 });
 afterEach(() => vi.useRealTimers());
 describe('room transport', () => {
   it('changes presentation locale without reconnecting, sending commands, or changing authoritative state', async () => {
+    const chineseContent = { ...content, locale: 'zh-TW' };
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockImplementation((url: string) =>
+          Promise.resolve(
+            Response.json(
+              url.endsWith('locale=zh-TW') ? chineseContent : content,
+            ),
+          ),
+        ),
+    );
     const { result } = renderHook(
       () => ({ room: useRoom(credentials), language: useLocale() }),
       { wrapper: LocaleProvider },
@@ -84,6 +100,9 @@ describe('room transport', () => {
         `/api/rooms/${credentials.roomId}/presentation?locale=zh-TW`,
         expect.objectContaining({ signal: expect.any(AbortSignal) }),
       ),
+    );
+    await waitFor(() =>
+      expect(result.current.room.presentation).toEqual(chineseContent),
     );
     expect(Socket.instances).toHaveLength(1);
     expect(socket.closed).toBe(false);

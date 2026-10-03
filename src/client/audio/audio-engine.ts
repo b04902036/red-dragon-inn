@@ -59,6 +59,21 @@ export class AudioEngine {
     this.musicPlaying = false;
     this.update('unavailable');
   };
+  private playbackError = (error: unknown) => {
+    this.musicPlaying = false;
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'name' in error &&
+      error.name === 'NotAllowedError'
+    ) {
+      // Policy rejection needs another gesture, not a manual settings action.
+      this.unlocked = false;
+      this.update('locked');
+      return;
+    }
+    this.mediaError();
+  };
   async unlock() {
     if (this.disposed || !this.settings.enabled) return;
     this.unlocked = true;
@@ -106,10 +121,7 @@ export class AudioEngine {
         .then(() => {
           if (this.disposed) music.pause();
         })
-        .catch(() => {
-          this.musicPlaying = false;
-          this.update('unavailable');
-        });
+        .catch(this.playbackError);
     }
   }
   observe(key: string | null, local: boolean) {
@@ -134,7 +146,7 @@ export class AudioEngine {
     )
       return;
     this.chime.currentTime = 0;
-    void this.chime.play().catch(() => this.update('unavailable'));
+    void this.chime.play().catch(this.playbackError);
   }
   dispose() {
     this.disposed = true;
