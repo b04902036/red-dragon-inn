@@ -50,6 +50,16 @@ At the end, review git diff and report whether all acceptance criteria passed.
 
 Repeat in numerical order.
 
+The RDI1 production sequence after Step 20 is now:
+
+- `step-21a-rdi1-source-lock.md`: validate and lock the supplied source; report engine gaps.
+- `step-21b-rdi1-engine-capabilities.md`: implement the required generic engine capabilities.
+- `step-21c-rdi1-compile-publish.md`: compile private content and publish validated decks.
+- `step-21d-rdi1-full-verification.md`: verify every compiled card and full game flows.
+- `step-22-rdi1-release-audit.md`: audit the RDI1 release. RDI2 is outside this sequence.
+
+Execute only the expressly requested substep. See [source verification](../docs/rdi1-source.md) for Step 21A inputs, lock updates and review instructions.
+
 ## If Codex is resuming an existing implementation
 
 Use:

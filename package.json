@@ -28,6 +28,7 @@
     "content:build": "vite build --config vite.content-import.config.ts",
     "content:import": "npm run content:build && node .tools/content-import/content-import.js",
     "content:verify:production": "vite build --config vite.production-content.config.ts && node .tools/production-content/production-content.js",
+    "content:verify:rdi1-source": "vite build --config vite.rdi1-source.config.ts && node .tools/rdi1-source/rdi1-source.js",
     "verify:build": "node scripts/verify-build.mjs",
     "content:translate:zh-TW": "vite build --config vite.localization.config.ts && node .tools/localization/localization.js --translate",
     "content:verify:zh-TW": "vite build --config vite.localization.config.ts && node .tools/localization/localization.js"
