@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
-  testIgnore: ['**/rdi1-content.spec.ts'],
+  testIgnore: ['**/rdi1-content.spec.ts', '**/rdi1-full-verification.spec.ts'],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -18,6 +18,7 @@ export default defineConfig({
         '**/replay-inspector.spec.ts',
         '**/localization.spec.ts',
         '**/rdi1-content.spec.ts',
+        '**/rdi1-full-verification.spec.ts',
       ],
       use: { ...devices['Desktop Chrome'] },
     },

@@ -235,6 +235,17 @@ it.each(
       expect(JSON.stringify(latestPublic(peers[seat]!))).not.toContain(
         'pendingTasks',
       );
+      // Drain the old connection before eviction. Otherwise its delayed close
+      // callback may observe the advanced clock and expire the prompt before
+      // runDurableObjectAlarm gets to exercise the alarm path.
+      const disconnected = peers[seat]!.socket;
+      const closed = new Promise<void>((resolve) =>
+        disconnected.addEventListener('close', () => resolve(), {
+          once: true,
+        }),
+      );
+      disconnected.close(1000, 'Reconnect verification');
+      await closed;
       await evictDurableObject(stub);
       await clock(now);
       const resumed = await connect(host.roomId);

@@ -4,6 +4,8 @@ Steps 00–17: a React + TypeScript game with a Cloudflare Worker API, authorita
 
 ## Local development
 
+The RDI1-only mechanics edition now provides Deirdre, Fiona, Gerki and Zot: four 40-card character decks, the 30-card Drink deck and 110 unique definitions with English/Traditional Chinese presentation. See the [Step 22 RDI1 release audit](docs/rdi1-release-status.md) for timing, per-card verification, exact test results and distribution limits, and the [private compilation/local publication workflow](docs/rdi1-compile-publish.md) to provision this edition. Normal production rooms load the published D1 edition; the fixture setup below remains explicit. The broader catalog release gate remains separate.
+
 Install Node.js 24 LTS, version 24.15 or later (with npm), then run:
 
 ```sh

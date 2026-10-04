@@ -1,5 +1,5 @@
 import { env, exports } from 'cloudflare:workers';
-import { evictDurableObject } from 'cloudflare:test';
+import { evictDurableObject, runInDurableObject } from 'cloudflare:test';
 import { beforeEach, expect, it } from 'vitest';
 import { contentPackSchema } from '../../src/content/pack';
 import { importContent } from '../../src/content/import';
@@ -13,7 +13,14 @@ import {
   stubFor,
   connect,
   sendCommand,
+  latestPrivate,
+  latestPublic,
 } from './room-helpers';
+import { rdi1Match, rdi1Play } from '../fixtures/rdi1-match';
+import { projectPrivatePlayer } from '../../src/protocol/projections';
+import { D1ReplayRepository } from '../../worker/repositories/replay';
+import type { GameRoom } from '../../worker/durable/game-room';
+import type { RoomClient } from './room-helpers';
 
 beforeEach(freshDatabase);
 const pack = () =>
@@ -108,7 +115,7 @@ it('offers exactly four RDI1 characters, starts a pinned match and reconnects wi
   } finally {
     socket.socket.close();
   }
-});
+}, 20_000);
 
 it('SQL channel guards accept paraphrases on insert and update, and still reject samples directly', async () => {
   const content = await publish();
@@ -134,3 +141,184 @@ it('SQL channel guards accept paraphrases on insert and update, and still reject
   );
   expect(await repo().productionVersion()).toBe(content.version.id);
 });
+
+it('four production seats receive exact decks and play a real timed Sometimes through WebSockets, hibernation and D1 replay from the beginning', async () => {
+  const content = await publish();
+  let chosen:
+    | { seed: number; attack: string; targetSeat: number; response: string }
+    | undefined;
+  for (let seed = 0; seed < 100 && !chosen; seed++) {
+    const state = rdi1Match(content, 7, seed);
+    const attack = state.players[0]!.hand.find(
+      (id) =>
+        state.definitions[state.cards[id]!.definitionId]!.type === 'ACTION' &&
+        state.definitions[state.cards[id]!.definitionId]!.effects.some(
+          (e) =>
+            e.op === 'CHANGE_STAT' &&
+            e.stat === 'FORTITUDE' &&
+            e.delta < 0 &&
+            e.target === 'CHOSEN_PLAYER',
+        ),
+    );
+    if (!attack) continue;
+    for (let seat = 1; seat < 4 && !chosen; seat++) {
+      const pending = rdi1Play(state, attack, state.players[seat]!.id).state;
+      const definition = state.players[seat]!.hand.find(
+        (id) =>
+          state.definitions[state.cards[id]!.definitionId]!.type ===
+            'SOMETIMES' &&
+          state.definitions[state.cards[id]!.definitionId]!.effects[0]?.op ===
+            'IGNORE',
+      );
+      if (!definition) continue;
+      // Inspect trigger legality independently of whichever seat initially has priority.
+      const p = structuredClone(pending);
+      if (!p.responseWindow?.eligiblePlayerIds.includes(p.players[seat]!.id))
+        continue;
+      (p.responseWindow as { priorityPlayerId: string }).priorityPlayerId =
+        p.players[seat]!.id;
+      if (
+        projectPrivatePlayer(p, p.players[seat]!.id).legalPlays.some(
+          (c) => c.cardId === definition,
+        )
+      )
+        chosen = {
+          seed,
+          attack: state.cards[attack]!.definitionId,
+          targetSeat: seat,
+          response: state.cards[definition]!.definitionId,
+        };
+    }
+  }
+  expect(chosen).toBeDefined();
+  const host = await newRoom('Deirdre');
+  const members = [
+    host,
+    await joinRoom(host.roomId, 'Fiona'),
+    await joinRoom(host.roomId, 'Gerki'),
+    await joinRoom(host.roomId, 'Zot'),
+  ];
+  const stub = stubFor(host.roomId);
+  const clockStart = Date.now();
+  await runInDurableObject(stub, async (instance: GameRoom, ctx) => {
+    const room =
+      (await ctx.storage.get<Awaited<ReturnType<typeof storedRoom>>>('room'))!;
+    await ctx.storage.put('room', { ...room, seed: chosen!.seed });
+    (instance as unknown as { clock: { now(): number } }).clock = {
+      now: () => clockStart,
+    };
+  });
+  const clients: RoomClient[] = [];
+  try {
+    for (const member of members) {
+      const client = await connect(host.roomId);
+      await client.hello(member.credentials);
+      clients.push(client);
+    }
+    expect((await sendCommand(clients[0]!, 'START_MATCH')).result.type).toBe(
+      'COMMAND_ACCEPTED',
+    );
+    for (const client of clients) await client.ping();
+    const initial = (await storedRoom(host.roomId)).game!;
+    expect(
+      initial.players.map(
+        (p) => p.hand.length + p.characterDeck.cardIds.length,
+      ),
+    ).toEqual([40, 40, 40, 40]);
+    for (let seat = 0; seat < 4; seat++) {
+      expect(latestPrivate(clients[seat]!).hand).toHaveLength(7);
+      for (const other of clients.filter((c) => c !== clients[seat]))
+        for (const card of initial.players[seat]!.hand)
+          expect(JSON.stringify(other.messages)).not.toContain(
+            JSON.stringify(card),
+          );
+    }
+    await sendCommand(clients[0]!, 'DISCARD', { cardIds: [] });
+    async function passTo(stop: (s: typeof initial) => boolean) {
+      for (let i = 0; i < 64; i++) {
+        const state = (await storedRoom(host.roomId)).game!;
+        if (stop(state)) return;
+        const window = state.responseWindow ?? state.control.phaseEnd!;
+        const seat = state.players.findIndex(
+          (p) => p.id === window.priorityPlayerId,
+        );
+        for (const client of clients) await client.ping();
+        expect(
+          (
+            await sendCommand(
+              clients[seat]!,
+              state.responseWindow ? 'PASS_RESPONSE' : 'PASS_ANYTIME',
+              { responseWindowId: window.id },
+            )
+          ).result.type,
+        ).toBe('COMMAND_ACCEPTED');
+      }
+      throw new Error('Worker checkpoint not reached');
+    }
+    await passTo(
+      (s) => s.phase === 'ACTION' && !s.responseWindow && !s.control.phaseEnd,
+    );
+    const action = (await storedRoom(host.roomId)).game!;
+    const attack = action.players[0]!.hand.find(
+      (id) => action.cards[id]!.definitionId === chosen!.attack,
+    )!;
+    expect(
+      (
+        await sendCommand(clients[0]!, 'PLAY_CARD', {
+          cardId: attack,
+          targetPlayerId: action.players[chosen!.targetSeat]!.id,
+        })
+      ).result.type,
+    ).toBe('COMMAND_ACCEPTED');
+    await passTo(
+      (s) =>
+        s.responseWindow?.priorityPlayerId ===
+        s.players[chosen!.targetSeat]!.id,
+    );
+    for (const client of clients) await client.ping();
+    const response = latestPrivate(clients[chosen!.targetSeat]!);
+    expect(response.responsePrompt?.hasLegalSometimes).toBe(true);
+    const prompt = latestPublic(clients[0]!).timedPrompt!;
+    expect(prompt.deadlineAt - prompt.openedAt).toBe(30_000);
+    await evictDurableObject(stub);
+    await runInDurableObject(stub, (instance: GameRoom) => {
+      (instance as unknown as { clock: { now(): number } }).clock = {
+        now: () => clockStart + 1000,
+      };
+    });
+    const resumed = await connect(host.roomId);
+    await resumed.hello(members[chosen!.targetSeat]!.credentials);
+    clients[chosen!.targetSeat]!.socket.close();
+    clients[chosen!.targetSeat] = resumed;
+    expect(latestPrivate(resumed).responsePrompt).toEqual(
+      response.responsePrompt,
+    );
+    const card = response.hand.find(
+      (c) => c.definitionId === chosen!.response,
+    )!;
+    expect(
+      (
+        await sendCommand(resumed, 'PLAY_RESPONSE', {
+          cardId: card.id,
+          responseWindowId: prompt.windowId,
+          promptId: prompt.promptId,
+        })
+      ).result.type,
+    ).toBe('COMMAND_ACCEPTED');
+    await passTo((s) => !s.responseWindow && !s.control.phaseEnd);
+    const final = (await storedRoom(host.roomId)).game!;
+    expect(final.players[chosen!.targetSeat]!.fortitude).toBe(20);
+    expect(
+      (await new D1ReplayRepository(env.DB).restore(final.matchId, true)).state,
+    ).toEqual(final);
+    expect(
+      (
+        await exports.default.fetch(
+          `https://example.com/api/rooms/${host.roomId}/__test/stage`,
+        )
+      ).status,
+    ).not.toBe(200);
+  } finally {
+    for (const client of clients) client.socket.close();
+  }
+}, 20_000);

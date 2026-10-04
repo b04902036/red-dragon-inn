@@ -32,6 +32,7 @@
     "content:compile:rdi1": "vite build --config vite.rdi1-pack.config.ts && node .tools/rdi1-pack/rdi1-pack.js --compile",
     "content:publish:rdi1": "vite build --config vite.rdi1-pack.config.ts && node .tools/rdi1-pack/rdi1-pack.js --publish",
     "content:verify:rdi1": "vite build --config vite.rdi1-pack.config.ts && node .tools/rdi1-pack/rdi1-pack.js",
+    "content:coverage:rdi1": "node scripts/rdi1-card-coverage.mjs",
     "verify:build": "node scripts/verify-build.mjs",
     "content:translate:zh-TW": "vite build --config vite.localization.config.ts && node .tools/localization/localization.js --translate",
     "content:verify:zh-TW": "vite build --config vite.localization.config.ts && node .tools/localization/localization.js"

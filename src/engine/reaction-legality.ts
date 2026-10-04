@@ -211,7 +211,7 @@ function conditionMatches(
         : condition.relation === 'SAME'
           ? context.counterFamily !== null &&
             responderFamily === context.counterFamily
-          : context.counterFamily !== null &&
+          : context.counterFamily === null ||
             responderFamily !== context.counterFamily;
     }
     case 'PHASE_OPPORTUNITY':

@@ -8,6 +8,8 @@ const sampleSeed = await readD1Migrations('./seeds');
 
 export default defineConfig({
   test: {
+    // Bound CPU-heavy replay and production-content suites on high-core machines.
+    maxWorkers: 4,
     coverage: {
       provider: 'istanbul',
       exclude: ['tests/**', 'scripts/**', '**/*.d.ts'],
