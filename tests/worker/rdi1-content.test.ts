@@ -279,7 +279,11 @@ it('four production seats receive exact decks and play a real timed Sometimes th
     const response = latestPrivate(clients[chosen!.targetSeat]!);
     expect(response.responsePrompt?.hasLegalSometimes).toBe(true);
     const prompt = latestPublic(clients[0]!).timedPrompt!;
-    expect(prompt.deadlineAt - prompt.openedAt).toBe(30_000);
+    expect(prompt.deadlineAt).toBe(
+      prompt.priorityPlayerId === action.activePlayerId
+        ? null
+        : prompt.openedAt + 30_000,
+    );
     await evictDurableObject(stub);
     await runInDurableObject(stub, (instance: GameRoom) => {
       (instance as unknown as { clock: { now(): number } }).clock = {

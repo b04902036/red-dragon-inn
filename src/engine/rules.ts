@@ -21,6 +21,8 @@ export const rulesConfigSchema = z
       .strictObject({
         responseMs: z.number().int().min(0).max(30000),
         phaseEndMs: z.number().int().min(0).max(15000),
+        // Absent in older pinned manifests: retain their original all-player deadlines.
+        turnOwnerUntimed: z.boolean().optional(),
       })
       .prefault({ responseMs: 30000, phaseEndMs: 15000 }),
     drinks: z
@@ -83,6 +85,7 @@ export const rulesConfigSchema = z
   });
 export type RulesConfig = z.infer<typeof rulesConfigSchema>;
 export const DEFAULT_RULES: RulesConfig = rulesConfigSchema.parse({
+  timing: { responseMs: 30000, phaseEndMs: 15000, turnOwnerUntimed: true },
   initialStats: { fortitude: 20, alcoholContent: 0, gold: 10 },
   handSize: 7,
   initialDrinkCount: 1,

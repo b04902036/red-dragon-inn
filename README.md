@@ -40,6 +40,8 @@ These local commands can be repeated. The development/test seed contains four fi
 
 Put owned/licensed complete card data in ignored `content-private/imports/`. Run the import dry run, write/publish, and `npm run content:verify:production -- --activate content_your_version` as documented in [production content](docs/production-content.md). `npm run content:verify:production` exits nonzero while required content is absent. All 76 supplied characters are cataloged as metadata; official playable cards have not been fabricated or bundled.
 
+If Create shows “遊戲內容尚未準備好。房主需要設定已發布的內容版本。”, check that this local database has a published edition assigned to the `production` channel. Seeding sample editions does not configure production. The private RDI1 source/pack is ignored by Git and must be restored separately; follow [RDI1 compilation/publication](docs/rdi1-compile-publish.md) to publish it locally, or use `npm run dev:fixture` for an explicit sample game.
+
 ## Visually verify the turn engine
 
 ```sh

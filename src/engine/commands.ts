@@ -64,6 +64,7 @@ export function applyTimeout(
   if (
     !parsed.success ||
     prompt === null ||
+    prompt.deadlineAt === null ||
     parsed.data.promptId !== prompt.promptId ||
     parsed.data.now < prompt.deadlineAt
   )
@@ -126,6 +127,7 @@ function transact(
     !system &&
     context.clock !== undefined &&
     state.control.timedPrompt !== null &&
+    state.control.timedPrompt.deadlineAt !== null &&
     now >= state.control.timedPrompt.deadlineAt
   )
     return reject('WRONG_WINDOW');

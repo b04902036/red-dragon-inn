@@ -13,6 +13,12 @@ export function PromptCountdown({
     return () => window.clearInterval(timer);
   }, []);
   if (!prompt) return null;
+  if (prompt.deadlineAt === null)
+    return (
+      <p role="note" data-prompt-id={prompt.promptId}>
+        {t('timer.owner')}
+      </p>
+    );
   return (
     <p role="timer" data-prompt-id={prompt.promptId}>
       {t(

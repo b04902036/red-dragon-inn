@@ -69,7 +69,11 @@ describe('every compiled RDI1 Sometimes definition', () => {
         );
         const fresh = played.state.control.timedPrompt!;
         expect(fresh.promptId).not.toBe(old.promptId);
-        expect(fresh.deadlineAt - fresh.openedAt).toBe(30_000);
+        expect(fresh.deadlineAt).toBe(
+          fresh.priorityPlayerId === played.state.activePlayerId
+            ? null
+            : fresh.openedAt + 30_000,
+        );
         expect(fresh.openedAt).toBe(old.openedAt + 500);
         const view = projectPrivatePlayer(played.state, owner.id);
         expect(view.legalPlays.some((p) => p.cardId === anytime)).toBe(true);
@@ -85,7 +89,11 @@ describe('every compiled RDI1 Sometimes definition', () => {
         expect(view.legalPlays.find((p) => p.cardId === cardId)).toBeDefined();
         expect(view.responsePrompt).toMatchObject({ hasLegalSometimes: true });
         const prompt = state.control.timedPrompt!;
-        expect(prompt.deadlineAt - prompt.openedAt).toBe(30_000);
+        expect(prompt.deadlineAt).toBe(
+          prompt.priorityPlayerId === state.activePlayerId
+            ? null
+            : prompt.openedAt + 30_000,
+        );
         for (const player of state.players.filter(
           (p) => p.id !== state.players[seat]!.id,
         )) {
@@ -111,11 +119,20 @@ describe('every compiled RDI1 Sometimes definition', () => {
           roomId: state.roomId,
           expectedStateVersion: state.version,
           promptId: prompt.promptId,
-          now: prompt.deadlineAt,
+          now: prompt.deadlineAt ?? prompt.openedAt + 60000,
         };
         const expired = applyTimeout(state, command);
-        expect(expired.status).toBe('ACCEPTED');
         expect(applyTimeout(restored, command)).toEqual(expired);
+        if (prompt.deadlineAt === null) {
+          expect(expired).toMatchObject({
+            status: 'REJECTED',
+            code: 'WRONG_WINDOW',
+            state,
+            events: [],
+          });
+          return;
+        }
+        expect(expired.status).toBe('ACCEPTED');
         expect(expired.state.control.timedPrompt?.promptId).not.toBe(
           prompt.promptId,
         );
@@ -351,10 +368,12 @@ describe('every compiled RDI1 Anytime definition', () => {
       expect(
         projectPrivatePlayer(response, base.players[seat]!.id).responsePrompt,
       ).toMatchObject({ hasLegalSometimes: false });
-      expect(
-        response.control.timedPrompt!.deadlineAt -
-          response.control.timedPrompt!.openedAt,
-      ).toBe(30_000);
+      const responsePrompt = response.control.timedPrompt!;
+      expect(responsePrompt.deadlineAt).toBe(
+        responsePrompt.priorityPlayerId === response.activePlayerId
+          ? null
+          : responsePrompt.openedAt + 30_000,
+      );
       const played = rdi1Play(response, cardId);
       expect(played.state.control.timedPrompt?.promptId).not.toBe(
         response.control.timedPrompt!.promptId,
@@ -378,10 +397,12 @@ describe('every compiled RDI1 Anytime definition', () => {
         graceBase.players.findIndex((p) => p.id === graceBase.activePlayerId),
         'SKIP_ACTION',
       ).state;
-      expect(
-        grace.control.timedPrompt!.deadlineAt -
-          grace.control.timedPrompt!.openedAt,
-      ).toBe(15_000);
+      const gracePrompt = grace.control.timedPrompt!;
+      expect(gracePrompt.deadlineAt).toBe(
+        gracePrompt.priorityPlayerId === grace.activePlayerId
+          ? null
+          : gracePrompt.openedAt + 15_000,
+      );
       expect(
         projectPrivatePlayer(grace, grace.players[seat]!.id).legalPlays.some(
           (p) => p.cardId === cardId,

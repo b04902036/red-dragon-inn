@@ -23,9 +23,9 @@ export const timedPromptSchema = z
     windowId: responseWindowIdSchema,
     priorityPlayerId: playerIdSchema,
     openedAt: z.number().int().nonnegative().safe(),
-    deadlineAt: z.number().int().nonnegative().safe(),
+    deadlineAt: z.number().int().nonnegative().safe().nullable(),
   })
-  .refine((p) => p.deadlineAt >= p.openedAt);
+  .refine((p) => p.deadlineAt === null || p.deadlineAt >= p.openedAt);
 export type TimedPrompt = z.infer<typeof timedPromptSchema>;
 export interface PhaseEndWindow {
   id: z.infer<typeof responseWindowIdSchema>;
@@ -200,10 +200,13 @@ export function synchronizePrompt(
     priorityPlayerId: playerId,
     openedAt: now,
     deadlineAt:
-      now +
-      (kind === 'RESPONSE_DECISION'
-        ? state.rules.timing.responseMs
-        : state.rules.timing.phaseEndMs),
+      state.rules.timing.turnOwnerUntimed === true &&
+      playerId === state.activePlayerId
+        ? null
+        : now +
+          (kind === 'RESPONSE_DECISION'
+            ? state.rules.timing.responseMs
+            : state.rules.timing.phaseEndMs),
   });
   state.control.timedPrompt = prompt;
   emit({ type: 'TIMED_PROMPT_OPENED', ...prompt });

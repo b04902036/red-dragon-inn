@@ -248,7 +248,11 @@ it.each(cases)(
     pending = until(pending, (s) => legal(s, seat, response) !== undefined);
     const parent = pending.resolutionStack.at(-1)!.id;
     const old = pending.control.timedPrompt!;
-    expect(old.deadlineAt - old.openedAt).toBe(30000);
+    expect(old.deadlineAt).toBe(
+      old.priorityPlayerId === pending.activePlayerId
+        ? null
+        : old.openedAt + 30000,
+    );
     const target =
       'target' in effect && effect.target === 'CHOSEN_PLAYER'
         ? state.players[2]!.id
@@ -279,7 +283,11 @@ it.each(cases)(
     );
     const fresh = pending.control.timedPrompt!;
     expect(fresh.promptId).not.toBe(old.promptId);
-    expect(fresh.deadlineAt).toBe(old.openedAt + 100 + 30000);
+    expect(fresh.deadlineAt).toBe(
+      fresh.priorityPlayerId === pending.activePlayerId
+        ? null
+        : old.openedAt + 100 + 30000,
+    );
     for (const foreign of pending.players[counterSeat]!.hand)
       expect(
         JSON.stringify(

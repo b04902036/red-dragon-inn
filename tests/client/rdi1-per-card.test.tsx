@@ -27,7 +27,7 @@ import type { CoreGameState } from '../../src/engine/types';
 
 const presentation = contentPresentation(rdi1Pack, false);
 for (const definition of rdi1Pack.cards.filter((c) => c.type === 'SOMETIMES')) {
-  it(`${definition.id}: real server highlight, 30s prompt, MP3 once, fresh prompt and reconnect deduplication`, async () => {
+  it(`${definition.id}: real server highlight, owner-aware prompt, MP3 once, fresh prompt and reconnect deduplication`, async () => {
     sessionStorage.clear();
     vi.spyOn(Date, 'now').mockReturnValue(1000);
     const { state, cardId, seat } = rdi1SometimesContext(rdi1Pack, definition);
@@ -82,7 +82,10 @@ for (const definition of rdi1Pack.cards.filter((c) => c.type === 'SOMETIMES')) {
         calls.filter((p) => p.endsWith('sometimes-response.mp3')),
       ).toHaveLength(1),
     );
-    expect(screen.getByRole('timer')).toHaveTextContent('30');
+    if (view.responsePrompt!.deadlineAt === null) {
+      expect(screen.queryByRole('timer')).not.toBeInTheDocument();
+      expect(screen.getByRole('note')).toHaveTextContent('no time limit');
+    } else expect(screen.getByRole('timer')).toHaveTextContent('30');
     ui.rerender(tree(structuredClone(state)));
     expect(
       calls.filter((p) => p.endsWith('sometimes-response.mp3')),
@@ -156,7 +159,10 @@ for (const definition of rdi1Pack.cards.filter((c) => c.type === 'ANYTIME')) {
     expect(
       document.querySelector(`[data-card-id="${cardId}"]`),
     ).toHaveAttribute('data-playable', 'true');
-    expect(screen.getByRole('timer')).toHaveTextContent('30');
+    if (view.responsePrompt!.deadlineAt === null) {
+      expect(screen.queryByRole('timer')).not.toBeInTheDocument();
+      expect(screen.getByRole('note')).toHaveTextContent('no time limit');
+    } else expect(screen.getByRole('timer')).toHaveTextContent('30');
     expect(calls.filter((p) => p.endsWith('sometimes-response.mp3'))).toEqual(
       [],
     );

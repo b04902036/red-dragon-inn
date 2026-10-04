@@ -175,7 +175,8 @@ export class GameRoom extends ProductionGameRoom {
         }
         if (path === '/__test/shorten') {
           const prompt = room.game!.control.timedPrompt;
-          if (!prompt) throw new Error('No deadline to inject');
+          if (!prompt || prompt.deadlineAt === null)
+            throw new Error('No deadline to inject');
           const offset = prompt.deadlineAt - Date.now() - 1500;
           (this as unknown as { clock: { now(): number } }).clock = {
             now: () => Date.now() + offset,

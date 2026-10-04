@@ -76,7 +76,13 @@ export class GameRoom extends DurableObject<Env> {
     const game = room.game;
     const prompt = game?.control.timedPrompt;
     const now = this.clock.now();
-    if (!game || !prompt || now < prompt.deadlineAt) return room;
+    if (
+      !game ||
+      !prompt ||
+      prompt.deadlineAt === null ||
+      now < prompt.deadlineAt
+    )
+      return room;
     const action = {
       type: 'EXPIRE_PROMPT',
       commandId: commandIdSchema.parse(
@@ -134,7 +140,7 @@ export class GameRoom extends DurableObject<Env> {
     await this.ctx.storage.transaction(async (tx) => {
       await tx.put(values);
       const prompt = room.game?.control.timedPrompt;
-      if (prompt) await tx.setAlarm(prompt.deadlineAt);
+      if (prompt?.deadlineAt != null) await tx.setAlarm(prompt.deadlineAt);
       else await tx.deleteAlarm();
     });
   }
@@ -146,7 +152,8 @@ export class GameRoom extends DurableObject<Env> {
         return;
       }
       const prompt = room?.game?.control.timedPrompt;
-      if (prompt) await this.ctx.storage.setAlarm(prompt.deadlineAt);
+      if (prompt?.deadlineAt != null)
+        await this.ctx.storage.setAlarm(prompt.deadlineAt);
     });
   }
   private async flushHistory(recover = false) {
@@ -618,6 +625,7 @@ export class GameRoom extends DurableObject<Env> {
               ? rulesConfigSchema.parse({
                   ...DEFAULT_RULES,
                   timing: {
+                    ...DEFAULT_RULES.timing,
                     responseMs: Number(
                       this.env.FIXTURE_TIMING_MS.split(',')[0],
                     ),

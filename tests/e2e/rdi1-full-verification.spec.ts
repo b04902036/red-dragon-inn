@@ -211,7 +211,9 @@ test('four production RDI1 browsers verify nested counters, timers, gambling, Dr
       kind: 'PHASE_END_ANYTIME',
       hasLegalSometimes: false,
     });
-    await expect(host.getByRole('timer')).toContainText('15');
+    expect((await view()).timedPrompt!.deadlineAt).toBeNull();
+    await expect(host.getByRole('note')).toContainText('no time limit');
+    await expect(host.getByRole('timer')).toHaveCount(0);
     const graceVoices = await voiceCount(0);
     await play(0, 'gain_two_fortitude');
     await settled();
@@ -294,6 +296,9 @@ test('four production RDI1 browsers verify nested counters, timers, gambling, Dr
     // Shortened alarm + injected clock prove the real server timeout, preserving 30s rule data and replay.
     await stage('nested');
     await play(1, 'damage_two', 0);
+    await passUntil(
+      (v) => v.timedPrompt != null && v.timedPrompt.deadlineAt !== null,
+    );
     const timed = (await view()).timedPrompt!;
     expect(
       (await host.request.post(`/__test/rooms/${roomId}/shorten`)).status(),

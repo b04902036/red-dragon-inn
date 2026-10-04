@@ -1,4 +1,5 @@
 import type { AudioSettings } from './settings';
+import { BufferedMusic } from './buffered-music';
 export const audioPaths = {
   music: '/audio/bgm/the-old-tower-inn.wav',
   chime: '/audio/sfx/turn-chime.wav',
@@ -12,9 +13,10 @@ export interface AudioElement {
   pause: () => void;
   addEventListener: (type: string, listener: () => void) => void;
   removeEventListener: (type: string, listener: () => void) => void;
+  dispose?: () => void;
 }
 export type AudioStatus = 'locked' | 'ready' | 'unavailable';
-/** One playback boundary, two reusable elements; no media is created before a gesture. */
+/** One playback boundary; no audio resources are created before a gesture. */
 export class AudioEngine {
   private music: AudioElement | null = null;
   private chime: AudioElement | null = null;
@@ -27,7 +29,8 @@ export class AudioEngine {
   status: AudioStatus = 'locked';
   constructor(
     private settings: AudioSettings,
-    private factory: (path: string) => AudioElement = (path) => new Audio(path),
+    private factory: (path: string) => AudioElement = (path) =>
+      path === audioPaths.music ? new BufferedMusic(path) : new Audio(path),
     private session: Pick<Storage, 'getItem' | 'setItem'> | null = null,
   ) {
     try {
@@ -128,7 +131,9 @@ export class AudioEngine {
         .then(() => {
           if (this.disposed) music.pause();
         })
-        .catch(this.playbackError);
+        .catch((error: unknown) => {
+          if (!this.disposed && this.music === music) this.playbackError(error);
+        });
     }
   }
   observe(key: string | null, local: boolean, voice = false) {
@@ -173,6 +178,7 @@ export class AudioEngine {
     for (const audio of [this.music, this.chime, this.voice]) {
       audio?.pause();
       audio?.removeEventListener('error', this.mediaError);
+      audio?.dispose?.();
     }
     this.music = null;
     this.chime = null;

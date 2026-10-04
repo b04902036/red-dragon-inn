@@ -145,17 +145,25 @@ it('a real Durable Object timeout removes the old private highlights and refresh
   const { host, a, b, stub } = await playing();
   try {
     await sendCommand(a, 'DISCARD', { cardIds: [] });
+    await sendCommand(a, 'PASS_ANYTIME', {
+      responseWindowId: latestPublic(a).phaseEnd!.id,
+    });
     await b.ping();
-    const prompt = latestPublic(a).timedPrompt!,
-      old = latestPrivate(a).legalPlays;
+    const prompt = latestPublic(b).timedPrompt!,
+      old = latestPrivate(b).legalPlays;
     expect(old).toHaveLength(1);
+    if (prompt.deadlineAt === null) throw new Error('Guest deadline missing');
     await clock(stub, prompt.deadlineAt);
     await runDurableObjectAlarm(stub);
     await a.ping();
     await b.ping();
-    expect(latestPrivate(a).legalPlays).toEqual([]);
-    expect(latestPrivate(b).legalPlays).toHaveLength(1);
-    expect(latestPrivate(b).legalPlays[0]!.promptId).not.toBe(prompt.promptId);
+    expect(latestPublic(a).phase).toBe('ACTION');
+    expect(latestPrivate(b).responsePrompt).toBeNull();
+    expect(
+      latestPrivate(b).legalPlays.every(
+        (play) => play.promptId !== prompt.promptId,
+      ),
+    ).toBe(true);
     for (const peer of [a, b])
       expect(latestPrivate(peer).legalPlayVersion).toBe(
         latestPublic(peer).version,

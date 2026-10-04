@@ -45,13 +45,10 @@ describe('generic system opportunities', () => {
       (s) => s.resolutionStack.at(-1)?.task?.kind === 'PHASE',
     );
     expect(legal(pending, 0, id)).toBeDefined();
-    expect(
-      pending.control.timedPrompt!.deadlineAt -
-        pending.control.timedPrompt!.openedAt,
-    ).toBe(30000);
+    expect(pending.control.timedPrompt!.deadlineAt).toBeNull();
   });
   it.each(['ANTE_REQUIRED', 'PAYMENT_REQUIRED'] as const)(
-    'substitutes exactly one Gold before %s commits, with a replayable 30-second prompt',
+    'substitutes exactly one Gold before %s commits, with a replayable owner prompt',
     (event) => {
       const state = genericState();
       const substitute = putCard(
@@ -90,10 +87,7 @@ describe('generic system opportunities', () => {
         (s) => s.resolutionStack.at(-1)?.task?.kind === 'PAYMENT',
       );
       expect(pending.players[0]!.gold).toBe(state.players[0]!.gold);
-      expect(
-        pending.control.timedPrompt!.deadlineAt -
-          pending.control.timedPrompt!.openedAt,
-      ).toBe(30_000);
+      expect(pending.control.timedPrompt!.deadlineAt).toBeNull();
       reconnectAndReplay(pending);
       const old = pending.control.timedPrompt!;
       const played = play(
@@ -287,7 +281,7 @@ describe('generic system opportunities', () => {
     );
   });
 
-  it('offers phase-scoped Sometimes before and after normal ordering with 30-second prompts', () => {
+  it('offers phase-scoped Sometimes before and after normal ordering with owner-aware prompts', () => {
     const state = genericState();
     state.phase = 'ORDER_DRINK';
     const spare = state.players[0]!.drinkPile.pop()!;

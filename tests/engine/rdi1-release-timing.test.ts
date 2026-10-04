@@ -22,7 +22,7 @@ function card(state: CoreGameState, seat: number, mechanic: string) {
 }
 
 it.each(['DISCARD_DRAW', 'ACTION', 'ORDER_DRINK', 'DRINK'] as const)(
-  '%s ends with a separate full 15s Anytime grace in the real RDI1 edition',
+  '%s ends with an untimed owner Anytime opportunity in the real RDI1 edition',
   (phase) => {
     const state = rdi1Match(rdi1Pack);
     const anytime = card(state, 0, 'gain_two_fortitude');
@@ -50,7 +50,7 @@ it.each(['DISCARD_DRAW', 'ACTION', 'ORDER_DRINK', 'DRINK'] as const)(
     expect(grace.control.phaseEnd?.phase).toBe(phase);
     const prompt = grace.control.timedPrompt!;
     expect(prompt.kind).toBe('PHASE_END_ANYTIME');
-    expect(prompt.deadlineAt - prompt.openedAt).toBe(15_000);
+    expect(prompt.deadlineAt).toBeNull();
     const view = projectPrivatePlayer(grace, grace.players[0]!.id);
     expect(view.responsePrompt?.hasLegalSometimes).toBe(false);
     expect(view.legalPlays.some((play) => play.cardId === anytime)).toBe(true);
@@ -60,7 +60,7 @@ it.each(['DISCARD_DRAW', 'ACTION', 'ORDER_DRINK', 'DRINK'] as const)(
   },
 );
 
-it('source actor begins response order when legal, then only eligible living seats get a full 30s', () => {
+it('source owner begins without a deadline, then other eligible living seats get a full 30s', () => {
   const state = rdi1Match(rdi1Pack);
   const attack = card(state, 0, 'damage_two');
   const anytime = card(state, 0, 'gain_two_fortitude');
@@ -68,10 +68,7 @@ it('source actor begins response order when legal, then only eligible living sea
   rdi1Keep(state, [attack, anytime, ignore]);
   const pending = rdi1Play(state, attack, state.players[1]!.id).state;
   expect(pending.responseWindow?.priorityPlayerId).toBe(state.players[0]!.id);
-  expect(
-    pending.control.timedPrompt!.deadlineAt -
-      pending.control.timedPrompt!.openedAt,
-  ).toBe(30_000);
+  expect(pending.control.timedPrompt!.deadlineAt).toBeNull();
   expect(
     projectPrivatePlayer(pending, state.players[0]!.id).responsePrompt
       ?.hasLegalSometimes,
@@ -89,7 +86,7 @@ it('source actor begins response order when legal, then only eligible living sea
     state.players[3]!.id,
   );
   expect(
-    passed.control.timedPrompt!.deadlineAt -
+    passed.control.timedPrompt!.deadlineAt! -
       passed.control.timedPrompt!.openedAt,
   ).toBe(30_000);
 });
@@ -154,7 +151,7 @@ it.each([true, false])(
     const resolved = rdi1Until(pending, (s) => s.players[1]!.fortitude === 0);
     expect(resolved.players[1]!.eliminated).toBe(false);
     expect(
-      resolved.control.timedPrompt!.deadlineAt -
+      resolved.control.timedPrompt!.deadlineAt! -
         resolved.control.timedPrompt!.openedAt,
     ).toBe(30_000);
     const view = projectPrivatePlayer(resolved, resolved.players[1]!.id);

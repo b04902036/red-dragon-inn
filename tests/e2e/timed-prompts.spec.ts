@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
 import { passPhaseEnd } from './timing-helpers';
-test('phase-end and response countdowns reset after play, expire on the server, and synchronize two contexts', async ({
+test('owner prompts remain untimed until explicit pass; guest countdowns reset, expire and synchronize', async ({
   browser,
 }) => {
   test.setTimeout(60000);
@@ -28,31 +28,34 @@ test('phase-end and response countdowns reset after play, expire on the server, 
     await host
       .getByRole('button', { name: 'Discard and draw', exact: true })
       .click();
-    await expect(host.getByRole('timer')).toHaveText(
-      /Phase-end Anytime: [45]s remaining/,
-    );
+    await expect(host.getByRole('note')).toHaveText(/no time limit/);
+    await expect(host.getByRole('timer')).toHaveCount(0);
     const grace = (await view()).timedPrompt!;
+    expect(grace.deadlineAt).toBeNull();
     await expect(host.locator('[data-playable="true"]')).toHaveCount(1);
     await expect(guest.locator('[data-playable="true"]')).toHaveCount(0);
-    await expect(host.getByRole('timer')).toHaveText(
-      /Phase-end Anytime: [0-3]s remaining/,
-    );
+    await expect
+      .poll(() => Date.now() - grace.openedAt, { timeout: 8000 })
+      .toBeGreaterThan(6000);
+    expect((await view()).timedPrompt).toEqual(grace);
     await host
       .getByRole('button', { name: 'Play Sample Quiet Breather' })
       .click();
-    await expect(host.getByRole('timer')).toHaveText(
-      /Response: (9|10)s remaining/,
-    );
+    await expect(host.getByRole('note')).toHaveText(/no time limit/);
     const response = (await view()).timedPrompt!;
     expect(response.promptId).not.toBe(grace.promptId);
-    expect(response.deadlineAt - response.openedAt).toBe(10000);
-    await expect(guest.getByRole('timer')).toHaveAttribute(
+    expect(response.deadlineAt).toBeNull();
+    await expect(guest.getByRole('note')).toHaveAttribute(
       'data-prompt-id',
       response.promptId,
     );
-    await expect(host.getByRole('timer')).toHaveText(
-      /Response: [0-8]s remaining/,
-    );
+    await expect
+      .poll(() => Date.now() - response.openedAt, { timeout: 14000 })
+      .toBeGreaterThan(11000);
+    expect((await view()).timedPrompt).toEqual(response);
+    await host
+      .getByRole('button', { name: 'Pass response', exact: true })
+      .click();
     await expect(
       guest.getByRole('button', { name: 'Pass response', exact: true }),
     ).toBeEnabled({ timeout: 12000 });
@@ -117,7 +120,8 @@ test('phase-end and response countdowns reset after play, expire on the server, 
       }),
     ).toHaveAttribute('data-playable', 'true');
     expect(child.promptId).not.toBe(parent.promptId);
-    expect(child.deadlineAt).toBeGreaterThan(parent.deadlineAt);
+    expect(parent.deadlineAt).not.toBeNull();
+    expect(child.deadlineAt).toBeGreaterThan(parent.deadlineAt!);
     await expect(guest.getByRole('timer')).toHaveText(
       /Response: (9|10)s remaining/,
     );

@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { legalCardPlays } from '../../src/engine/card-play-legality';
-import { applyCommand, applyTimeout } from '../../src/engine/commands';
+import { applyCommand } from '../../src/engine/commands';
 import {
   projectPrivatePlayer,
   projectPublicGame,
@@ -271,18 +271,22 @@ it('private legal plays never appear in public state or in another player’s pr
     ),
   ).toEqual(a);
 });
-it('expiry removes the old priority’s private legal plays and re-evaluates the next holder', () => {
+it('owner pass removes the old private legal plays and re-evaluates the next holder', () => {
   const state = mutable(playAction().state);
   state.rules.timing = { ...DEFAULT_RULES.timing };
   synchronizePrompt(state, 1000, () => {});
   const first = state.control.timedPrompt!;
   const old = projectPrivatePlayer(state, first.priorityPlayerId);
   expect(old.legalPlays.every((p) => p.promptId === first.promptId)).toBe(true);
-  const result = applyTimeout(state, {
-    ...intent(state, 'EXPIRE_PROMPT'),
-    promptId: first.promptId,
-    now: first.deadlineAt,
-  });
+  expect(first.deadlineAt).toBeNull();
+  const result = applyCommand(
+    state,
+    intent(state, 'PASS_RESPONSE', {
+      responseWindowId: first.windowId,
+      promptId: first.promptId,
+    }),
+    { actorId: first.priorityPlayerId, clock: { now: () => 1000000 } },
+  );
   expect(result.status).toBe('ACCEPTED');
   if (result.status !== 'ACCEPTED') throw new Error('expiry rejected');
   expect(

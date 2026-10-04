@@ -35,6 +35,14 @@ import {
   anytimeSystemEvents,
   anytimeSystemOpportunity,
 } from '../fixtures/anytime-system';
+// These tests exercise the shared playback policy; decoding/looping has its own suite.
+vi.mock('../../src/client/audio/buffered-music', () => ({
+  BufferedMusic: class {
+    constructor(path: string) {
+      return new Audio(path);
+    }
+  },
+}));
 class Media implements AudioElement {
   static instances: Media[] = [];
   loop = false;

@@ -92,6 +92,12 @@ export function assertCoreInvariants(state: CoreGameState): void {
       'invalid prompt player',
     );
     requireInvariant(
+      (prompt.deadlineAt === null) ===
+        (rules.timing.turnOwnerUntimed === true &&
+          prompt.priorityPlayerId === state.activePlayerId),
+      'invalid turn-owner deadline',
+    );
+    requireInvariant(
       prompt.kind === 'RESPONSE_DECISION'
         ? state.responseWindow?.id === prompt.windowId &&
             state.responseWindow.priorityPlayerId === prompt.priorityPlayerId

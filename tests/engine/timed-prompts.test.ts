@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { applyCommand, applyTimeout } from '../../src/engine/commands';
-import { DEFAULT_RULES } from '../../src/engine/rules';
 import {
   projectPrivatePlayer,
   projectPublicGame,
@@ -13,7 +12,8 @@ import { intent, mutable, started } from '../fixtures/core-match';
 
 function timed(state: CoreGameState) {
   const copy = mutable(state);
-  copy.rules.timing = { ...DEFAULT_RULES.timing };
+  // Historical all-player deadline policy remains replayable.
+  copy.rules.timing = { responseMs: 30000, phaseEndMs: 15000 };
   return copy;
 }
 function command(

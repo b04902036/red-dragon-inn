@@ -10,6 +10,13 @@ import { projectPublicGame } from '../../src/protocol/projections';
 import type { PublicGameView } from '../../src/protocol/views';
 import { playAction, actionState, passWindow } from '../fixtures/timing-match';
 import { startRound } from '../fixtures/gambling-match';
+vi.mock('../../src/client/audio/buffered-music', () => ({
+  BufferedMusic: class {
+    constructor(path: string) {
+      return new Audio(path);
+    }
+  },
+}));
 function Probe({ view, player }: { view: PublicGameView; player: string }) {
   useAttentionChime(view, player);
   return null;

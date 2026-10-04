@@ -15,6 +15,7 @@ export default defineConfig({
       exclude: ['tests/**', 'scripts/**', '**/*.d.ts'],
       include: [
         'src/client/audio/audio-engine.ts',
+        'src/client/audio/buffered-music.ts',
         'src/client/audio/settings.ts',
         'src/client/cards/**/*.ts',
         'src/client/cards/**/*.tsx',

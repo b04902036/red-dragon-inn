@@ -86,10 +86,12 @@ describe('generic gambling workflows', () => {
     while (pending.resolutionStack.at(-1)?.task?.kind !== 'SETTLEMENT')
       pending = gamblingPass(pending);
     expect(pending.players[0]!.gold).toBe(state.players[0]!.gold - 1);
-    expect(
-      pending.control.timedPrompt!.deadlineAt -
-        pending.control.timedPrompt!.openedAt,
-    ).toBe(30_000);
+    const prompt = pending.control.timedPrompt!;
+    expect(prompt.deadlineAt).toBe(
+      prompt.priorityPlayerId === pending.activePlayerId
+        ? null
+        : prompt.openedAt + 30_000,
+    );
     reconnectAndReplay(pending);
     pending = until(pending, (s) => legal(s, 2, replace) !== undefined);
     pending = play(pending, 2, replace).state;

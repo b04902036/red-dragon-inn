@@ -151,7 +151,7 @@ it('re-evaluates effect eligibility after an Anytime changes the system responde
   ).toBe(false);
 });
 
-it('Anytime alone never creates a phase Sometimes opportunity and retains 15-second phase-end grace', () => {
+it('Anytime alone never creates a phase Sometimes opportunity and keeps owner grace untimed', () => {
   const state = genericState();
   state.phase = 'ORDER_DRINK';
   const ordered = send(
@@ -162,10 +162,7 @@ it('Anytime alone never creates a phase Sometimes opportunity and retains 15-sec
   ).state;
   expect(ordered.resolutionStack).toEqual([]);
   expect(ordered.control.timedPrompt?.kind).toBe('PHASE_END_ANYTIME');
-  expect(
-    ordered.control.timedPrompt!.deadlineAt -
-      ordered.control.timedPrompt!.openedAt,
-  ).toBe(15000);
+  expect(ordered.control.timedPrompt!.deadlineAt).toBeNull();
   expect(
     projectPrivatePlayer(ordered, ordered.control.timedPrompt!.priorityPlayerId)
       .responsePrompt?.hasLegalSometimes,

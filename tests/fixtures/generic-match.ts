@@ -131,25 +131,41 @@ export function settle(state: CoreGameState) {
     (s) => s.responseWindow === null && s.control.phaseEnd === null,
   );
 }
-export function expire(state: CoreGameState) {
+function finishPrompt(state: CoreGameState) {
   const prompt = state.control.timedPrompt!;
-  const command = {
-    type: 'EXPIRE_PROMPT',
-    commandId: `command_timeout_${state.version}`,
-    roomId: state.roomId,
-    expectedStateVersion: state.version,
-    promptId: prompt.promptId,
-    now: prompt.deadlineAt,
-  };
-  const result = applyTimeout(state, command);
+  const clockTime = prompt.deadlineAt ?? prompt.openedAt + 60000;
+  const command =
+    prompt.deadlineAt === null
+      ? intent(
+          state,
+          prompt.kind === 'RESPONSE_DECISION'
+            ? 'PASS_RESPONSE'
+            : 'PASS_ANYTIME',
+          { responseWindowId: prompt.windowId, promptId: prompt.promptId },
+        )
+      : {
+          type: 'EXPIRE_PROMPT',
+          commandId: `command_timeout_${state.version}`,
+          roomId: state.roomId,
+          expectedStateVersion: state.version,
+          promptId: prompt.promptId,
+          now: clockTime,
+        };
+  const result =
+    prompt.deadlineAt === null
+      ? applyCommand(state, command, {
+          actorId: prompt.priorityPlayerId,
+          clock: { now: () => clockTime },
+        })
+      : applyTimeout(state, command);
   expect(result.status).toBe('ACCEPTED');
-  return { result, command };
+  return { result, command, clockTime };
 }
 export function reconnectAndReplay(state: CoreGameState) {
   const restored = coreStateSchema.parse(
     JSON.parse(JSON.stringify(state)) as unknown,
   );
-  const { result, command } = expire(restored);
+  const { result, command, clockTime } = finishPrompt(restored);
   const history = [
     {
       actorId: state.control.timedPrompt!.priorityPlayerId,
@@ -157,11 +173,12 @@ export function reconnectAndReplay(state: CoreGameState) {
       firstSequence: 1,
       lastSequence: result.events.length,
       events: result.events,
-      acceptedAt: new Date(state.control.timedPrompt!.deadlineAt).toISOString(),
+      acceptedAt: new Date(clockTime).toISOString(),
+      clockTime,
     },
   ];
   expect(replayFromSnapshot(restored, 0, history).state).toEqual(result.state);
-  expect(expire(state).result).toEqual(result);
+  expect(finishPrompt(state).result).toEqual(result);
   return mutable(result.state);
 }
 export function systemTrigger(

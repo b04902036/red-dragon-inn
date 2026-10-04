@@ -198,7 +198,11 @@ it.each(
       const game = (await storedRoom(host.roomId)).game!;
       expect(taskEvent(game.resolutionStack.at(-1)?.task)).toBe(event);
       const prompt = game.control.timedPrompt!;
-      expect(prompt.deadlineAt - prompt.openedAt).toBe(30000);
+      expect(prompt.deadlineAt).toBe(
+        prompt.priorityPlayerId === game.activePlayerId
+          ? null
+          : prompt.openedAt + 30000,
+      );
       expect(
         await runInDurableObject(stub, (_instance, ctx) =>
           ctx.storage.getAlarm(),
@@ -252,8 +256,19 @@ it.each(
       await resumed.hello(seat === 0 ? host.credentials : guest.credentials);
       expect(latestPublic(resumed).timedPrompt).toEqual(prompt);
       peers.push(resumed);
-      await clock(prompt.deadlineAt);
-      expect(await runDurableObjectAlarm(stub)).toBe(true);
+      await clock(prompt.deadlineAt ?? prompt.openedAt + 60000);
+      if (prompt.deadlineAt === null) {
+        expect(await runDurableObjectAlarm(stub)).toBe(false);
+        expect(
+          (await storedRoom(host.roomId)).game!.control.timedPrompt,
+        ).toEqual(prompt);
+        await sendCommand(resumed, 'PASS_RESPONSE', {
+          responseWindowId: prompt.windowId,
+          promptId: prompt.promptId,
+        });
+      } else {
+        expect(await runDurableObjectAlarm(stub)).toBe(true);
+      }
       const expired = (await storedRoom(host.roomId)).game!;
       expect(expired.control.timedPrompt?.promptId).not.toBe(prompt.promptId);
       const replay = new D1ReplayRepository(env.DB);
@@ -261,7 +276,7 @@ it.each(
         (await replay.commands(game.matchId)).filter(
           (c) => c.command.type === 'EXPIRE_PROMPT',
         ),
-      ).toHaveLength(1);
+      ).toHaveLength(prompt.deadlineAt === null ? 0 : 1);
       expect((await replay.restore(game.matchId, true)).state).toEqual(expired);
     } finally {
       peers.forEach((p) => p.socket.close());

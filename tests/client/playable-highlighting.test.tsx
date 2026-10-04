@@ -242,7 +242,7 @@ it('discard selection and playable styling coexist; keyboard Play never toggles 
     cardId: cardInHand(game, 0, 'breather'),
   });
 });
-it('phase-end highlights only the eligible holder; timeout removes that holderâ€™s old plays', () => {
+it('phase-end owner highlights persist beyond the old deadline and explicit pass removes them', () => {
   const input = mutable(started(1, 7));
   input.rules.timing = { ...DEFAULT_RULES.timing };
   const game = accepted(input, 'DISCARD', { cardIds: [] }).state;
@@ -251,11 +251,21 @@ it('phase-end highlights only the eligible holder; timeout removes that holderâ€
   expect(screen.getByRole('button', { name: 'Pass Anytime' })).toBeEnabled();
   ui.rerender(table(stateFor(game, 1)));
   expect(document.querySelectorAll('[data-playable="true"]')).toHaveLength(0);
-  const result = applyTimeout(game, {
-    ...intent(game, 'EXPIRE_PROMPT'),
-    promptId: game.control.timedPrompt!.promptId,
-    now: game.control.timedPrompt!.deadlineAt,
-  });
+  expect(
+    applyTimeout(game, {
+      ...intent(game, 'EXPIRE_PROMPT'),
+      promptId: game.control.timedPrompt!.promptId,
+      now: 1000000,
+    }).status,
+  ).toBe('REJECTED');
+  const result = applyCommand(
+    game,
+    intent(game, 'PASS_ANYTIME', {
+      responseWindowId: game.control.phaseEnd!.id,
+      promptId: game.control.timedPrompt!.promptId,
+    }),
+    { actorId: game.activePlayerId!, clock: { now: () => 1000000 } },
+  );
   if (result.status !== 'ACCEPTED') throw new Error('expiry rejected');
   ui.rerender(table(stateFor(result.state)));
   expect(document.querySelectorAll('[data-playable="true"]')).toHaveLength(0);

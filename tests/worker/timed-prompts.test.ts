@@ -25,9 +25,8 @@ beforeEach(async () => {
 it('a failed timeout mirror retries the durable outbox without passing twice', async () => {
   const { host, a, b, stub } = await playing();
   try {
-    await sendCommand(a, 'DISCARD', { cardIds: [] });
-    await b.ping();
-    const first = latestPublic(a).timedPrompt!;
+    const first = await guestGrace(a, b);
+    if (first.deadlineAt === null) throw new Error('Guest deadline missing');
     await sql(
       "CREATE TRIGGER test_fail_timed_history BEFORE INSERT ON match_commands WHEN NEW.command_id LIKE 'command_system_%' BEGIN SELECT RAISE(FAIL,'temporary timeout mirror failure'); END",
     );
@@ -88,12 +87,113 @@ async function clock(stub: ReturnType<typeof stubFor>, now: number) {
     };
   });
 }
-it('persists alarm/deadline and prompt identity across hibernation and reconnect without extension', async () => {
+async function guestGrace(
+  a: Awaited<ReturnType<typeof connect>>,
+  b: Awaited<ReturnType<typeof connect>>,
+) {
+  await sendCommand(a, 'DISCARD', { cardIds: [] });
+  expect(latestPublic(a).timedPrompt?.deadlineAt).toBeNull();
+  await sendCommand(a, 'PASS_ANYTIME', {
+    responseWindowId: latestPublic(a).phaseEnd!.id,
+  });
+  await b.ping();
+  return latestPublic(b).timedPrompt!;
+}
+it('untimed owner grace survives elapsed time, stale alarms, hibernation and reconnect until an explicit pass', async () => {
   const { host, a, b, stub } = await playing();
   try {
     await sendCommand(a, 'DISCARD', { cardIds: [] });
-    await b.ping();
     const first = latestPublic(a).timedPrompt!;
+    expect(first.deadlineAt).toBeNull();
+    expect(latestPrivate(a).legalPlays).toHaveLength(1);
+    expect(
+      await runInDurableObject(stub, (_instance, ctx) =>
+        ctx.storage.getAlarm(),
+      ),
+    ).toBeNull();
+    await clock(stub, first.openedAt + 60000);
+    await runInDurableObject(stub, (_instance, ctx) =>
+      ctx.storage.setAlarm(first.openedAt + 60000),
+    );
+    expect(await runDurableObjectAlarm(stub)).toBe(true);
+    expect((await storedRoom(host.roomId)).game!.control.timedPrompt).toEqual(
+      first,
+    );
+    await evictDurableObject(stub);
+    await clock(stub, first.openedAt + 60000);
+    const resumed = await connect(host.roomId);
+    await resumed.hello(host.credentials);
+    expect(latestPrivate(resumed).responsePrompt).toMatchObject({
+      promptId: first.promptId,
+      deadlineAt: null,
+    });
+    expect(latestPrivate(resumed).legalPlays).toHaveLength(1);
+    await sendCommand(resumed, 'PASS_ANYTIME', {
+      responseWindowId: first.windowId,
+      promptId: first.promptId,
+    });
+    await b.ping();
+    const next = latestPublic(b).timedPrompt!;
+    expect(next.priorityPlayerId).not.toBe(host.credentials.playerId);
+    expect(next.deadlineAt).toBe(next.openedAt + 15000);
+    const game = (await storedRoom(host.roomId)).game!;
+    expect(
+      (await new D1ReplayRepository(env.DB).restore(game.matchId, true)).state,
+    ).toEqual(game);
+    resumed.socket.close();
+  } finally {
+    a.socket.close();
+    b.socket.close();
+  }
+});
+
+it('the owner retains legal source responses after 30 seconds and passing starts a guest deadline', async () => {
+  const { host, a, b, stub } = await playing();
+  try {
+    await guestGrace(a, b);
+    await sendCommand(b, 'PASS_ANYTIME', {
+      responseWindowId: latestPublic(b).phaseEnd!.id,
+    });
+    await a.ping();
+    const attack = latestPrivate(a).hand.find(
+      (card) => card.definitionId === 'carddef_sample_shove',
+    )!;
+    const target = latestPublic(a).players.find(
+      (p) => p.id !== host.credentials.playerId,
+    )!;
+    await sendCommand(a, 'PLAY_CARD', {
+      cardId: attack.id,
+      targetPlayerId: target.id,
+    });
+    const first = latestPublic(a).timedPrompt!;
+    expect(first.kind).toBe('RESPONSE_DECISION');
+    expect(first.deadlineAt).toBeNull();
+    await clock(stub, first.openedAt + 60000);
+    await a.ping();
+    expect(latestPublic(a).timedPrompt).toEqual(first);
+    expect(latestPrivate(a).legalPlays.length).toBeGreaterThan(0);
+    await sendCommand(a, 'PASS_RESPONSE', {
+      responseWindowId: first.windowId,
+      promptId: first.promptId,
+    });
+    await b.ping();
+    const next = latestPublic(b).timedPrompt!;
+    expect(next.deadlineAt).toBe(next.openedAt + 30000);
+    expect(
+      await runInDurableObject(stub, (_instance, ctx) =>
+        ctx.storage.getAlarm(),
+      ),
+    ).toBe(next.deadlineAt);
+  } finally {
+    a.socket.close();
+    b.socket.close();
+  }
+});
+it('persists alarm/deadline and prompt identity across hibernation and reconnect without extension', async () => {
+  const { host, guest, a, b, stub } = await playing();
+  try {
+    const first = await guestGrace(a, b);
+    if (first.deadlineAt === null) throw new Error('Guest deadline missing');
     expect(first.kind).toBe('PHASE_END_ANYTIME');
     expect(first.deadlineAt - first.openedAt).toBe(15000);
     expect(
@@ -108,7 +208,7 @@ it('persists alarm/deadline and prompt identity across hibernation and reconnect
       first,
     );
     const resumed = await connect(host.roomId);
-    await resumed.hello(host.credentials);
+    await resumed.hello(guest.credentials);
     expect(latestPublic(resumed).timedPrompt).toEqual(first);
     expect(latestPrivate(resumed).responsePrompt?.promptId).toBe(
       first.promptId,
@@ -122,9 +222,8 @@ it('persists alarm/deadline and prompt identity across hibernation and reconnect
 it('alarm auto-passes once, stale/early alarms preserve newer prompts, and timeout history replays through real D1', async () => {
   const { host, a, b, stub } = await playing();
   try {
-    await sendCommand(a, 'DISCARD', { cardIds: [] });
-    await b.ping();
-    const first = latestPublic(a).timedPrompt!;
+    const first = await guestGrace(a, b);
+    if (first.deadlineAt === null) throw new Error('Guest deadline missing');
     await clock(stub, first.deadlineAt - 1);
     expect(await runDurableObjectAlarm(stub)).toBe(true);
     expect((await storedRoom(host.roomId)).game!.control.timedPrompt).toEqual(
@@ -135,11 +234,10 @@ it('alarm auto-passes once, stale/early alarms preserve newer prompts, and timeo
     await a.ping();
     await b.ping();
     expect(latestPublic(a)).toEqual(latestPublic(b));
-    const current = latestPublic(a).timedPrompt!;
-    expect(current.promptId).not.toBe(first.promptId);
-    expect(current.priorityPlayerId).not.toBe(first.priorityPlayerId);
-    expect(current.deadlineAt).toBe(first.deadlineAt + 15000);
-    expect(await runDurableObjectAlarm(stub)).toBe(true);
+    const current = latestPublic(a).timedPrompt;
+    expect(current).toBeNull();
+    expect(latestPublic(a).phase).toBe('ACTION');
+    expect(await runDurableObjectAlarm(stub)).toBe(false);
     expect((await storedRoom(host.roomId)).game!.control.timedPrompt).toEqual(
       current,
     );
@@ -157,14 +255,13 @@ it('alarm auto-passes once, stale/early alarms preserve newer prompts, and timeo
   }
 });
 it('expired reconnect advances first and rejects the old priority command before it can win', async () => {
-  const { host, a, b, stub } = await playing();
+  const { host, guest, a, b, stub } = await playing();
   try {
-    await sendCommand(a, 'DISCARD', { cardIds: [] });
-    await b.ping();
-    const first = latestPublic(a).timedPrompt!;
+    const first = await guestGrace(a, b);
+    if (first.deadlineAt === null) throw new Error('Guest deadline missing');
     await clock(stub, first.deadlineAt + 1);
     const resumed = await connect(host.roomId);
-    await resumed.hello(host.credentials);
+    await resumed.hello(guest.credentials);
     expect(latestPublic(resumed).timedPrompt?.promptId).not.toBe(
       first.promptId,
     );
@@ -176,9 +273,8 @@ it('expired reconnect advances first and rejects the old priority command before
       ).result.type,
     ).toBe('COMMAND_REJECTED');
     const game = (await storedRoom(host.roomId)).game!;
-    expect(game.control.phaseEnd!.passedPlayerIds).toContain(
-      first.priorityPlayerId,
-    );
+    expect(game.phase).toBe('ACTION');
+    expect(game.control.phaseEnd).toBeNull();
     resumed.socket.close();
   } finally {
     a.socket.close();
