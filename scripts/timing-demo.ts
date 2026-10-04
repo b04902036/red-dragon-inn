@@ -103,6 +103,13 @@ export function timingDemo(
     ignored.state.players[1]!.fortitude !== 20
   )
     throw new Error('Timing outcome check failed');
+  const systemResolutions = new Set(
+    nested.rows.flatMap((row) =>
+      row.view.resolutionStack
+        .filter((frame) => frame.kind === 'SYSTEM')
+        .map((frame) => frame.id),
+    ),
+  );
   const completionOrder = nested.rows
     .flatMap((row) => row.events)
     .filter((event) => event.type === 'RESOLUTION_COMPLETED')
@@ -111,7 +118,9 @@ export function timingDemo(
         ? 'Ignore (canceled)'
         : event.resolutionId === nested.rows[0]!.view.resolutionStack[0]!.id
           ? 'Shove'
-          : 'Negate',
+          : systemResolutions.has(event.resolutionId)
+            ? 'Fortitude loss response'
+            : 'Negate',
     )
     .join(' → ');
   const table = nested.rows
@@ -122,9 +131,10 @@ export function timingDemo(
         )?.displayName ?? 'None';
       const sources =
         row.view.resolutionStack
-          .map(
-            (frame) =>
-              initial.definitions[frame.sourceCard!.definitionId]!.name,
+          .map((frame) =>
+            frame.sourceCard === null
+              ? (frame.opportunity ?? 'System response')
+              : initial.definitions[frame.sourceCard.definitionId]!.name,
           )
           .join(' → ') || 'Empty';
       return `<tr data-depth="${row.view.resolutionStack.length}"><td>${escape(row.label)}</td><td>${row.view.resolutionStack.length}</td><td>${escape(sources)}</td><td>${escape(priority)}</td><td>${row.view.players[1]!.fortitude}</td><td>${escape(row.view.phase)}</td><td>${escape(row.events.map((event) => event.type).join(', '))}<details><summary>Inspect public timing view</summary><pre>${escape(JSON.stringify(row.view, null, 2))}</pre></details></td></tr>`;

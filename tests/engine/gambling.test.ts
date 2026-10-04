@@ -277,9 +277,10 @@ describe('control cards, restrictions, reactions, and leaving', () => {
         input.players[1]!.id,
       );
     expect(choose(restored)).toEqual(choose(choosing));
-    expect(choose(restored).state.gambling).toBeNull();
-    expect(choose(restored).state.players[1]!.gold).toBe(13);
-    expect(choose(restored).state.phase).toBe('ORDER_DRINK');
+    const settled = passWindow(choose(restored).state).state;
+    expect(settled.gambling).toBeNull();
+    expect(settled.players[1]!.gold).toBe(13);
+    expect(settled.phase).toBe('ORDER_DRINK');
   });
   it.each(['gamble', 'cheat'])(
     '%s transfers control after its response window, from the correct hand',
@@ -380,12 +381,13 @@ describe('control cards, restrictions, reactions, and leaving', () => {
   });
   it('leaving preserves the ante, blocks further controls, and still permits a response', () => {
     const round = startRound().state;
-    const left = accepted(
+    const leaving = accepted(
       round,
       'GAMBLING_LEAVE',
       {},
       round.players[1]!.id,
     ).state;
+    const left = passWindow(leaving).state;
     expect(left.gambling).toMatchObject({
       leftPlayerIds: ['player_1'],
       pot: 4,
@@ -586,8 +588,12 @@ describe('suspension, authority, idempotency, and Gold boundaries', () => {
         actorId: state.players[3]!.id,
       }),
     ).toMatchObject({ status: 'DUPLICATE', events: [] });
-    expect(result.state.players[0]!.gold).toBe(13);
-    reject(result.state, 'GAMBLING_PASS', {}, 'NO_GAMBLING', 3);
+    const settled = passWindow(result.state).state;
+    expect(settled.players[0]!.gold).toBe(13);
+    expect(
+      applyCommand(settled, payoutCommand, { actorId: state.players[3]!.id }),
+    ).toMatchObject({ status: 'DUPLICATE', events: [] });
+    reject(settled, 'GAMBLING_PASS', {}, 'NO_GAMBLING', 3);
     reject(
       state,
       'GAMBLING_PASS',

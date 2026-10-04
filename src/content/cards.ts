@@ -23,6 +23,7 @@ const definitionFields = {
     'TEST_FIXTURE',
     'USER_OWNED',
     'LICENSED',
+    'PUBLIC_RULES_PARAPHRASE',
     'OFFICIAL_CATALOG_REFERENCE',
   ]),
   characterId: characterIdSchema.optional(),
@@ -36,6 +37,7 @@ const gamblingMetadata = z.strictObject({
     .max(2)
     .refine((categories) => new Set(categories).size === categories.length),
   immediateWin: z.boolean(),
+  canStart: z.boolean().optional(),
 });
 
 export const cardDefinitionSchema = z
@@ -61,7 +63,7 @@ export const cardDefinitionSchema = z
     z.strictObject({
       ...definitionFields,
       type: z.literal('DRINK'),
-      alcoholContent: z.number().int().nonnegative().max(1000),
+      alcoholContent: z.number().int().min(-1000).max(1000),
       fortitudeChange: z.number().int().min(-1000).max(1000),
       chaser: z.boolean(),
       chaserSource: z.enum(['SAME_SOURCE', 'INN']).optional(),

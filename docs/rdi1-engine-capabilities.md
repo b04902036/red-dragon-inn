@@ -60,7 +60,7 @@ The existing version-one JSON snapshots, append-only command/event history, D1 J
 
 ## Timing and verification
 
-Only living holders of legal Sometimes receive system response opportunities. All six system/phase opportunities use the existing 30-second response prompt. Nested plays invalidate prompt identities, recompute legality and reset deadlines. Anytime retains the existing 15-second phase-end grace, normal phases, source responses, and legal gambling timing. Gambling control category restrictions remain independent of Anytime eligibility.
+Living holders of any legal response, including Anytime alone, receive source/system response opportunities. Eligibility is computed directly from validated effects and context, before a window exists; it never depends on holding Sometimes or belonging to a previous window. Source/system decisions retain the existing 30-second generic response deadline. Only an actually legal Sometimes sets private `hasLegalSometimes` and enables the Sometimes voice; an Anytime-only decision remains silent. Nested plays invalidate prompt identities, recompute legality and reset deadlines. A phase-scoped Sometimes is required to create the Order Drink system opportunity; Anytime alone retains the existing 15-second phase-end grace. Anytime remains legal in normal phases, source responses and legal gambling timing. Gambling control category restrictions remain independent of Anytime eligibility.
 
 New scenario suites cover gambling, Drink operations, contest rounds, shared predicates, validation, and response lifecycles. Real Workers tests cover all six system opportunities with D1-pinned original fixtures, WebSockets, Durable Object hibernation, alarm timeout and verified replay. React tests check phase Sometimes command/prompt submission. Playwright checks visible Anytime play during a live gambling round and reconnect consistency. Existing probes now assert the capabilities implemented in this step; their audit artifact remains the Step-20 baseline.
 
@@ -87,6 +87,18 @@ The following suites add 101 Vitest cases and one browser journey. Existing suit
 | `tests/e2e/gambling-anytime.spec.ts`              |     1 | Two-player visible Anytime play during gambling and reconnect preserving pot/control                                                                                                                                                                                                                      |
 
 ## Changed file inventory
+
+The timing follow-up adds 22 regression cases: 12 in `tests/engine/anytime-system.test.ts`, five real-projection voice cases in `tests/client/audio.test.tsx`, and five Anytime-only Workers variants in `tests/worker/generic-opportunities.test.ts`. `tests/fixtures/anytime-system.ts` reaches the five non-phase system opportunities through real commands with no Sometimes in any hand. Cases exercise a single held Anytime, stale windows/prompts, effect-dependent legality changes, private projection, JSON reconnect, command/event replay, real alarms, and silent voice playback. Existing source/gambling fixture helpers explicitly decline the additional system continuations; their rule assertions remain intact.
+
+The follow-up changes these 22 files:
+
+- Production: `src/engine/reaction-legality.ts`, `src/engine/timing.ts`.
+- Documentation: `docs/rdi1-engine-capabilities.md`, `docs/timed-prompts.md`.
+- Developer reports: `scripts/gambling-demo.ts`, `scripts/timing-demo.ts`; report generation now passes system checkpoints and displays source-less post-loss responses.
+- Fixtures: `tests/fixtures/anytime-system.ts`, `tests/fixtures/timing-match.ts`, `tests/fixtures/gambling-match.ts`.
+- Engine tests: `tests/engine/anytime-system.test.ts`, `tests/engine/gambling.test.ts`, `tests/engine/generic-gambling.test.ts`, `tests/engine/generic-opportunities.test.ts`, `tests/engine/generic-response-lifecycle.test.ts`, `tests/engine/generic-validation.test.ts`, `tests/engine/timing.test.ts`.
+- Client/runtime tests: `tests/client/audio.test.tsx`, `tests/worker/core-engine.test.ts`, `tests/worker/generic-opportunities.test.ts`.
+- Browser tests: `tests/e2e/engine-trace.spec.ts`, `tests/e2e/gameplay.spec.ts`, `tests/e2e/production-upgrade.spec.ts`; these preserve intermediate post-loss/pre-payout windows and assert silent Sometimes voice during original-fixture system responses.
 
 - Documentation: `docs/content-format.md`, `docs/drinks-elimination.md`, `docs/gambling-engine.md`, `docs/timed-prompts.md`, `docs/rdi1-engine-capabilities.md`.
 - Content schemas: `src/content/cards.ts`, `src/content/effects.ts`, `src/content/pack.ts`, `src/content/reaction-triggers.ts`, `src/content/mechanics.ts`.

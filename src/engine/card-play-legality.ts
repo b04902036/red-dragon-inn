@@ -104,14 +104,18 @@ export function cardDefinitionForPlay(
       'CONTROL_RESTRICTED',
     );
     const effects: Effect[] = [
-      {
-        op: 'TAKE_GAMBLING_CONTROL',
-        allowedNextCategories: definition.gambling?.allowedNextCategories ?? [
-          'GAMBLING',
-          'CHEATING',
-        ],
-      },
-      ...definition.effects,
+      ...(definition.effects.some(
+        (effect) => effect.op === 'TAKE_GAMBLING_CONTROL',
+      )
+        ? []
+        : [
+            {
+              op: 'TAKE_GAMBLING_CONTROL',
+              allowedNextCategories: definition.gambling
+                ?.allowedNextCategories ?? ['GAMBLING', 'CHEATING'],
+            } as Effect,
+          ]),
+      ...definition.effects.filter((effect) => effect.op !== 'START_GAMBLING'),
     ];
     if (definition.gambling?.immediateWin) effects.push({ op: 'WIN_GAMBLING' });
     return { ...definition, effects };
@@ -147,10 +151,18 @@ export function cardDefinitionForPlay(
     definition.type === 'ACTION' || definition.type === 'GAMBLING',
     'UNSUPPORTED_CARD',
   );
+  requireCommand(
+    definition.type !== 'GAMBLING' || definition.gambling?.canStart !== false,
+    'ILLEGAL_TIMING',
+  );
   return definition.type === 'GAMBLING'
     ? {
         ...definition,
-        effects: [{ op: 'START_GAMBLING' }, ...definition.effects],
+        effects: definition.effects.some(
+          (effect) => effect.op === 'START_GAMBLING',
+        )
+          ? definition.effects
+          : [{ op: 'START_GAMBLING' }, ...definition.effects],
       }
     : definition;
 }

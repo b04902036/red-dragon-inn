@@ -88,7 +88,7 @@ test('nested response report shows priority, child cancellation, and final visib
     'Nested replay and snapshot resume: passed.',
   );
   const rows = trace.locator('tbody tr');
-  await expect(rows).toHaveCount(13);
+  await expect(rows).toHaveCount(17);
   await expect(rows.nth(0).locator('td').nth(1)).toHaveText('1');
   await expect(rows.nth(2).locator('td').nth(1)).toHaveText('2');
   await expect(rows.nth(4).locator('td').nth(1)).toHaveText('3');
@@ -98,8 +98,13 @@ test('nested response report shows priority, child cancellation, and final visib
   await expect(rows.nth(8).locator('td').nth(1)).toHaveText('1');
   await expect(rows.nth(8)).toContainText('SOURCE_NEGATED');
   await expect(page.locator('#unwind-order')).toHaveText(
-    'Negate → Ignore (canceled) → Shove',
+    'Negate → Ignore (canceled) → Fortitude loss response → Shove',
   );
+  for (let index = 12; index < 16; index++) {
+    await expect(rows.nth(index).locator('td').nth(4)).toHaveText('18');
+    await expect(rows.nth(index)).toContainText('FORTITUDE_LOSS_RESOLVED');
+    await expect(rows.nth(index).locator('td').nth(5)).toHaveText('ACTION');
+  }
   await expect(rows.last().locator('td').nth(1)).toHaveText('0');
   await expect(rows.last().locator('td').nth(3)).toHaveText('None');
   await expect(rows.last().locator('td').nth(4)).toHaveText('18');

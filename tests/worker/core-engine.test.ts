@@ -155,7 +155,7 @@ it('persists a three-level response stack in D1 and resumes with identical event
     completed.events
       .filter((event) => event.type === 'RESOLUTION_COMPLETED')
       .map((event) => event.canceled),
-  ).toEqual([false, true, false]);
+  ).toEqual([false, true, false, false]); // Leaf, canceled counter, post-loss system, source.
   const continued = completed.events.map((event, index) => ({
     sequence: stored.length + index + 1,
     event,

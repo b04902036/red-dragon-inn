@@ -30,6 +30,8 @@ npm run test:e2e
 
 ## Deploy to your Cloudflare account
 
+The local Step 21C RDI1 edition uses `PUBLIC_RULES_PARAPHRASE`, which is not a distribution license. Public RDI branding, character identities and assets may require permission. Local D1 activation does not grant permission or populate remote storage. Follow [the current production content workflow](rdi1-compile-publish.md); do not seed sample content into a production channel. The all-76-character deployment completeness gate remains unchanged.
+
 Deployment is prepared locally; these remote operations are performed only when you choose an account and are ready to publish. No custom domain or home public IP is required. Follow Cloudflare's [D1 setup](https://developers.cloudflare.com/d1/get-started/) and [React/Vite deployment](https://developers.cloudflare.com/workers/framework-guides/web-apps/react/) guides if your account prompts differ.
 
 1. Authenticate and verify the intended account:
@@ -47,14 +49,13 @@ Deployment is prepared locally; these remote operations are performed only when 
 
 3. In `wrangler.jsonc`, replace the zero `database_id` with the returned UUID and set `database_name` to `red-dragon-inn-production`. If you have multiple accounts, set the intended non-secret `account_id` from `whoami`. Keep `DB`, `ASSETS`, `ROOMS`, the GameRoom class, migration tag `v1` and `new_sqlite_classes` unchanged. Set a unique Worker name if needed. Check the two rate-limit namespace IDs against your existing applications. Credentials/API tokens remain outside the repository.
 
-4. Apply migrations and the original sample seed to that selected remote database:
+4. Apply migrations to that selected remote database:
 
    ```sh
    npx wrangler d1 migrations apply DB --remote
-   npx wrangler d1 execute DB --remote --file seeds/0001_sample.sql
    ```
 
-   Local D1 storage remains separate from remote data. Do not upload private packs unless you intend to make their configured public metadata available to players. Public rooms currently use the original sample pack.
+   Local D1 storage remains separate from remote data. Populate and activate a validated published edition only when its public use is authorized. Public rooms require the production channel and never fall back to samples. The local importer does not write remote D1.
 
 5. Run the local verification above, then deploy the client and Worker:
 

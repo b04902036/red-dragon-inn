@@ -1,6 +1,7 @@
 import { cloudflareTest, readD1Migrations } from '@cloudflare/vitest-plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
+import { readFileSync } from 'node:fs';
 
 const migrations = await readD1Migrations('./migrations');
 const sampleSeed = await readD1Migrations('./seeds');
@@ -69,7 +70,10 @@ export default defineConfig({
         test: {
           name: 'worker',
           include: ['tests/worker/**/*.test.ts'],
-          exclude: ['tests/worker/production-content.test.ts'],
+          exclude: [
+            'tests/worker/production-content.test.ts',
+            'tests/worker/rdi1-content.test.ts',
+          ],
         },
       },
       {
@@ -82,13 +86,20 @@ export default defineConfig({
                 FIXTURE_CONTENT_VERSION: '',
                 TEST_MIGRATIONS: migrations,
                 TEST_SAMPLE_SEED: sampleSeed,
+                TEST_RDI1_PACK_JSON: readFileSync(
+                  'content-private/imports/rdi1/pack.json',
+                  'utf8',
+                ),
               },
             },
           }),
         ],
         test: {
           name: 'production-worker',
-          include: ['tests/worker/production-content.test.ts'],
+          include: [
+            'tests/worker/production-content.test.ts',
+            'tests/worker/rdi1-content.test.ts',
+          ],
         },
       },
     ],

@@ -1,6 +1,11 @@
 import { spawn } from 'node:child_process';
+import { parseArgs } from 'node:util';
 
-// The build already selected fixture vars; preview must consume its generated config.
+const { values } = parseArgs({
+  options: { port: { type: 'string', default: '4173' } },
+});
+
+// Preview must consume the build's generated configuration, including its content mode.
 const previewEnvironment = { ...process.env };
 delete previewEnvironment.CLOUDFLARE_ENV;
 const child = spawn(
@@ -11,7 +16,7 @@ const child = spawn(
     '--host',
     '127.0.0.1',
     '--port',
-    '4173',
+    values.port,
     '--strictPort',
   ],
   { stdio: 'inherit', env: previewEnvironment },

@@ -31,6 +31,10 @@ import { nextStateVersion } from '../../src/shared/version';
 import { projectPublicGame } from '../../src/protocol/projections';
 import type { PublicGameView } from '../../src/protocol/views';
 import { started } from '../fixtures/core-match';
+import {
+  anytimeSystemEvents,
+  anytimeSystemOpportunity,
+} from '../fixtures/anytime-system';
 class Media implements AudioElement {
   static instances: Media[] = [];
   loop = false;
@@ -165,6 +169,32 @@ it.each(['anytime', 'remote', 'phase-end'])(
     expect(Media.instances.some((m) => m.path === audioPaths.voice)).toBe(
       false,
     );
+  },
+);
+it.each(anytimeSystemEvents)(
+  'a real Anytime-only %s projection never plays sometimes-response.mp3, including reconnect',
+  async (event) => {
+    const { state, first } = anytimeSystemOpportunity(event);
+    const view = projectPrivatePlayer(state, state.players[1]!.id);
+    expect(view.legalPlays.some((p) => p.cardId === first)).toBe(true);
+    expect(view.responsePrompt?.hasLegalSometimes).toBe(false);
+    const renderVoice = (value: PrivatePlayerView) => (
+      <AudioProvider>
+        <VoiceHarness view={value} playerId={value.playerId} />
+      </AudioProvider>
+    );
+    const ui = render(renderVoice({ ...view, responsePrompt: null }));
+    await userEvent.click(screen.getByRole('button'));
+    ui.rerender(renderVoice(view));
+    ui.rerender(
+      renderVoice(JSON.parse(JSON.stringify(view)) as PrivatePlayerView),
+    );
+    expect(
+      Media.instances.some((media) => media.path === audioPaths.voice),
+    ).toBe(false);
+    expect(
+      Media.instances.some((media) => media.path === audioPaths.music),
+    ).toBe(true);
   },
 );
 it('missing MP3/rejected playback remains optional and preserves music and later game prompts', async () => {

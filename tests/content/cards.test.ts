@@ -164,7 +164,7 @@ describe('card definition and JSON effect contracts', () => {
     {
       ...common,
       type: 'DRINK',
-      alcoholContent: -1,
+      alcoholContent: -1001,
       fortitudeChange: 0,
       chaser: false,
     },

@@ -24,24 +24,38 @@ import {
 } from './room-helpers';
 
 beforeEach(freshDatabase);
-it.each([
+const opportunities = [
   'ANTE_REQUIRED',
   'PAYMENT_REQUIRED',
   'GAMBLING_CHECKPOINT',
   'GAMBLING_WIN_BEFORE_PAYOUT',
   'FORTITUDE_LOSS_RESOLVED',
   'PHASE_OPPORTUNITY',
-] as const)(
-  'persists %s through WebSocket, hibernation, real alarms, and verified D1 replay',
-  async (event) => {
+] as const;
+it.each(
+  opportunities.flatMap<{
+    event: (typeof opportunities)[number];
+    anytimeOnly: boolean;
+  }>((event) =>
+    event === 'PHASE_OPPORTUNITY'
+      ? [{ event, anytimeOnly: false }]
+      : [
+          { event, anytimeOnly: false },
+          { event, anytimeOnly: true },
+        ],
+  ),
+)(
+  'persists $event (Anytime-only: $anytimeOnly) through WebSocket, hibernation, real alarms, and verified D1 replay',
+  async ({ event, anytimeOnly }) => {
     const pack = structuredClone(localizedFixturePack);
     const index = pack.cards.findIndex(
       (c) => c.id === 'carddef_sample_breather',
     );
     const effects =
-      event === 'ANTE_REQUIRED' || event === 'PAYMENT_REQUIRED'
+      !anytimeOnly &&
+      (event === 'ANTE_REQUIRED' || event === 'PAYMENT_REQUIRED')
         ? [{ op: 'SUBSTITUTE_PAYMENT_FROM_INN', amount: 1 }]
-        : event === 'GAMBLING_WIN_BEFORE_PAYOUT'
+        : !anytimeOnly && event === 'GAMBLING_WIN_BEFORE_PAYOUT'
           ? [{ op: 'REPLACE_GAMBLING_WINNER', target: 'SELF' }]
           : event === 'PHASE_OPPORTUNITY'
             ? [{ op: 'ORDER_EXTRA_DRINKS', count: 2 }]
@@ -55,32 +69,47 @@ it.each([
               ];
     pack.cards[index] = contentPackSchema.shape.cards.element.parse({
       ...pack.cards[index],
-      type: 'SOMETIMES',
-      responseKind: 'SOMETIMES',
       effects,
-      ...(event === 'PHASE_OPPORTUNITY'
-        ? { phaseOpportunity: 'ORDER_DRINK' }
-        : {
-            responseTrigger: {
-              event: 'SYSTEM',
-              alternatives: [
-                [
-                  { kind: 'SYSTEM_EVENT', events: [event] },
-                  ...(event === 'FORTITUDE_LOSS_RESOLVED'
-                    ? [
-                        {
-                          kind: 'ACTUAL_STAT_LOSS',
-                          stat: 'FORTITUDE',
-                          relation: 'SELF',
-                          minAmount: 1,
-                        },
-                      ]
-                    : []),
+      ...(anytimeOnly
+        ? { type: 'ANYTIME' }
+        : { type: 'SOMETIMES', responseKind: 'SOMETIMES' }),
+      ...(anytimeOnly
+        ? {}
+        : event === 'PHASE_OPPORTUNITY'
+          ? { phaseOpportunity: 'ORDER_DRINK' }
+          : {
+              responseTrigger: {
+                event: 'SYSTEM',
+                alternatives: [
+                  [
+                    { kind: 'SYSTEM_EVENT', events: [event] },
+                    ...(event === 'FORTITUDE_LOSS_RESOLVED'
+                      ? [
+                          {
+                            kind: 'ACTUAL_STAT_LOSS',
+                            stat: 'FORTITUDE',
+                            relation: 'SELF',
+                            minAmount: 1,
+                          },
+                        ]
+                      : []),
+                  ],
                 ],
-              ],
-            },
-          }),
+              },
+            }),
     });
+    if (anytimeOnly) {
+      pack.cards = pack.cards.map((card) => {
+        if (card.type !== 'SOMETIMES') return card;
+        const { responseKind, responseTrigger, ...fields } = card;
+        void responseKind;
+        void responseTrigger;
+        return contentPackSchema.shape.cards.element.parse({
+          ...fields,
+          type: 'ACTION',
+        });
+      });
+    }
     if (event === 'PAYMENT_REQUIRED') {
       const source = pack.cards.findIndex(
         (c) => c.id === 'carddef_sample_shove',
@@ -120,6 +149,14 @@ it.each([
       };
       await execute(0, 'START_MATCH');
       await execute(0, 'DISCARD', { cardIds: [] });
+      while ((await storedRoom(host.roomId)).game!.control.phaseEnd !== null) {
+        const grace = (await storedRoom(host.roomId)).game!.control.phaseEnd!;
+        await execute(
+          grace.priorityPlayerId === host.credentials.playerId ? 0 : 1,
+          'PASS_ANYTIME',
+          { responseWindowId: grace.id },
+        );
+      }
       if (event === 'PHASE_OPPORTUNITY') await execute(0, 'SKIP_ACTION');
       else {
         const source = latestPrivate(peers[0]!).hand.find(
@@ -174,6 +211,22 @@ it.each([
           (c) => c.promptId === prompt.promptId,
         ),
       ).toBe(true);
+      if (anytimeOnly) {
+        const view = latestPrivate(peers[seat]!);
+        const anytime = view.hand.find(
+          (card) => card.definitionId === 'carddef_sample_breather',
+        )!;
+        expect(view.responsePrompt?.hasLegalSometimes).toBe(false);
+        expect(view.legalPlays.some((play) => play.cardId === anytime.id)).toBe(
+          true,
+        );
+        expect(JSON.stringify(latestPrivate(peers[1 - seat]!))).not.toContain(
+          anytime.id,
+        );
+        expect(JSON.stringify(latestPublic(peers[seat]!))).not.toContain(
+          anytime.id,
+        );
+      }
       expect(latestPrivate(peers[1 - seat]!).legalPlays).toEqual([]);
       for (const foreign of game.players[1 - seat]!.hand)
         expect(JSON.stringify(latestPrivate(peers[seat]!))).not.toContain(

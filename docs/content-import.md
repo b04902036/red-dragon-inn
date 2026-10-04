@@ -4,6 +4,8 @@ The importer accepts a complete version-one JSON pack matching [the content form
 
 ## Validate and review
 
+Step 21C adds a deterministic private RDI1 compiler and truthful `PUBLIC_RULES_PARAPHRASE` provenance. See [RDI1 compilation/publication](rdi1-compile-publish.md) for source verification, local activation and production visual checks. CI running the RDI1 suites must provision the ignored inputs; it cannot substitute samples or skip missing-source validation.
+
 ```sh
 npm run content:import -- --input content/samples/pack.json --dry-run
 npm run content:import -- --input content-private/imports/my-pack.json --dry-run
@@ -39,4 +41,4 @@ After a valid local write, inspect its draft with:
 npx wrangler d1 execute DB --local --command "SELECT id,name,published_at FROM content_versions;"
 ```
 
-Your new row should exist, with null `published_at` unless you used `--publish`. Import the same version again: it must fail, and row/card counts must remain unchanged. Start the normal sample app and confirm its lobby and game still work without private inputs. CI validates only the public sample fixture, then runs typecheck, lint, tests, coverage, build and browser checks.
+Your new row should exist, with null `published_at` unless you used `--publish`. Import the same version again: it must fail, and row/card counts must remain unchanged. Use `npm run dev:fixture` for the sample app. Normal production development uses its activated D1 edition. Tests now validate both original public fixtures and the provisioned private RDI1 pack, then run typecheck, lint, tests, coverage, build and browser checks.

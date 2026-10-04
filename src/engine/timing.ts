@@ -140,7 +140,11 @@ export function maintainPhaseOpportunity(
       state,
       state.activePlayerId!,
       reactionContext(state, frame),
-    ).length === 0
+    ).every(
+      (play) =>
+        state.definitions[state.cards[play.cardId]!.definitionId]!.type !==
+        'SOMETIMES',
+    )
   )
     return false;
   state.control.phaseOpportunityKey = key;

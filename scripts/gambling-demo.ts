@@ -89,6 +89,7 @@ export function gamblingDemo(
     append('Cheating resolves: player 3 controls');
     for (const seat of [3, 0, 1]) {
       accept('GAMBLING_PASS', {}, state.players[seat]!.id);
+      passResponses();
       append(`Player ${seat + 1} passes${seat === 1 ? ': player 3 wins' : ''}`);
     }
     if (

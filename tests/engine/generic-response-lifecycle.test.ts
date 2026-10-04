@@ -214,6 +214,12 @@ it.each(cases)(
     if (opportunity === 'GAMBLING_WIN_BEFORE_PAYOUT') {
       pending = until(pending, (s) => s.responseWindow === null);
       while (pending.resolutionStack.at(-1)?.task?.kind !== 'SETTLEMENT') {
+        if (pending.responseWindow !== null) {
+          pending = send(pending, 'PASS_RESPONSE', {
+            responseWindowId: pending.responseWindow.id,
+          }).state;
+          continue;
+        }
         pending = send(
           pending,
           'GAMBLING_PASS',

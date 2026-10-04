@@ -191,6 +191,7 @@ describe('generic system opportunities', () => {
       affected: state.players[2]!.id,
     });
     reconnectAndReplay(pending);
+    pending = until(pending, (s) => legal(s, 2, retaliation) !== undefined);
     pending = play(pending, 2, retaliation).state;
     expect(settle(pending).players[0]!.fortitude).toBe(
       state.players[0]!.fortitude - 2,

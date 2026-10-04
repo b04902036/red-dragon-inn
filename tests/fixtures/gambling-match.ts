@@ -28,12 +28,21 @@ export function gamblingPlay(
   );
 }
 export function gamblingPass(state: CoreGameState) {
-  return accepted(
+  const result = accepted(
     state,
     'GAMBLING_PASS',
     {},
     state.gambling!.priorityPlayerId!,
   );
+  if (result.state.responseWindow !== null) {
+    const passed = passWindow(result.state);
+    return {
+      ...result,
+      state: passed.state,
+      events: [...result.events, ...passed.events],
+    };
+  }
+  return result;
 }
 export function finishRound(state: CoreGameState) {
   const results = [];

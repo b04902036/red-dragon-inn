@@ -25,7 +25,13 @@ beforeEach(async () => {
 });
 it('migrates existing published metadata translations without changing source/status', async () => {
   await reset();
-  await applyD1Migrations(env.DB, env.TEST_MIGRATIONS.slice(0, -1));
+  // This scenario specifically predates translation backfill, even as later migrations are added.
+  await applyD1Migrations(
+    env.DB,
+    env.TEST_MIGRATIONS.filter(
+      (migration) => migration.name < '0007_content_translations.sql',
+    ),
+  );
   const row = localizedFixturePack.translations![0]!;
   await sql(
     "INSERT INTO content_versions(id,name,created_at) VALUES ('content_legacy_translation','Legacy','2026-10-03T00:00:00.000Z')",

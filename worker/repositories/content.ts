@@ -206,11 +206,14 @@ export class D1ContentRepository implements ContentRepository {
       throw new RangeError('Production requires a published version');
     if (
       pack.cards.some(
-        (card) => card.source !== 'USER_OWNED' && card.source !== 'LICENSED',
+        (card) =>
+          !['USER_OWNED', 'LICENSED', 'PUBLIC_RULES_PARAPHRASE'].includes(
+            card.source,
+          ),
       )
     )
       throw new RangeError(
-        'Production requires user-owned or licensed playable cards',
+        'Production requires user-owned or licensed playable cards, or public-rules paraphrases',
       );
     await this.db
       .prepare(

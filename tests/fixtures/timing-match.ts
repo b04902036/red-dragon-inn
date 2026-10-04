@@ -63,7 +63,13 @@ export function pass(
 export function passWindow(state: CoreGameState) {
   const id = state.responseWindow!.id;
   const results = [];
-  while (state.responseWindow?.id === id) {
+  // Legacy source-resolution fixtures decline the newly interruptible system
+  // continuations too. Dedicated system suites stop at and exercise those windows.
+  while (
+    state.responseWindow?.id === id ||
+    (state.responseWindow !== null &&
+      state.resolutionStack.at(-1)?.kind === 'SYSTEM')
+  ) {
     const result = pass(state);
     results.push(result);
     state = result.state;

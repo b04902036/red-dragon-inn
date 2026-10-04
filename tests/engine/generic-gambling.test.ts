@@ -17,6 +17,10 @@ function round(state = genericState()) {
   return settle(play(state, 0, cardInHand(state, 0, 'gamble')).state);
 }
 function gamblingPass(state: CoreGameState) {
+  if (state.responseWindow !== null)
+    return send(state, 'PASS_RESPONSE', {
+      responseWindowId: state.responseWindow.id,
+    }).state;
   return send(
     state,
     'GAMBLING_PASS',
@@ -87,6 +91,7 @@ describe('generic gambling workflows', () => {
         pending.control.timedPrompt!.openedAt,
     ).toBe(30_000);
     reconnectAndReplay(pending);
+    pending = until(pending, (s) => legal(s, 2, replace) !== undefined);
     pending = play(pending, 2, replace).state;
     expect(settle(pending).players[2]!.gold).toBe(state.players[2]!.gold + 3);
   });
@@ -113,18 +118,12 @@ describe('generic gambling workflows', () => {
       },
     );
     let pending = play(state, 0, cardInHand(state, 0, 'gamble')).state;
-    pending = until(
-      pending,
-      (s) => s.resolutionStack.at(-1)?.task?.kind === 'PAYMENT',
-    );
+    pending = until(pending, (s) => legal(s, 1, sub) !== undefined);
     pending = settle(pending); // Decline the initial substitute; committed Gold remains committed.
     expect(pending.players[1]!.gold).toBe(state.players[1]!.gold - 1);
     expect(legal(pending, 1, sub)).toBeUndefined();
     pending = play(pending, 1, raise).state;
-    pending = until(
-      pending,
-      (s) => s.resolutionStack.at(-1)?.task?.kind === 'PAYMENT',
-    );
+    pending = until(pending, (s) => legal(s, 1, sub) !== undefined);
     pending = play(pending, 1, sub).state;
     const finished = settle(pending);
     expect(finished.gambling!.pot).toBe(12);
@@ -152,6 +151,7 @@ describe('generic gambling workflows', () => {
         (s) => s.resolutionStack.at(-1)?.task?.kind === 'CHECKPOINT',
       );
       reconnectAndReplay(pending);
+      pending = until(pending, (s) => legal(s, 2, card) !== undefined);
       const oldControl = pending.gambling!.controlPlayerId;
       pending = play(pending, 2, card).state;
       const finished = settle(pending);

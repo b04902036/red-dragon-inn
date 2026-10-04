@@ -220,6 +220,7 @@ test('two players use the table, reactions, Drinks, gambling, refresh and mobile
       roomId,
       host.getByRole('button', { name: 'Pass gambling' }),
     );
+    await passResponses(pages, roomId);
     await expect(
       guest.getByRole('heading', { name: 'Gambling round' }),
     ).toHaveCount(0);

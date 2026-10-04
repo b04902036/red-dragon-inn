@@ -9,18 +9,26 @@ async function view(page: Page, id: string) {
     await (await page.request.get(`/api/rooms/${id}`)).json(),
   ).view;
 }
-async function command(page: Page, id: string, button: Locator) {
+async function command(
+  page: Page,
+  id: string,
+  button: Locator,
+  passGrace = true,
+) {
   const version = (await view(page, id)).version;
   await button.click();
   await expect
     .poll(async () => (await view(page, id)).version)
     .toBeGreaterThan(version);
-  if (peers.has(id)) await passPhaseEnd(peers.get(id)!, id);
+  if (passGrace && peers.has(id)) await passPhaseEnd(peers.get(id)!, id);
 }
 async function resolveResponses(host: Page, guest: Page, id: string) {
   for (let limit = 0; limit < 16; limit++) {
     const before = await view(host, id);
-    if (!before.responseWindow) return;
+    if (!before.responseWindow) {
+      await passPhaseEnd([host, guest], id);
+      return;
+    }
     const hostPriority =
       before.players.find(
         (player) => player.id === before.responseWindow!.priorityPlayerId,
@@ -29,6 +37,14 @@ async function resolveResponses(host: Page, guest: Page, id: string) {
       playbackCount(host, 'chime'),
       playbackCount(guest, 'chime'),
     ]);
+    const system = before.resolutionStack.at(-1)?.opportunity;
+    const voices = await Promise.all(
+      [host, guest].map((page) =>
+        page.evaluate<number>(
+          'window.__audioCalls.filter(path=>path&&path.includes("sometimes-response.mp3")).length',
+        ),
+      ),
+    );
     const page = hostPriority ? host : guest;
     await command(
       page,
@@ -39,6 +55,7 @@ async function resolveResponses(host: Page, guest: Page, id: string) {
             ? '跳過回應'
             : 'Pass response',
       }),
+      false,
     );
     const after = await view(host, id);
     for (const [index, client] of [host, guest].entries()) {
@@ -50,6 +67,13 @@ async function resolveResponses(host: Page, guest: Page, id: string) {
       await expect
         .poll(() => playbackCount(client, 'chime'))
         .toBe(counts[index]! + (localPrompt ? 1 : 0));
+      if (system) {
+        expect(
+          await client.evaluate<number>(
+            'window.__audioCalls.filter(path=>path&&path.includes("sometimes-response.mp3")).length',
+          ),
+        ).toBe(voices[index]);
+      }
     }
   }
   throw new Error('Response audit did not finish');
@@ -207,6 +231,7 @@ test('mixed-locale gambling priorities chime once; Chinese card details scroll, 
     expect(await playbackCount(host, 'music')).toBe(1);
     expect(await playbackCount(guest, 'music')).toBe(1);
     await command(host, id, host.getByRole('button', { name: '跳過賭博行動' }));
+    await resolveResponses(host, guest, id);
     await expect(host.getByRole('heading', { name: '賭博回合' })).toHaveCount(
       0,
     );

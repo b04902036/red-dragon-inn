@@ -1,5 +1,7 @@
 # Production content through step 13
 
+Step 21C now publishes and activates a complete **local RDI1 mechanics-paraphrase edition**, with four selectable characters in production-content mode. See [current compilation/publication and visual verification](rdi1-compile-publish.md). `PUBLIC_RULES_PARAPHRASE` is accepted by schema, runtime and SQL guards, without claiming a distribution license. RDI branding/assets may require permission for public deployment. The historical Step 13 absence notes below describe that earlier milestone; the full 76-character release gate remains separate and is not passed by this four-character pack.
+
 The default Worker environment is production. It reads a published immutable edition from D1; it does not import the sample pack or presentation. An empty database, missing production channel, unpublished version, invalid pack or fixture-only card provenance fails room creation with HTTP 503. There is no sample fallback. `npm run deploy` runs the completeness gate before building or publishing.
 
 ## Published edition and room pinning

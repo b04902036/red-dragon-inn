@@ -8,7 +8,10 @@ export function assertRuntimePack(pack: ContentPack, fixture: boolean) {
   if (
     !fixture &&
     pack.cards.some(
-      (card) => card.source !== 'USER_OWNED' && card.source !== 'LICENSED',
+      (card) =>
+        !['USER_OWNED', 'LICENSED', 'PUBLIC_RULES_PARAPHRASE'].includes(
+          card.source,
+        ),
     )
   )
     throw new ContentUnavailable(

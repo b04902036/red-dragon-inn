@@ -100,6 +100,9 @@ describe('response priority and source resolution', () => {
     expect(
       complete.events
         .filter((event) => event.type === 'RESPONSE_PASSED')
+        .filter(
+          (event) => event.responseWindowId === queued.state.responseWindow!.id,
+        )
         .map((event) => event.playerId),
     ).toEqual(['player_0', 'player_1', 'player_2', 'player_3']);
     expect(complete.state.responseWindow).toBeNull();
@@ -110,12 +113,18 @@ describe('response priority and source resolution', () => {
       complete.state.cards[queued.state.resolutionStack[0]!.sourceCardId!]!
         .location.zone,
     ).toBe('CHARACTER_DISCARD');
-    expect(complete.events.map((event) => event.type).slice(-7)).toEqual([
-      'RESPONSE_WINDOW_CLOSED',
-      'FORTITUDE_CHANGED',
-      'EFFECT_RESOLVED',
-      'CARDS_DISCARDED',
-      'RESOLUTION_COMPLETED',
+    const loss = complete.events.findIndex(
+      (event) => event.type === 'FORTITUDE_CHANGED',
+    );
+    const postLoss = complete.events.findIndex(
+      (event) => event.type === 'RESPONSE_WINDOW_OPENED',
+    );
+    const discarded = complete.events.findIndex(
+      (event) => event.type === 'CARDS_DISCARDED',
+    );
+    expect(postLoss).toBeGreaterThan(loss);
+    expect(discarded).toBeGreaterThan(postLoss);
+    expect(complete.events.map((event) => event.type).slice(-2)).toEqual([
       'PHASE_CHANGED',
       'ELIMINATION_CHECKED',
     ]);
@@ -232,6 +241,10 @@ describe('response priority and source resolution', () => {
         ...leaf.events,
         ...root.events,
       ];
+      const postLoss = root.events.find(
+        (event) => event.type === 'RESPONSE_WINDOW_OPENED',
+      );
+      expect(postLoss?.type).toBe('RESPONSE_WINDOW_OPENED');
       expect(
         events
           .filter((event) => event.type === 'RESOLUTION_COMPLETED')
@@ -239,6 +252,12 @@ describe('response priority and source resolution', () => {
       ).toEqual([
         [negated.state.resolutionStack[2]!.id, false],
         [ignored.state.resolutionStack[1]!.id, true],
+        [
+          postLoss?.type === 'RESPONSE_WINDOW_OPENED'
+            ? postLoss.resolutionId
+            : null,
+          false,
+        ],
         [queued.state.resolutionStack[0]!.id, false],
       ]);
       expect(events.filter((event) => event.type === 'SOURCE_NEGATED')).toEqual(
@@ -790,12 +809,13 @@ describe('validated effect operations and choices', () => {
       'INVALID_CHOICE',
     );
     const selected = suspended.players[1]!.hand.slice(0, 2);
-    const complete = choices(
+    const chosen = choices(
       JSON.parse(JSON.stringify(suspended)) as CoreGameState,
       'CHOOSE_CARDS',
       { cardIds: selected },
       1,
     );
+    const complete = passWindow(chosen.state);
     expect(complete.state.players[1]!.hand).toHaveLength(5);
     expect(complete.state.players[1]!.characterDiscard).toEqual(selected);
     expect(complete.state.players[1]!.fortitude).toBe(18);

@@ -174,7 +174,11 @@ export function verifyProductionContent(
       }
     }
     for (const card of pack.cards) {
-      if (card.source !== 'USER_OWNED' && card.source !== 'LICENSED')
+      if (
+        !['USER_OWNED', 'LICENSED', 'PUBLIC_RULES_PARAPHRASE'].includes(
+          card.source ?? '',
+        )
+      )
         report.invalidProvenance.push(card.id);
       if (
         !card.effects?.length &&

@@ -389,11 +389,9 @@ export function legalResponsesForPlayer(
       continue;
     if (context.frame.task !== undefined) {
       if (context.systemEvent === null) continue;
-      if (
-        definition.type === 'ANYTIME' &&
-        !context.frame.window?.eligiblePlayerIds.includes(playerId)
-      )
-        continue;
+      // Eligibility is derived from legal effects, never from an existing window.
+      // An Anytime holder must be able to create/join a system opportunity even
+      // without a matching Sometimes. Voice eligibility is projected separately.
       if (
         definition.type === 'SOMETIMES' &&
         definition.phaseOpportunity === undefined &&

@@ -202,6 +202,7 @@ describe('bounded generic contracts and shared legality', () => {
         (s) => s.resolutionStack.at(-1)?.task?.kind === 'PAYMENT',
       );
       reconnectAndReplay(pending);
+      pending = until(pending, (s) => legal(s, 1, id) !== undefined);
       pending = play(pending, 1, id).state;
       const finished = settle(pending);
       expect(finished.players[1]!.gold).toBe(state.players[1]!.gold);
