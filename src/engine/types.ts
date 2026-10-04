@@ -24,6 +24,9 @@ export interface CoreGameState extends AuthoritativeGameState {
   readonly rng: DeterministicRngState;
   readonly initialCardCount: number;
   readonly control: {
+    readonly resolutionOrdinal?: number;
+    readonly normalOrderDone?: boolean;
+    readonly phaseOpportunityKey?: string;
     readonly hostPlayerId: PlayerId;
     readonly turnNumber: number;
     readonly eliminationCheckPending: boolean;

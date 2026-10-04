@@ -485,7 +485,7 @@ describe('validation, privacy, retries, and reconnect state', () => {
     ) as CoreGameState;
     expect(passWindow(restored)).toEqual(passWindow(pass(nested).state));
   });
-  it('rejects Anytime during setup, gambling, from eliminated actors, and from another hand', () => {
+  it('allows Anytime during gambling and rejects setup, eliminated actors, and another hand', () => {
     const state = mutable(started(1, 7));
     const cardId = cardInHand(state, 1, 'breather');
     state.players[1]!.eliminated = true;
@@ -493,7 +493,10 @@ describe('validation, privacy, retries, and reconnect state', () => {
     state.players[1]!.eliminated = false;
     reject(state, 'PLAY_CARD', { cardId }, 'CARD_NOT_IN_HAND', 2);
     const gambling = startRound().state;
-    reject(gambling, 'PLAY_CARD', { cardId }, 'RESOLUTION_PENDING');
+    expect(
+      accepted(gambling, 'PLAY_CARD', { cardId }, gambling.players[1]!.id).state
+        .resolutionStack,
+    ).toHaveLength(2);
     state.gambling = null;
     state.lifecycle = 'SETUP';
     state.activePlayerId = null;

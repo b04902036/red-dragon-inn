@@ -442,16 +442,35 @@ export function GameTable({
             <ol className="stack">
               {view.resolutionStack.map((frame) => (
                 <li key={frame.id}>
-                  {(
-                    frame.sourceCards ??
-                    (frame.sourceCard ? [frame.sourceCard] : [])
-                  )
-                    .map(
-                      (source) =>
-                        cards.get(source.definitionId)?.name ??
-                        t('table.revealed'),
-                    )
-                    .join(' → ') || t('table.emptyDrink')}
+                  {frame.opportunity
+                    ? t(`table.opportunity.${frame.opportunity}`)
+                    : (
+                        frame.sourceCards ??
+                        (frame.sourceCard ? [frame.sourceCard] : [])
+                      )
+                        .map(
+                          (source) =>
+                            cards.get(source.definitionId)?.name ??
+                            t('table.revealed'),
+                        )
+                        .join(' → ') || t('table.emptyDrink')}
+                  {frame.revealedDrinks?.map((drink, index) => (
+                    <span key={index}>
+                      {
+                        view.players.find(
+                          (player) => player.id === drink.playerId,
+                        )?.displayName
+                      }
+                      :{' '}
+                      {drink.cards
+                        .map(
+                          (card) =>
+                            cards.get(card.definitionId)?.name ??
+                            t('table.revealed'),
+                        )
+                        .join(' → ')}
+                    </span>
+                  ))}
                   <span>
                     {t('table.awaiting', {
                       kind:

@@ -13,6 +13,7 @@ import {
 } from '../shared/ids';
 import { stateVersionSchema } from '../shared/version';
 import { timedPromptSchema } from '../engine/timed-prompts';
+import { systemEventSchema } from '../content/mechanics';
 
 const count = z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER);
 const value = z
@@ -22,7 +23,7 @@ const value = z
   .max(Number.MAX_SAFE_INTEGER);
 const playerIds = z.array(playerIdSchema).max(4);
 export const publicGamblingViewSchema = z.strictObject({
-  stage: z.enum(['ROUND', 'SETTLING']),
+  stage: z.enum(['ANTE', 'ROUND', 'SETTLING']),
   initiatorPlayerId: playerIdSchema,
   priorityPlayerId: playerIdSchema.nullable(),
   controlPlayerId: playerIdSchema,
@@ -107,6 +108,17 @@ export const publicGameViewSchema = z.strictObject({
       actorId: playerIdSchema.nullable(),
       sourceCard: cardReferenceSchema.nullable(),
       sourceCards: z.array(cardReferenceSchema).max(32).optional(),
+      opportunity: systemEventSchema.optional(),
+      drinkRecipientId: playerIdSchema.optional(),
+      revealedDrinks: z
+        .array(
+          z.strictObject({
+            playerId: playerIdSchema,
+            cards: z.array(cardReferenceSchema).max(32),
+          }),
+        )
+        .max(8)
+        .optional(),
       targetPlayerIds: playerIds,
     }),
   ),

@@ -42,6 +42,32 @@ const controlCategories = z
 /** Append-only internal events can contain hidden data; they are not socket messages. */
 export const domainEventSchema = z.discriminatedUnion('type', [
   z.strictObject({
+    type: z.literal('WORKFLOW_CHANGED'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    operation: z
+      .string()
+      .regex(/^[A-Z_]+$/)
+      .max(64),
+    playerId: playerIdSchema.nullable(),
+    amount: integer,
+  }),
+  z.strictObject({
+    type: z.literal('DRINK_CONTEST_ROUND'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    round: z.number().int().min(1).max(256),
+    scores: z
+      .array(
+        z.strictObject({
+          playerId: playerIdSchema,
+          score: integer.nonnegative(),
+        }),
+      )
+      .min(1)
+      .max(4),
+  }),
+  z.strictObject({
     type: z.literal('TIMED_PROMPT_OPENED'),
     ...eventFields,
     ...timedPromptSchema.shape,
@@ -86,7 +112,7 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     ...eventFields,
     playerId: playerIdSchema,
     cardId: cardInstanceIdSchema,
-    context: z.literal('CHASER'),
+    context: z.enum(['CHASER', 'SOURCE_SELECTION']),
   }),
   z.strictObject({
     type: z.literal('DRINK_QUEUED'),
@@ -155,7 +181,7 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     participants: players.min(1),
     excludedPlayerIds: players,
     anteAmount: integer.positive(),
-    pot: integer.positive(),
+    pot: integer.nonnegative(),
     resolutionId: resolutionIdSchema,
   }),
   z.strictObject({
@@ -195,7 +221,7 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     type: z.literal('GAMBLING_FINISHED'),
     ...eventFields,
     winnerPlayerId: playerIdSchema,
-    pot: integer.positive(),
+    pot: integer.nonnegative(),
     reason: z.enum(['IMMEDIATE_WIN', 'ALL_PASSED']),
   }),
   z.strictObject({

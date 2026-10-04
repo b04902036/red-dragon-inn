@@ -5,6 +5,10 @@ import { TURN_PHASES } from './model';
 import type { CoreGameState } from './types';
 
 export const gamblingStateSchema = publicGamblingViewSchema.extend({
+  checkpointReady: z.boolean().optional(),
+  settlementReady: z.boolean().optional(),
+  settlementReason: z.enum(['ALL_PASSED', 'IMMEDIATE_WIN']).optional(),
+  potRemoved: z.number().int().nonnegative().safe().optional(),
   suspended: z.strictObject({
     resolutionId: resolutionIdSchema,
     activePlayerId: playerIdSchema,
@@ -64,16 +68,18 @@ export function assertGamblingState(state: CoreGameState) {
   );
   assert(
     round.stage === 'SETTLING'
-      ? round.winnerPlayerId !== null && active.includes(round.winnerPlayerId)
+      ? round.winnerPlayerId !== null && living.includes(round.winnerPlayerId)
       : round.winnerPlayerId === null,
     'invalid gambling winner',
   );
   assert(
-    round.priorityPlayerId === null
-      ? active.every(
-          (id) =>
-            id === round.controlPlayerId || round.passedPlayerIds.includes(id),
-        )
+    round.stage === 'ANTE' || round.priorityPlayerId === null
+      ? round.stage === 'ANTE' ||
+          active.every(
+            (id) =>
+              id === round.controlPlayerId ||
+              round.passedPlayerIds.includes(id),
+          )
       : active.includes(round.priorityPlayerId) &&
           !round.passedPlayerIds.includes(round.priorityPlayerId) &&
           round.priorityPlayerId !== round.controlPlayerId,
@@ -86,15 +92,14 @@ export function assertGamblingState(state: CoreGameState) {
         round.contributions.length &&
       round.contributions.every(
         (entry) =>
-          round.participants.includes(entry.playerId) &&
-          entry.amount > 0 &&
-          entry.amount <= round.anteAmount,
+          round.participants.includes(entry.playerId) && entry.amount >= 0,
       ),
     'invalid antes',
   );
   assert(
     round.pot ===
-      round.contributions.reduce((sum, entry) => sum + entry.amount, 0),
+      round.contributions.reduce((sum, entry) => sum + entry.amount, 0) -
+        (round.potRemoved ?? 0),
     'pot differs from antes',
   );
   assert(

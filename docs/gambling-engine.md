@@ -1,5 +1,7 @@
 # Gambling engine through step 05
 
+This page preserves the original step-05 model. For the current pending-ante stage, system checkpoints, pre-payout winner replacement, pot operations and Anytime support, see [Step 21B generic capabilities](rdi1-engine-capabilities.md).
+
 `src/engine/gambling.ts` suspends the normal turn while a round is active. `null` means inactive; `ROUND` and `SETTLING` are internal stages. State records initiator, participants/exclusions, controller/source, priority, accepted contributions/pot, current passes, departures, and the initiating resolution/turn continuation. It is JSON data, independent of React, Workers, and connections.
 
 ## Starting and antes

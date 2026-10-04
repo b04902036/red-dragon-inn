@@ -46,6 +46,8 @@ A Drink Event encountered as a Chaser emits DRINK_EVENT_DISCARDED with explicit 
 
 ## Elimination and Gold
 
+Step 21B adds independently interruptible forced, passed, split, simultaneous and copied Drinks, delayed extra reveals, immutable contest scores/tie continuations, and generic trait replacements. See [the capability and persistence inventory](rdi1-engine-capabilities.md). Elimination still waits for the safe boundary described below.
+
 Alcohol >= Fortitude means passed out; Gold zero means broke. Stat operations mark a pending check, but that marker is not a verdict. The engine checks final stats only when no stack, response/choice, or gambling round remains. A nested temporary pass-out can be healed by the parent source; a player who spends their last Gold on an ante can survive by winning the pot. No player is removed midway through a source's effects or gambling settlement.
 
 At a safe boundary, victims and survivors are frozen simultaneously in seat order. No victim receives another victim's payout. Passed-out victims take precedence when both conditions hold. SPLIT_WITH_INN/UP sends half the spendable Gold, rounded up, to the Inn; the other half splits evenly among survivors. Remainders and amounts exceeding recipient Gold bounds also go to the Inn. With Gold 10 and three survivors, the Inn receives 7 and each survivor receives 1. With Gold 7, the Inn receives 4 and each survivor receives 1. The core split follows the [combined rules](https://slugfestgames.com/wp-content/uploads/2019/02/Red_Dragon_Inn_Combined_Rules_as_of_RDI_7_v_1.1.pdf).

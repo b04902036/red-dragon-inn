@@ -15,8 +15,8 @@ import {
   priorityFor,
 } from '../fixtures/timing-match';
 
-// These are Step-20 behavior probes, not a compiler for the private source.
-// Unsupported positive source expectations belong to Step 21B implementation.
+// Step-20 behavior probes retained as regressions as capabilities are added.
+// The immutable audit in docs remains the Step-20 baseline.
 function configure(
   input: CoreGameState,
   seat: number,
@@ -149,20 +149,18 @@ describe('Step-20 primitives and source boundaries', () => {
     },
   );
 
-  it('Anytime works in ordinary phases but is absent/rejected during gambling', () => {
+  it('Anytime works in ordinary phases and during gambling', () => {
     const normal = actionState();
     expect(projected(normal, 1)).toBeDefined();
     expect(submit(normal, 1).status).toBe('ACCEPTED');
     const gambling = startRound().state;
-    expect(projected(gambling, 1)).toBeUndefined();
+    expect(projected(gambling, 1)).toBeDefined();
     expect(submit(gambling, 1)).toMatchObject({
-      status: 'REJECTED',
-      code: 'RESOLUTION_PENDING',
-      events: [],
+      status: 'ACCEPTED',
     });
   });
 
-  it('a negate-Cheating response cannot currently win the round immediately', () => {
+  it('a negate-Cheating response can win before the cheating effect completes', () => {
     const source = configure(
       startRound().state,
       2,
@@ -179,10 +177,9 @@ describe('Step-20 primitives and source boundaries', () => {
       },
     );
     const pending = priorityFor(gamblingPlay(source, 1, 'cheat').state, 2);
-    expect(projected(pending, 2)).toBeUndefined();
+    expect(projected(pending, 2)).toBeDefined();
     expect(submit(pending, 2)).toMatchObject({
-      status: 'REJECTED',
-      events: [],
+      status: 'ACCEPTED',
     });
     expect(pending.gambling!.pot).toBe(4);
     expect(pending.resolutionStack.at(-1)!.parentId).toBe(

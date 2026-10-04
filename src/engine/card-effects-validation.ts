@@ -1,10 +1,27 @@
 import type { Effect } from '../content/effects';
+import type { CardDefinition } from '../content/cards';
 import { requireCommand } from './errors';
 import { affectedPlayers, effectTargets } from './effect-operations';
 import type { MutableFrame } from './effect-operations';
 import type { MutableGameState } from './types';
 import { drinkModifierEffects } from './drinks';
 import { activeGamblers, validateGamblingStart } from './gambling';
+import { validateGenericEffects } from './generic-effect-validation';
+export function cardEffects(definition: CardDefinition): Effect[] {
+  return [
+    ...(definition.mandatoryGoldCost === undefined
+      ? []
+      : [
+          {
+            op: 'PAY_INN' as const,
+            target: 'SELF' as const,
+            amount: definition.mandatoryGoldCost,
+            requireFullPayment: true,
+          },
+        ]),
+    ...(JSON.parse(JSON.stringify(definition.effects)) as Effect[]),
+  ];
+}
 export function hasChosenTarget(effects: readonly Effect[]) {
   for (const effect of effects) {
     if (effect.op === 'OPEN_CHOICE') return false;
@@ -17,6 +34,7 @@ export function validateEffects(
   frame: MutableFrame,
   parent: MutableFrame | undefined,
 ) {
+  validateGenericEffects(state, frame, parent);
   requireCommand(frame.effects.length <= 32, 'INVALID_EFFECT');
   requireCommand(
     frame.effects.filter((effect) => effect.op === 'START_GAMBLING').length <=
@@ -28,7 +46,8 @@ export function validateEffects(
     if (effect.op === 'TAKE_GAMBLING_CONTROL' || effect.op === 'WIN_GAMBLING') {
       requireCommand(
         state.gambling !== null &&
-          frame.parentId === state.gambling.suspended.resolutionId &&
+          (frame.parentId === state.gambling.suspended.resolutionId ||
+            (effect.op === 'WIN_GAMBLING' && parent?.kind === 'CARD')) &&
           activeGamblers(state).includes(frame.actorId!),
         'ILLEGAL_TIMING',
       );
@@ -77,11 +96,18 @@ export function validateEffects(
         effect.allowDrinkEvents,
       );
       requireCommand(
-        Number.isSafeInteger(alcohol.delta + effect.alcoholDelta) &&
-          Number.isSafeInteger(fortitude.delta + effect.fortitudeDelta),
+        Number.isSafeInteger(
+          alcohol.delta + (parent.alcoholAsFortitude ? 0 : effect.alcoholDelta),
+        ) &&
+          Number.isSafeInteger(
+            fortitude.delta +
+              effect.fortitudeDelta +
+              (parent.alcoholAsFortitude ? effect.alcoholDelta : 0),
+          ),
         'INVALID_EFFECT',
       );
-      alcohol.delta += effect.alcoholDelta;
+      if (parent.alcoholAsFortitude) fortitude.delta += effect.alcoholDelta;
+      else alcohol.delta += effect.alcoholDelta;
       fortitude.delta += effect.fortitudeDelta;
     }
     if (

@@ -11,6 +11,7 @@ import type {
   RoomId,
 } from '../shared/ids';
 import type { StateVersion } from '../shared/version';
+import type { WorkflowTask, DrinkWork } from './workflow-state';
 
 export const MATCH_LIFECYCLES = [
   'LOBBY',
@@ -56,6 +57,7 @@ export interface SpecialDeck {
 }
 
 export interface PlayerState {
+  readonly traits?: readonly string[];
   readonly id: PlayerId;
   readonly seat: Seat;
   readonly displayName: string;
@@ -76,7 +78,11 @@ export interface PlayerState {
 
 /** Non-null while a round suspends its initiating source and normal turn. */
 export interface GamblingState {
-  readonly stage: 'ROUND' | 'SETTLING';
+  readonly stage: 'ANTE' | 'ROUND' | 'SETTLING';
+  readonly checkpointReady?: boolean;
+  readonly settlementReady?: boolean;
+  readonly settlementReason?: 'ALL_PASSED' | 'IMMEDIATE_WIN';
+  readonly potRemoved?: number;
   readonly initiatorPlayerId: PlayerId;
   readonly priorityPlayerId: PlayerId | null;
   readonly controlPlayerId: PlayerId;
@@ -101,6 +107,23 @@ export interface GamblingState {
 }
 
 export interface ResolutionFrame {
+  readonly task?: WorkflowTask;
+  readonly pendingTasks?: readonly WorkflowTask[];
+  readonly afterTasks?: readonly WorkflowTask[];
+  readonly pendingDrinks?: readonly DrinkWork[];
+  readonly heldDrinkCardIds?: readonly CardInstanceId[];
+  readonly drinkProvenance?: readonly CardInstanceId[];
+  readonly drinkRecipientId?: PlayerId;
+  readonly alcoholAsFortitude?: boolean;
+  readonly origin?: {
+    readonly playerId: PlayerId | null;
+    readonly cardId: CardInstanceId | null;
+  };
+  readonly responseToOrigin?: {
+    readonly playerId: PlayerId | null;
+    readonly cardId: CardInstanceId | null;
+  };
+  readonly redirectedFortitudePlayerId?: PlayerId;
   readonly id: ResolutionId;
   readonly kind: 'CARD' | 'DRINK' | 'DRINK_EVENT' | 'SYSTEM';
   readonly actorId: PlayerId | null;

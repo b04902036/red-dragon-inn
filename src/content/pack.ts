@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { cardDefinitionSchema } from './cards';
+import { traitSchema } from './mechanics';
 import { resourceKeySchema, registeredSpecialRuleKeySchema } from './effects';
 import {
   assetIdSchema,
@@ -31,6 +32,7 @@ export const productSchema = z.strictObject({
 });
 export type Product = z.infer<typeof productSchema>;
 export const characterRulesSchema = z.strictObject({
+  traits: z.array(traitSchema).max(16).optional(),
   resources: z.record(
     resourceKeySchema,
     z.strictObject({

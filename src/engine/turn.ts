@@ -16,7 +16,7 @@ function setPhase(state: MutableGameState, phase: TurnPhase, emit: EmitEvent) {
   state.phase = phase;
   emit({ type: 'PHASE_CHANGED', phase, activePlayerId: state.activePlayerId! });
 }
-function dealDrinks(
+export function dealDrinks(
   state: MutableGameState,
   target: MutableGameState['players'][number],
   count: number,
@@ -199,6 +199,7 @@ export function executeTurnCommand(
           targetPlayerId: target.id,
           cardId: drawn[0]!,
         });
+      state.control.normalOrderDone = true;
       completePhase(state, 'DRINK', emit);
       return;
     }

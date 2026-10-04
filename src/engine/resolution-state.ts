@@ -8,6 +8,13 @@ import {
 } from '../shared/ids';
 import { RESPONSE_KINDS } from './model';
 import type { CoreGameState } from './types';
+import { workflowTaskSchema, drinkWorkSchema } from './workflow-state';
+import type { WorkflowTask } from './workflow-state';
+import type { PlayerId } from '../shared/ids';
+const originSchema = z.strictObject({
+  playerId: playerIdSchema.nullable(),
+  cardId: cardInstanceIdSchema.nullable(),
+});
 
 const playerIds = z
   .array(playerIdSchema)
@@ -47,6 +54,17 @@ export const responseWindowSchema = z.strictObject({
     .nullable(),
 });
 export const resolutionFrameSchema = z.strictObject({
+  task: workflowTaskSchema.optional(),
+  pendingTasks: z.array(workflowTaskSchema).max(64).optional(),
+  afterTasks: z.array(workflowTaskSchema).max(8).optional(),
+  pendingDrinks: z.array(drinkWorkSchema).max(8).optional(),
+  heldDrinkCardIds: z.array(cardInstanceIdSchema).max(32).optional(),
+  drinkProvenance: z.array(cardInstanceIdSchema).max(32).optional(),
+  drinkRecipientId: playerIdSchema.optional(),
+  alcoholAsFortitude: z.boolean().optional(),
+  origin: originSchema.optional(),
+  responseToOrigin: originSchema.optional(),
+  redirectedFortitudePlayerId: playerIdSchema.optional(),
   id: resolutionIdSchema,
   kind: z.enum(['CARD', 'DRINK', 'DRINK_EVENT', 'SYSTEM']),
   actorId: playerIdSchema.nullable(),
@@ -67,6 +85,28 @@ export const resolutionFrameSchema = z.strictObject({
 function assert(condition: boolean, message: string): asserts condition {
   if (!condition) throw new RangeError(`Engine invariant: ${message}`);
 }
+function taskPlayers(task: WorkflowTask): PlayerId[] {
+  switch (task.kind) {
+    case 'PAYMENT':
+      return [task.payer, ...(task.recipient === null ? [] : [task.recipient])];
+    case 'FORCED_DRINK':
+      return [task.actorId];
+    case 'SETTLEMENT':
+      return [task.winner];
+    case 'POST_LOSS':
+      return [
+        task.affected,
+        ...(task.originalPlayer === null ? [] : [task.originalPlayer]),
+      ];
+    case 'DRINK_BATCH':
+      return [
+        ...task.participants,
+        ...task.scores.map((score) => score.playerId),
+      ];
+    default:
+      return [];
+  }
+}
 export function assertResolutionState(state: CoreGameState) {
   const ids = new Set(state.players.map((player) => player.id));
   const living = state.players
@@ -80,16 +120,85 @@ export function assertResolutionState(state: CoreGameState) {
     new Set(frames.map((frame) => frame.id)).size === frames.length,
     'duplicate resolution',
   );
+  const workIds = [
+    ...frames.map((source) => source.id),
+    ...frames.flatMap(
+      (source) => source.pendingDrinks?.map((work) => work.id) ?? [],
+    ),
+  ];
+  assert(
+    new Set(workIds).size === workIds.length,
+    'duplicate queued resolution',
+  );
   for (let i = 0; i < frames.length; i += 1) {
     const frame = frames[i]!;
+    const tasks = [
+      ...(frame.task === undefined ? [] : [frame.task]),
+      ...(frame.pendingTasks ?? []),
+      ...(frame.afterTasks ?? []),
+    ];
+    assert(
+      tasks.every((task) => taskPlayers(task).every((id) => ids.has(id))),
+      'unknown workflow player',
+    );
+    assert(
+      tasks.every(
+        (task) =>
+          task.kind !== 'POST_LOSS' ||
+          task.originalCard === null ||
+          state.cards[task.originalCard] !== undefined,
+      ),
+      'unknown workflow origin',
+    );
+    assert(
+      tasks.every(
+        (task) =>
+          task.kind !== 'PAYMENT' ||
+          ((task.destination === 'PLAYER') === (task.recipient !== null) &&
+            (task.purpose === 'ANTE') === (task.destination === 'POT') &&
+            task.substituted <= task.amount),
+      ),
+      'invalid payment obligation',
+    );
+    assert(
+      [
+        frame.drinkRecipientId,
+        frame.redirectedFortitudePlayerId,
+        frame.origin?.playerId,
+        frame.responseToOrigin?.playerId,
+      ].every((id) => id == null || ids.has(id)),
+      'unknown effect provenance player',
+    );
+    assert(
+      [frame.origin?.cardId, frame.responseToOrigin?.cardId].every(
+        (id) => id == null || state.cards[id] !== undefined,
+      ),
+      'unknown effect provenance card',
+    );
+    assert(
+      (frame.drinkProvenance ?? []).every(
+        (id) => state.cards[id]?.ownerId === null,
+      ),
+      'invalid virtual Drink provenance',
+    );
+    assert(
+      (frame.pendingDrinks ?? []).every(
+        (work) =>
+          ids.has(work.actorId) &&
+          [...work.sourceCardIds, ...work.provenanceCardIds].every(
+            (id) => state.cards[id]?.ownerId === null,
+          ),
+      ),
+      'invalid queued Drink',
+    );
     if (frame.kind === 'DRINK' || frame.kind === 'DRINK_EVENT') {
       const cards = frame.sourceCardIds;
       assert(
         cards !== undefined &&
           new Set(cards).size === cards.length &&
           frame.sourceCardId === (cards[0] ?? null) &&
-          frame.parentId === null &&
-          frame.continuation === 'ELIMINATION_CHECK',
+          (frame.continuation === 'ELIMINATION_CHECK' ||
+            frame.continuation === 'RESUME'),
         'invalid drink source',
       );
       assert(

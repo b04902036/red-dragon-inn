@@ -3,7 +3,6 @@ import type { PlayerId } from '../shared/ids';
 import { requireCommand } from './errors';
 import { drawHand } from './card-moves';
 import { applyCustomEffect } from './effect-handlers';
-import { payGold, transferGold } from './gold';
 import { changeStat } from './stats';
 import { drinkModifierEffects } from './drinks';
 import {
@@ -15,6 +14,7 @@ import {
 import type { EmitEvent } from './event-writer';
 import type { RandomSource } from './rng';
 import type { MutableGameState } from './types';
+import { executeGenericOperation, queuePostLoss } from './workflows';
 export type MutableFrame = MutableGameState['resolutionStack'][number];
 
 export function effectTargets(
@@ -27,7 +27,12 @@ export function effectTargets(
       !player.eliminated &&
       !frame.ignoredPlayerIds.includes(player.id) &&
       (target === 'ALL_PLAYERS' ||
-        (target === 'SELF' && player.id === frame.actorId) ||
+        (target === 'SELF' &&
+          player.id === (frame.drinkRecipientId ?? frame.actorId)) ||
+        (target === 'ORIGINAL_SOURCE_PLAYER' &&
+          player.id === frame.responseToOrigin?.playerId) ||
+        (target === 'SOURCE_ACTOR' &&
+          player.id === frame.responseToOrigin?.playerId) ||
         (target === 'CHOSEN_PLAYER' &&
           frame.targetPlayerIds.includes(player.id)) ||
         (target === 'EACH_OTHER_PLAYER' && player.id !== frame.actorId)),
@@ -41,18 +46,30 @@ export function affectedPlayers(
     .filter(
       (player) =>
         !frame.ignoredPlayerIds.includes(player.id) &&
-        frame.effects.some(
-          (effect) =>
-            'target' in effect &&
-            (effectTargets(state, frame, effect.target).some(
-              (target) => target.id === player.id,
-            ) ||
-              (effect.op === 'TRANSFER_GOLD' &&
-                player.id === frame.actorId &&
-                effectTargets(state, frame, effect.target).some(
-                  (target) => target.id !== frame.actorId,
-                ))),
-        ),
+        frame.effects
+          .slice(frame.nextEffectIndex)
+          .some(
+            (effect) =>
+              'target' in effect &&
+              ((effect.op === 'CHANGE_STAT' &&
+              effect.stat === 'FORTITUDE' &&
+              effect.delta < 0 &&
+              frame.redirectedFortitudePlayerId !== undefined
+                ? state.players.filter(
+                    (p) =>
+                      p.id === frame.redirectedFortitudePlayerId &&
+                      !p.eliminated &&
+                      !frame.ignoredPlayerIds.includes(p.id),
+                  )
+                : effectTargets(state, frame, effect.target)
+              ).some((target) => target.id === player.id) ||
+                ((effect.op === 'TRANSFER_GOLD' ||
+                  effect.op === 'COLLECT_GOLD') &&
+                  player.id === frame.actorId &&
+                  effectTargets(state, frame, effect.target).some(
+                    (target) => target.id !== frame.actorId,
+                  ))),
+          ),
     )
     .map((player) => player.id);
 }
@@ -85,31 +102,32 @@ export function executeOperation(
   emit: EmitEvent,
   rng: RandomSource,
 ) {
+  if (executeGenericOperation(state, frame, effect, emit, rng)) return;
   const targets =
     'target' in effect ? effectTargets(state, frame, effect.target) : [];
   const parent = state.resolutionStack.at(-2);
   switch (effect.op) {
     case 'CHANGE_STAT':
-      for (const player of targets)
+      for (const player of effect.stat === 'FORTITUDE' &&
+      effect.delta < 0 &&
+      frame.redirectedFortitudePlayerId !== undefined
+        ? state.players.filter(
+            (p) =>
+              p.id === frame.redirectedFortitudePlayerId &&
+              !p.eliminated &&
+              !frame.ignoredPlayerIds.includes(p.id),
+          )
+        : targets) {
+        const previous = player.fortitude;
         changeStat(state, player, effect.stat, effect.delta, emit);
+        if (effect.stat === 'FORTITUDE' && player.fortitude < previous)
+          queuePostLoss(frame, player.id, previous - player.fortitude);
+      }
       return;
     case 'DRAW_CARDS':
       for (const player of targets)
         drawHand(state, player, emit, rng, effect.count);
       return;
-    case 'PAY_INN':
-      for (const player of targets) payGold(state, player, effect.amount, emit);
-      return;
-    case 'TRANSFER_GOLD': {
-      const actor = state.players.find(
-        (player) => player.id === frame.actorId,
-      )!;
-      if (frame.ignoredPlayerIds.includes(actor.id)) return;
-      for (const player of targets.filter((player) => player.id !== actor.id)) {
-        transferGold(state, actor, player, effect.amount, emit);
-      }
-      return;
-    }
     case 'IGNORE':
       requireCommand(
         parent !== undefined && frame.actorId !== null,
@@ -158,7 +176,8 @@ export function executeOperation(
         parent!,
         effect.allowDrinkEvents,
       );
-      alcohol.delta += effect.alcoholDelta;
+      if (parent!.alcoholAsFortitude) fortitude.delta += effect.alcoholDelta;
+      else alcohol.delta += effect.alcoholDelta;
       fortitude.delta += effect.fortitudeDelta;
       emit({
         type: 'DRINK_MODIFIED',

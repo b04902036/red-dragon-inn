@@ -116,7 +116,7 @@ it('gambling control categories and Winning-Hand-like restrictions use the accep
   expect(legalCardPlays(initial, actor.id).map((p) => p.cardId)).toContain(
     cardInHand(initial, actor.seat, 'cheat'),
   );
-  expect(legalCardPlays(initial, actor.id).map((p) => p.cardId)).not.toContain(
+  expect(legalCardPlays(initial, actor.id).map((p) => p.cardId)).toContain(
     cardInHand(initial, actor.seat, 'breather'),
   );
   const restricted = mutable(initial);

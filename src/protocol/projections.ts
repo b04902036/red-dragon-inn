@@ -7,6 +7,7 @@ import {
 import { actionAttention } from './attention';
 import { legalAnytimeCards } from '../engine/timed-prompts';
 import { legalCardPlays } from '../engine/card-play-legality';
+import { taskEvent } from '../engine/workflow-state';
 import type { CardInstanceId, PlayerId } from '../shared/ids';
 import {
   privatePlayerViewSchema,
@@ -129,23 +130,43 @@ export function projectPublicGame(
             ],
             winnerPlayerId: state.gambling.winnerPlayerId,
           },
-    resolutionStack: state.resolutionStack.map((frame) => ({
-      id: frame.id,
-      kind: frame.kind,
-      actorId: frame.actorId,
-      sourceCard:
-        frame.sourceRevealed && frame.sourceCardId !== null
-          ? cardReference(state, frame.sourceCardId)
-          : null,
-      ...(frame.sourceCardIds === undefined
-        ? {}
-        : {
-            sourceCards: frame.sourceRevealed
-              ? frame.sourceCardIds.map((id) => cardReference(state, id))
-              : [],
-          }),
-      targetPlayerIds: [...frame.targetPlayerIds],
-    })),
+    resolutionStack: state.resolutionStack.map((frame) => {
+      const sourceId = frame.sourceCardId ?? frame.drinkProvenance?.[0];
+      const opportunity = taskEvent(frame.task);
+      return {
+        id: frame.id,
+        kind: frame.kind,
+        actorId: frame.actorId,
+        ...(opportunity === null ? {} : { opportunity }),
+        ...(frame.drinkRecipientId === undefined
+          ? {}
+          : { drinkRecipientId: frame.drinkRecipientId }),
+        ...(frame.pendingDrinks === undefined
+          ? {}
+          : {
+              revealedDrinks: frame.pendingDrinks.map((work) => ({
+                playerId: work.actorId,
+                cards: work.provenanceCardIds.map((id) =>
+                  cardReference(state, id),
+                ),
+              })),
+            }),
+        sourceCard:
+          frame.sourceRevealed && sourceId !== undefined
+            ? cardReference(state, sourceId)
+            : null,
+        ...(frame.sourceCardIds === undefined
+          ? {}
+          : {
+              sourceCards: frame.sourceRevealed
+                ? (frame.drinkProvenance ?? frame.sourceCardIds).map((id) =>
+                    cardReference(state, id),
+                  )
+                : [],
+            }),
+        targetPlayerIds: [...frame.targetPlayerIds],
+      };
+    }),
     responseWindow:
       state.responseWindow === null
         ? null
@@ -248,7 +269,7 @@ export function projectPrivatePlayer(
               state as CoreGameState,
               state.resolutionStack.at(-1)!,
             ),
-          )
+          ).filter((play) => play.commandType === 'PLAY_RESPONSE')
         : [],
     hand: player.hand.map((id) => {
       const card = state.cards[id];

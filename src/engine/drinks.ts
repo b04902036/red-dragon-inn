@@ -1,5 +1,5 @@
 import type { Effect } from '../content/effects';
-import type { CardInstanceId, PlayerId } from '../shared/ids';
+import type { CardInstanceId, PlayerId, ResolutionId } from '../shared/ids';
 import { resolutionIdSchema } from '../shared/ids';
 import { matchNamespace } from './identity';
 import type { MutableGameState } from './types';
@@ -39,17 +39,24 @@ export function buildDrinkFrame(
   actorId: PlayerId,
   emit: EmitEvent,
   rng: RandomSource,
+  options: {
+    source?: 'DRINK_PILE' | 'INN';
+    skipEvents?: boolean;
+    id?: ResolutionId;
+  } = {},
 ) {
   const player = state.players.find((entry) => entry.id === actorId)!;
-  const id = resolutionIdSchema.parse(
-    `resolution_${matchNamespace(state.matchId)}_${state.version}`,
-  );
+  const id =
+    options.id ??
+    resolutionIdSchema.parse(
+      `resolution_${matchNamespace(state.matchId)}_${state.version}`,
+    );
   const cards: CardInstanceId[] = [];
   const effects: Effect[] = [];
   let alcohol = 0,
     fortitude = 0;
   let kind: 'DRINK' | 'DRINK_EVENT' = 'DRINK';
-  let source: 'DRINK_PILE' | 'INN' = 'DRINK_PILE';
+  let source: 'DRINK_PILE' | 'INN' = options.source ?? 'DRINK_PILE';
   const reveal = () => {
     let cardId: CardInstanceId | undefined;
     if (source === 'DRINK_PILE') cardId = player.drinkPile.shift();
@@ -98,6 +105,29 @@ export function buildDrinkFrame(
     return definition;
   };
   let definition = reveal();
+  if (options.skipEvents) {
+    let skipped = 0;
+    while (
+      definition?.type === 'DRINK_EVENT' &&
+      skipped < state.rules.drinks.maxChainCards
+    ) {
+      const skippedCard = cards.pop()!;
+      state.innDrinkDiscard.push(skippedCard);
+      state.cards[skippedCard]!.location = {
+        zone: 'INN_DRINK_DISCARD',
+        deckId: state.innDrinkDeck.deckId,
+      };
+      emit({
+        type: 'DRINK_EVENT_DISCARDED',
+        playerId: actorId,
+        cardId: skippedCard,
+        context: 'SOURCE_SELECTION',
+      });
+      skipped++;
+      definition = reveal();
+    }
+    requireCommand(definition?.type !== 'DRINK_EVENT', 'INVALID_EFFECT');
+  }
   if (definition === null) {
     emit({
       type: 'DRINK_EMPTY',
@@ -129,8 +159,11 @@ export function buildDrinkFrame(
           break;
         }
       } else {
-        alcohol += definition.alcoholContent;
-        fortitude += definition.fortitudeChange;
+        const replacement = definition.traitReplacements?.find((r) =>
+          player.traits?.includes(r.trait),
+        );
+        alcohol += replacement?.alcoholContent ?? definition.alcoholContent;
+        fortitude += replacement?.fortitudeChange ?? definition.fortitudeChange;
         effects.push(...definition.effects);
         if (!definition.chaser) break;
         if (

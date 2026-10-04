@@ -550,12 +550,14 @@ describe('suspension, authority, idempotency, and Gold boundaries', () => {
     expect(round.players[0]!.fortitude).toBe(20);
     reject(round, 'SKIP_ACTION', {}, 'RESOLUTION_PENDING', 0);
     reject(round, 'ADVANCE_PHASE', {}, 'RESOLUTION_PENDING', 0);
-    reject(
-      round,
-      'PLAY_CARD',
-      { cardId: cardInHand(round, 1, 'breather') },
-      'RESOLUTION_PENDING',
-    );
+    expect(
+      accepted(
+        round,
+        'PLAY_CARD',
+        { cardId: cardInHand(round, 1, 'breather') },
+        round.players[1]!.id,
+      ).state.resolutionStack,
+    ).toHaveLength(2);
     const completed = finishRound(round).state;
     expect(completed.players[0]!.fortitude).toBe(22);
     expect(completed.phase).toBe('ORDER_DRINK');

@@ -1,4 +1,8 @@
-import { hasChosenTarget, validateEffects } from './card-effects-validation';
+import {
+  cardEffects,
+  hasChosenTarget,
+  validateEffects,
+} from './card-effects-validation';
 import {
   legalResponsesForPlayer,
   reactionContext,
@@ -27,15 +31,124 @@ import type { MutableGameState } from './types';
 import { buildDrinkFrame } from './drinks';
 import { completePhase, legalAnytimeCards, passAnytime } from './timed-prompts';
 import { cardDefinitionForPlay } from './card-play-legality';
+import { nextResolutionId } from './resolution-ids';
+import { addTask, finishTask } from './workflows';
+import type { WorkflowTask, DrinkWork } from './workflow-state';
+import { taskEvent } from './workflow-state';
 import {
   activeGamblers,
-  settleGambling,
   passGambling,
   leaveGambling,
   advanceGamblingPriority,
 } from './gambling';
 
 const MAX_STACK_DEPTH = 32;
+function taskFrame(
+  state: MutableGameState,
+  parent: MutableFrame | undefined,
+  task: WorkflowTask,
+): MutableFrame {
+  const actorId =
+    task.kind === 'PAYMENT'
+      ? task.payer
+      : task.kind === 'SETTLEMENT'
+        ? task.winner
+        : task.kind === 'POST_LOSS'
+          ? (task.originalPlayer ?? task.affected)
+          : (parent?.actorId ?? state.activePlayerId!);
+  return {
+    id: resolutionIdSchema.parse('resolution_pending_work'),
+    kind: 'SYSTEM',
+    actorId,
+    sourceCardId: null,
+    sourceRevealed: false,
+    targetPlayerIds: task.kind === 'POST_LOSS' ? [task.affected] : [],
+    effects: [],
+    nextEffectIndex: 0,
+    parentId: parent?.id ?? null,
+    stage: 'RESPONSES',
+    canceled: false,
+    ignoredPlayerIds: [],
+    window: null,
+    continuation: 'RESUME',
+    selectedOptionId: null,
+    task,
+  };
+}
+function pushDrinkWork(
+  state: MutableGameState,
+  parent: MutableFrame,
+  work: DrinkWork,
+  emit: EmitEvent,
+) {
+  requireCommand(state.resolutionStack.length < MAX_STACK_DEPTH, 'STACK_LIMIT');
+  const frame: MutableFrame = {
+    id: work.id,
+    kind: work.kind,
+    actorId: work.actorId,
+    sourceCardId: work.sourceCardIds[0] ?? null,
+    sourceCardIds: work.sourceCardIds,
+    drinkProvenance: work.provenanceCardIds,
+    alcoholAsFortitude: work.alcoholAsFortitude,
+    origin: {
+      playerId: work.actorId,
+      cardId: work.provenanceCardIds[0] ?? null,
+    },
+    sourceRevealed: true,
+    targetPlayerIds: [],
+    effects: work.effects,
+    nextEffectIndex: 0,
+    parentId: parent.id,
+    stage: 'RESPONSES',
+    canceled: false,
+    ignoredPlayerIds: [],
+    window: null,
+    continuation: 'RESUME',
+    selectedOptionId: null,
+  };
+  for (const id of work.sourceCardIds)
+    state.cards[id]!.location = { zone: 'RESOLUTION', resolutionId: frame.id };
+  state.resolutionStack.push(frame);
+  emit({
+    type: 'RESOLUTION_STARTED',
+    resolutionId: frame.id,
+    parentId: parent.id,
+    cardId: frame.sourceCardId,
+    playerId: frame.actorId!,
+  });
+  openWindow(state, frame, 'SOMETIMES', emit);
+}
+export function maintainPhaseOpportunity(
+  state: MutableGameState,
+  emit: EmitEvent,
+) {
+  if (
+    state.lifecycle !== 'PLAYING' ||
+    state.phase !== 'ORDER_DRINK' ||
+    state.resolutionStack.length > 0
+  )
+    return false;
+  const key = `${state.control.turnNumber}:${state.activePlayerId}:${state.control.normalOrderDone ? 'AFTER' : 'BEFORE'}`;
+  if (state.control.phaseOpportunityKey === key) return false;
+  const frame = taskFrame(state, undefined, {
+    kind: 'PHASE',
+    phase: 'ORDER_DRINK',
+    normalOrderComplete: state.control.normalOrderDone ?? false,
+  });
+  if (
+    legalResponsesForPlayer(
+      state,
+      state.activePlayerId!,
+      reactionContext(state, frame),
+    ).length === 0
+  )
+    return false;
+  state.control.phaseOpportunityKey = key;
+  frame.id = nextResolutionId(state);
+  state.resolutionStack.push(frame);
+  openWindow(state, frame, 'SOMETIMES', emit);
+  return true;
+}
 function seatsAfter(state: MutableGameState, actorId: PlayerId): PlayerId[] {
   const players = state.players
     .filter((player) => !player.eliminated)
@@ -60,7 +173,7 @@ function openWindow(
   emit: EmitEvent,
 ) {
   const order = timingOrder(state, frame.actorId!);
-  const context = reactionContext(state, frame);
+  const context = reactionContext(state, { ...frame, window: null });
   const eligiblePlayerIds = order.filter(
     (id) => legalResponsesForPlayer(state, id, context).length > 0,
   );
@@ -118,11 +231,26 @@ function queueCard(
   const target = state.players.find((player) => player.id === targetId);
   requireCommand(
     chosen
-      ? target !== undefined && !target.eliminated && target.id !== actorId
+      ? target !== undefined &&
+          !target.eliminated &&
+          (definition.targetPolicy === 'ANY_LIVING_PLAYER' ||
+            target.id !== actorId)
       : targetId === undefined,
     'INVALID_TARGET',
   );
   const frame: MutableFrame = {
+    origin: { playerId: actorId, cardId: command.cardId },
+    ...(parent === undefined
+      ? {}
+      : {
+          responseToOrigin:
+            parent.task?.kind === 'POST_LOSS'
+              ? {
+                  playerId: parent.task.originalPlayer,
+                  cardId: parent.task.originalCard,
+                }
+              : { playerId: parent.actorId, cardId: parent.sourceCardId },
+        }),
     id: resolutionIdSchema.parse(
       `resolution_${matchNamespace(state.matchId)}_${state.version}`,
     ),
@@ -131,7 +259,7 @@ function queueCard(
     sourceCardId: command.cardId,
     sourceRevealed: true,
     targetPlayerIds: target === undefined ? [] : [target.id],
-    effects: JSON.parse(JSON.stringify(definition.effects)) as Effect[],
+    effects: cardEffects(definition),
     nextEffectIndex: 0,
     parentId: parent?.id ?? null,
     stage: 'RESPONSES',
@@ -144,7 +272,8 @@ function queueCard(
   validateEffects(state, frame, parent);
   if (
     command.type === 'PLAY_CARD' &&
-    definition.type === 'ANYTIME' &&
+    (definition.type === 'ANYTIME' ||
+      definition.phaseOpportunity !== undefined) &&
     state.control.phaseEnd !== null
   ) {
     const grace = state.control.phaseEnd;
@@ -316,12 +445,62 @@ export function drain(
 ) {
   while (state.resolutionStack.length > 0) {
     const frame = state.resolutionStack.at(-1)!;
+    if (frame.pendingTasks?.length) {
+      const task = frame.pendingTasks.shift()!;
+      const child = taskFrame(state, frame, task);
+      const context = reactionContext(state, child);
+      const eligible =
+        taskEvent(task) !== null &&
+        state.players.some(
+          (p) => legalResponsesForPlayer(state, p.id, context).length > 0,
+        );
+      if (eligible || task.kind === 'DRINK_BATCH') {
+        requireCommand(
+          state.resolutionStack.length < MAX_STACK_DEPTH,
+          'STACK_LIMIT',
+        );
+        child.id = nextResolutionId(state);
+        state.resolutionStack.push(child);
+        openWindow(state, child, 'SOMETIMES', emit);
+      } else {
+        child.id = frame.id;
+        finishTask(state, child, frame, emit, rng);
+      }
+      continue;
+    }
     if (
       state.gambling !== null &&
-      frame.id === state.gambling.suspended.resolutionId &&
-      !settleGambling(state, emit)
-    )
+      frame.id === state.gambling.suspended.resolutionId
+    ) {
+      const round = state.gambling;
+      const closed =
+        round.stage === 'SETTLING' ||
+        (round.stage === 'ROUND' && round.priorityPlayerId === null);
+      if (closed && !round.settlementReady) {
+        round.settlementReason =
+          round.winnerPlayerId === null ? 'ALL_PASSED' : 'IMMEDIATE_WIN';
+        round.stage = 'SETTLING';
+        round.settlementReady = true;
+        round.winnerPlayerId ??= round.controlPlayerId;
+        addTask(frame, {
+          kind: 'SETTLEMENT',
+          winner: round.winnerPlayerId,
+          toInn: false,
+        });
+        continue;
+      }
+      if (round.stage === 'ROUND' && !round.checkpointReady) {
+        round.checkpointReady = true;
+        addTask(frame, {
+          kind: 'CHECKPOINT',
+          afterFinalPass: false,
+          anteAvoidance: false,
+          sourceEndsRound: false,
+        });
+        continue;
+      }
       return;
+    }
     if (frame.canceled && frame.window !== null) {
       emit({
         type: 'RESPONSE_WINDOW_CLOSED',
@@ -329,6 +508,7 @@ export function drain(
         reason: 'CANCELED',
       });
       setWindow(state, frame, null);
+      frame.stage = 'OPERATIONS';
     }
     if (!frame.canceled && frame.stage !== 'OPERATIONS') {
       state.responseWindow = frame.window;
@@ -354,12 +534,37 @@ export function drain(
       });
       frame.nextEffectIndex += 1;
       if (
-        state.gambling !== null &&
-        frame.id === state.gambling.suspended.resolutionId &&
-        !settleGambling(state, emit)
+        frame.pendingTasks?.length ||
+        (state.gambling !== null &&
+          frame.id === state.gambling.suspended.resolutionId)
       )
-        return;
+        break;
     }
+    if (
+      frame.pendingTasks?.length ||
+      (state.gambling !== null &&
+        frame.id === state.gambling.suspended.resolutionId)
+    )
+      continue;
+    if (frame.afterTasks?.length) {
+      finishTask(
+        state,
+        { ...taskFrame(state, frame, frame.afterTasks.shift()!), id: frame.id },
+        frame,
+        emit,
+        rng,
+      );
+      continue;
+    }
+    if (frame.pendingDrinks?.length) {
+      pushDrinkWork(state, frame, frame.pendingDrinks.shift()!, emit);
+      continue;
+    }
+    if (
+      frame.task !== undefined &&
+      !finishTask(state, frame, state.resolutionStack.at(-2), emit, rng)
+    )
+      continue;
     const player = state.players.find((player) => player.id === frame.actorId)!;
     if (frame.kind === 'DRINK' || frame.kind === 'DRINK_EVENT') {
       const cards = frame.sourceCardIds!;
@@ -370,7 +575,7 @@ export function drain(
           deckId: state.innDrinkDeck.deckId,
         };
       emit({ type: 'DRINK_DISCARDED', resolutionId: frame.id, cardIds: cards });
-    } else {
+    } else if (frame.sourceCardId !== null) {
       player.characterDiscard.push(frame.sourceCardId!);
       state.cards[frame.sourceCardId!]!.location = {
         zone: 'CHARACTER_DISCARD',
@@ -383,6 +588,16 @@ export function drain(
         cardIds: [frame.sourceCardId!],
       });
     }
+    if (frame.heldDrinkCardIds?.length) {
+      const cards = frame.heldDrinkCardIds;
+      state.innDrinkDiscard.push(...cards);
+      for (const id of cards)
+        state.cards[id]!.location = {
+          zone: 'INN_DRINK_DISCARD',
+          deckId: state.innDrinkDeck.deckId,
+        };
+      emit({ type: 'DRINK_DISCARDED', resolutionId: frame.id, cardIds: cards });
+    }
     emit({
       type: 'RESOLUTION_COMPLETED',
       resolutionId: frame.id,
@@ -394,8 +609,13 @@ export function drain(
       frame.parentId === state.gambling.suspended.resolutionId
     ) {
       const definition =
-        state.definitions[state.cards[frame.sourceCardId!]!.definitionId]!;
-      if (definition.type === 'GAMBLING' || definition.type === 'CHEATING')
+        frame.sourceCardId === null
+          ? undefined
+          : state.definitions[state.cards[frame.sourceCardId]!.definitionId];
+      if (
+        state.gambling.stage === 'ROUND' &&
+        (definition?.type === 'GAMBLING' || definition?.type === 'CHEATING')
+      )
         advanceGamblingPriority(state, frame.actorId!, emit);
     }
     state.responseWindow = state.resolutionStack.at(-1)?.window ?? null;
@@ -549,22 +769,26 @@ export function executeTimingCommand(
     command.type === 'CHOOSE_OPTION' ||
     command.type === 'CHOOSE_CARDS';
   if (!timing && command.type !== 'PLAY_CARD') return false;
-  if (command.type === 'PLAY_CARD' && state.responseWindow !== null)
+  if (
+    command.type === 'PLAY_CARD' &&
+    state.responseWindow !== null &&
+    state.resolutionStack.at(-1)?.task?.kind !== 'PHASE'
+  )
     requireCommand(false, 'RESOLUTION_PENDING');
   if (command.type === 'PLAY_CARD') {
     const player = state.players.find((player) => player.id === actorId)!;
     const card = state.cards[command.cardId];
     const definition =
       card === undefined ? undefined : state.definitions[card.definitionId];
-    if (definition?.type !== 'ANYTIME') return false;
+    if (
+      definition?.type !== 'ANYTIME' &&
+      definition?.phaseOpportunity === undefined
+    )
+      return false;
     requireCommand(state.lifecycle === 'PLAYING', 'WRONG_LIFECYCLE');
-    requireCommand(
-      state.gambling === null && state.resolutionStack.length === 0,
-      'RESOLUTION_PENDING',
-    );
     requireCommand(!player.eliminated, 'NOT_ELIGIBLE');
     requireCommand(player.hand.includes(command.cardId), 'CARD_NOT_IN_HAND');
-    if (state.control.phaseEnd !== null) {
+    if (state.control.phaseEnd !== null && definition.type === 'ANYTIME') {
       const grace = state.control.phaseEnd;
       requireCommand(grace.priorityPlayerId === actorId, 'NOT_PRIORITY');
       const legal = legalAnytimeCards(state, actorId).find(

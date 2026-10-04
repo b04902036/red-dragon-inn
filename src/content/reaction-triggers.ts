@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { effectSchema } from './effects';
 import { MATCH_LIFECYCLES, TURN_PHASES } from '../engine/model';
+import { systemEventSchema, sourceCapabilitySchema } from './mechanics';
 
 const relation = z.enum(['SELF', 'OTHER', 'ANY']);
 const cardType = z.enum([
@@ -14,6 +15,44 @@ const cardType = z.enum([
   'SPECIAL',
 ]);
 export const reactionConditionSchema = z.discriminatedUnion('kind', [
+  z.strictObject({
+    kind: z.literal('SYSTEM_EVENT'),
+    events: z.array(systemEventSchema).min(1).max(6),
+  }),
+  z.strictObject({
+    kind: z.literal('PAYMENT_CONTEXT'),
+    payer: relation,
+    purpose: z.enum(['ANTE', 'PAYMENT', 'ANY']),
+    minAmount: z.number().int().min(1).max(64),
+  }),
+  z.strictObject({
+    kind: z.literal('ACTUAL_STAT_LOSS'),
+    stat: z.literal('FORTITUDE'),
+    relation,
+    minAmount: z.number().int().min(1).max(1000),
+  }),
+  z.strictObject({ kind: z.literal('ORIGINAL_SOURCE_PLAYER'), relation }),
+  z.strictObject({
+    kind: z.literal('SOURCE_CAPABILITY'),
+    capabilities: z.array(sourceCapabilitySchema).min(1).max(6),
+    match: z.enum(['ANY', 'NONE', 'ALL']),
+  }),
+  z.strictObject({
+    kind: z.literal('COUNTER_FAMILY'),
+    relation: z.enum(['SAME', 'DIFFERENT', 'UNPROTECTED']),
+  }),
+  z.strictObject({
+    kind: z.literal('PHASE_OPPORTUNITY'),
+    phase: z.literal('ORDER_DRINK'),
+    actor: relation,
+  }),
+  z.strictObject({
+    kind: z.literal('GAMBLING_CHECKPOINT'),
+    notAfterFinalPass: z.boolean(),
+    notAnteAvoidance: z.boolean(),
+    sourceWillNotEndRound: z.boolean(),
+    potMin: z.number().int().min(0).max(1000),
+  }),
   z.strictObject({ kind: z.literal('SOURCE_ACTOR'), relation }),
   z.strictObject({ kind: z.literal('AFFECTS'), relation }),
   z.strictObject({

@@ -93,6 +93,7 @@ export function createMatch(input: MatchSetup): CoreGameState {
         throw new RangeError('Character deck cannot supply initial hand');
       return {
         ...player,
+        traits: character.rules.traits ?? [],
         ...setup.rules.initialStats,
         eliminated: false,
         hand: [],

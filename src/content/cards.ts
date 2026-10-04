@@ -9,8 +9,10 @@ import {
 } from '../shared/ids';
 import { effectSchema, resourceKeySchema } from './effects';
 import { responseTriggerSchema } from './reaction-triggers';
+import { cardMechanics, traitSchema } from './mechanics';
 
 const definitionFields = {
+  ...cardMechanics,
   id: cardDefinitionIdSchema,
   name: z.string().min(1).max(160),
   rulesText: z.string().max(4000),
@@ -36,41 +38,70 @@ const gamblingMetadata = z.strictObject({
   immediateWin: z.boolean(),
 });
 
-export const cardDefinitionSchema = z.discriminatedUnion('type', [
-  z.strictObject({ ...definitionFields, type: z.literal('ACTION') }),
-  z.strictObject({
-    ...definitionFields,
-    type: z.literal('SOMETIMES'),
-    responseKind: z.enum(['SOMETIMES', 'IGNORE', 'NEGATE']),
-    responseTrigger: responseTriggerSchema.optional(),
-  }),
-  z.strictObject({ ...definitionFields, type: z.literal('ANYTIME') }),
-  z.strictObject({
-    ...definitionFields,
-    type: z.literal('GAMBLING'),
-    gambling: gamblingMetadata.optional(),
-  }),
-  z.strictObject({
-    ...definitionFields,
-    type: z.literal('CHEATING'),
-    gambling: gamblingMetadata.optional(),
-  }),
-  z.strictObject({
-    ...definitionFields,
-    type: z.literal('DRINK'),
-    alcoholContent: z.number().int().nonnegative().max(1000),
-    fortitudeChange: z.number().int().min(-1000).max(1000),
-    chaser: z.boolean(),
-    chaserSource: z.enum(['SAME_SOURCE', 'INN']).optional(),
-  }),
-  z.strictObject({ ...definitionFields, type: z.literal('DRINK_EVENT') }),
-  z.strictObject({
-    ...definitionFields,
-    type: z.literal('SPECIAL'),
-    characterId: characterIdSchema,
-    sideDeckKey: resourceKeySchema.optional(),
-  }),
-]);
+export const cardDefinitionSchema = z
+  .discriminatedUnion('type', [
+    z.strictObject({ ...definitionFields, type: z.literal('ACTION') }),
+    z.strictObject({
+      ...definitionFields,
+      type: z.literal('SOMETIMES'),
+      responseKind: z.enum(['SOMETIMES', 'IGNORE', 'NEGATE']),
+      responseTrigger: responseTriggerSchema.optional(),
+    }),
+    z.strictObject({ ...definitionFields, type: z.literal('ANYTIME') }),
+    z.strictObject({
+      ...definitionFields,
+      type: z.literal('GAMBLING'),
+      gambling: gamblingMetadata.optional(),
+    }),
+    z.strictObject({
+      ...definitionFields,
+      type: z.literal('CHEATING'),
+      gambling: gamblingMetadata.optional(),
+    }),
+    z.strictObject({
+      ...definitionFields,
+      type: z.literal('DRINK'),
+      alcoholContent: z.number().int().nonnegative().max(1000),
+      fortitudeChange: z.number().int().min(-1000).max(1000),
+      chaser: z.boolean(),
+      chaserSource: z.enum(['SAME_SOURCE', 'INN']).optional(),
+      traitReplacements: z
+        .array(
+          z.strictObject({
+            trait: traitSchema,
+            alcoholContent: z.number().int().min(0).max(1000),
+            fortitudeChange: z.number().int().min(-1000).max(1000),
+          }),
+        )
+        .max(8)
+        .optional(),
+    }),
+    z.strictObject({ ...definitionFields, type: z.literal('DRINK_EVENT') }),
+    z.strictObject({
+      ...definitionFields,
+      type: z.literal('SPECIAL'),
+      characterId: characterIdSchema,
+      sideDeckKey: resourceKeySchema.optional(),
+    }),
+  ])
+  .superRefine((definition, ctx) => {
+    if (
+      definition.counterPolicy !== undefined &&
+      definition.counterFamily === undefined
+    )
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Protected counters require a family',
+      });
+    if (
+      definition.phaseOpportunity !== undefined &&
+      definition.type !== 'SOMETIMES'
+    )
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Phase opportunities require Sometimes cards',
+      });
+  });
 
 export type CardDefinition = z.infer<typeof cardDefinitionSchema>;
 export type ActionCardDefinition = Extract<CardDefinition, { type: 'ACTION' }>;

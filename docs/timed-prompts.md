@@ -1,5 +1,7 @@
 # Server-owned deadlines and phase-end grace
 
+Step 21B extends the same 30-second system to pending ante/payment, gambling checkpoints, pre-payout settlement, committed Fortitude loss, and Order Drink Sometimes opportunities. These use server-private legal eligibility and existing alarms/replay. See [generic capabilities](rdi1-engine-capabilities.md#timing-and-verification).
+
 Production response decisions last 30 seconds; each eligible phase-end Anytime decision lasts 15 seconds. The fixture browser environment injects 10/5 seconds. Older pure rule fixtures explicitly use zero durations to isolate untimed rules; dedicated timer tests use an injected clock and production durations. No client option changes a deadline.
 
 The persisted control state stores `timedPrompt` (immutable ID, kind, window ID, priority player, opening time and deadline) and a phase-end continuation. One clock reading is supplied per accepted server transaction. Only the authoritative priority holder receives private `responsePrompt` with `hasLegalSometimes`; legal cards and targets stay private. Public state exposes the current countdown/priority, without eligible-hand lists.

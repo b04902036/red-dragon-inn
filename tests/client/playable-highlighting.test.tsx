@@ -125,7 +125,7 @@ it('gambling and Winning-Hand-like category restrictions expose only current aut
   );
   expect(card(cardInHand(game, actor.seat, 'breather'))).toHaveAttribute(
     'data-playable',
-    'false',
+    'true',
   );
   game.gambling!.allowedControlCategories = ['GAMBLING'];
   ui.rerender(table(stateFor(game, actor.seat)));

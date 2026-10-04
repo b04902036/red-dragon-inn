@@ -8,12 +8,36 @@ export function goldFloor(state: MutableGameState) {
 export function goldCeiling(state: MutableGameState, player: Player) {
   const max = state.rules.statBounds.gold?.max ?? Number.MAX_SAFE_INTEGER;
   const round = state.gambling;
+  let reserve = round?.pot ?? 0;
+  let ownPayment = 0;
+  if (round !== null)
+    for (const frame of state.resolutionStack) {
+      for (const task of [
+        ...(frame.task === undefined ? [] : [frame.task]),
+        ...(frame.pendingTasks ?? []),
+      ]) {
+        if (
+          task.kind !== 'PAYMENT' ||
+          task.destination !== 'POT' ||
+          task.canceled
+        )
+          continue;
+        const payer = state.players.find((p) => p.id === task.payer)!;
+        const paid = Math.min(
+          task.amount - task.substituted,
+          payer.gold - goldFloor(state),
+        );
+        reserve += paid + task.substituted;
+        if (task.payer === player.id) ownPayment += paid;
+      }
+    }
   return (
     max -
     (round !== null &&
-    round.participants.includes(player.id) &&
-    !round.leftPlayerIds.includes(player.id)
-      ? round.pot
+    ((round.participants.includes(player.id) &&
+      !round.leftPlayerIds.includes(player.id)) ||
+      round.winnerPlayerId === player.id)
+      ? reserve - ownPayment
       : 0)
   );
 }

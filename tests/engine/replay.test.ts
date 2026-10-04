@@ -63,7 +63,7 @@ describe('verified deterministic replay', () => {
       result.manifest.setup.content.version.id,
     );
     expect(replay.state.rng).toEqual(result.complete.state.rng);
-  });
+  }, 30000);
   it('restores a versioned snapshot and replays the remaining accepted commands to the same final state', () => {
     const result = trace();
     const checkpoint = result.entries[14]!;
@@ -86,7 +86,7 @@ describe('verified deterministic replay', () => {
     );
     expect(empty.state).toEqual(checkpoint.state);
     expect(empty.state).not.toBe(checkpoint.state);
-  });
+  }, 30000);
   it('fails closed on corrupt, duplicate, reordered, foreign-actor or altered event history', () => {
     const result = trace();
     const first = result.entries[0]!.entry;

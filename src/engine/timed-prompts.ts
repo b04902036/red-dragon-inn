@@ -85,8 +85,19 @@ export function completePhase(
     state.phase !== null && state.activePlayerId !== null,
     'WRONG_PHASE',
   );
-  if (state.rules.timing.phaseEndMs === 0) {
+  const phaseSometimes =
+    state.phase === 'ORDER_DRINK' &&
+    nextPhase === 'DRINK' &&
+    state.players
+      .find((p) => p.id === state.activePlayerId)!
+      .hand.some(
+        (id) =>
+          state.definitions[state.cards[id]!.definitionId]!.phaseOpportunity ===
+          'ORDER_DRINK',
+      );
+  if (state.rules.timing.phaseEndMs === 0 && !phaseSometimes) {
     state.phase = nextPhase;
+    state.control.normalOrderDone = false;
     emit({
       type: 'PHASE_CHANGED',
       phase: nextPhase,
@@ -158,6 +169,7 @@ export function synchronizePrompt(
     grace.priorityPlayerId = playerId;
     if (playerId === null) {
       state.phase = grace.nextPhase;
+      state.control.normalOrderDone = false;
       state.control.phaseEnd = null;
       emit({ type: 'PHASE_END_WINDOW_CLOSED', windowId: grace.id });
       emit({

@@ -3,7 +3,7 @@ import type { MutableFrame } from './effect-operations';
 import type { MutableGameState } from './types';
 import type { EmitEvent } from './event-writer';
 import { requireCommand } from './errors';
-import { changeGold, goldFloor, payGold } from './gold';
+import { goldFloor } from './gold';
 
 export function activeGamblers(state: MutableGameState) {
   const round = state.gambling!;
@@ -93,26 +93,13 @@ export function startGambling(
     return;
   }
   const participants = plan.contributions.map((entry) => entry.playerId);
-  for (const contribution of plan.contributions) {
-    payGold(
-      state,
-      state.players.find((player) => player.id === contribution.playerId)!,
-      contribution.amount,
-      emit,
-    );
-    emit({
-      type: 'GAMBLING_ANTE_PAID',
-      playerId: contribution.playerId,
-      amount: contribution.amount,
-    });
-  }
   const controller = state.rules.gambling.initiatorControls
     ? frame.actorId!
     : clockwisePlayers(state, frame.actorId!).find((id) =>
         participants.includes(id),
       )!;
   state.gambling = {
-    stage: 'ROUND',
+    stage: 'ANTE',
     initiatorPlayerId: frame.actorId!,
     priorityPlayerId: null,
     controlPlayerId: controller,
@@ -124,9 +111,9 @@ export function startGambling(
         (player) => !player.eliminated && !participants.includes(player.id),
       )
       .map((player) => player.id),
-    pot: plan.pot,
+    pot: 0,
     anteAmount: state.rules.gambling.anteAmount,
-    contributions: plan.contributions,
+    contributions: plan.contributions.map((c) => ({ ...c, amount: 0 })),
     controlSourceCardId: frame.sourceCardId,
     allowedControlCategories: ['GAMBLING', 'CHEATING'],
     winnerPlayerId: null,
@@ -136,28 +123,51 @@ export function startGambling(
       phase: state.phase!,
     },
   };
-  state.gambling.priorityPlayerId = nextPlayer(state, controller);
+  state.gambling.checkpointReady = false;
   const definition =
     state.definitions[state.cards[frame.sourceCardId!]!.definitionId]!;
   if (definition.type === 'GAMBLING' || definition.type === 'CHEATING')
     state.gambling.allowedControlCategories = definition.gambling
       ?.allowedNextCategories ?? ['GAMBLING', 'CHEATING'];
+  frame.pendingTasks = [
+    ...plan.contributions.map((c) => ({
+      kind: 'PAYMENT' as const,
+      purpose: 'ANTE' as const,
+      payer: c.playerId,
+      amount: c.amount,
+      substituted: 0,
+      canceled: false,
+      destination: 'POT' as const,
+      recipient: null,
+      full: false,
+    })),
+    { kind: 'GAMBLING_READY' },
+  ];
+}
+export function finishGamblingAntes(state: MutableGameState, emit: EmitEvent) {
+  const round = state.gambling!;
+  round.stage = 'ROUND';
+  round.priorityPlayerId = nextPlayer(state, round.controlPlayerId);
   emit({
     type: 'GAMBLING_STARTED',
-    initiatorPlayerId: frame.actorId!,
-    controlPlayerId: controller,
-    participants,
-    excludedPlayerIds: state.gambling.excludedPlayerIds,
-    anteAmount: state.gambling.anteAmount,
-    pot: plan.pot,
-    resolutionId: frame.id,
+    initiatorPlayerId: round.initiatorPlayerId,
+    controlPlayerId: round.controlPlayerId,
+    participants: round.participants,
+    excludedPlayerIds: round.excludedPlayerIds,
+    anteAmount: round.anteAmount,
+    pot: round.pot,
+    resolutionId: round.suspended.resolutionId,
   });
   emitPriority(state, emit);
+  const definition =
+    state.definitions[
+      state.cards[state.resolutionStack[0]!.sourceCardId!]!.definitionId
+    ]!;
   if (
     (definition.type === 'GAMBLING' || definition.type === 'CHEATING') &&
     definition.gambling?.immediateWin
   )
-    requestImmediateWin(state, frame, emit);
+    requestImmediateWin(state, state.resolutionStack[0]!, emit);
 }
 function emitPriority(state: MutableGameState, emit: EmitEvent) {
   emit({
@@ -253,6 +263,7 @@ export function advanceGamblingPriority(
   emit: EmitEvent,
 ) {
   state.gambling!.priorityPlayerId = nextPlayer(state, actorId);
+  state.gambling!.checkpointReady = false;
   emitPriority(state, emit);
 }
 export function passGambling(
@@ -263,31 +274,4 @@ export function passGambling(
   state.gambling!.passedPlayerIds.push(actorId);
   emit({ type: 'GAMBLING_PASSED', playerId: actorId });
   advanceGamblingPriority(state, actorId, emit);
-}
-/** Settle only after all response children finish; clear escrow before crediting the winner. */
-export function settleGambling(
-  state: MutableGameState,
-  emit: EmitEvent,
-): boolean {
-  const round = state.gambling!;
-  if (
-    round.stage !== 'SETTLING' &&
-    activeGamblers(state).some(
-      (id) =>
-        id !== round.controlPlayerId && !round.passedPlayerIds.includes(id),
-    )
-  )
-    return false;
-  const winnerPlayerId = round.winnerPlayerId ?? round.controlPlayerId;
-  const winner = state.players.find((player) => player.id === winnerPlayerId)!;
-  const pot = round.pot;
-  state.gambling = null;
-  changeGold(state, winner, pot, emit);
-  emit({
-    type: 'GAMBLING_FINISHED',
-    winnerPlayerId,
-    pot,
-    reason: round.stage === 'SETTLING' ? 'IMMEDIATE_WIN' : 'ALL_PASSED',
-  });
-  return true;
 }

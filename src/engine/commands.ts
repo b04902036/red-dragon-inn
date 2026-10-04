@@ -9,7 +9,11 @@ import { eventWriter } from './event-writer';
 import { mulberry32 } from './rng';
 import type { RandomSource } from './rng';
 import { executeTurnCommand } from './turn';
-import { executeTimingCommand, drain } from './timing';
+import {
+  executeTimingCommand,
+  drain,
+  maintainPhaseOpportunity,
+} from './timing';
 import { checkEliminations } from './elimination';
 import { CommandError } from './errors';
 import type { RejectionCode } from './errors';
@@ -167,7 +171,10 @@ function transact(
         context.rng ?? mulberry32,
       );
     drain(draft, writer.emit, context.rng ?? mulberry32);
+    maintainPhaseOpportunity(draft, writer.emit);
     synchronizePrompt(draft, now, writer.emit);
+    if (maintainPhaseOpportunity(draft, writer.emit))
+      synchronizePrompt(draft, now, writer.emit);
     checkEliminations(draft, writer.emit);
   } catch (error) {
     if (error instanceof CommandError) return reject(error.code);

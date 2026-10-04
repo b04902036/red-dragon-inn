@@ -23,6 +23,7 @@ import { assertResolutionState } from './resolution-state';
 import { assertGamblingState } from './gambling-state';
 import { systemActionSchema } from './system-actions';
 import { timedPromptSchema, phaseEndSchema } from './timed-prompts';
+import { traitSchema } from '../content/mechanics';
 const acceptedCommandSchema = z.union([
   clientCommandSchema,
   systemActionSchema,
@@ -62,6 +63,12 @@ export function assertCoreInvariants(state: CoreGameState): void {
   assertGamblingState(state);
   requireInvariant(ids.has(state.control.hostPlayerId), 'host is not a player');
   safeInteger.nonnegative().parse(state.control.turnNumber);
+  if (state.control.resolutionOrdinal !== undefined)
+    safeInteger.nonnegative().parse(state.control.resolutionOrdinal);
+  if (state.control.normalOrderDone !== undefined)
+    z.boolean().parse(state.control.normalOrderDone);
+  if (state.control.phaseOpportunityKey !== undefined)
+    z.string().max(128).parse(state.control.phaseOpportunityKey);
   if (state.control.phaseEnd !== null) {
     const grace = phaseEndSchema.parse(state.control.phaseEnd);
     requireInvariant(
@@ -123,6 +130,9 @@ export function assertCoreInvariants(state: CoreGameState): void {
       'invalid finished match',
     );
   for (const player of state.players) {
+    z.array(traitSchema)
+      .max(16)
+      .parse(player.traits ?? []);
     z.number().int().min(0).max(3).parse(player.seat);
     z.string().min(1).max(80).parse(player.displayName);
     z.boolean().parse(player.eliminated);
@@ -221,6 +231,12 @@ export function assertCoreInvariants(state: CoreGameState): void {
       deckId: state.innDrinkDeck.deckId,
     });
   for (const frame of state.resolutionStack) {
+    const held = [
+      ...(frame.heldDrinkCardIds ?? []),
+      ...(frame.pendingDrinks ?? []).flatMap((work) => work.sourceCardIds),
+    ];
+    for (const id of held)
+      locate(id, null, { zone: 'RESOLUTION', resolutionId: frame.id });
     const sourceCards =
       frame.sourceCardIds ??
       (frame.sourceCardId === null ? [] : [frame.sourceCardId]);

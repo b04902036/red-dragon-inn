@@ -5,8 +5,16 @@ import { resolutionIdSchema } from '../shared/ids';
 import type { CoreGameState, MutableGameState } from './types';
 import { CommandError, requireCommand } from './errors';
 import { activeGamblers } from './gambling';
-import { hasChosenTarget, validateEffects } from './card-effects-validation';
-import { legalResponsesForPlayer, reactionContext } from './reaction-legality';
+import {
+  cardEffects,
+  hasChosenTarget,
+  validateEffects,
+} from './card-effects-validation';
+import {
+  legalResponsesForPlayer,
+  reactionContext,
+  phaseReactionContext,
+} from './reaction-legality';
 import { legalAnytimeCards } from './timed-prompts';
 
 export type CardPlayCommand = 'PLAY_CARD' | 'PLAY_RESPONSE' | 'GAMBLING_PLAY';
@@ -47,6 +55,33 @@ export function cardDefinitionForPlay(
     );
     return definition;
   }
+  if (
+    command === 'PLAY_CARD' &&
+    definition.type === 'SOMETIMES' &&
+    definition.phaseOpportunity === 'ORDER_DRINK'
+  ) {
+    requireCommand(
+      state.phase === 'ORDER_DRINK' && state.activePlayerId === playerId,
+      'ILLEGAL_TIMING',
+    );
+    requireCommand(
+      state.resolutionStack.length === 0 ||
+        (state.resolutionStack.at(-1)?.task?.kind === 'PHASE' &&
+          state.responseWindow?.priorityPlayerId === playerId),
+      'RESOLUTION_PENDING',
+    );
+    requireCommand(
+      legalResponsesForPlayer(
+        state,
+        playerId,
+        state.resolutionStack.length === 0
+          ? phaseReactionContext(state)
+          : reactionContext(state, state.resolutionStack.at(-1)!),
+      ).some((play) => play.cardId === cardId),
+      'ILLEGAL_TIMING',
+    );
+    return definition;
+  }
   requireCommand(state.responseWindow === null, 'RESOLUTION_PENDING');
   if (command === 'GAMBLING_PLAY') {
     const round = state.gambling;
@@ -81,11 +116,14 @@ export function cardDefinitionForPlay(
     if (definition.gambling?.immediateWin) effects.push({ op: 'WIN_GAMBLING' });
     return { ...definition, effects };
   }
-  requireCommand(
-    state.gambling === null && state.resolutionStack.length === 0,
-    'RESOLUTION_PENDING',
-  );
   if (definition.type === 'ANYTIME') {
+    requireCommand(
+      state.resolutionStack.length === 0 ||
+        (state.gambling?.stage === 'ROUND' &&
+          state.resolutionStack.at(-1)?.id ===
+            state.gambling.suspended.resolutionId),
+      'RESOLUTION_PENDING',
+    );
     if (state.control.phaseEnd !== null) {
       requireCommand(
         state.control.phaseEnd.priorityPlayerId === playerId,
@@ -98,6 +136,10 @@ export function cardDefinitionForPlay(
     }
     return definition;
   }
+  requireCommand(
+    state.gambling === null && state.resolutionStack.length === 0,
+    'RESOLUTION_PENDING',
+  );
   requireCommand(state.control.phaseEnd === null, 'RESOLUTION_PENDING');
   requireCommand(state.activePlayerId === playerId, 'NOT_ACTIVE_PLAYER');
   requireCommand(state.phase === 'ACTION', 'WRONG_PHASE');
@@ -140,9 +182,13 @@ export function legalCardPlays(
       ...(promptId === undefined ? {} : { promptId }),
     }));
   }
-  const commandType = state.gambling === null ? 'PLAY_CARD' : 'GAMBLING_PLAY';
   const legal: LegalPlay[] = [];
   for (const cardId of player.hand) {
+    const commandType =
+      state.gambling !== null &&
+      state.definitions[state.cards[cardId]!.definitionId]!.type !== 'ANYTIME'
+        ? 'GAMBLING_PLAY'
+        : 'PLAY_CARD';
     let definition: CardDefinition;
     try {
       definition = cardDefinitionForPlay(state, playerId, cardId, commandType);
@@ -153,7 +199,12 @@ export function legalCardPlays(
     const requiresTarget = hasChosenTarget(definition.effects);
     const targets = requiresTarget
       ? state.players
-          .filter((p) => !p.eliminated && p.id !== playerId)
+          .filter(
+            (p) =>
+              !p.eliminated &&
+              (definition.targetPolicy === 'ANY_LIVING_PLAYER' ||
+                p.id !== playerId),
+          )
           .map((p) => p.id)
       : [undefined];
     const legalTargetPlayerIds: PlayerId[] = [];
@@ -170,7 +221,7 @@ export function legalCardPlays(
             sourceCardId: cardId,
             sourceRevealed: true,
             targetPlayerIds: target === undefined ? [] : [target],
-            effects: JSON.parse(JSON.stringify(definition.effects)) as Effect[],
+            effects: cardEffects(definition),
             nextEffectIndex: 0,
             parentId: parent?.id ?? null,
             stage: 'RESPONSES',
