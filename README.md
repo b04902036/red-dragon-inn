@@ -20,6 +20,15 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`). This expl
 
 If browser installation needs Linux system libraries, use `npx playwright install --with-deps chromium`.
 
+For Cloudflare quick tunnels, `vite.config.ts` allows `.trycloudflare.com`, including the changing subdomain assigned when a tunnel starts. Restart `npm run dev` after configuration changes, keep the tunnel pointed at the local URL printed by Vite, and refresh the tunnel URL. No hostname edit is needed when the quick-tunnel URL changes. This trusts Cloudflare's quick-tunnel domain; unrelated domains remain blocked. For a tunnel using your own custom domain, allow that exact hostname for the development session in PowerShell:
+
+```powershell
+$env:__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS = 'game.your-domain.example'
+npm run dev
+```
+
+Vite's [host allowlist](https://vite.dev/config/server-options.html#server-allowedhosts) accepts this environment variable. Keep additional hosts explicit rather than setting `allowedHosts: true`.
+
 To create and seed the local content database:
 
 ```sh

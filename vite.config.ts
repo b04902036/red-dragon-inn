@@ -4,4 +4,8 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react(), cloudflare()],
+  server: {
+    // Quick tunnels receive a different subdomain each time they start.
+    allowedHosts: ['.trycloudflare.com'],
+  },
 });
