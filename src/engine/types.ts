@@ -30,6 +30,7 @@ export interface CoreGameState extends AuthoritativeGameState {
     readonly hostPlayerId: PlayerId;
     readonly turnNumber: number;
     readonly eliminationCheckPending: boolean;
+    readonly deferredContestPassOutPlayerIds?: readonly PlayerId[];
     readonly timedPrompt: TimedPrompt | null;
     readonly phaseEnd: PhaseEndWindow | null;
     readonly acceptedCommands: Readonly<Record<CommandId, CommandReceipt>>;

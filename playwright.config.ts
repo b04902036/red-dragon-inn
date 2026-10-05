@@ -2,7 +2,11 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
-  testIgnore: ['**/rdi1-content.spec.ts', '**/rdi1-full-verification.spec.ts'],
+  testIgnore: [
+    '**/rdi1-content.spec.ts',
+    '**/rdi1-full-verification.spec.ts',
+    '**/dev-card-selection.spec.ts',
+  ],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -15,6 +19,7 @@ export default defineConfig({
     {
       name: 'chromium',
       testIgnore: [
+        '**/dev-card-selection.spec.ts',
         '**/replay-inspector.spec.ts',
         '**/localization.spec.ts',
         '**/rdi1-content.spec.ts',

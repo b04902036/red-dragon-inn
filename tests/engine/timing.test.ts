@@ -288,7 +288,8 @@ describe('response priority and source resolution', () => {
     expect(passWindow(parent.state).state.players[1]!.fortitude).toBe(20);
   });
   it('preserves a suspended turn when an out-of-turn Anytime card opens its own source', () => {
-    const initial = started(1, 7);
+    const initial = mutable(started(1, 7));
+    initial.players[1]!.fortitude = 19;
     const cardId = cardInHand(initial, 1, 'breather');
     const queued = accepted(
       initial,
@@ -301,13 +302,13 @@ describe('response priority and source resolution', () => {
     const complete = passWindow(queued.state);
     expect(complete.state.phase).toBe('DISCARD_DRAW');
     expect(complete.state.control.turnNumber).toBe(1);
-    expect(complete.state.players[1]!.fortitude).toBe(21);
+    expect(complete.state.players[1]!.fortitude).toBe(20);
   });
   it('allows Anytime responses during a source window', () => {
     const queued = playAction();
     const complete = passWindow(response(queued.state, 1, 'breather').state);
-    expect(complete.state.players[1]!.fortitude).toBe(21);
-    expect(passWindow(complete.state).state.players[1]!.fortitude).toBe(19);
+    expect(complete.state.players[1]!.fortitude).toBe(20);
+    expect(passWindow(complete.state).state.players[1]!.fortitude).toBe(18);
   });
 });
 
@@ -548,7 +549,7 @@ describe('validated effect operations and choices', () => {
       },
       'INVALID_EFFECT',
     );
-    expect(passWindow(state).state.players[1]!.fortitude).toBe(100);
+    expect(passWindow(state).state.players[1]!.fortitude).toBe(20);
   });
   it.each([Number.MAX_SAFE_INTEGER, -Number.MAX_SAFE_INTEGER])(
     'saturates sequential resource changes at safe integer boundary %s',
@@ -590,7 +591,7 @@ describe('validated effect operations and choices', () => {
     const complete = passWindow(playAction(actionState(effects)).state);
     expect(complete.state.players[0]).toMatchObject({
       fortitude: 0,
-      alcoholContent: 100,
+      alcoholContent: 20,
       gold: 0,
     });
     expect(complete.state.players[1]!.gold).toBe(6);

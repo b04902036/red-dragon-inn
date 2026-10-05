@@ -58,10 +58,13 @@ export const resolutionFrameSchema = z.strictObject({
   pendingTasks: z.array(workflowTaskSchema).max(64).optional(),
   afterTasks: z.array(workflowTaskSchema).max(8).optional(),
   pendingDrinks: z.array(drinkWorkSchema).max(8).optional(),
+  pendingDrinkResolutions: z.array(drinkWorkSchema).max(32).optional(),
+  batchResponseComplete: z.boolean().optional(),
   heldDrinkCardIds: z.array(cardInstanceIdSchema).max(32).optional(),
   drinkProvenance: z.array(cardInstanceIdSchema).max(32).optional(),
   drinkRecipientId: playerIdSchema.optional(),
   alcoholAsFortitude: z.boolean().optional(),
+  contestScore: z.number().int().safe().optional(),
   origin: originSchema.optional(),
   responseToOrigin: originSchema.optional(),
   redirectedFortitudePlayerId: playerIdSchema.optional(),
@@ -125,6 +128,9 @@ export function assertResolutionState(state: CoreGameState) {
     ...frames.flatMap(
       (source) => source.pendingDrinks?.map((work) => work.id) ?? [],
     ),
+    ...frames.flatMap(
+      (source) => source.pendingDrinkResolutions?.map((work) => work.id) ?? [],
+    ),
   ];
   assert(
     new Set(workIds).size === workIds.length,
@@ -182,9 +188,15 @@ export function assertResolutionState(state: CoreGameState) {
       'invalid virtual Drink provenance',
     );
     assert(
-      (frame.pendingDrinks ?? []).every(
+      [
+        ...(frame.pendingDrinks ?? []),
+        ...(frame.pendingDrinkResolutions ?? []),
+      ].every(
         (work) =>
           ids.has(work.actorId) &&
+          (work.drinkRecipientId === undefined ||
+            ids.has(work.drinkRecipientId)) &&
+          (work.ignoredPlayerIds ?? []).every((id) => ids.has(id)) &&
           [...work.sourceCardIds, ...work.provenanceCardIds].every(
             (id) => state.cards[id]?.ownerId === null,
           ),

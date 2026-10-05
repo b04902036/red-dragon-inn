@@ -37,11 +37,20 @@ async function route(request: Request, env: Env): Promise<Response> {
         return apiError('INVALID_REQUEST', 400);
       }
       const roomId = roomIdSchema.parse(opaqueId('room'));
+      const localDevelopment =
+        env.DEV_CARD_SELECTION === 'true' &&
+        ['127.0.0.1', 'localhost', '[::1]'].includes(
+          new URL(request.url).hostname,
+        );
       return env.ROOMS.getByName(roomId).fetch(
         new Request('https://room/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...input, roomId }),
+          body: JSON.stringify({
+            ...input,
+            roomId,
+            ...(localDevelopment ? { devCardSelection: true } : {}),
+          }),
         }),
       );
     }

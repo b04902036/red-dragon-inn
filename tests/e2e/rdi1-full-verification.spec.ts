@@ -218,7 +218,7 @@ test('four production RDI1 browsers verify nested counters, timers, gambling, Dr
     await play(0, 'gain_two_fortitude');
     await settled();
     expect(await voiceCount(0)).toBe(graceVoices);
-    expect((await view()).players[0]!.fortitude).toBe(22);
+    expect((await view()).players[0]!.fortitude).toBe(20);
     await replay();
 
     await stage('gambling');

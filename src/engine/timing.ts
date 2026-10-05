@@ -90,6 +90,9 @@ function pushDrinkWork(
     sourceCardIds: work.sourceCardIds,
     drinkProvenance: work.provenanceCardIds,
     alcoholAsFortitude: work.alcoholAsFortitude,
+    ...(work.contestScore === undefined
+      ? {}
+      : { contestScore: work.contestScore }),
     origin: {
       playerId: work.actorId,
       cardId: work.provenanceCardIds[0] ?? null,
@@ -99,9 +102,16 @@ function pushDrinkWork(
     effects: work.effects,
     nextEffectIndex: 0,
     parentId: parent.id,
-    stage: 'RESPONSES',
-    canceled: false,
-    ignoredPlayerIds: [],
+    stage: work.responseComplete ? 'OPERATIONS' : 'RESPONSES',
+    canceled: work.canceled ?? false,
+    ignoredPlayerIds: work.ignoredPlayerIds ?? [],
+    ...(work.drinkRecipientId === undefined
+      ? {}
+      : { drinkRecipientId: work.drinkRecipientId }),
+    ...(work.afterTasks === undefined ? {} : { afterTasks: work.afterTasks }),
+    ...(work.responseComplete === undefined
+      ? {}
+      : { batchResponseComplete: work.responseComplete }),
     window: null,
     continuation: 'RESUME',
     selectedOptionId: null,
@@ -109,14 +119,15 @@ function pushDrinkWork(
   for (const id of work.sourceCardIds)
     state.cards[id]!.location = { zone: 'RESOLUTION', resolutionId: frame.id };
   state.resolutionStack.push(frame);
-  emit({
-    type: 'RESOLUTION_STARTED',
-    resolutionId: frame.id,
-    parentId: parent.id,
-    cardId: frame.sourceCardId,
-    playerId: frame.actorId!,
-  });
-  openWindow(state, frame, 'SOMETIMES', emit);
+  if (!work.responseComplete)
+    emit({
+      type: 'RESOLUTION_STARTED',
+      resolutionId: frame.id,
+      parentId: parent.id,
+      cardId: frame.sourceCardId,
+      playerId: frame.actorId!,
+    });
+  if (!work.responseComplete) openWindow(state, frame, 'SOMETIMES', emit);
 }
 export function maintainPhaseOpportunity(
   state: MutableGameState,
@@ -518,6 +529,72 @@ export function drain(
       state.responseWindow = frame.window;
       return;
     }
+    if (frame.contestScore !== undefined) {
+      const batch = state.resolutionStack.find(
+        (entry) => entry.id === frame.parentId,
+      )?.task;
+      if (batch?.kind === 'DRINK_BATCH' && batch.contestRules !== undefined) {
+        const score = batch.scores.find(
+          (entry) => entry.playerId === frame.actorId,
+        );
+        if (score) score.score = Math.max(0, frame.contestScore);
+      }
+    }
+    if (
+      (frame.kind === 'DRINK' || frame.kind === 'DRINK_EVENT') &&
+      !frame.batchResponseComplete
+    ) {
+      const batch = [...state.resolutionStack.slice(0, -1)]
+        .reverse()
+        .find(
+          (entry) =>
+            entry.task?.kind === 'DRINK_BATCH' &&
+            entry.task.deferDrinkConsumption &&
+            !entry.task.consumingDrinks,
+        );
+      if (batch) {
+        batch.pendingDrinkResolutions ??= [];
+        requireCommand(
+          batch.pendingDrinkResolutions.length < 32,
+          'STACK_LIMIT',
+        );
+        batch.pendingDrinkResolutions.push({
+          id: frame.id,
+          actorId: frame.actorId!,
+          kind: frame.kind,
+          sourceCardIds: frame.sourceCardIds!,
+          provenanceCardIds: frame.drinkProvenance ?? frame.sourceCardIds!,
+          effects: frame.effects,
+          score: 0,
+          alcoholAsFortitude: frame.alcoholAsFortitude ?? false,
+          responseComplete: true,
+          canceled: frame.canceled,
+          ignoredPlayerIds: frame.ignoredPlayerIds,
+          ...(frame.drinkRecipientId === undefined
+            ? {}
+            : { drinkRecipientId: frame.drinkRecipientId }),
+          ...(frame.contestScore === undefined
+            ? {}
+            : { contestScore: frame.contestScore }),
+          ...(frame.afterTasks === undefined
+            ? {}
+            : { afterTasks: frame.afterTasks }),
+        });
+        batch.pendingDrinks ??= [];
+        batch.pendingDrinks.unshift(...(frame.pendingDrinks ?? []));
+        for (const id of [
+          ...frame.sourceCardIds!,
+          ...(frame.pendingDrinks ?? []).flatMap((work) => work.sourceCardIds),
+        ])
+          state.cards[id]!.location = {
+            zone: 'RESOLUTION',
+            resolutionId: batch.id,
+          };
+        state.resolutionStack.pop();
+        state.responseWindow = batch.window;
+        continue;
+      }
+    }
     while (!frame.canceled && frame.nextEffectIndex < frame.effects.length) {
       const effect = frame.effects[frame.nextEffectIndex]!;
       if (
@@ -562,6 +639,11 @@ export function drain(
     }
     if (frame.pendingDrinks?.length) {
       pushDrinkWork(state, frame, frame.pendingDrinks.shift()!, emit);
+      continue;
+    }
+    if (frame.pendingDrinkResolutions?.length) {
+      if (frame.task?.kind === 'DRINK_BATCH') frame.task.consumingDrinks = true;
+      pushDrinkWork(state, frame, frame.pendingDrinkResolutions.shift()!, emit);
       continue;
     }
     if (
@@ -790,7 +872,11 @@ export function executeTimingCommand(
     )
       return false;
     requireCommand(state.lifecycle === 'PLAYING', 'WRONG_LIFECYCLE');
-    requireCommand(!player.eliminated, 'NOT_ELIGIBLE');
+    requireCommand(
+      !player.eliminated &&
+        !state.control.deferredContestPassOutPlayerIds?.includes(actorId),
+      'NOT_ELIGIBLE',
+    );
     requireCommand(player.hand.includes(command.cardId), 'CARD_NOT_IN_HAND');
     if (state.control.phaseEnd !== null && definition.type === 'ANYTIME') {
       const grace = state.control.phaseEnd;

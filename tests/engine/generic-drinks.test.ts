@@ -19,6 +19,7 @@ import {
 
 function drinks(suffixes = ['fizz']) {
   const state = drinkState(suffixes);
+  state.players[0]!.fortitude = 15;
   state.rules.timing = { ...DEFAULT_RULES.timing };
   const id = state.cards[state.players[0]!.drinkPile[0]!]!.definitionId;
   if (state.definitions[id]!.type === 'DRINK')

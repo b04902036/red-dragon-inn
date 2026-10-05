@@ -1,0 +1,45 @@
+﻿mechanic_id,type,en-US,zh-TW,dimli,eve,fleck,gog,verification_basis
+gambling_start_or_control,GAMBLING,Join the Game,加入賭局,6,6,6,6,community_matrix;official_rdi2_9e
+gambling_raise_one,GAMBLING,Raise the Stakes,加注,2,2,2,2,community_matrix;official_rdi2_9e
+gambling_winning_hand,GAMBLING,Strong Hand,好牌在手,2,2,2,2,community_matrix;official_rdi2_9e
+cheat_take_control,CHEATING,Under-the-Table Trick,桌下花招,0,3,4,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+cheat_control_and_eject,CHEATING,Rig the Table,做局趕人,0,1,1,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+anti_cheat_win_round,SOMETIMES,Catch the Cheat,抓到作弊,0,0,0,1,community_matrix;official_rdi2_9e;official_gog
+dump_gambling_pot_to_inn,SOMETIMES,The House Takes the Pot,酒館收走賭池,1,1,1,1,community_matrix;official_rdi2_9e
+restart_gambling_round,SOMETIMES,Run It Back,再賭一局,1,0,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+substitute_payment_from_inn,SOMETIMES,Use the Inn's Gold,用酒館的金幣,2,0,2,2,community_matrix;the_inn_uploaded;official_rdi2_9e
+illusionary_payment,SOMETIMES,Illusory Payment,幻象金幣,0,2,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+take_one_from_pot,SOMETIMES,Palm a Coin,順手摸走一枚,0,1,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+avoid_ante_leave,SOMETIMES,Sit This One Out,這局先退出,2,0,1,2,community_matrix;the_inn_uploaded;official_rdi2_9e
+avoid_ante_leave_or_ignore_drink,SOMETIMES,Leave or Refuse the Drink,退出或擋酒,1,1,1,1,community_matrix;the_inn_uploaded;official_rdi2_9e
+ignore_card_all_stats,SOMETIMES,Disbelieve the Effect,拒絕相信這個效果,0,2,0,1,community_matrix;official_rdi2_9e
+ignore_card_fortitude,SOMETIMES,Brace Against the Hit,擋下耐力傷害,1,0,0,2,community_matrix;official_rdi2_9e
+negate_sometimes_counter,SOMETIMES,Hard No,強硬否決,1,1,1,1,community_matrix;official_rdi2_9e
+ignore_drink,SOMETIMES,Refuse the Drink,這杯不喝,2,2,2,2,community_matrix;official_rdi2_9e
+order_two_extra_drinks_paid,SOMETIMES,Order Two More,再請兩杯,2,2,0,2,community_matrix;the_inn_uploaded;official_rdi2_9e
+order_two_extra_drinks_free_or_waive_refill,SOMETIMES,Pay With a Song,用歌聲買單,0,0,2,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+all_players_drink_from_inn,ACTION,Toast the Whole Table,全桌乾杯,0,0,1,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+force_extra_drink_during_other_drink_phase,SOMETIMES,Drink One More,再喝一杯,1,0,0,2,community_matrix;official_rdi2_9e
+pass_own_drink,SOMETIMES,Pass the Mug,把酒杯傳走,2,0,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+split_own_drink,SOMETIMES,Share the Mug,一起分這杯,1,0,2,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+alcohol_to_fortitude,SOMETIMES,Turn Spirits Into Courage,酒意化為勇氣,1,0,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+add_two_alcohol_to_drink,SOMETIMES,Spike the Drink,把酒加烈,2,0,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+replace_drink_with_four_alcohol,SOMETIMES,Make It Dragonfire,變成龍火烈酒,0,1,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+negate_drink_change_card,SOMETIMES,Stop Messing With Drinks,別再動飲料,1,1,1,1,community_matrix;official_rdi2_9e
+all_lose_one_alcohol_collect_one_each_other,ACTION,Sad Song,悲傷之歌,0,0,1,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+give_two_alcohol,ACTION,Mesmerizing Suggestion,迷幻催眠,0,2,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+damage_one,ACTION,Light Hit,輕擊,1,2,1,0,community_matrix;official_rdi2_9e
+damage_two,ACTION,Solid Hit,強力一擊,5,0,2,5,community_matrix;official_rdi2_9e
+damage_three,ACTION,Real Fire,真正的火焰,0,2,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+damage_three_pay_inn_one,ACTION,Reckless Smash,魯莽重擊,0,0,0,1,community_matrix;official_rdi2_9e;official_gog
+damage_four,ACTION,Huge Smash,超重擊,0,0,0,1,community_matrix;official_rdi2_9e;official_gog
+damage_all_others_one,ACTION,Everybody Gets Hit,大家都被打,0,0,0,1,community_matrix;official_rdi2_9e;official_gog
+rowdy_song,ACTION,Rowdy Drinking Song,吵鬧飲酒歌,0,0,2,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+hit_back_two_after_loss,SOMETIMES,Hit Back,打回去,1,0,1,1,community_matrix;official_rdi2_9e
+share_pain,SOMETIMES,Share the Pain,分攤傷害,0,1,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+redirect_fortitude_loss,SOMETIMES,Redirect the Hit,轉移傷害,0,1,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+gain_two_fortitude,ANYTIME,Second Wind,喘口氣,0,0,1,1,community_matrix;official_rdi2_9e
+collect_one_from_each_other,ACTION,Impress the Table,讓全桌買單,1,1,1,1,community_matrix;official_rdi2_9e
+take_one_gold,ACTION,Pocket One Coin,拿走一枚金幣,0,2,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+take_two_gold,ACTION,Pocket Two Coins,拿走兩枚金幣,0,0,1,0,community_matrix;the_inn_uploaded;official_rdi2_9e
+tip_wench,ANYTIME,Tip the Wench,給女侍小費,1,1,1,1,community_matrix;official_rdi2_9e

@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "engineBaseline": "step-20",
   "sha256": {
-    "content-private/imports/rdi1/source-normalized.json": "91357d8e03180e397caf760ac0fbadac9c1260a79a89eeea81751ea5619b2156",
-    "reference/rdi1/rdi1-mechanics-matrix.csv": "9d63167e0cd2597c5ada0d016c02776d5b7b4f5f986265c6455a8eaed1d8a575",
+    "content-private/imports/rdi1/source-normalized.json": "12412c1a6deea2729c78667ae7bccead734f0590dcc84c33e4dcd2b50a3982d7",
+    "reference/rdi1/rdi1-mechanics-matrix.csv": "72616e313cca269be28bda44659e18c4724f5b55208e00c58cff9018ae6d2cd2",
     "reference/rdi1/rdi1-card-matrix.md": "9ab83fd12044f9c175afc8ffbf10b9755a74fd6317fb98edb3f132145b9d23e0",
-    "reference/rdi1/source-evidence.md": "6e219e008f0848dbe31bfc23339ca061c4fbd09123bf399db5a2bd812accfa4e",
+    "reference/rdi1/source-evidence.md": "d690c262a787f345ea120db14d9cfe81448796ec6577e63b5fb2df8ff9b22559",
     "reference/rdi1/required-engine-capabilities.json": "53bbbe1104e6ac7b134c5a5e8c2ef993e8afc43076caffda30048b01edcc95aa",
-    "reference/rdi1/sometimes-legality-fixtures.json": "3e3d439a2ff3205a6157231740752df7055d2733d2e5d06198f4311c2d1b6937"
+    "reference/rdi1/sometimes-legality-fixtures.json": "426871537f509658c332554cb8dc8cd764935c1f4bc3d4b61e588d78a9fea1bc"
   }
 }

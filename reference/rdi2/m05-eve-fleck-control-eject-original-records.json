@@ -1,0 +1,96 @@
+{
+  "purpose": "Unblock Step 24A M05 verification for Eve/Fleck control-and-eject Cheating cards.",
+  "source": {
+    "origin": "user-provided HaxxonHax/the-inn ZIP",
+    "note": "These are verbatim JSON records extracted from the user's uploaded repository."
+  },
+  "cards": {
+    "eve": {
+      "sourceFile": "Cards/base/eve/eve.json",
+      "sourceFileSha256": "6615dd874459844e499bcf607c1efa48f77d5d913d5edebbc147e712952b82c1",
+      "recordCanonicalSha256": "27895b9d974767ea424fea895dbea2fb3d41fd5317458f535b9f81530190645a",
+      "record": {
+        "name": "What's that up your sleeve?",
+        "type": "base",
+        "description": "What's that up your sleeve?",
+        "data": {
+          "type": "Cheating"
+        },
+        "suit": "",
+        "value": 0,
+        "back": {
+          "name": "Eve the Illusionist",
+          "text": "Eve the Illusionist",
+          "image": "Cards/base/eve/eve-the-illusionist-back.png"
+        },
+        "faces": [
+          {
+            "name": "What's that up your sleeve?",
+            "img": "Cards/base/eve/whats-that-up-your-sleeve.png",
+            "text": "<div class=\"cardtext\">Take control of a Round of Gambling</div><div class=\"cardtext\">-AND-</div><div class=\"cardtext\">Pick one player in the current Round of Gambling and force them to leave the Round. They may not play any more Gambling or Cheating Cards during this Round. Any Gold they have already anted stays.</div>"
+          }
+        ],
+        "face": 0,
+        "drawn": false,
+        "width": 2,
+        "height": 3,
+        "rotation": 0,
+        "flags": {}
+      }
+    },
+    "fleck": {
+      "sourceFile": "Cards/base/fleck/fleck.json",
+      "sourceFileSha256": "0eeea03f64b4e787a2766d7a79627a69ce5e1f8709ba2ae5c6d62150dbdea648",
+      "recordCanonicalSha256": "e491e3d4eb1ded9591e0561d54a158c63370505844792133eb2e38742cfe2a9a",
+      "record": {
+        "name": "What's that up your sleeve?",
+        "type": "base",
+        "description": "What's that up your sleeve?",
+        "data": {
+          "type": "Cheating"
+        },
+        "suit": "",
+        "value": 0,
+        "back": {
+          "name": "Fleck the Bard",
+          "text": "Fleck the Bard",
+          "img": "Cards/base/fleck/fleck-the-bard-back.png"
+        },
+        "faces": [
+          {
+            "name": "What's that up your sleeve?",
+            "img": "Cards/base/fleck/whats-that-up-your-sleeve.png",
+            "text": "<div class=\"cardtext\">Take control of a Round of Gambling</div><div class=\"cardtext\">-AND-</div><div class=\"cardtext\">Pick one player in the current Round of Gambling and force them to leave the Round. They may not play any more Gambling or Cheating Cards during this Round. Any Gold they have already anted stays.</div>"
+          }
+        ],
+        "face": 0,
+        "drawn": false,
+        "width": 2,
+        "height": 3,
+        "rotation": 0,
+        "flags": {}
+      }
+    }
+  },
+  "verificationNotes": {
+    "identicalRuleText": true,
+    "cardType": "Cheating",
+    "verbatimMechanicalTextSummary": [
+      "Take control of the current Round of Gambling.",
+      "Pick one player in the current Round of Gambling and force that player to leave.",
+      "That player may not play any more Gambling or Cheating cards during that Round.",
+      "Any Gold already anted stays in the pot."
+    ],
+    "importantTargetAmbiguity": {
+      "sourceWording": "Pick one player in the current Round of Gambling",
+      "doNotAssume": "Do not silently rewrite this as OTHER_ACTIVE_GAMBLER / another player unless a primary official source explicitly excludes self-targeting.",
+      "required24AAction": "Record the exact source wording. Use current official gambling rules for forced-leave response timing and post-leave restrictions. If self-target legality remains unproven, leave only that sub-point unresolved rather than guessing."
+    },
+    "officialGenericRulesToApply": [
+      "Before a forced leave completes, every player, including the player being forced out, gets a response opportunity.",
+      "After leaving the Round, that player cannot play Gambling or Cheating cards for the rest of the Round, but may still play legal Sometimes/Anytime cards.",
+      "Gold already anted remains in the pot.",
+      "If the forced leave would leave only one participant, the final response opportunity occurs before the remaining player wins."
+    ]
+  }
+}

@@ -22,6 +22,7 @@ export interface ReactionContext {
   readonly capabilities: ReturnType<typeof sourceCapabilities>;
   readonly counterFamily: string | null;
   readonly counterProtected: boolean;
+  readonly allowedCounterFamilies: readonly string[] | null;
   readonly frame: ResolutionFrame;
   readonly sourceKind: ResolutionFrame['kind'];
   readonly sourceType: CardDefinition['type'] | null;
@@ -131,7 +132,10 @@ export function reactionContext(
       state.resolutionStack.find((parent) => parent.id === frame.parentId),
     ),
     counterFamily: definition?.counterFamily ?? null,
-    counterProtected: definition?.counterPolicy === 'SAME_FAMILY_ONLY',
+    counterProtected:
+      definition?.counterPolicy === 'SAME_FAMILY_ONLY' ||
+      definition?.allowedCounterFamilies !== undefined,
+    allowedCounterFamilies: definition?.allowedCounterFamilies ?? null,
     frame,
     sourceKind: frame.kind,
     sourceType: definition?.type ?? null,
@@ -376,6 +380,7 @@ export function legalResponsesForPlayer(
   if (
     !player ||
     player.eliminated ||
+    state.control.deferredContestPassOutPlayerIds?.includes(playerId) ||
     state.lifecycle !== 'PLAYING' ||
     context.frame.canceled ||
     state.resolutionStack.length >= 32 ||
@@ -456,10 +461,20 @@ export function legalResponsesForPlayer(
     )
       continue;
     if (
-      definition.effects.some((e) => e.op === 'NEGATE') &&
+      definition.effects.some((e) =>
+        [
+          'NEGATE',
+          'IGNORE',
+          'MODIFY_PENDING_EFFECT',
+          'REDIRECT_FORTITUDE_LOSS',
+        ].includes(e.op),
+      ) &&
       context.counterProtected &&
-      (context.counterFamily === null ||
-        definition.counterFamily !== context.counterFamily)
+      (context.allowedCounterFamilies !== null
+        ? definition.counterFamily === undefined ||
+          !context.allowedCounterFamilies.includes(definition.counterFamily)
+        : context.counterFamily === null ||
+          definition.counterFamily !== context.counterFamily)
     )
       continue;
     const requiresTarget = hasChosenTarget(definition.effects);
@@ -468,6 +483,9 @@ export function legalResponsesForPlayer(
           .filter(
             (target) =>
               !target.eliminated &&
+              !state.control.deferredContestPassOutPlayerIds?.includes(
+                target.id,
+              ) &&
               (definition.targetPolicy === 'ANY_LIVING_PLAYER' ||
                 target.id !== playerId),
           )
@@ -535,6 +553,10 @@ export function timingOrder(
   const ordered = [...state.players].sort((a, b) => a.seat - b.seat);
   const index = ordered.findIndex((player) => player.id === origin);
   return [...ordered.slice(index), ...ordered.slice(0, index)]
-    .filter((player) => !player.eliminated)
+    .filter(
+      (player) =>
+        !player.eliminated &&
+        !state.control.deferredContestPassOutPlayerIds?.includes(player.id),
+    )
     .map((player) => player.id);
 }

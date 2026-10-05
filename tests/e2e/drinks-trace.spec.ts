@@ -21,8 +21,8 @@ test('Drink chain report waits for responses, passes out at equality, redistribu
     await expect(rows.nth(i).locator('td').nth(4)).toHaveText('Playing');
   }
   await expect(rows.nth(1).locator('td').nth(1)).toContainText('→');
-  await expect(rows.last().locator('td').nth(2)).toHaveText('22');
-  await expect(rows.last().locator('td').nth(3)).toHaveText('22');
+  await expect(rows.last().locator('td').nth(2)).toHaveText('20');
+  await expect(rows.last().locator('td').nth(3)).toHaveText('20');
   await expect(rows.last().locator('td').nth(4)).toHaveText('Eliminated');
   await expect(rows.last().locator('td').nth(5)).toHaveText('0 / 11 / 11 / 11');
   await expect(rows.last().locator('td').nth(6)).toHaveText('DISCARD_DRAW');

@@ -14,6 +14,7 @@ import { socketAbuseSchema } from './abuse';
 export const roomRecordSchema = z
   .strictObject({
     schemaVersion: z.literal(1),
+    devCardSelection: z.literal(true).optional(),
     roomId: roomIdSchema,
     contentVersionId: contentVersionIdSchema,
     version: stateVersionSchema,

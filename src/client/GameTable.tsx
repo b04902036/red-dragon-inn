@@ -15,6 +15,7 @@ import type { MessageKey } from '../shared/ui-messages';
 import { useAttentionChime } from './audio/use-attention-chime';
 import { useResponseVoice } from './audio/use-response-voice';
 import { PromptCountdown } from './PromptCountdown';
+import { DevCardPicker } from './DevCardPicker';
 import { HandCard } from './cards/HandCard';
 import { CardPreview } from './cards/CardPreview';
 import { useCardSelection } from './cards/useCardSelection';
@@ -571,6 +572,26 @@ export function GameTable({
           </section>
         </aside>
       </div>
+      {state.privateView?.devChoices &&
+        (actions.includes('DISCARD') || actions.includes('ORDER_DRINK')) && (
+          <DevCardPicker
+            key={`${view.version}:${selected.join(',')}`}
+            choices={state.privateView.devChoices}
+            hand={hand}
+            discards={selected.filter((id) =>
+              hand.some((card) => card.id === id),
+            )}
+            players={view.players}
+            playerId={playerId}
+            phase={actions.includes('DISCARD') ? 'DISCARD_DRAW' : 'ORDER_DRINK'}
+            busy={busy}
+            presentation={presentation}
+            send={(type, fields) => {
+              send(type, fields);
+              selection.clear();
+            }}
+          />
+        )}
       <footer className="hand-dock">
         <div className="action-bar">
           <p>

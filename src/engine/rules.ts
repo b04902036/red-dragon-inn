@@ -10,6 +10,7 @@ const bounds = z
   .refine((value) => value.min <= value.max, 'Invalid stat bounds');
 export const rulesConfigSchema = z
   .strictObject({
+    devCardSelection: z.literal(true).optional(),
     initialStats: z.strictObject({
       fortitude: integer,
       alcoholContent: integer,
@@ -90,8 +91,8 @@ export const DEFAULT_RULES: RulesConfig = rulesConfigSchema.parse({
   handSize: 7,
   initialDrinkCount: 1,
   statBounds: {
-    fortitude: { min: 0, max: 100 },
-    alcoholContent: { min: 0, max: 100 },
+    fortitude: { min: 0, max: 20 },
+    alcoholContent: { min: 0, max: 20 },
     gold: null,
   },
 });

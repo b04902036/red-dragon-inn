@@ -90,6 +90,11 @@ export function prepareDrink(
     source,
     skipEvents,
     id: nextResolutionId(state),
+    payForRefill:
+      frame.task?.kind === 'DRINK_BATCH' &&
+      (frame.task.contestRules !== undefined ||
+        frame.task.source === 'INN' ||
+        frame.task.payForRefill === true),
   });
   const alcohol = drink.effects.find(
     (e) => e.op === 'CHANGE_STAT' && e.stat === 'ALCOHOL',
@@ -115,6 +120,7 @@ function copyDrink(
   halve: boolean,
 ) {
   const copy = clone(work);
+  delete copy.contestScore;
   copy.id = nextResolutionId(state);
   copy.actorId = actorId;
   copy.sourceCardIds = [];
@@ -155,6 +161,7 @@ function beginBatch(
   task.round++;
   task.initialized = true;
   task.scores = [];
+  if (task.deferDrinkConsumption) task.consumingDrinks = false;
   if (task.mode === 'HOUSE') {
     const work = prepareDrink(
       state,
@@ -177,8 +184,15 @@ function beginBatch(
         actor,
         emit,
         rng,
-        task.mode === 'CONTEST' ? 'INN' : 'DRINK_PILE',
+        task.mode === 'CONTEST' ? 'INN' : (task.source ?? 'DRINK_PILE'),
       );
+      if (task.mode === 'CONTEST' && task.contestRules !== undefined) {
+        if (work.kind === 'DRINK_EVENT') work.effects = [];
+        const alcohol = work.effects.find(
+          (effect) => effect.op === 'CHANGE_STAT' && effect.stat === 'ALCOHOL',
+        );
+        work.contestScore = alcohol?.op === 'CHANGE_STAT' ? alcohol.delta : 0;
+      }
       task.scores.push({ playerId: actor, score: work.score });
     }
   if (task.mode === 'CONTEST')
@@ -266,9 +280,40 @@ export function finishTask(
       }
       if (task.mode !== 'CONTEST') return true;
       const max = Math.max(...task.scores.map((s) => s.score));
-      const winners = task.scores
+      let winners = task.scores
         .filter((s) => s.score === max)
         .map((s) => s.playerId);
+      if (task.contestRules !== undefined) {
+        // A passed-out contestant leaves play immediately; their Gold remains
+        // available for the contest payment until final elimination settlement.
+        task.passedOutPlayerIds = [
+          ...new Set([
+            ...(task.passedOutPlayerIds ?? []),
+            ...state.players
+              .filter(
+                (player) =>
+                  !player.eliminated &&
+                  player.alcoholContent >= player.fortitude,
+              )
+              .map((player) => player.id),
+          ]),
+        ];
+        state.control.deferredContestPassOutPlayerIds = [
+          ...new Set([
+            ...(state.control.deferredContestPassOutPlayerIds ?? []),
+            ...task.passedOutPlayerIds,
+          ]),
+        ];
+        if (winners.length > 1)
+          winners = winners.filter(
+            (id) => !task.passedOutPlayerIds!.includes(id),
+          );
+        if (winners.length === 0) {
+          task.mode = 'SIMULTANEOUS';
+          changed(frame, 'CONTEST_NO_WINNER', emit, null, max);
+          return true;
+        }
+      }
       if (winners.length > 1) {
         task.participants = winners;
         task.initialized = false;
@@ -456,12 +501,38 @@ export function executeGenericOperation(
             : effect.op === 'ROUND_ON_HOUSE'
               ? 'HOUSE'
               : 'SIMULTANEOUS',
-        participants: state.players
-          .filter((p) => !p.eliminated)
-          .map((p) => p.id),
+        participants: (() => {
+          const living = [...state.players]
+            .sort((a, b) => a.seat - b.seat)
+            .filter(
+              (p) =>
+                !p.eliminated &&
+                !state.control.deferredContestPassOutPlayerIds?.includes(p.id),
+            );
+          if (effect.op !== 'DRINKING_CONTEST' || effect.rules === undefined)
+            return living.map((p) => p.id);
+          const index = living.findIndex((p) => p.id === state.activePlayerId);
+          return [...living.slice(index), ...living.slice(0, index)].map(
+            (p) => p.id,
+          );
+        })(),
         scores: [],
         round: 0,
         initialized: false,
+        ...(effect.op === 'FORCE_SIMULTANEOUS_DRINK' &&
+        effect.source !== undefined
+          ? { source: effect.source }
+          : {}),
+        ...(effect.op === 'DRINKING_CONTEST' && effect.rules !== undefined
+          ? { contestRules: effect.rules }
+          : {}),
+        ...((effect.op === 'DRINKING_CONTEST' && effect.rules !== undefined) ||
+        (effect.op === 'FORCE_SIMULTANEOUS_DRINK' && effect.source === 'INN')
+          ? { deferDrinkConsumption: true }
+          : {}),
+        ...(effect.op === 'ROUND_ON_HOUSE' && effect.payForRefill !== undefined
+          ? { payForRefill: effect.payForRefill }
+          : {}),
       });
       return true;
     case 'CONTEXT_BRANCH':

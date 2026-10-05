@@ -716,3 +716,18 @@ dialog button:focus-visible,
     transform: none;
   }
 }
+.dev-card-picker {
+  padding: 1rem;
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+}
+.dev-card-picker label {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.5rem;
+  max-width: calc(100% - 1rem);
+}
+.dev-card-picker select {
+  max-width: 100%;
+}

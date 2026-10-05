@@ -61,6 +61,7 @@ import {
 const createSchema = z.strictObject({
   ...roomJoinSchema.shape,
   roomId: roomIdSchema,
+  devCardSelection: z.literal(true).optional(),
 });
 type Rejection = Extract<ServerMessage, { type: 'COMMAND_REJECTED' }>;
 
@@ -243,6 +244,10 @@ export class GameRoom extends DurableObject<Env> {
         );
         const created: RoomRecord = {
           schemaVersion: 1,
+          ...(input.devCardSelection === true &&
+          this.env.DEV_CARD_SELECTION === 'true'
+            ? { devCardSelection: true as const }
+            : {}),
           roomId: input.roomId,
           contentVersionId: pack.version.id,
           version: stateVersionSchema.parse(0),
@@ -581,6 +586,14 @@ export class GameRoom extends DurableObject<Env> {
     session: SessionAttachment,
     command: ClientCommand,
   ) {
+    if (
+      (command.type === 'DEV_DISCARD_DRAW' ||
+        command.type === 'DEV_ORDER_DRINK') &&
+      this.env.DEV_CARD_SELECTION !== 'true'
+    ) {
+      this.reject(ws, room, 'NOT_ALLOWED', command.commandId);
+      return;
+    }
     if (command.type === 'JOIN_ROOM' || command.roomId !== room.roomId) {
       this.reject(ws, room, 'NOT_ALLOWED', command.commandId);
       return;
@@ -620,8 +633,9 @@ export class GameRoom extends DurableObject<Env> {
           seed: room.seed,
           version: room.version,
           content,
-          rules:
-            this.env.CONTENT_MODE === 'fixture' && this.env.FIXTURE_TIMING_MS
+          rules: rulesConfigSchema.parse({
+            ...(this.env.CONTENT_MODE === 'fixture' &&
+            this.env.FIXTURE_TIMING_MS
               ? rulesConfigSchema.parse({
                   ...DEFAULT_RULES,
                   timing: {
@@ -634,7 +648,11 @@ export class GameRoom extends DurableObject<Env> {
                     ),
                   },
                 })
-              : DEFAULT_RULES,
+              : DEFAULT_RULES),
+            ...(room.devCardSelection === true
+              ? { devCardSelection: true }
+              : {}),
+          }),
           players: room.players.map(
             ({ id, seat, displayName, characterId }) => ({
               id,
@@ -755,6 +773,7 @@ export class GameRoom extends DurableObject<Env> {
             sideDecks: {},
             pendingChoice: null,
           });
+    if (this.env.DEV_CARD_SELECTION !== 'true') delete privateView.devChoices;
     const signature = await digest(
       JSON.stringify({ ...privateView, version: 0 }),
     );

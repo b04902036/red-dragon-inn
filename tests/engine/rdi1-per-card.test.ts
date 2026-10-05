@@ -297,7 +297,7 @@ function assertSometimesEffect(
       break;
     case 'REPLACE_DRINK_ALCOHOL_WITH_FORTITUDE':
       expect(final.alcoholContent).toBe(actor.alcoholContent);
-      expect(final.fortitude).toBe(actor.fortitude + 2);
+      expect(final.fortitude).toBe(Math.min(20, actor.fortitude + 2));
       break;
     case 'MODIFY_DRINK': {
       const e = definition.effects[0]!;
@@ -326,6 +326,7 @@ describe('every compiled RDI1 Anytime definition', () => {
       const base = rdi1Match(rdi1Pack);
       const cardId = definitionCard(base, definition);
       const seat = base.players.findIndex((p) => p.hand.includes(cardId));
+      base.players[seat]!.fortitude = 18;
       const start = rdi1Card(base, 'gambling_start_or_control', seat);
       const damage = rdi1Card(base, 'damage_two', seat);
       rdi1Keep(base, [cardId, start, damage]);

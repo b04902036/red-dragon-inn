@@ -25,6 +25,16 @@ import {
 } from '../fixtures/rdi1-match';
 import type { CoreGameState } from '../../src/engine/types';
 
+// This suite checks response voice/highlight behavior. Web Audio decoding and
+// seamless looping are exercised separately in buffered-music and browser tests.
+vi.mock('../../src/client/audio/buffered-music', () => ({
+  BufferedMusic: class {
+    constructor(path: string) {
+      return new Audio(path);
+    }
+  },
+}));
+
 const presentation = contentPresentation(rdi1Pack, false);
 for (const definition of rdi1Pack.cards.filter((c) => c.type === 'SOMETIMES')) {
   it(`${definition.id}: real server highlight, owner-aware prompt, MP3 once, fresh prompt and reconnect deduplication`, async () => {

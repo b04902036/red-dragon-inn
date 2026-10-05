@@ -1,0 +1,26 @@
+{
+  "mustAuditAgainstCurrentRDI1Engine": [
+    "gambling.restart-before-payout",
+    "gold.prevent-loss",
+    "gambling.ante-satisfied-without-transfer",
+    "drink.replace-base-effects",
+    "damage.split-with-source",
+    "reaction.self-mitigation-lock",
+    "damage.redirect",
+    "drink.free-extra-orders",
+    "drink.refill-payment-waiver",
+    "drink.simultaneous-from-inn",
+    "drink.mead-built-in-split",
+    "drink.optional-two-drink-challenge",
+    "drink.trait-replacement-half-ogre",
+    "bar-deck.multi-set",
+    "effect.sequence"
+  ],
+  "timingInvariants": [
+    "Any legal Sometimes OR Anytime during an event/system response opportunity creates the configured 30-second response window.",
+    "Sometimes voice plays only when at least one legal Sometimes exists.",
+    "An Anytime-only 30-second response window does not play Sometimes voice.",
+    "Core phase end retains the separate 15-second Anytime grace.",
+    "Playing any card invalidates old prompt/deadline and recomputes legality."
+  ]
+}

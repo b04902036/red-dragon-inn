@@ -18,6 +18,8 @@ npm run dev:fixture
 
 Open the local URL printed by Vite (normally `http://127.0.0.1:5173`). This explicitly selects the development fixture environment. The Worker runs locally in workerd through the Cloudflare Vite plugin. No secrets, Cloudflare login, public IP, or hosted database are needed. Normal `npm run dev` selects production content and fails clearly when no published production edition is configured.
 
+For local card selection, use `npm run dev:cards` with activated production content, or `npm run dev:fixture:cards` with the seeded fixture edition. Create a new loopback room to choose replacement character cards during Discard/Draw and a specific Drink/Event during Order Drink. See [development card selection](docs/development-card-selection.md).
+
 If browser installation needs Linux system libraries, use `npx playwright install --with-deps chromium`.
 
 For Cloudflare quick tunnels, `vite.config.ts` allows `.trycloudflare.com`, including the changing subdomain assigned when a tunnel starts. Restart `npm run dev` after configuration changes, keep the tunnel pointed at the local URL printed by Vite, and refresh the tunnel URL. No hostname edit is needed when the quick-tunnel URL changes. This trusts Cloudflare's quick-tunnel domain; unrelated domains remain blocked. For a tunnel using your own custom domain, allow that exact hostname for the development session in PowerShell:

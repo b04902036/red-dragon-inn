@@ -1,0 +1,1816 @@
+{
+  "schemaVersion": "rdi2-verification-ledger-v1",
+  "policy": {
+    "primaryBeatsSecondary": true,
+    "currentOfficialBeatsLegacy": true,
+    "countMatchingDoesNotProveEffect": true,
+    "noGuessing": true,
+    "hardStopOnConflict": true
+  },
+  "characterMechanics": [
+    {
+      "ledgerId": "M01",
+      "mechanicId": "gambling_start_or_control",
+      "counts": { "dimli": 6, "eve": 6, "fleck": 6, "gog": 6 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "GAMBLING",
+      "candidateSummary": {
+        "en-US": "During your Action phase, start a gambling round and have all players ante. During an active gambling round, take control unless the current Winning-Hand restriction forbids a Gambling card.",
+        "zh-TW": "在出牌行動階段開始一輪賭博並讓所有玩家投入；賭博已進行中時可取得主導權，但若目前受到「好牌」類限制則一般賭博牌不能奪權。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "VERIFIED",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "review": {
+        "ledgerId": "M01",
+        "mechanicId": "gambling_start_or_control",
+        "date": "2026-10-05",
+        "counts": { "dimli": 6, "eve": 6, "fleck": 6, "gog": 6 },
+        "cardType": "GAMBLING",
+        "legality": { "modes": ["ACTION_PHASE", "GAMBLING_PRIORITY"] },
+        "effects": [{ "op": "START_OR_TAKE_GAMBLING_CONTROL" }],
+        "evidence": [
+          {
+            "id": "matrix-m01",
+            "sourceId": "community_matrix",
+            "url": "https://forums.giantitp.com/showsinglepost.php?p=11628890&postcount=3",
+            "locator": "RDI2 table, Gambling start/control row; directly inspected search-index transcription; live page returns HTTP 403",
+            "observedCounts": { "dimli": 6, "eve": 6, "fleck": 6, "gog": 6 }
+          },
+          {
+            "id": "uploaded-m01",
+            "sourceId": "the_inn_uploaded",
+            "path": "reference/rdi2/the-inn-crosscheck.json",
+            "locator": "Dimli/Eve/Fleck mechanicCounts and sourceTypesByMechanic; supplied aggregate crosscheck, original card files unavailable"
+          },
+          {
+            "id": "official-m01",
+            "sourceId": "official_rdi2_9e",
+            "url": "https://slugfestgames.com/wp-content/uploads/2021/11/RDI2-9thEd-Web.pdf",
+            "locator": "Pages 1-3: Action, Gambling, printed start/control card, Winning Hand, Leaving and Running out of Gold"
+          }
+        ],
+        "checks": [
+          {
+            "check": "quantity per character",
+            "result": "PASS",
+            "finding": "Six copies in each character column; Dimli/Eve/Fleck independently agree with supplied per-row crosscheck. Gog quantity checked directly in its matrix column, with official shared-family rules as required by Step 24A.",
+            "evidence": ["matrix-m01", "uploaded-m01", "official-m01"]
+          },
+          {
+            "check": "card type/timing",
+            "result": "PASS",
+            "finding": "Official dual Action-Gambling type is represented by GAMBLING plus ACTION_PHASE and GAMBLING_PRIORITY. Start on own Action phase; control on own gambling turn while still participating.",
+            "evidence": ["uploaded-m01", "official-m01"]
+          },
+          {
+            "check": "numeric values",
+            "result": "PASS",
+            "finding": "Starting requires one Gold ante from each player, including the initiator; taking control of an existing round adds no ante.",
+            "evidence": ["official-m01"]
+          },
+          {
+            "check": "targets",
+            "result": "PASS",
+            "finding": "Start affects all players including self. Control belongs to the player playing the card and has no selected opponent target.",
+            "evidence": ["official-m01"]
+          },
+          {
+            "check": "response trigger if Sometimes/Anytime",
+            "result": "PASS",
+            "finding": "Not a Sometimes/Anytime card; use Action or gambling priority rather than a response trigger.",
+            "evidence": ["official-m01"]
+          },
+          {
+            "check": "special restrictions/edge cases",
+            "result": "PASS",
+            "finding": "Cannot take control after Winning Hand until a Cheating card takes control; players who left cannot play Gambling cards; a round that has ended cannot accept control. An initiator unable to ante triggers the official no-ante rule, with payment-prevention cards treated under the official exception.",
+            "evidence": ["official-m01"]
+          },
+          {
+            "check": "current errata override if applicable",
+            "result": "PASS",
+            "finding": "Current Ninth Edition printed card and gambling rules agree with the candidate mechanic; Eve's three changed attack/defense cards do not change this gambling card.",
+            "evidence": ["official-m01"]
+          }
+        ]
+      }
+    },
+    {
+      "ledgerId": "M02",
+      "mechanicId": "gambling_raise_one",
+      "counts": { "dimli": 2, "eve": 2, "fleck": 2, "gog": 2 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "GAMBLING",
+      "candidateSummary": {
+        "en-US": "Take control and require each player still in the round to ante 1 additional Gold. If the player causing the ante cannot make the required ante under the governing rules, nobody is required to ante.",
+        "zh-TW": "取得主導權，並要求仍在本輪賭博中的每位玩家再投入 1 金幣；若發動此效果的玩家依規則無法完成該次投入，則其他玩家也不必投入。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "VERIFIED",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "review": {
+        "ledgerId": "M02",
+        "mechanicId": "gambling_raise_one",
+        "date": "2026-10-05",
+        "counts": { "dimli": 2, "eve": 2, "fleck": 2, "gog": 2 },
+        "cardType": "GAMBLING",
+        "legality": { "mode": "GAMBLING_PRIORITY" },
+        "effects": [
+          { "op": "TAKE_GAMBLING_CONTROL" },
+          { "op": "ANTE_ALL_ACTIVE", "amount": 1 }
+        ],
+        "evidence": [
+          {
+            "id": "matrix-m02",
+            "sourceId": "community_matrix",
+            "url": "https://forums.giantitp.com/showsinglepost.php?p=11628890&postcount=3",
+            "locator": "RDI2 table, raise row: 2/2/2/2; search-index transcription inspected, live HTTP 403"
+          },
+          {
+            "id": "uploaded-m02",
+            "sourceId": "the_inn_uploaded",
+            "path": "reference/rdi2/the-inn-crosscheck.json",
+            "locator": "Per-row counts and Gambling source type for Dimli/Eve/Fleck; supplied aggregate only"
+          },
+          {
+            "id": "official-m02",
+            "sourceId": "official_rdi2_9e",
+            "url": "https://slugfestgames.com/wp-content/uploads/2021/11/RDI2-9thEd-Web.pdf",
+            "locator": "Pages 2-3: gambling priority, Winning Hand, Leaving, Running out of Gold and Dimli raise example"
+          },
+          {
+            "id": "errata-m02",
+            "sourceId": "official_errata",
+            "url": "https://slugfestgames.com/clarifications-and-errata/",
+            "locator": "Running out of Gold During Gambling: Illusionary Coin counts as anteing"
+          }
+        ],
+        "checks": [
+          {
+            "check": "quantity per character",
+            "result": "PASS",
+            "finding": "Two copies in each of the four independently read character columns, matching the supplied Dimli/Eve/Fleck per-row counts; Gog directly crosschecked with matrix and official shared raise rules.",
+            "evidence": ["matrix-m02", "uploaded-m02", "official-m02"]
+          },
+          {
+            "check": "card type/timing",
+            "result": "PASS",
+            "finding": "Gambling card played on own gambling priority by a remaining participant; official Dimli example identifies the type and use.",
+            "evidence": ["uploaded-m02", "official-m02"]
+          },
+          {
+            "check": "numeric values",
+            "result": "PASS",
+            "finding": "Take control and require one additional Gold ante, confirmed by the official example's three antes and six-Gold pot.",
+            "evidence": ["official-m02"]
+          },
+          {
+            "check": "targets",
+            "result": "PASS",
+            "finding": "All players still in the round, including the player raising, ante; players who left are excluded.",
+            "evidence": ["official-m02"]
+          },
+          {
+            "check": "response trigger if Sometimes/Anytime",
+            "result": "PASS",
+            "finding": "Not Sometimes/Anytime; gambling priority applies.",
+            "evidence": ["official-m02"]
+          },
+          {
+            "check": "special restrictions/edge cases",
+            "result": "PASS",
+            "finding": "Cannot follow Winning Hand until Cheating clears its restriction. If the player causing the ante cannot ante, nobody must ante; a qualifying prevention such as Illusionary Coin counts as making the ante. Players who left cannot play this card.",
+            "evidence": ["official-m02", "errata-m02"]
+          },
+          {
+            "check": "current errata override if applicable",
+            "result": "PASS",
+            "finding": "Current Ninth Edition and official payment-prevention clarification agree; inability to ante must not be confused with an ante fulfilled using Illusionary Coin.",
+            "evidence": ["official-m02", "errata-m02"]
+          }
+        ]
+      }
+    },
+    {
+      "ledgerId": "M03",
+      "mechanicId": "gambling_winning_hand",
+      "counts": { "dimli": 2, "eve": 2, "fleck": 2, "gog": 2 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "GAMBLING",
+      "candidateSummary": {
+        "en-US": "Take control. Until a Cheating card takes control, an ordinary Gambling card cannot take control.",
+        "zh-TW": "取得主導權；直到有作弊牌奪權前，一般賭博牌不能再取得主導權。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "VERIFIED",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "review": {
+        "ledgerId": "M03",
+        "mechanicId": "gambling_winning_hand",
+        "date": "2026-10-05",
+        "counts": { "dimli": 2, "eve": 2, "fleck": 2, "gog": 2 },
+        "cardType": "GAMBLING",
+        "legality": { "mode": "GAMBLING_PRIORITY" },
+        "effects": [
+          { "op": "TAKE_GAMBLING_CONTROL", "lockNextControlTo": "CHEATING" }
+        ],
+        "evidence": [
+          {
+            "id": "matrix-m03",
+            "sourceId": "community_matrix",
+            "url": "https://forums.giantitp.com/showsinglepost.php?p=11628890&postcount=3",
+            "locator": "RDI2 table, Winning Hand row: 2/2/2/2; search-index transcription inspected, live HTTP 403"
+          },
+          {
+            "id": "uploaded-m03",
+            "sourceId": "the_inn_uploaded",
+            "path": "reference/rdi2/the-inn-crosscheck.json",
+            "locator": "Per-row counts and Gambling type for Dimli/Eve/Fleck; supplied aggregate only"
+          },
+          {
+            "id": "official-m03",
+            "sourceId": "official_rdi2_9e",
+            "url": "https://slugfestgames.com/wp-content/uploads/2021/11/RDI2-9thEd-Web.pdf",
+            "locator": "Pages 2-3: printed Winning Hand, next-control restriction, Fleck/Eve example and Leaving rules"
+          }
+        ],
+        "checks": [
+          {
+            "check": "quantity per character",
+            "result": "PASS",
+            "finding": "Two copies in each independently read matrix column; supplied Dimli/Eve/Fleck counts agree. Gog checked directly with the matrix and official shared Winning Hand rules.",
+            "evidence": ["matrix-m03", "uploaded-m03", "official-m03"]
+          },
+          {
+            "check": "card type/timing",
+            "result": "PASS",
+            "finding": "Official printed Gambling type; own gambling priority while participating.",
+            "evidence": ["uploaded-m03", "official-m03"]
+          },
+          {
+            "check": "numeric values",
+            "result": "PASS",
+            "finding": "No stat delta or additional ante; takes control and changes the next allowed control-card category.",
+            "evidence": ["official-m03"]
+          },
+          {
+            "check": "targets",
+            "result": "PASS",
+            "finding": "The card player takes control; no selected opponent target. Restriction applies to the next card attempting control.",
+            "evidence": ["official-m03"]
+          },
+          {
+            "check": "response trigger if Sometimes/Anytime",
+            "result": "PASS",
+            "finding": "Not Sometimes/Anytime; gambling priority applies.",
+            "evidence": ["official-m03"]
+          },
+          {
+            "check": "special restrictions/edge cases",
+            "result": "PASS",
+            "finding": "Only Cheating can next take control. After Cheating takes control, ordinary Gambling is legal again. Winning Hand is itself Gambling and cannot take control over another Winning Hand. Players who left cannot play it.",
+            "evidence": ["official-m03"]
+          },
+          {
+            "check": "current errata override if applicable",
+            "result": "PASS",
+            "finding": "The current Ninth Edition printed reminder and explicit rules agree with CHEATING-only next-control behavior; this is not an immediate round win.",
+            "evidence": ["official-m03"]
+          }
+        ]
+      }
+    },
+    {
+      "ledgerId": "M04",
+      "mechanicId": "cheat_take_control",
+      "counts": { "dimli": 0, "eve": 3, "fleck": 4, "gog": 0 },
+      "charactersPresent": ["eve", "fleck"],
+      "candidateType": "CHEATING",
+      "candidateSummary": {
+        "en-US": "Take control of the gambling round. A Cheating card may take control after a Strong Hand.",
+        "zh-TW": "取得本輪賭博主導權；作弊牌可在「好牌在手」之後奪權。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "VERIFIED",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "review": {
+        "ledgerId": "M04",
+        "mechanicId": "cheat_take_control",
+        "date": "2026-10-05",
+        "counts": { "dimli": 0, "eve": 3, "fleck": 4, "gog": 0 },
+        "cardType": "CHEATING",
+        "legality": { "mode": "GAMBLING_PRIORITY" },
+        "effects": [{ "op": "TAKE_GAMBLING_CONTROL", "category": "CHEATING" }],
+        "evidence": [
+          {
+            "id": "matrix-m04",
+            "sourceId": "community_matrix",
+            "url": "https://forums.giantitp.com/showsinglepost.php?p=11628890&postcount=3",
+            "locator": "RDI2 table, plain take-control row: 0/3/4/0; search-index transcription inspected, live HTTP 403"
+          },
+          {
+            "id": "uploaded-m04",
+            "sourceId": "the_inn_uploaded",
+            "path": "reference/rdi2/the-inn-crosscheck.json",
+            "locator": "Plain cheat mechanic counts and Cheating type in Eve/Fleck; absent in Dimli; supplied aggregate only"
+          },
+          {
+            "id": "official-m04",
+            "sourceId": "official_rdi2_9e",
+            "url": "https://slugfestgames.com/wp-content/uploads/2021/11/RDI2-9thEd-Web.pdf",
+            "locator": "Pages 2-3: printed plain Cheating card, Winning Hand rules, Eve plain-cheat example and Leaving rules"
+          }
+        ],
+        "checks": [
+          {
+            "check": "quantity per character",
+            "result": "PASS",
+            "finding": "Matrix independently records Dimli zero, Eve three, Fleck four, Gog zero. Dimli/Eve/Fleck agree with their supplied per-row crosscheck; Gog zero is checked in its matrix column.",
+            "evidence": ["matrix-m04", "uploaded-m04"]
+          },
+          {
+            "check": "card type/timing",
+            "result": "PASS",
+            "finding": "Cheating in both populated supplied character crosschecks and the official printed plain-control card; own gambling priority while participating.",
+            "evidence": ["uploaded-m04", "official-m04"]
+          },
+          {
+            "check": "numeric values",
+            "result": "PASS",
+            "finding": "No additional stat change or ante; this row represents plain control, separately from the eject row.",
+            "evidence": ["matrix-m04", "official-m04"]
+          },
+          {
+            "check": "targets",
+            "result": "PASS",
+            "finding": "The player playing the card takes control of the current round; no opponent target is selected.",
+            "evidence": ["official-m04"]
+          },
+          {
+            "check": "response trigger if Sometimes/Anytime",
+            "result": "PASS",
+            "finding": "Not Sometimes/Anytime; gambling priority applies.",
+            "evidence": ["official-m04"]
+          },
+          {
+            "check": "special restrictions/edge cases",
+            "result": "PASS",
+            "finding": "May take control after Winning Hand, then clears the next-control restriction so Gambling can follow. Players who left cannot play Cheating cards; control cannot be taken after a round ends.",
+            "evidence": ["official-m04"]
+          },
+          {
+            "check": "current errata override if applicable",
+            "result": "PASS",
+            "finding": "Current Ninth Edition plain Cheating example and general rules match the candidate; the Eve attack/defense changes do not alter this mechanic.",
+            "evidence": ["official-m04"]
+          }
+        ]
+      }
+    },
+    {
+      "ledgerId": "M05",
+      "mechanicId": "cheat_control_and_eject",
+      "counts": { "dimli": 0, "eve": 1, "fleck": 1, "gog": 0 },
+      "charactersPresent": ["eve", "fleck"],
+      "candidateType": "CHEATING",
+      "candidateSummary": {
+        "en-US": "Take control, then choose another participant and force that player to leave the round. Everyone, including the player being forced out, gets the normal response opportunity before the ejection completes.",
+        "zh-TW": "取得主導權，接著選擇另一名參與者並強制其離開本輪賭博；在強制離場完成前，包含被趕出的玩家在內都必須獲得正常回應機會。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "UNRESOLVED_MISSING_CARD_EVIDENCE",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "review": {
+        "date": "2026-10-05",
+        "verifiedObservations": [
+          "Per-row matrix and supplied crosscheck agree on Dimli 0, Eve 1, Fleck 1, Gog 0 and Cheating type for Eve/Fleck.",
+          "Current Ninth Edition page 3 gives everyone, including the player forced out, a response opportunity before forced leave completes.",
+          "Official Gambling 102 describes the generic control-and-eject family as forcing another player out of the round."
+        ],
+        "unresolvedChecks": [
+          {
+            "field": "legality.target",
+            "candidateValue": "OTHER_ACTIVE_GAMBLER",
+            "reason": "Neither original Eve nor original Fleck card text is included. The supplied aggregate cannot establish each card's precise target restriction."
+          },
+          {
+            "field": "effects / special restrictions",
+            "reason": "Cannot verify that both original cards contain precisely the candidate control-plus-forced-leave effect without additional conditions or character-specific behavior. A generic official card-family explanation is not an individual card crosscheck."
+          }
+        ],
+        "evidence": [
+          {
+            "sourceId": "community_matrix",
+            "url": "https://forums.giantitp.com/showsinglepost.php?p=11628890&postcount=3",
+            "locator": "RDI2 control/eject row, 0/1/1/0; search-index transcription inspected, live HTTP 403"
+          },
+          {
+            "sourceId": "the_inn_uploaded",
+            "path": "reference/rdi2/the-inn-crosscheck.json",
+            "locator": "Only per-row counts/types and claimed source hashes; original card files are absent"
+          },
+          {
+            "sourceId": "official_rdi2_9e",
+            "url": "https://slugfestgames.com/wp-content/uploads/2021/11/RDI2-9thEd-Web.pdf",
+            "locator": "Page 3, forced-leave response timing"
+          },
+          {
+            "sourceId": "official_gambling_102",
+            "url": "https://slugfestgames.com/rulesfest-gambling-102/",
+            "locator": "Generic control/eject family; explicitly notes that other characters may have variants"
+          }
+        ],
+        "requiredEvidence": "Original user-provided The Inn Eve/Fleck card JSON or readable user-owned card images for their control-and-eject Cheating cards. Reconcile those exact effects with current official rules before resuming M06."
+      }
+    },
+    {
+      "ledgerId": "M06",
+      "mechanicId": "anti_cheat_win_round",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 0, "gog": 1 },
+      "charactersPresent": ["gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When a Cheating card is played while you may legally respond, negate that Cheating card and immediately win the gambling round.",
+        "zh-TW": "當作弊牌被打出且你可合法回應時，取消該作弊牌並立刻贏得本輪賭博。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_gog",
+        "official_rdi2_9e"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M07",
+      "mechanicId": "dump_gambling_pot_to_inn",
+      "counts": { "dimli": 1, "eve": 1, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "During an active gambling round, end the round and send the pot to the Inn. It is illegal after the round already ended, in response to an ante-causing effect, or in response to an effect that will end the round when it resolves.",
+        "zh-TW": "賭博進行中可立即結束本輪並把賭池交給酒館；本輪已結束、正在回應會要求投入的效果、或正在回應本身結算後就會結束賭局的效果時不可使用。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M08",
+      "mechanicId": "restart_gambling_round",
+      "counts": { "dimli": 1, "eve": 0, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["dimli"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When another player has just won but before payout is finalized, keep the existing pot, keep only players who had not already left, require them to ante 1 more Gold, make yourself the current controller, and continue play to your left. Illegal if you already left the round or after an effect that has already replaced the winner.",
+        "zh-TW": "當另一名玩家剛贏得賭局但賭池尚未完成支付時，保留原賭池，只保留尚未離場的玩家並要求各再投入 1 金幣；你成為目前主導者，接著從你左手邊繼續。若你已離開賭局，或勝者已被其他特殊效果取代，則不可使用。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "mandatoryOfficialCrossCheck": "Gambling? I'm In! variant rules and current gambling timing."
+    },
+    {
+      "ledgerId": "M09",
+      "mechanicId": "substitute_payment_from_inn",
+      "counts": { "dimli": 2, "eve": 0, "fleck": 2, "gog": 2 },
+      "charactersPresent": ["dimli", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When you would lose Gold because of a payment, ante, or another player taking Gold, satisfy that current Gold loss using Gold from the Inn instead of your own stash.",
+        "zh-TW": "當你因付款、投入或被其他玩家拿走金幣而即將失去金幣時，本次金幣損失改由酒館支付，而不是從你的金幣中扣除。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M10",
+      "mechanicId": "illusionary_payment",
+      "counts": { "dimli": 0, "eve": 2, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When you would lose Gold for a payment, ante, or theft, prevent that current Gold loss. If the prevented loss is an ante, it still counts as having anted for rules that care whether you anted.",
+        "zh-TW": "當你因付款、投入或被拿走金幣而即將失去金幣時，取消本次金幣損失；若取消的是投入，規則上仍視為你完成了該次投入。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "mandatoryOfficialCrossCheck": "Official errata: no Gold moves, but a prevented ante still counts as anteing."
+    },
+    {
+      "ledgerId": "M11",
+      "mechanicId": "take_one_from_pot",
+      "counts": { "dimli": 0, "eve": 1, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "During an active gambling round, take 1 Gold from the pot without changing control. This is legal even if you already left the round.",
+        "zh-TW": "賭博進行中從賭池拿走 1 金幣，不改變主導權；即使你已離開本輪賭博也可以使用。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M12",
+      "mechanicId": "avoid_ante_leave",
+      "counts": { "dimli": 2, "eve": 0, "fleck": 1, "gog": 2 },
+      "charactersPresent": ["dimli", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When you must ante, do not pay that ante and leave the gambling round. Previously anted Gold remains in the pot.",
+        "zh-TW": "當你必須投入金幣時，不支付這次投入並離開本輪賭博；之前已投入的金幣仍留在賭池。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M13",
+      "mechanicId": "avoid_ante_leave_or_ignore_drink",
+      "counts": { "dimli": 1, "eve": 1, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Use the branch matching the current context: when required to ante, avoid that ante and leave the round; or when a Drink would affect you, ignore the entire Drink.",
+        "zh-TW": "依目前情境使用對應效果：必須投入時可免除該次投入並離開賭局；或當一杯飲料將影響你時，忽略整杯飲料。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M14",
+      "mechanicId": "ignore_card_all_stats",
+      "counts": { "dimli": 0, "eve": 2, "fleck": 0, "gog": 1 },
+      "charactersPresent": ["eve", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Ignore an Action, Sometimes or Anytime card that directly affects your Fortitude, Alcohol Content or Gold. This cannot be used merely to ignore a Round of Gambling.",
+        "zh-TW": "忽略一張會直接影響你耐力值、酒精值或金幣的行動牌、Sometimes 或 Anytime；不能只因賭博會影響金幣就用它忽略整輪賭博。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "mandatoryOverride": "Apply current official Eve errata; do not accept older Eve values."
+    },
+    {
+      "ledgerId": "M15",
+      "mechanicId": "ignore_card_fortitude",
+      "counts": { "dimli": 1, "eve": 0, "fleck": 0, "gog": 2 },
+      "charactersPresent": ["dimli", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Ignore an Action, Sometimes or Anytime card that directly affects your Fortitude.",
+        "zh-TW": "忽略一張會直接影響你耐力值的行動牌、Sometimes 或 Anytime。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M16",
+      "mechanicId": "negate_sometimes_counter",
+      "counts": { "dimli": 1, "eve": 1, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Negate a Sometimes card. This protected counter may only be affected by a compatible protected counter, and it may affect any card that the ordinary protected counter family can affect.",
+        "zh-TW": "取消一張 Sometimes 牌。此特殊反制只能被相容的同系列反制影響，也可反制一般同系列可反制的牌。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M17",
+      "mechanicId": "ignore_drink",
+      "counts": { "dimli": 2, "eve": 2, "fleck": 2, "gog": 2 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Ignore the entire Drink you are about to drink after all of its Chasers have been revealed.",
+        "zh-TW": "在該杯飲料與所有續杯都翻完後，忽略你即將喝下的整杯飲料。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M18",
+      "mechanicId": "order_two_extra_drinks_paid",
+      "counts": { "dimli": 2, "eve": 2, "fleck": 0, "gog": 2 },
+      "charactersPresent": ["dimli", "eve", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "During your own Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks, distributing them among other players as allowed by the rules.",
+        "zh-TW": "在自己的請客階段支付 1 金幣給酒館並額外請 2 杯，可依規則分配到其他玩家的暢飲區。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M19",
+      "mechanicId": "order_two_extra_drinks_free_or_waive_refill",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 2, "gog": 0 },
+      "charactersPresent": ["fleck"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Choose the matching context: during your own Order a Drink phase, order 2 additional Drinks for free; or when the Drink deck is refilled and you would pay the Inn, waive your own refill payment.",
+        "zh-TW": "依目前情境選擇：在自己的請客階段免費額外請 2 杯；或飲料牌庫補充、你原本要付酒館金幣時，免除自己的補牌費用。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M20",
+      "mechanicId": "all_players_drink_from_inn",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 1, "gog": 0 },
+      "charactersPresent": ["fleck"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Every living player, including you, reveals a Drink from the Inn Drink deck and drinks it now. Drink Events revealed while finding these Drinks are discarded and skipped until a Drink is found.",
+        "zh-TW": "所有仍在遊戲中的玩家（包含你）立刻從酒館飲料牌庫翻一杯並飲用；在尋找這些飲料時翻到酒卡事件則棄掉並繼續翻，直到翻到飲料。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M21",
+      "mechanicId": "force_extra_drink_during_other_drink_phase",
+      "counts": { "dimli": 1, "eve": 0, "fleck": 0, "gog": 2 },
+      "charactersPresent": ["dimli", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "During another player's Drink phase, make that player drink an additional Drink from the top of their Drink Me! pile.",
+        "zh-TW": "在另一名玩家的喝酒階段，使該玩家再喝一杯其暢飲區最上方的飲料。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M22",
+      "mechanicId": "pass_own_drink",
+      "counts": { "dimli": 2, "eve": 0, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["dimli"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Give the Drink you are about to drink to another player; that player takes the Drink's effects instead of you.",
+        "zh-TW": "把你即將喝下的飲料交給另一名玩家；改由該玩家承受這杯飲料的效果。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M23",
+      "mechanicId": "split_own_drink",
+      "counts": { "dimli": 1, "eve": 0, "fleck": 2, "gog": 0 },
+      "charactersPresent": ["dimli", "fleck"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Split the Drink you are about to drink with another player. Combine Chasers first, then halve each combined numeric effect and round up; the two resulting Drinks are independent.",
+        "zh-TW": "把你即將喝下的飲料與另一名玩家平分。先合併續杯，再把每個合併後的數值效果除以二並向上取整；分出的兩杯彼此獨立。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M24",
+      "mechanicId": "alcohol_to_fortitude",
+      "counts": { "dimli": 1, "eve": 0, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["dimli"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "For the Drink you are about to take, add its Alcohol Content amount to your Fortitude instead of your Alcohol Content. Other parts of the Drink remain.",
+        "zh-TW": "對你即將承受的這杯飲料，把原本增加的酒精值改成等量增加耐力值；飲料其他效果仍保留。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M25",
+      "mechanicId": "add_two_alcohol_to_drink",
+      "counts": { "dimli": 2, "eve": 0, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["dimli"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Add 2 Alcohol Content to one Drink currently being resolved.",
+        "zh-TW": "使一杯正在結算的飲料額外增加 2 點酒精值。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M26",
+      "mechanicId": "replace_drink_with_four_alcohol",
+      "counts": { "dimli": 0, "eve": 1, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "After another player reveals a Drink and its possible Chasers, replace the Drink's usual Drink effects with exactly +4 Alcohol Content. Non-Drink cards that modify that Drink afterward still apply normally.",
+        "zh-TW": "另一名玩家翻開飲料與可能的續杯後，把該杯原本的飲料效果替換為恰好增加 4 點酒精值；之後由非飲料牌對它做的修改仍正常套用。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M27",
+      "mechanicId": "negate_drink_change_card",
+      "counts": { "dimli": 1, "eve": 1, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Negate a Sometimes card that changes a Drink's effects, including Ignore, Negate, split, pass, or numeric modification. It cannot negate itself, effects that merely order/force Drinks, direct player Alcohol changes, or Drink Events.",
+        "zh-TW": "取消一張會改變飲料效果的 Sometimes，包括忽略、取消、平分、轉交或修改飲料數值。不能反制本身、只負責請客／強迫喝酒的效果、直接改玩家酒精值的效果或酒卡事件。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M28",
+      "mechanicId": "all_lose_one_alcohol_collect_one_each_other",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 1, "gog": 0 },
+      "charactersPresent": ["fleck"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Every living player, including you, loses 1 Alcohol Content; each other player then pays you 1 Gold.",
+        "zh-TW": "所有仍在遊戲中的玩家（包含你）各降低 1 點酒精值；接著其他每位玩家各支付你 1 金幣。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M29",
+      "mechanicId": "give_two_alcohol",
+      "counts": { "dimli": 0, "eve": 2, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose another player; they gain 2 Alcohol Content.",
+        "zh-TW": "選擇另一名玩家；其增加 2 點酒精值。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "mandatoryOverride": "Apply current official Eve errata; do not accept older Eve values."
+    },
+    {
+      "ledgerId": "M30",
+      "mechanicId": "damage_one",
+      "counts": { "dimli": 1, "eve": 2, "fleck": 1, "gog": 0 },
+      "charactersPresent": ["dimli", "eve", "fleck"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose another player; they lose 1 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 1 點耐力值。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M31",
+      "mechanicId": "damage_two",
+      "counts": { "dimli": 5, "eve": 0, "fleck": 2, "gog": 5 },
+      "charactersPresent": ["dimli", "fleck", "gog"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose another player; they lose 2 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M32",
+      "mechanicId": "damage_three",
+      "counts": { "dimli": 0, "eve": 2, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose another player; they lose 3 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 3 點耐力值。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ],
+      "mandatoryOverride": "Apply current official Eve errata; do not accept older Eve values."
+    },
+    {
+      "ledgerId": "M33",
+      "mechanicId": "damage_three_pay_inn_one",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 0, "gog": 1 },
+      "charactersPresent": ["gog"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose another player; they lose 3 Fortitude. You then pay 1 Gold to the Inn as part of the effect.",
+        "zh-TW": "選擇另一名玩家；其失去 3 點耐力值。接著你把 1 金幣支付給酒館，這是卡牌效果的一部分。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_gog",
+        "official_rdi2_9e"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M34",
+      "mechanicId": "damage_four",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 0, "gog": 1 },
+      "charactersPresent": ["gog"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose another player; they lose 4 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 4 點耐力值。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_gog",
+        "official_rdi2_9e"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M35",
+      "mechanicId": "damage_all_others_one",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 0, "gog": 1 },
+      "charactersPresent": ["gog"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Each other living player loses 1 Fortitude.",
+        "zh-TW": "其他每位仍在遊戲中的玩家各失去 1 點耐力值。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_gog",
+        "official_rdi2_9e"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M36",
+      "mechanicId": "rowdy_song",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 2, "gog": 0 },
+      "charactersPresent": ["fleck"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Each other player loses 1 Fortitude; every living player including you gains 1 Alcohol Content; then you pay 1 Gold to the Inn.",
+        "zh-TW": "其他每位玩家各失去 1 點耐力值；所有仍在遊戲中的玩家（包含你）各增加 1 點酒精值；接著你支付 1 金幣給酒館。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M37",
+      "mechanicId": "hit_back_two_after_loss",
+      "counts": { "dimli": 1, "eve": 0, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "fleck", "gog"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "Immediately after another player actually makes you lose at least 1 Fortitude, that original source player loses 2 Fortitude. Illegal if you reduced or Ignored the loss to 0.",
+        "zh-TW": "當另一名玩家實際使你失去至少 1 點耐力值後立刻使用；原始來源玩家失去 2 點耐力值。若你把該次損失降為 0 或完全忽略，就不能使用。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M38",
+      "mechanicId": "share_pain",
+      "counts": { "dimli": 0, "eve": 1, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When another player would make you lose Fortitude, split that Fortitude loss between you and that source player, each half rounded up. After choosing this response, you may not use your own further cards to reduce or Ignore this damage.",
+        "zh-TW": "當另一名玩家即將使你失去耐力值時，把該次耐力損失在你與來源玩家之間平分，各自向上取整。選擇此回應後，你不能再用自己的其他牌降低或忽略這次傷害。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M39",
+      "mechanicId": "redirect_fortitude_loss",
+      "counts": { "dimli": 0, "eve": 1, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "SOMETIMES",
+      "candidateSummary": {
+        "en-US": "When another player would make you lose Fortitude, redirect only the Fortitude loss to a different player of your choice other than the original source. Preserve the original source. In a two-player game, use the documented fallback: Ignore the qualifying Fortitude-affecting card instead.",
+        "zh-TW": "當另一名玩家即將使你失去耐力值時，只把耐力損失轉移給你選擇的另一名玩家，且不能轉給原始來源；原始來源身分必須保留。兩人遊戲時使用規則指定的替代效果：忽略符合條件的耐力影響牌。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M40",
+      "mechanicId": "gain_two_fortitude",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["fleck", "gog"],
+      "candidateType": "ANYTIME",
+      "candidateSummary": {
+        "en-US": "Gain 2 Fortitude.",
+        "zh-TW": "獲得 2 點耐力值。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M41",
+      "mechanicId": "collect_one_from_each_other",
+      "counts": { "dimli": 1, "eve": 1, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Each other living player pays you 1 Gold.",
+        "zh-TW": "其他每位仍在遊戲中的玩家各支付你 1 金幣。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M42",
+      "mechanicId": "take_one_gold",
+      "counts": { "dimli": 0, "eve": 2, "fleck": 0, "gog": 0 },
+      "charactersPresent": ["eve"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose a player; that player pays you 1 Gold.",
+        "zh-TW": "選擇一名玩家；該玩家支付你 1 金幣。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_eve_errata",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M43",
+      "mechanicId": "take_two_gold",
+      "counts": { "dimli": 0, "eve": 0, "fleck": 1, "gog": 0 },
+      "charactersPresent": ["fleck"],
+      "candidateType": "ACTION",
+      "candidateSummary": {
+        "en-US": "Choose a player; that player pays you 2 Gold.",
+        "zh-TW": "選擇一名玩家；該玩家支付你 2 金幣。"
+      },
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi2_9e",
+        "the_inn_uploaded"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    },
+    {
+      "ledgerId": "M44",
+      "mechanicId": "tip_wench",
+      "counts": { "dimli": 1, "eve": 1, "fleck": 1, "gog": 1 },
+      "charactersPresent": ["dimli", "eve", "fleck", "gog"],
+      "candidateType": "ANYTIME",
+      "candidateSummary": {
+        "en-US": "Choose a player; that player pays 1 Gold to the Inn.",
+        "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+      },
+      "sourcesToCheck": ["community_matrix", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity per character",
+        "card type/timing",
+        "numeric values",
+        "targets",
+        "response trigger if Sometimes/Anytime",
+        "special restrictions/edge cases",
+        "current errata override if applicable"
+      ]
+    }
+  ],
+  "drinks": [
+    {
+      "ledgerId": "D01",
+      "drinkId": "dark_ale",
+      "quantity": 2,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D02",
+      "drinkId": "dark_ale_chaser",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D03",
+      "drinkId": "dirty_dishwater",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D04",
+      "drinkId": "dragon_breath_ale",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D05",
+      "drinkId": "drinking_contest",
+      "quantity": 2,
+      "candidateKind": "DRINK_EVENT",
+      "sourcesToCheck": ["official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D06",
+      "drinkId": "dwarven_firewater",
+      "quantity": 2,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D07",
+      "drinkId": "elven_wine",
+      "quantity": 2,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D08",
+      "drinkId": "elven_wine_chaser",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D09",
+      "drinkId": "fine_ambrosia",
+      "quantity": 1,
+      "candidateKind": "DRINK_EVENT",
+      "sourcesToCheck": [],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ],
+      "conflict": "Legacy detailed mechanical table says normal Drink (+1 Alcohol, +4 Fortitude, pay 2 Gold); BGG catalog labels it Drink Event.",
+      "resolutionRequired": "Complete quantity, Chaser, trait and special-behavior checks under the explicit user rule override. Do not reinterpret this decision as primary official evidence.",
+      "userDecision": {
+        "sourceId": "user_fine_ambrosia_override_2026_10_05",
+        "provenance": "USER_RULE_OVERRIDE",
+        "date": "2026-10-05",
+        "instruction": "treat it as drink event, +alcohol +4 fortitude -2 gold",
+        "kind": "DRINK_EVENT",
+        "fortitudeDelta": 4,
+        "goldDelta": -2,
+        "alcoholDelta": 1,
+        "goldRecipient": "INN",
+        "pendingConfirmation": [],
+        "confirmation": "yes +1 alcohol and 2 gold pay to inn"
+      }
+    },
+    {
+      "ledgerId": "D10",
+      "drinkId": "holy_water",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D11",
+      "drinkId": "light_ale",
+      "quantity": 2,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D12",
+      "drinkId": "light_ale_chaser",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D13",
+      "drinkId": "mead",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D14",
+      "drinkId": "ogre_brew",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D15",
+      "drinkId": "orcish_rotgut",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D16",
+      "drinkId": "round_on_house",
+      "quantity": 2,
+      "candidateKind": "DRINK_EVENT",
+      "sourcesToCheck": ["official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D17",
+      "drinkId": "the_challenge",
+      "quantity": 1,
+      "candidateKind": "DRINK_EVENT",
+      "sourcesToCheck": [
+        "community_matrix",
+        "official_rdi8_rules",
+        "official_rdi10_rules"
+      ],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D18",
+      "drinkId": "troll_swill",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D19",
+      "drinkId": "water",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D20",
+      "drinkId": "cutting_off",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D21",
+      "drinkId": "wine",
+      "quantity": 2,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D22",
+      "drinkId": "wine_chaser",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    },
+    {
+      "ledgerId": "D23",
+      "drinkId": "wizards_brew",
+      "quantity": 1,
+      "candidateKind": "DRINK",
+      "sourcesToCheck": ["community_matrix", "bgg_rdi2", "official_rdi2_9e"],
+      "status": "PENDING_STEP_24A_ITEM_BY_ITEM_VERIFICATION",
+      "requiredChecks": [
+        "quantity",
+        "Drink vs Drink Event classification",
+        "numeric effects",
+        "Chaser/event rules",
+        "current-edition overrides"
+      ]
+    }
+  ]
+}

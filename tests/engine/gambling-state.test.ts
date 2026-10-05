@@ -9,6 +9,24 @@ import {
 } from '../../src/shared/ids';
 import { intent, mutable } from '../fixtures/core-match';
 import { startRound } from '../fixtures/gambling-match';
+import { coreStateSchema } from '../../src/engine/replay';
+
+it('restores deferred contest pass-outs and rejects corrupted player lists', () => {
+  const state = mutable(startRound().state);
+  state.control.deferredContestPassOutPlayerIds = [state.players[1]!.id];
+  expect(coreStateSchema.parse(JSON.parse(JSON.stringify(state)))).toEqual(
+    state,
+  );
+  for (const ids of [
+    [state.players[1]!.id, state.players[1]!.id],
+    [playerIdSchema.parse('player_missing')],
+    Array.from({ length: 5 }, () => state.players[1]!.id),
+  ]) {
+    const corrupt = mutable(state);
+    corrupt.control.deferredContestPassOutPlayerIds = ids;
+    expect(() => coreStateSchema.parse(corrupt)).toThrow();
+  }
+});
 
 it.each([
   [

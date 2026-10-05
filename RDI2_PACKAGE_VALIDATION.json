@@ -1,0 +1,17 @@
+{
+  "candidateCharacterTotals": {
+    "dimli": 40,
+    "eve": 40,
+    "fleck": 40,
+    "gog": 40
+  },
+  "candidateCharacterPhysicalTotal": 160,
+  "mechanicRows": 44,
+  "drinkPhysicalTotal": 30,
+  "drinkUniqueDefinitions": 23,
+  "knownHardSourceConflicts": [
+    "fine_ambrosia.classification"
+  ],
+  "sourceLocked": false,
+  "reasonNotLocked": "User requires item-by-item verification. Step 24A must resolve all ledger items; Fine Ambrosia currently has conflicting secondary sources."
+}

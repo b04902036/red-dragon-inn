@@ -190,7 +190,7 @@ export function compileRdi1Source(input: unknown): ContentPack {
   if (!verified.valid) throw new RangeError(verified.errors.join('\n'));
   const pack: ContentPack = contentPackSchema.parse({
     schemaVersion: 1,
-    version: {
+    version: source.contentVersion ?? {
       id: RDI1_VERSION,
       name: 'RDI1 public-rules mechanics paraphrase v1',
       createdAt: '2026-10-04T00:00:00.000Z',
@@ -226,7 +226,7 @@ export function compileRdi1Source(input: unknown): ContentPack {
         locale,
         text: bilingual[locale],
         sourceKind: 'MANUAL',
-        sourceRef: 'rdi1-mechanics-normalized-v1',
+        sourceRef: source.contentVersion?.id ?? 'rdi1-mechanics-normalized-v1',
         status: 'MANUAL_REVIEWED',
       });
   };
@@ -288,6 +288,13 @@ export function compileRdi1Source(input: unknown): ContentPack {
         (effect) => effect.op === 'TAKE_GAMBLING_CONTROL',
       );
       const metadata = {
+        ...(mechanic.counterMetadata === undefined
+          ? {}
+          : {
+              counterFamily: mechanic.counterMetadata.family,
+              allowedCounterFamilies:
+                mechanic.counterMetadata.allowedCounterFamilies,
+            }),
         ...(mandatoryGoldCost === undefined ? {} : { mandatoryGoldCost }),
         ...('target' in mechanic.legality &&
         mechanic.legality.target === 'ANY_LIVING_PLAYER'

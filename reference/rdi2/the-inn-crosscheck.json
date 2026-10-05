@@ -1,0 +1,312 @@
+{
+  "source": "user-provided HaxxonHax/the-inn",
+  "characters": {
+    "dimli": {
+      "sha256": "7d820fd65ae6eb283d9548e0a932eefa13649444d9236589798e89f2903e5bfe",
+      "physicalCardCount": 40,
+      "mechanicCounts": {
+        "add_two_alcohol_to_drink": 2,
+        "alcohol_to_fortitude": 1,
+        "avoid_ante_leave": 2,
+        "avoid_ante_leave_or_ignore_drink": 1,
+        "collect_one_from_each_other": 1,
+        "damage_one": 1,
+        "damage_two": 5,
+        "dump_gambling_pot_to_inn": 1,
+        "force_extra_drink_during_other_drink_phase": 1,
+        "gambling_raise_one": 2,
+        "gambling_start_or_control": 6,
+        "gambling_winning_hand": 2,
+        "hit_back_two_after_loss": 1,
+        "ignore_card_fortitude": 1,
+        "ignore_drink": 2,
+        "negate_drink_change_card": 1,
+        "negate_sometimes_counter": 1,
+        "order_two_extra_drinks_paid": 2,
+        "pass_own_drink": 2,
+        "restart_gambling_round": 1,
+        "split_own_drink": 1,
+        "substitute_payment_from_inn": 2,
+        "tip_wench": 1
+      },
+      "sourceTypesByMechanic": {
+        "add_two_alcohol_to_drink": [
+          "Sometimes"
+        ],
+        "alcohol_to_fortitude": [
+          "Sometimes"
+        ],
+        "avoid_ante_leave": [
+          "Sometimes"
+        ],
+        "avoid_ante_leave_or_ignore_drink": [
+          "Sometimes"
+        ],
+        "collect_one_from_each_other": [
+          "Action"
+        ],
+        "damage_one": [
+          "Action"
+        ],
+        "damage_two": [
+          "Action"
+        ],
+        "dump_gambling_pot_to_inn": [
+          "Sometimes"
+        ],
+        "force_extra_drink_during_other_drink_phase": [
+          "Sometimes"
+        ],
+        "gambling_raise_one": [
+          "Gambling"
+        ],
+        "gambling_start_or_control": [
+          "Action - Gambling"
+        ],
+        "gambling_winning_hand": [
+          "Gambling"
+        ],
+        "hit_back_two_after_loss": [
+          "Sometimes"
+        ],
+        "ignore_card_fortitude": [
+          "Sometimes"
+        ],
+        "ignore_drink": [
+          "Sometimes"
+        ],
+        "negate_drink_change_card": [
+          "Sometimes"
+        ],
+        "negate_sometimes_counter": [
+          "Sometimes"
+        ],
+        "order_two_extra_drinks_paid": [
+          "Sometimes"
+        ],
+        "pass_own_drink": [
+          "Sometimes"
+        ],
+        "restart_gambling_round": [
+          "Sometimes"
+        ],
+        "split_own_drink": [
+          "Sometimes"
+        ],
+        "substitute_payment_from_inn": [
+          "Sometimes"
+        ],
+        "tip_wench": [
+          "Anytime"
+        ]
+      },
+      "unmappedTitles": []
+    },
+    "eve": {
+      "sha256": "6615dd874459844e499bcf607c1efa48f77d5d913d5edebbc147e712952b82c1",
+      "physicalCardCount": 40,
+      "mechanicCounts": {
+        "avoid_ante_leave_or_ignore_drink": 1,
+        "cheat_control_and_eject": 1,
+        "cheat_take_control": 3,
+        "collect_one_from_each_other": 1,
+        "damage_one": 2,
+        "damage_three": 2,
+        "dump_gambling_pot_to_inn": 1,
+        "gambling_raise_one": 2,
+        "gambling_start_or_control": 6,
+        "gambling_winning_hand": 2,
+        "give_two_alcohol": 2,
+        "ignore_card_all_stats": 2,
+        "ignore_drink": 2,
+        "illusionary_payment": 2,
+        "negate_drink_change_card": 1,
+        "negate_sometimes_counter": 1,
+        "order_two_extra_drinks_paid": 2,
+        "redirect_fortitude_loss": 1,
+        "replace_drink_with_four_alcohol": 1,
+        "share_pain": 1,
+        "take_one_from_pot": 1,
+        "take_one_gold": 2,
+        "tip_wench": 1
+      },
+      "sourceTypesByMechanic": {
+        "avoid_ante_leave_or_ignore_drink": [
+          "Sometimes"
+        ],
+        "cheat_control_and_eject": [
+          "Cheating"
+        ],
+        "cheat_take_control": [
+          "Cheating"
+        ],
+        "collect_one_from_each_other": [
+          "Action"
+        ],
+        "damage_one": [
+          "Action"
+        ],
+        "damage_three": [
+          "Action"
+        ],
+        "dump_gambling_pot_to_inn": [
+          "Sometimes"
+        ],
+        "gambling_raise_one": [
+          "Gambling"
+        ],
+        "gambling_start_or_control": [
+          "Action - Gambling"
+        ],
+        "gambling_winning_hand": [
+          "Gambling"
+        ],
+        "give_two_alcohol": [
+          "Action"
+        ],
+        "ignore_card_all_stats": [
+          "Sometimes"
+        ],
+        "ignore_drink": [
+          "Sometimes"
+        ],
+        "illusionary_payment": [
+          "Sometimes"
+        ],
+        "negate_drink_change_card": [
+          "Sometimes"
+        ],
+        "negate_sometimes_counter": [
+          "Sometimes"
+        ],
+        "order_two_extra_drinks_paid": [
+          "Sometimes"
+        ],
+        "redirect_fortitude_loss": [
+          "Sometimes"
+        ],
+        "replace_drink_with_four_alcohol": [
+          "Sometimes"
+        ],
+        "share_pain": [
+          "Sometimes"
+        ],
+        "take_one_from_pot": [
+          "Sometimes"
+        ],
+        "take_one_gold": [
+          "Anytime"
+        ],
+        "tip_wench": [
+          "Anytime"
+        ]
+      },
+      "unmappedTitles": []
+    },
+    "fleck": {
+      "sha256": "0eeea03f64b4e787a2766d7a79627a69ce5e1f8709ba2ae5c6d62150dbdea648",
+      "physicalCardCount": 40,
+      "mechanicCounts": {
+        "all_lose_one_alcohol_collect_one_each_other": 1,
+        "all_players_drink_from_inn": 1,
+        "avoid_ante_leave": 1,
+        "avoid_ante_leave_or_ignore_drink": 1,
+        "cheat_control_and_eject": 1,
+        "cheat_take_control": 4,
+        "collect_one_from_each_other": 1,
+        "damage_one": 1,
+        "damage_two": 2,
+        "dump_gambling_pot_to_inn": 1,
+        "gain_two_fortitude": 1,
+        "gambling_raise_one": 2,
+        "gambling_start_or_control": 6,
+        "gambling_winning_hand": 2,
+        "hit_back_two_after_loss": 1,
+        "ignore_drink": 2,
+        "negate_drink_change_card": 1,
+        "negate_sometimes_counter": 1,
+        "order_two_extra_drinks_free_or_waive_refill": 2,
+        "rowdy_song": 2,
+        "split_own_drink": 2,
+        "substitute_payment_from_inn": 2,
+        "take_two_gold": 1,
+        "tip_wench": 1
+      },
+      "sourceTypesByMechanic": {
+        "all_lose_one_alcohol_collect_one_each_other": [
+          "Action"
+        ],
+        "all_players_drink_from_inn": [
+          "Action"
+        ],
+        "avoid_ante_leave": [
+          "Sometimes"
+        ],
+        "avoid_ante_leave_or_ignore_drink": [
+          "Sometimes"
+        ],
+        "cheat_control_and_eject": [
+          "Cheating"
+        ],
+        "cheat_take_control": [
+          "Cheating"
+        ],
+        "collect_one_from_each_other": [
+          "Action"
+        ],
+        "damage_one": [
+          "Action"
+        ],
+        "damage_two": [
+          "Action"
+        ],
+        "dump_gambling_pot_to_inn": [
+          "Sometimes"
+        ],
+        "gain_two_fortitude": [
+          "Anytime"
+        ],
+        "gambling_raise_one": [
+          "Gambling"
+        ],
+        "gambling_start_or_control": [
+          "Action - Gambling"
+        ],
+        "gambling_winning_hand": [
+          "Gambling"
+        ],
+        "hit_back_two_after_loss": [
+          "Sometimes"
+        ],
+        "ignore_drink": [
+          "Sometimes"
+        ],
+        "negate_drink_change_card": [
+          "Sometimes"
+        ],
+        "negate_sometimes_counter": [
+          "Sometimes"
+        ],
+        "order_two_extra_drinks_free_or_waive_refill": [
+          "Sometimes"
+        ],
+        "rowdy_song": [
+          "Action"
+        ],
+        "split_own_drink": [
+          "Sometimes"
+        ],
+        "substitute_payment_from_inn": [
+          "Sometimes"
+        ],
+        "take_two_gold": [
+          "Action"
+        ],
+        "tip_wench": [
+          "Anytime"
+        ]
+      },
+      "unmappedTitles": []
+    }
+  }
+}

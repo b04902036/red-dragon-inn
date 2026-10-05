@@ -5,7 +5,12 @@ const source = JSON.parse(
   await readFile('content-private/imports/rdi1/source-normalized.json', 'utf8'),
 );
 const pack = JSON.parse(
-  await readFile('content-private/imports/rdi1/pack.json', 'utf8'),
+  await readFile(
+    source.contentVersion
+      ? `content-private/imports/rdi1/pack-${source.contentVersion.id}.json`
+      : 'content-private/imports/rdi1/pack.json',
+    'utf8',
+  ),
 );
 const records = [
   ...source.characters.flatMap((character) =>

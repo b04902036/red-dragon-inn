@@ -12,6 +12,7 @@ import {
   rdi1Until,
   rdi1DrinkPile,
   rdi1Send,
+  rdi1InnOrder,
 } from '../fixtures/rdi1-match';
 import { intent, mutable } from '../fixtures/core-match';
 
@@ -21,6 +22,7 @@ describe('every RDI1 Action and Gambling/Cheating definition', () => {
   )) {
     it(`${definition.id}: positive/negative legality and exact effect resolution`, () => {
       const base = rdi1Match(rdi1Pack);
+      for (const player of base.players) player.fortitude = 18;
       const cardId = Object.values(base.cards).find(
         (c) => c.definitionId === definition.id,
       )!.id;
@@ -63,7 +65,9 @@ describe('every RDI1 Action and Gambling/Cheating definition', () => {
       const prepared = mutable(before);
       if (
         definition.effects.some(
-          (e) => e.op === 'FORCE_DRINK' || e.op === 'FORCE_SIMULTANEOUS_DRINK',
+          (e) =>
+            e.op === 'FORCE_DRINK' ||
+            (e.op === 'FORCE_SIMULTANEOUS_DRINK' && e.source !== 'INN'),
         )
       ) {
         for (const p of prepared.players)
@@ -71,6 +75,12 @@ describe('every RDI1 Action and Gambling/Cheating definition', () => {
             p.seat % 2 === 0 ? 'light_ale' : 'dark_ale',
           ]);
       }
+      if (
+        definition.effects.some(
+          (e) => e.op === 'FORCE_SIMULTANEOUS_DRINK' && e.source === 'INN',
+        )
+      )
+        rdi1InnOrder(prepared, ['light_ale', 'dark_ale', 'wine', 'elven_wine']);
       const choice = projectPrivatePlayer(
         prepared,
         prepared.players[seat]!.id,
@@ -123,7 +133,7 @@ describe('every RDI1 Action and Gambling/Cheating definition', () => {
           ).toBe(1);
         if (effect.op === 'FORCE_SIMULTANEOUS_DRINK')
           expect(finished.players.map((p) => p.alcoholContent)).toEqual([
-            1, 1, 1, 1,
+            ...(effect.source === 'INN' ? [1, 1, 2, 3] : [1, 1, 1, 1]),
           ]);
         if (effect.op === 'START_GAMBLING') {
           expect(finished.gambling!.pot).toBe(4);

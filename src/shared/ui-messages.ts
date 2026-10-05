@@ -1,6 +1,15 @@
 import type { Locale } from './locales';
 
 export const englishMessages = {
+  'dev.title': 'Development: choose cards',
+  'dev.drawHelp':
+    'Select cards to discard in your hand, then choose all {count} replacement cards. Regular actions still draw randomly.',
+  'dev.drawSlot': 'Replacement card {slot}',
+  'dev.choose': 'Choose a card or player',
+  'dev.drawConfirm': 'Discard and take chosen cards',
+  'dev.drink': 'Chosen Drink or Drink Event',
+  'dev.target': 'Give chosen Drink to',
+  'dev.drinkConfirm': 'Order chosen Drink',
   'audio.settings': 'Sound',
   'audio.enable': 'Enable sound',
   'audio.enabled': 'Sound enabled',
@@ -215,6 +224,15 @@ export const englishMessages = {
 } as const;
 export type MessageKey = keyof typeof englishMessages;
 export const traditionalChineseMessages = {
+  'dev.title': '開發模式：指定牌',
+  'dev.drawHelp':
+    '先在手牌選擇要棄掉的牌，再指定全部 {count} 張補牌。一般操作仍使用隨機抽牌。',
+  'dev.drawSlot': '指定補牌 {slot}',
+  'dev.choose': '請選擇牌或玩家',
+  'dev.drawConfirm': '棄牌並取得指定牌',
+  'dev.drink': '指定酒牌或酒事件',
+  'dev.target': '指定酒的收件玩家',
+  'dev.drinkConfirm': '買指定的酒',
   'audio.settings': '聲音',
   'audio.enable': '啟用聲音',
   'audio.enabled': '聲音已啟用',

@@ -1,0 +1,1387 @@
+{
+  "auditDate": "2026-10-05",
+  "auditedFile": "content-private/imports/rdi1/source-normalized.json",
+  "auditedFileSha256": "91357d8e03180e397caf760ac0fbadac9c1260a79a89eeea81751ea5619b2156",
+  "method": "Fresh internet cross-check performed for this audit; prior audit conclusions were not treated as evidence.",
+  "result": {
+    "characterDeckPhysicalCounts": {
+      "deirdre": 40,
+      "fiona": 40,
+      "gerki": 40,
+      "zot": 40,
+      "total": 160
+    },
+    "characterMechanicRows": 40,
+    "characterQuantityMismatches": 0,
+    "drinkPhysicalCards": 30,
+    "drinkUniqueDefinitions": 18,
+    "drinkQuantityMismatches": 0,
+    "mustFixCharacterMechanics": [
+      "all_players_drink_now",
+      "force_extra_drink_on_reveal",
+      "negate_drink_change_card"
+    ],
+    "mustFixDrinkRecords": [
+      "drinking_contest"
+    ],
+    "metadataCorrections": [
+      "sourceRefs.official_rules_current points to Twelfth Edition but the current official RDI1 rules found in this audit are Fifteenth Edition.",
+      "Do not label every mechanic MECHANICALLY_VERIFIED/HIGH solely from a community matrix plus generic rules. Store evidence tier per mechanic."
+    ],
+    "limitedPrimaryEvidence": [
+      "substitute_one_gold_from_inn: exact quantities and one-Gold substitution pattern are supported, but this audit did not find primary current card text proving a broader >1-Gold generalization."
+    ],
+    "releaseConclusion": "DO_NOT_CALL_CURRENT_SOURCE_FULLY_REAUDITED_UNTIL_MUST_FIX ITEMS ARE APPLIED, TESTED, AND A NEW SOURCE LOCK/IMMUTABLE CONTENT VERSION IS CREATED."
+  },
+  "freshSources": {
+    "official_rdi1_15e": {
+      "authority": "PRIMARY_CURRENT",
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/10/RDI1-15thEd.pdf",
+      "notes": [
+        "Current RDI1 rules located in this audit: Fifteenth Edition.",
+        "4 x 40-card character decks and one 30-card Drink Deck.",
+        "Current timing, Chasers, Gambling, direct-stat, Negate/Ignore, split Drinks, Round on the House, Drinking Contest."
+      ]
+    },
+    "official_rulesfest_first_sometimes": {
+      "authority": "PRIMARY",
+      "url": "https://slugfestgames.com/rulesfest-the-first-rule-of-sometimes/",
+      "notes": [
+        "Direct-stat response legality; Drink modifiers are not direct Alcohol-stat effects."
+      ]
+    },
+    "official_rulesfest_gambling_101": {
+      "authority": "PRIMARY",
+      "url": "https://slugfestgames.com/rulesfest-gambling-101/",
+      "notes": [
+        "Base gambling/control/raise/Winning Hand behavior."
+      ]
+    },
+    "official_rulesfest_gambling_102": {
+      "authority": "PRIMARY",
+      "url": "https://slugfestgames.com/rulesfest-gambling-102/",
+      "notes": [
+        "Special gambling Sometimes restrictions; Gerki post-win behavior."
+      ]
+    },
+    "official_rdi6_3e": {
+      "authority": "PRIMARY_LATER_CROSSCHECK",
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/05/RDI6-3rdEd.pdf",
+      "notes": [
+        "Deirdre Let's toast the Goddess => each player drinks from the Drink Deck.",
+        "Gerki may take a Gold from gambling pot even when not participating.",
+        "Fiona Liquid Courage converts Drink Alcohol gain to equal Fortitude gain."
+      ]
+    },
+    "official_combined_rdi7": {
+      "authority": "PRIMARY_LATER_CROSSCHECK",
+      "url": "https://slugfestgames.com/wp-content/uploads/2019/02/Red_Dragon_Inn_Combined_Rules_as_of_RDI_7_v_1.1.pdf",
+      "notes": [
+        "Later combined-rules examples for RDI1 cards and generic interactions."
+      ]
+    },
+    "fresh_character_matrix": {
+      "authority": "SECONDARY_COMPLETE_MATRIX",
+      "url": "https://forums.giantitp.com/showsinglepost.php?p=11628882&postcount=2",
+      "crawled": "2026-10 audit result",
+      "notes": [
+        "Complete 40-row RDI1 effect/quantity matrix.",
+        "All 40 rows match the current source quantities exactly.",
+        "Secondary source: must not override official current rules."
+      ]
+    },
+    "fresh_drink_table": {
+      "authority": "SECONDARY_COMPLETE_MECHANICS_TABLE",
+      "url": "https://forums.giantitp.com/archive/index.php/t-211309.html",
+      "crawled": "2026-10 audit result",
+      "notes": [
+        "Complete RDI1 Drink quantities/numeric values; matches current source physical quantities and numeric effects."
+      ]
+    },
+    "fresh_bgg_drink_catalog": {
+      "authority": "SECONDARY_CATALOG",
+      "url": "https://boardgamegeek.com/boardgame/24310/the-red-dragon-inn/wiki",
+      "crawled": "2026-10 audit result",
+      "notes": [
+        "Current web-indexed RDI1 30-card Drink composition; matches current source."
+      ]
+    }
+  },
+  "characterMechanics": [
+    {
+      "ledgerId": "M01",
+      "mechanicId": "gambling_start_or_control",
+      "type": "GAMBLING",
+      "counts": {
+        "deirdre": 6,
+        "fiona": 6,
+        "gerki": 6,
+        "zot": 6
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "During your Action phase, start a gambling round; during an existing gambling round, take control.",
+        "zh-TW": "在你的出牌行動階段可開始一輪賭博；若賭博已進行中，則取得主導權。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M02",
+      "mechanicId": "gambling_raise_one",
+      "type": "GAMBLING",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 2,
+        "gerki": 2,
+        "zot": 2
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Take control of the gambling round and make every active participant ante 1 additional Gold.",
+        "zh-TW": "取得賭博主導權，並使所有仍在賭局中的玩家各再投入 1 金幣。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M03",
+      "mechanicId": "gambling_winning_hand",
+      "type": "GAMBLING",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 2,
+        "gerki": 2,
+        "zot": 2
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Take control. Until a Cheating card takes control, Gambling cards cannot take control.",
+        "zh-TW": "取得賭博主導權；在有作弊牌奪取主導權之前，一般賭博牌不能再奪取主導權。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M04",
+      "mechanicId": "cheat_take_control",
+      "type": "CHEATING",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 3,
+        "zot": 3
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Take control of the gambling round. Cheating can take control even after a Strong Hand.",
+        "zh-TW": "取得賭博主導權；作弊牌可在「好牌在手」之後奪取主導權。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M05",
+      "mechanicId": "cheat_control_and_eject",
+      "type": "CHEATING",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 1,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Take control, then choose another active participant; that player leaves the gambling round.",
+        "zh-TW": "取得賭博主導權，接著選擇另一名仍在賭局中的玩家，使其離開本輪賭博。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M06",
+      "mechanicId": "anti_cheat_win_round",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 1,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "When a Cheating card is played while you are still participating, negate that Cheating card and immediately win the gambling round.",
+        "zh-TW": "當你仍參與賭局且有人打出作弊牌時，可取消該作弊牌，並立即贏得本輪賭博。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M07",
+      "mechanicId": "dump_gambling_pot_to_inn",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 1,
+        "gerki": 1,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "During a gambling round, end the round immediately and move the entire pot to the Inn. It cannot be used after the final pass, to dodge an ante caused by starting/raising, or in response to an effect that will itself end the round.",
+        "zh-TW": "在賭博進行中，可立即結束本輪，並把整個賭池交給酒館。不能在最後一人已跳過後使用，也不能用來逃避開局／加注造成的投入，或回應本來就會結束賭局的效果。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M08",
+      "mechanicId": "steal_winners_pot",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 1,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "After a winner is determined but before payout is finalized, replace the winner with yourself and take the pot.",
+        "zh-TW": "在賭局已決定勝者、但賭池尚未完成支付前，把勝者改成自己並取得賭池。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M09",
+      "mechanicId": "substitute_one_gold_from_inn",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 2,
+        "gerki": 2,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_MATRIX_BUT_PRIMARY_EXACT_SCOPE_NOT_FULLY_VERIFIED",
+      "currentSummary": {
+        "en-US": "When you must pay or ante Gold, satisfy exactly 1 Gold of that cost using Gold from the Inn instead of your stash.",
+        "zh-TW": "當你必須支付或投入金幣時，其中恰好 1 金幣改由酒館支付，而不是從你的金幣中扣除。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": [
+        "Fresh complete matrix confirms 'Pay or Ante with found gold' and exact quantities.",
+        "Official later examples confirm paying a 1-Gold obligation with Inn Gold. Public primary text located in this audit does not fully establish how this exact RDI1 card generalizes to obligations greater than 1 Gold. Keep the implementation at one substituted Gold unless primary card text says otherwise; do not generalize."
+      ]
+    },
+    {
+      "ledgerId": "M10",
+      "mechanicId": "take_one_from_pot",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 1,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "During an active gambling round, take 1 Gold from the pot and add it to your stash without changing control.",
+        "zh-TW": "在賭博進行中，從賭池拿走 1 金幣加入自己的金幣，不改變賭局主導權。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e",
+        "official_rdi6_3e"
+      ],
+      "correction": null,
+      "notes": [
+        "Later official RDI6 rules explicitly confirm Gerki may do this even while not participating in the gambling round."
+      ]
+    },
+    {
+      "ledgerId": "M11",
+      "mechanicId": "avoid_ante_leave",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 2,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "When you are required to ante, do not pay that ante and leave the gambling round. Previously anted Gold stays in the pot.",
+        "zh-TW": "當你必須投入金幣時，不支付這次投入並離開本輪賭博；之前已投入的金幣仍留在賭池。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M12",
+      "mechanicId": "avoid_ante_leave_or_ignore_drink",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 2
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Choose the applicable branch: when required to ante, avoid that ante and leave the round; or when a Drink would affect you, ignore that entire Drink.",
+        "zh-TW": "依目前情境選擇適用效果：必須投入時可免除該次投入並離開賭局；或當飲料將影響你時，忽略整杯飲料。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M13",
+      "mechanicId": "avoid_ante_leave_or_ignore_drink_pay_one",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "When required to ante, avoid the ante and leave the round; or ignore a Drink affecting you and pay 1 Gold to the Inn.",
+        "zh-TW": "必須投入時可免除該次投入並離開賭局；或忽略一杯會影響你的飲料，並支付 1 金幣給酒館。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M14",
+      "mechanicId": "ignore_card_all_stats_or_drink",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 1,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Ignore either a Drink affecting you, or an Action/Sometimes/Anytime card that directly affects your Fortitude, Alcohol Content, or Gold.",
+        "zh-TW": "忽略一杯會影響你的飲料；或忽略一張會直接影響你耐力值、酒精值或金幣的行動／Sometimes／Anytime 牌。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M15",
+      "mechanicId": "ignore_card_all_stats",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Ignore an Action/Sometimes/Anytime card that directly affects your Fortitude, Alcohol Content, or Gold.",
+        "zh-TW": "忽略一張會直接影響你耐力值、酒精值或金幣的行動／Sometimes／Anytime 牌。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M16",
+      "mechanicId": "ignore_action_sometimes_fort_alcohol",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 1,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Ignore an Action or Sometimes card that directly affects your Fortitude or Alcohol Content.",
+        "zh-TW": "忽略一張會直接影響你耐力值或酒精值的行動牌或 Sometimes 牌。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M17",
+      "mechanicId": "ignore_action_sometimes_fort_loss",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 2,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Ignore an Action or Sometimes card that would directly make you lose Fortitude.",
+        "zh-TW": "忽略一張會直接使你損失耐力值的行動牌或 Sometimes 牌。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M18",
+      "mechanicId": "negate_sometimes_counter",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 1,
+        "gerki": 1,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Negate a Sometimes card. This counter belongs to a protected counter family: it may itself only be negated by another card in the same family.",
+        "zh-TW": "取消一張 Sometimes 牌。本牌屬於特殊反制系列：它本身只能被同系列的反制牌取消。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M19",
+      "mechanicId": "ignore_drink",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 2,
+        "gerki": 3,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Ignore the entire Drink that you are about to drink, including its Chasers.",
+        "zh-TW": "忽略你即將喝下的整杯飲料，包含所有續杯效果。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M20",
+      "mechanicId": "order_two_extra_drinks",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 2,
+        "gerki": 2,
+        "zot": 2
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "During your Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks. Each extra Drink may be placed on any other player's Drink Me! pile.",
+        "zh-TW": "在你的請客階段，支付 1 金幣給酒館並額外請 2 杯。每杯都可放到任一其他玩家的暢飲區。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M21",
+      "mechanicId": "all_players_drink_now",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MUST_FIX",
+      "currentSummary": {
+        "en-US": "Every living player, including you, reveals and resolves the top card of their Drink Me! pile now.",
+        "zh-TW": "所有仍在遊戲中的玩家（包含你）立刻各翻開並結算自己暢飲區最上方的一張飲料。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e",
+        "official_rdi6_3e"
+      ],
+      "correction": {
+        "problem": "Current source uses each player's Drink Me! pile.",
+        "required": "This RDI1 action makes each player drink from the central Drink Deck, not their Drink Me! pile.",
+        "implementation": "Inspect current generic Drink operation and make the source explicit. Do not add a card-name check."
+      },
+      "notes": [
+        "Confirmed by later official RDI6 and RDI10 examples naming Deirdre's card."
+      ]
+    },
+    {
+      "ledgerId": "M22",
+      "mechanicId": "force_extra_drink_on_reveal",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 1,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MUST_FIX",
+      "currentSummary": {
+        "en-US": "When another player reveals a Drink they are about to drink, make them also reveal another Drink from their Drink Me! pile; both are resolved as separate Drinks in the proper order.",
+        "zh-TW": "當另一名玩家翻開即將飲用的飲料時，使其再從自己的暢飲區翻開一杯；兩杯依正確時序分別結算。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": {
+        "problem": "Source trigger is AFTER_REVEAL_BEFORE_RESOLVE.",
+        "required": "No response to a Drink is allowed until all Chasers are revealed. This trigger must obey AFTER_CHASERS_BEFORE_RESOLVE (or an equivalent global authoritative chaser gate).",
+        "implementation": "Prefer encoding the timing explicitly in source while also retaining the global chaser invariant."
+      },
+      "notes": [
+        "Current Fifteenth Edition explicitly forbids responses before all Chasers are revealed."
+      ]
+    },
+    {
+      "ledgerId": "M23",
+      "mechanicId": "force_other_player_drink_now",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 1,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Choose another player. They immediately reveal and resolve the top card of their Drink Me! pile.",
+        "zh-TW": "選擇另一名玩家；該玩家立刻翻開並結算自己暢飲區最上方的一張飲料。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M24",
+      "mechanicId": "pass_own_drink",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "When you are about to drink a Drink, give that entire Drink to another player. They become the affected drinker.",
+        "zh-TW": "當你即將喝一杯飲料時，把整杯交給另一名玩家；該玩家改為承受這杯飲料。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": [
+        "Current official rules show the RDI1 pass-a-Drink card and current Drinking Contest behavior."
+      ]
+    },
+    {
+      "ledgerId": "M25",
+      "mechanicId": "split_own_drink",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 1,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "When you are about to drink, split the combined numeric effects of the Drink with another player. Each numeric effect is halved and rounded up, creating two independent Drinks.",
+        "zh-TW": "當你即將喝下一杯飲料時，與另一名玩家平分此飲料合併後的數值效果；每個數值效果除以二並向上取整，形成兩杯獨立飲料。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": [
+        "Current official rules define independent split Drinks, pre-split modifications, combined numeric effects, and ceil rounding."
+      ]
+    },
+    {
+      "ledgerId": "M26",
+      "mechanicId": "alcohol_to_fortitude",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 1,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "When you are about to drink, replace that Drink's Alcohol Content gain with an equal Fortitude gain. Other effects of the Drink remain.",
+        "zh-TW": "當你即將喝一杯飲料時，把該飲料造成的酒精值增加改成等量的耐力值增加；飲料的其他效果仍照常。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e",
+        "official_rdi6_3e"
+      ],
+      "correction": null,
+      "notes": [
+        "Later official RDI6 example confirms Dragon Breath +4 Alcohol becomes +4 Fortitude."
+      ]
+    },
+    {
+      "ledgerId": "M27",
+      "mechanicId": "add_two_alcohol_to_drink",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 0,
+        "gerki": 2,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Add 2 Alcohol Content to one Drink that has been revealed and is currently being resolved.",
+        "zh-TW": "使一杯已翻開、正在結算的飲料額外增加 2 點酒精值。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M28",
+      "mechanicId": "reduce_drink_alcohol_two",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Reduce one revealed Drink's Alcohol Content by 2, to a minimum effective value of 0 where rules require.",
+        "zh-TW": "使一杯已翻開飲料的酒精值效果降低 2；依規則需要時最低視為 0。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M29",
+      "mechanicId": "negate_drink_change_card",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 1,
+        "gerki": 1,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MUST_FIX",
+      "currentSummary": {
+        "en-US": "Negate a card that changes a Drink's effects (such as modifying, ignoring, passing, or splitting it). It cannot negate another copy of this mechanic, a card that merely orders Drinks, forces a player to drink, directly changes a player's Alcohol Content, or affects a Drink Event.",
+        "zh-TW": "取消一張會改變飲料效果的牌（例如修改、忽略、轉交或平分飲料）。不能取消同機制的另一張牌，也不能取消只負責請客、強迫喝酒、直接改變玩家酒精值，或影響酒卡事件的牌。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": {
+        "problem": "Source trigger only requires CHANGES_DRINK_EFFECT and does not explicitly require the source to be a Sometimes card; source metadata also does not fully encode the card's own protection.",
+        "required": "It Negates a SOMETIMES card that changes a Drink's effects. It cannot Negate another copy. The counter itself can only be affected by the protected 'I don't think so!' family.",
+        "implementation": "Add structured source-card-type restriction and protected-counter metadata; keep existing exclusions for order/force/direct-Alcohol/Drink-Event cases."
+      },
+      "notes": [
+        "Current Fifteenth Edition prints this restriction and protection."
+      ]
+    },
+    {
+      "ledgerId": "M30",
+      "mechanicId": "damage_one",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 3,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Choose another player. They lose 1 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 1 點耐力值。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M31",
+      "mechanicId": "damage_two",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 4,
+        "fiona": 3,
+        "gerki": 4,
+        "zot": 5
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Choose another player. They lose 2 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M32",
+      "mechanicId": "damage_three",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 1,
+        "gerki": 2,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Choose another player. They lose 3 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 3 點耐力值。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M33",
+      "mechanicId": "damage_all_others_one",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 2
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Each other living player loses 1 Fortitude.",
+        "zh-TW": "其他所有仍在遊戲中的玩家各失去 1 點耐力值。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M34",
+      "mechanicId": "hit_back_two_after_loss",
+      "type": "SOMETIMES",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 2,
+        "gerki": 0,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Immediately after another player causes you to actually lose Fortitude, that original source player loses 2 Fortitude. You cannot use this if the loss was fully ignored/reduced to 0.",
+        "zh-TW": "當另一名玩家使你實際失去耐力值後立刻使用；原始來源玩家失去 2 點耐力值。若該次損失被完全忽略或降為 0，則不能使用。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": [
+        "Current timing example confirms this occurs after actual Fortitude loss resolves, not while damage is merely pending."
+      ]
+    },
+    {
+      "ledgerId": "M35",
+      "mechanicId": "gain_two_fortitude",
+      "type": "ANYTIME",
+      "counts": {
+        "deirdre": 2,
+        "fiona": 1,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Gain 2 Fortitude.",
+        "zh-TW": "獲得 2 點耐力值。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M36",
+      "mechanicId": "heal_other_charge_gold",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Choose another player. They gain 2 Fortitude, then pay you 1 Gold. The payment still applies even if their Fortitude is already at its maximum.",
+        "zh-TW": "選擇另一名玩家；其獲得 2 點耐力值，接著支付你 1 金幣。即使其耐力值已達上限，付款仍照常發生。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M37",
+      "mechanicId": "heal_all_and_collect",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 0,
+        "gerki": 0,
+        "zot": 0
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Every living player gains 1 Fortitude. Then each other player pays you 1 Gold.",
+        "zh-TW": "所有仍在遊戲中的玩家各獲得 1 點耐力值；接著其他每位玩家各支付你 1 金幣。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M38",
+      "mechanicId": "collect_one_from_each_other",
+      "type": "ACTION",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 1,
+        "gerki": 1,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Each other living player pays you 1 Gold.",
+        "zh-TW": "其他每位仍在遊戲中的玩家各支付你 1 金幣。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M39",
+      "mechanicId": "take_one_gold",
+      "type": "ANYTIME",
+      "counts": {
+        "deirdre": 0,
+        "fiona": 0,
+        "gerki": 2,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "MATCHES_FRESH_EXACT_MATRIX_AND_CURRENT_OFFICIAL_GENERIC_RULES",
+      "currentSummary": {
+        "en-US": "Choose a player. Take 1 Gold from that player's stash.",
+        "zh-TW": "選擇一名玩家，從其金幣中拿走 1 金幣。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "M40",
+      "mechanicId": "tip_wench",
+      "type": "ANYTIME",
+      "counts": {
+        "deirdre": 1,
+        "fiona": 1,
+        "gerki": 1,
+        "zot": 1
+      },
+      "quantityComparison": "EXACT_MATCH",
+      "mechanicStatus": "VERIFIED_CURRENT_OR_LATER_OFFICIAL_BEHAVIOR_PLUS_EXACT_MATRIX_QUANTITY",
+      "currentSummary": {
+        "en-US": "Choose a player. That player pays 1 Gold to the Inn.",
+        "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+      },
+      "freshEvidence": [
+        "fresh_character_matrix",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    }
+  ],
+  "drinks": [
+    {
+      "ledgerId": "D01",
+      "drinkKey": "light_ale",
+      "quantity": 3,
+      "type": "DRINK",
+      "currentAlcohol": 1,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D02",
+      "drinkKey": "light_ale_chaser",
+      "quantity": 2,
+      "type": "DRINK",
+      "currentAlcohol": 1,
+      "currentFortitude": 0,
+      "chaser": true,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D03",
+      "drinkKey": "dark_ale",
+      "quantity": 3,
+      "type": "DRINK",
+      "currentAlcohol": 1,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D04",
+      "drinkKey": "dark_ale_chaser",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 1,
+      "currentFortitude": 0,
+      "chaser": true,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D05",
+      "drinkKey": "dirty_dishwater",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 0,
+      "currentFortitude": -1,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D06",
+      "drinkKey": "wine",
+      "quantity": 3,
+      "type": "DRINK",
+      "currentAlcohol": 2,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D07",
+      "drinkKey": "wine_chaser",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 2,
+      "currentFortitude": 0,
+      "chaser": true,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D08",
+      "drinkKey": "troll_swill",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 1,
+      "currentFortitude": -1,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D09",
+      "drinkKey": "orcish_rotgut",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 0,
+      "currentFortitude": -2,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D10",
+      "drinkKey": "elven_wine",
+      "quantity": 2,
+      "type": "DRINK",
+      "currentAlcohol": 3,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D11",
+      "drinkKey": "elven_wine_chaser",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 3,
+      "currentFortitude": 0,
+      "chaser": true,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D12",
+      "drinkKey": "dragon_breath",
+      "quantity": 3,
+      "type": "DRINK",
+      "currentAlcohol": 4,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D13",
+      "drinkKey": "water",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 0,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D14",
+      "drinkKey": "wizards_brew",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 2,
+      "currentFortitude": 2,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D15",
+      "drinkKey": "cutting_off",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": -1,
+      "currentFortitude": 0,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D16",
+      "drinkKey": "holy_water",
+      "quantity": 1,
+      "type": "DRINK",
+      "currentAlcohol": 0,
+      "currentFortitude": 2,
+      "chaser": false,
+      "status": "MATCHES_FRESH_DRINK_TABLE_AND_BGG_COMPOSITION",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": []
+    },
+    {
+      "ledgerId": "D17",
+      "drinkKey": "drinking_contest",
+      "quantity": 2,
+      "type": "DRINK_EVENT",
+      "currentAlcohol": null,
+      "currentFortitude": null,
+      "chaser": null,
+      "status": "MUST_FIX",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": {
+        "problem": "Current summary says Drink Events revealed for the contest count as 0 and then resolve according to normal event rules.",
+        "required": "Current Fifteenth Edition says a Drink Event revealed for Drinking Contest has NO EFFECT and counts as a 0-Alcohol Drink.",
+        "additionalOfficialRules": [
+          "Pass/split/ignore does not change contest score.",
+          "Extra Drinks taken during the contest do not affect contest score.",
+          "A negative total Alcohol score counts as 0 for contest scoring while the actual Drink effect still resolves normally.",
+          "Tied highest players repeat until a clear winner or the official pass-out end cases occur."
+        ],
+        "implementation": "Update player-facing summary and verify the DRINKING_CONTEST handler/tests implement all current official cases."
+      },
+      "notes": []
+    },
+    {
+      "ledgerId": "D18",
+      "drinkKey": "round_on_house",
+      "quantity": 2,
+      "type": "DRINK_EVENT",
+      "currentAlcohol": null,
+      "currentFortitude": null,
+      "chaser": null,
+      "status": "VERIFIED_CURRENT_OFFICIAL",
+      "evidence": [
+        "fresh_drink_table",
+        "fresh_bgg_drink_catalog",
+        "official_rdi1_15e"
+      ],
+      "correction": null,
+      "notes": [
+        "Current Fifteenth Edition: reveal a Drink with possible Chasers, skipping Drink Events until a Drink; create independent copies before players can modify individual copies.",
+        "Current summary is directionally correct but should explicitly mention possible Chasers for completeness."
+      ]
+    }
+  ]
+}

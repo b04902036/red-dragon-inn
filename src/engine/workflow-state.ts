@@ -53,6 +53,15 @@ export const workflowTaskSchema = z.discriminatedUnion('kind', [
   z.strictObject({
     kind: z.literal('DRINK_BATCH'),
     mode: z.enum(['SIMULTANEOUS', 'CONTEST', 'HOUSE']),
+    source: z.enum(['INN', 'DRINK_PILE']).optional(),
+    contestRules: z
+      .strictObject({
+        drinkEvents: z.literal('IGNORE'),
+        scoring: z.literal('REVEALED_WITH_MODIFIERS'),
+        settlement: z.literal('AFTER_CONTEST'),
+      })
+      .optional(),
+    passedOutPlayerIds: z.array(player).max(4).optional(),
     participants: players,
     scores: z
       .array(
@@ -64,6 +73,9 @@ export const workflowTaskSchema = z.discriminatedUnion('kind', [
       .max(4),
     round: z.number().int().min(0).max(256),
     initialized: z.boolean(),
+    deferDrinkConsumption: z.boolean().optional(),
+    consumingDrinks: z.boolean().optional(),
+    payForRefill: z.boolean().optional(),
   }),
 ]);
 export type WorkflowTask = z.infer<typeof workflowTaskSchema>;
@@ -76,6 +88,12 @@ export const drinkWorkSchema = z.strictObject({
   effects: z.array(effectSchema).max(32),
   score: z.number().int().min(0).safe(),
   alcoholAsFortitude: z.boolean(),
+  contestScore: z.number().int().safe().optional(),
+  responseComplete: z.boolean().optional(),
+  canceled: z.boolean().optional(),
+  ignoredPlayerIds: z.array(player).max(4).optional(),
+  drinkRecipientId: player.optional(),
+  afterTasks: z.array(workflowTaskSchema).max(8).optional(),
 });
 export type DrinkWork = z.infer<typeof drinkWorkSchema>;
 export function taskEvent(task: WorkflowTask | undefined) {

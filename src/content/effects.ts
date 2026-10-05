@@ -177,9 +177,22 @@ export const effectSchema = z.discriminatedUnion('op', [
   z.strictObject({
     op: z.literal('FORCE_SIMULTANEOUS_DRINK'),
     targets: z.literal('ALL_PLAYERS'),
+    source: z.enum(['INN', 'DRINK_PILE']).optional(),
   }),
-  z.strictObject({ op: z.literal('DRINKING_CONTEST') }),
-  z.strictObject({ op: z.literal('ROUND_ON_HOUSE') }),
+  z.strictObject({
+    op: z.literal('DRINKING_CONTEST'),
+    rules: z
+      .strictObject({
+        drinkEvents: z.literal('IGNORE'),
+        scoring: z.literal('REVEALED_WITH_MODIFIERS'),
+        settlement: z.literal('AFTER_CONTEST'),
+      })
+      .optional(),
+  }),
+  z.strictObject({
+    op: z.literal('ROUND_ON_HOUSE'),
+    payForRefill: z.boolean().optional(),
+  }),
   z.strictObject({
     op: z.literal('CONTEXT_BRANCH'),
     branches: z

@@ -3,3 +3,8 @@ worker-configuration.d.ts
 AGENTS.md
 START_HERE.txt
 codex-prompts/
+# Supplied audit evidence is kept byte-for-byte, independently of code style.
+RDI1_REAUDIT_VALIDATION.json
+RDI2_PACKAGE_VALIDATION.json
+reference/rdi1/reaudit-2026-10-05/
+reference/rdi2/

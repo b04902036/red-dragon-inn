@@ -14,7 +14,7 @@ export default defineConfig({
   },
   webServer: {
     command:
-      'npm run db:migrate && npm run content:compile:rdi1 && npm run content:publish:rdi1 && node scripts/rdi1-e2e-config.mjs && vite build --config vite.rdi1-e2e.config.ts && node scripts/fixture-preview.mjs --port 4174',
+      'npm run db:migrate && npm run content:compile:rdi1 -- --version content_rdi1_mechanics_v2 && npm run content:publish:rdi1 -- --version content_rdi1_mechanics_v2 && npm run content:verify:rdi1 -- --activate content_rdi1_mechanics_v2 && node scripts/rdi1-e2e-config.mjs && vite build --config vite.rdi1-e2e.config.ts && node scripts/fixture-preview.mjs --port 4174',
     url: 'http://127.0.0.1:4174',
     reuseExistingServer: false,
     timeout: 120_000,

@@ -1,6 +1,6 @@
 # RDI1 source evidence and reconciliation
 
-## Primary mechanics/count source
+## Secondary complete mechanics/count matrix
 
 Giant in the Playground archive:
 
@@ -14,11 +14,14 @@ The extracted rows sum to exactly 40 for each character. This package keeps thos
 
 Current RDI1 rules / searchable current-rule references:
 
-- https://slugfestgames.com/wp-content/uploads/2021/10/RDI1RulesForWeb-12thEd-1.pdf
+- https://slugfestgames.com/wp-content/uploads/2021/10/RDI1-15thEd.pdf
 - https://www.64ouncegames.com/pages/the-red-dragon-inn
 - https://slugfestgames.com/rulesfest-the-first-rule-of-sometimes/
 
 Use current rules over old card wording when there is a conflict.
+
+The Twelfth Edition is a historical reference: https://slugfestgames.com/wp-content/uploads/2021/10/RDI1RulesForWeb-12thEd-1.pdf.
+The current audit also cross-checks later official clarifications in https://slugfestgames.com/wp-content/uploads/2021/05/RDI6-3rdEd.pdf.
 
 Key reconciliations:
 
@@ -48,9 +51,6 @@ The cheating card has not finished resolving when anti-cheat Sometimes responses
 
 ## Confidence model
 
-`MECHANICALLY_VERIFIED` means:
+The corrected source records an evidence tier for each mechanic, matched against the [fresh ledger](reaudit-2026-10-05/verification-ledger%20%281%29.json): `CURRENT_OFFICIAL_DIRECT`, `LATER_OFFICIAL_CROSSCHECK`, `FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES`, or `LIMITED_PRIMARY_CARD_TEXT`.
 
-1. quantity/effect category is present in the complete RDI1 deck matrix; and
-2. the implementation semantics are reconciled with current core rules where those rules clarify timing/interaction.
-
-It does NOT mean this package reproduces the original printed title, flavor text, art, or exact rules prose.
+Every quantity retains `SECONDARY_COMPLETE_MATRIX` evidence. Generic official rules do not prove a particular card's full text or exact quantity. The Inn substitution remains exactly one Gold; its primary wording limitation is explicit. No original printed title, flavor text, artwork, or exact rules prose is reproduced.

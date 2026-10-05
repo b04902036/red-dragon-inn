@@ -1,0 +1,26 @@
+{
+  "auditedSha256": "91357d8e03180e397caf760ac0fbadac9c1260a79a89eeea81751ea5619b2156",
+  "mechanicRowsChecked": 40,
+  "mechanicQuantityMismatches": 0,
+  "characterTotals": {
+    "deirdre": 40,
+    "fiona": 40,
+    "gerki": 40,
+    "zot": 40,
+    "total": 160
+  },
+  "drinkDefinitionsChecked": 18,
+  "drinkPhysicalTotal": 30,
+  "drinkQuantityMismatches": 0,
+  "mustFixMechanics": [
+    "all_players_drink_now",
+    "force_extra_drink_on_reveal",
+    "negate_drink_change_card"
+  ],
+  "mustFixDrinkRecords": [
+    "drinking_contest"
+  ],
+  "metadataCorrections": 2,
+  "readyToRemainOnV1WithoutFixes": false,
+  "recommendedCorrectedVersion": "content_rdi1_mechanics_v2"
+}

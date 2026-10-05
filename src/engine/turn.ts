@@ -1,6 +1,7 @@
 import type { StateChangingCommand } from '../protocol/commands';
 import { requireCommand, CommandError } from './errors';
 import { drawHand } from './card-moves';
+import { chooseHand, chooseDrink } from './dev-card-selection';
 import { playAction, startDrink } from './timing';
 import { completePhase } from './timed-prompts';
 import type { PlayerId } from '../shared/ids';
@@ -128,6 +129,11 @@ export function executeTurnCommand(
   emit: EmitEvent,
   rng: RandomSource,
 ) {
+  if (command.type === 'DEV_DISCARD_DRAW' || command.type === 'DEV_ORDER_DRINK')
+    requireCommand(
+      state.rules.devCardSelection === true,
+      'UNSUPPORTED_COMMAND',
+    );
   requireCommand(
     state.gambling === null &&
       state.control.phaseEnd === null &&
@@ -145,7 +151,8 @@ export function executeTurnCommand(
   requireCommand(state.activePlayerId === actorId, 'NOT_ACTIVE_PLAYER');
   const player = state.players.find((p) => p.id === actorId)!;
   switch (command.type) {
-    case 'DISCARD': {
+    case 'DISCARD':
+    case 'DEV_DISCARD_DRAW': {
       requireCommand(state.phase === 'DISCARD_DRAW', 'WRONG_PHASE');
       requireCommand(
         command.cardIds.every((id) => player.hand.includes(id)),
@@ -166,7 +173,9 @@ export function executeTurnCommand(
           playerId: actorId,
           cardIds: command.cardIds,
         });
-      drawHand(state, player, emit, rng);
+      if (command.type === 'DEV_DISCARD_DRAW')
+        chooseHand(state, player, command.definitionIds, emit);
+      else drawHand(state, player, emit, rng);
       completePhase(state, 'ACTION', emit);
       return;
     }
@@ -177,14 +186,18 @@ export function executeTurnCommand(
       requireCommand(state.phase === 'ACTION', 'WRONG_PHASE');
       completePhase(state, 'ORDER_DRINK', emit);
       return;
-    case 'ORDER_DRINK': {
+    case 'ORDER_DRINK':
+    case 'DEV_ORDER_DRINK': {
       requireCommand(state.phase === 'ORDER_DRINK', 'WRONG_PHASE');
       const target = state.players.find((p) => p.id === command.targetPlayerId);
       requireCommand(
         target !== undefined && !target.eliminated && target.id !== actorId,
         'INVALID_TARGET',
       );
-      const drawn = dealDrinks(state, target, 1, emit, rng);
+      const drawn =
+        command.type === 'DEV_ORDER_DRINK'
+          ? [chooseDrink(state, target, command.definitionId)]
+          : dealDrinks(state, target, 1, emit, rng);
       if (drawn.length === 0)
         emit({
           type: 'DRINK_ORDER_SKIPPED',

@@ -204,6 +204,20 @@ export function projectPublicGame(
       };
 }
 
+function choiceCounts(
+  state: AuthoritativeGameState,
+  ids: readonly CardInstanceId[],
+) {
+  const counts = new Map<string, number>();
+  for (const id of ids) {
+    const definitionId = state.cards[id]!.definitionId;
+    counts.set(definitionId, (counts.get(definitionId) ?? 0) + 1);
+  }
+  return [...counts]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([definitionId, count]) => ({ definitionId, count }));
+}
+
 /** requesterId must come from the authenticated server session, not a command payload. */
 export function projectPrivatePlayer(
   state: AuthoritativeGameState,
@@ -215,6 +229,23 @@ export function projectPrivatePlayer(
   const window = state.responseWindow;
   const choice = window?.pendingChoice;
   return privatePlayerViewSchema.parse({
+    ...('definitions' in state &&
+    (state as CoreGameState).rules.devCardSelection === true
+      ? {
+          devChoices: {
+            handSize: (state as CoreGameState).rules.handSize,
+            characterCards: choiceCounts(state, [
+              ...player.characterDeck.cardIds,
+              ...player.characterDiscard,
+              ...player.hand,
+            ]),
+            innCards: choiceCounts(state, [
+              ...state.innDrinkDeck.cardIds,
+              ...state.innDrinkDiscard,
+            ]),
+          },
+        }
+      : {}),
     schemaVersion: state.schemaVersion,
     roomId: state.roomId,
     matchId: state.matchId,

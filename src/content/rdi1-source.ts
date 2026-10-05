@@ -140,8 +140,6 @@ export const rdi1EffectPlanSchema = z.union([
       'IGNORE_CURRENT_EFFECT_FOR_SELF',
       'IGNORE_CURRENT_DRINK',
       'REPLACE_DRINK_ALCOHOL_WITH_FORTITUDE',
-      'DRINKING_CONTEST',
-      'ROUND_ON_HOUSE',
     ]),
   }),
   z.strictObject({
@@ -188,6 +186,21 @@ export const rdi1EffectPlanSchema = z.union([
   z.strictObject({
     op: z.literal('FORCE_SIMULTANEOUS_DRINK'),
     targets: z.literal('ALL_PLAYERS'),
+    source: z.enum(['INN', 'DRINK_PILE']).optional(),
+  }),
+  z.strictObject({
+    op: z.literal('DRINKING_CONTEST'),
+    rules: z
+      .strictObject({
+        drinkEvents: z.literal('IGNORE'),
+        scoring: z.literal('REVEALED_WITH_MODIFIERS'),
+        settlement: z.literal('AFTER_CONTEST'),
+      })
+      .optional(),
+  }),
+  z.strictObject({
+    op: z.literal('ROUND_ON_HOUSE'),
+    payForRefill: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('ORDER_EXTRA_DRINKS'),
@@ -228,11 +241,25 @@ export const rdi1EffectPlanSchema = z.union([
   }),
 ]);
 const requirements = z.array(key).max(64);
-const verification = z.strictObject({
-  status: z.literal('MECHANICALLY_VERIFIED'),
-  confidence: z.literal('HIGH'),
-  basis: z.array(key).min(1).max(16),
-});
+const verification = z.union([
+  z.strictObject({
+    status: z.literal('MECHANICALLY_VERIFIED'),
+    confidence: z.literal('HIGH'),
+    basis: z.array(key).min(1).max(16),
+  }),
+  z.strictObject({
+    status: z.literal('REAUDITED'),
+    evidenceTier: z.enum([
+      'CURRENT_OFFICIAL_DIRECT',
+      'LATER_OFFICIAL_CROSSCHECK',
+      'FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES',
+      'LIMITED_PRIMARY_CARD_TEXT',
+    ]),
+    quantityEvidenceTier: z.literal('SECONDARY_COMPLETE_MATRIX'),
+    basis: z.array(key).min(1).max(16),
+    ledgerId: text,
+  }),
+]);
 const mechanic = z
   .strictObject({
     id: key,
@@ -240,6 +267,12 @@ const mechanic = z
     display: bilingual,
     rulesSummary: bilingual,
     responseKind: z.enum(['IGNORE', 'NEGATE', 'SOMETIMES']).nullable(),
+    counterMetadata: z
+      .strictObject({
+        family: key,
+        allowedCounterFamilies: z.array(key).min(1).max(8),
+      })
+      .optional(),
     legality,
     effects: z.array(rdi1EffectPlanSchema).min(1).max(32),
     engineRequirements: requirements,
@@ -303,6 +336,13 @@ const drink = z
 export const rdi1SourceSchema = z.strictObject({
   schemaVersion: z.literal('rdi1-mechanics-normalized-v1'),
   status: z.literal('READY_FOR_ENGINE_COMPILATION'),
+  contentVersion: z
+    .strictObject({
+      id: z.literal('content_rdi1_mechanics_v2'),
+      name: text,
+      createdAt: z.iso.datetime(),
+    })
+    .optional(),
   copyrightStrategy: z.strictObject({
     cardNames: text,
     rulesText: text,
@@ -457,8 +497,11 @@ export function verifyRdi1Source(input: unknown, requiredInput: unknown) {
   for (const id of required.data.requiredCapabilities)
     if (!used.includes(id)) errors.push(`Unused required capability ${id}`);
   const visit = (value: unknown) => {
-    if (typeof value === 'string' && /\b(?:UNKNOWN|TODO|NO_OP)\b/i.test(value))
-      errors.push('Forbidden UNKNOWN/TODO/NO_OP entry');
+    if (
+      typeof value === 'string' &&
+      /\b(?:UNKNOWN|TODO|NO_OP|ASSUMED|GUESSED)\b/i.test(value)
+    )
+      errors.push('Forbidden UNKNOWN/TODO/NO_OP/ASSUMED/GUESSED entry');
     else if (Array.isArray(value)) value.forEach(visit);
     else if (value !== null && typeof value === 'object')
       for (const [name, child] of Object.entries(value)) {

@@ -23,6 +23,7 @@ it('initializes generic character traits and preserves additional Drink operatio
   setup.content.characters[0]!.rules.traits = ['TROLL'];
   expect(createMatch(setup).players[0]!.traits).toEqual(['TROLL']);
   const state = drinkState([]);
+  for (const player of state.players) player.fortitude = 18;
   state.phase = 'ACTION';
   state.rules.timing = { ...DEFAULT_RULES.timing };
   const id = state.cards[state.innDrinkDeck.cardIds[0]!]!.definitionId;
@@ -42,7 +43,7 @@ it('initializes generic character traits and preserves additional Drink operatio
   });
   const finished = settle(play(state, 0, house).state);
   expect(finished.players.map((player) => player.fortitude)).toEqual([
-    22, 22, 22, 22,
+    20, 20, 20, 20,
   ]);
   expect(finished.players.map((player) => player.alcoholContent)).toEqual([
     4, 4, 4, 4,

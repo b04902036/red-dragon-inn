@@ -240,6 +240,9 @@ export function assertCoreInvariants(state: CoreGameState): void {
     const held = [
       ...(frame.heldDrinkCardIds ?? []),
       ...(frame.pendingDrinks ?? []).flatMap((work) => work.sourceCardIds),
+      ...(frame.pendingDrinkResolutions ?? []).flatMap(
+        (work) => work.sourceCardIds,
+      ),
     ];
     for (const id of held)
       locate(id, null, { zone: 'RESOLUTION', resolutionId: frame.id });

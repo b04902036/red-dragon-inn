@@ -30,7 +30,9 @@ function gamblingPass(state: CoreGameState) {
 }
 describe('generic gambling workflows', () => {
   it('Anytime during gambling preserves control and the Winning Hand restriction', () => {
-    const state = round();
+    const initial = genericState();
+    initial.players[2]!.fortitude = 19;
+    const state = round(initial);
     const old = state.gambling!;
     const finished = settle(
       play(state, 2, cardInHand(state, 2, 'breather')).state,

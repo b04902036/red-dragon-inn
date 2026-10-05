@@ -132,6 +132,7 @@ describe('hidden ordering, reveal, compound Drinks, and configured fallback', ()
     'combines %j into one logical Drink with one response window',
     (suffixes) => {
       const state = drinkState(suffixes);
+      state.players[0]!.fortitude = 18;
       const original = [...state.players[0]!.drinkPile];
       const result = takeDrink(state);
       expect(result.queued.state.resolutionStack).toHaveLength(1);
@@ -145,7 +146,7 @@ describe('hidden ordering, reveal, compound Drinks, and configured fallback', ()
       ).toEqual(original);
       expect(result.queued.events.at(-1)!.type).toBe('RESPONSE_WINDOW_OPENED');
       expect(result.state.players[0]!.alcoholContent).toBe(suffixes.length + 1);
-      expect(result.state.players[0]!.fortitude).toBe(20 + suffixes.length - 1);
+      expect(result.state.players[0]!.fortitude).toBe(18 + suffixes.length - 1);
       expect(result.state.innDrinkDiscard).toEqual(original);
       expect(
         result.events.filter(
@@ -157,9 +158,11 @@ describe('hidden ordering, reveal, compound Drinks, and configured fallback', ()
     },
   );
   it('a missing pile Chaser adds no sobering effect and preserves hidden Inn cards', () => {
-    const result = takeDrink(drinkState(['tea']));
+    const state = drinkState(['tea']);
+    state.players[0]!.fortitude = 19;
+    const result = takeDrink(state);
     expect(result.state.players[0]!.alcoholContent).toBe(1);
-    expect(result.state.players[0]!.fortitude).toBe(21);
+    expect(result.state.players[0]!.fortitude).toBe(20);
     expect(result.events).toContainEqual(
       expect.objectContaining({
         type: 'DRINK_CHAIN_STOPPED',
@@ -430,20 +433,19 @@ describe('Drink Events, reactions, modifiers, and reconnect safety', () => {
     );
   });
   it('Ignore suppresses the complete Drink chain, Negate can restore it, and snapshots resume identically', () => {
-    const queued: CoreGameState = accepted(
-      drinkState(['tea', 'fizz']),
-      'TAKE_DRINK',
-    ).state;
+    const state = drinkState(['tea', 'fizz']);
+    state.players[0]!.fortitude = 18;
+    const queued: CoreGameState = accepted(state, 'TAKE_DRINK').state;
     const ignored = response(queued, 0, 'ignore').state;
     expect(resolveResponses(ignored).state.players[0]).toMatchObject({
-      fortitude: 20,
+      fortitude: 18,
       alcoholContent: 0,
     });
     const negated = response(ignored, 1, 'negate').state;
     const restored = JSON.parse(JSON.stringify(negated)) as CoreGameState;
     expect(resolveResponses(restored)).toEqual(resolveResponses(negated));
     expect(resolveResponses(restored).state.players[0]).toMatchObject({
-      fortitude: 21,
+      fortitude: 19,
       alcoholContent: 3,
     });
   });

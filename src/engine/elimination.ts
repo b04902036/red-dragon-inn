@@ -16,7 +16,10 @@ export function checkEliminations(state: MutableGameState, emit: EmitEvent) {
   const ordered = [...state.players].sort((a, b) => a.seat - b.seat);
   const living = ordered.filter((player) => !player.eliminated);
   const victims = living.filter(
-    (player) => player.alcoholContent >= player.fortitude || player.gold === 0,
+    (player) =>
+      player.alcoholContent >= player.fortitude ||
+      player.gold === 0 ||
+      state.control.deferredContestPassOutPlayerIds?.includes(player.id),
   );
   const survivors = living.filter((player) => !victims.includes(player));
   if (
@@ -30,7 +33,9 @@ export function checkEliminations(state: MutableGameState, emit: EmitEvent) {
     });
   state.control.eliminationCheckPending = false;
   for (const player of victims) {
-    const passedOut = player.alcoholContent >= player.fortitude;
+    const passedOut =
+      player.alcoholContent >= player.fortitude ||
+      state.control.deferredContestPassOutPlayerIds?.includes(player.id);
     player.eliminated = true;
     emit({
       type: 'PLAYER_ELIMINATED',
@@ -63,6 +68,7 @@ export function checkEliminations(state: MutableGameState, emit: EmitEvent) {
     });
   }
   state.control.eliminationCheckPending = false;
+  delete state.control.deferredContestPassOutPlayerIds;
   if (survivors.length <= 1) {
     state.winners = survivors.map((player) => player.id);
     state.lifecycle = 'FINISHED';

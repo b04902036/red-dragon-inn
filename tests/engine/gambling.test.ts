@@ -405,7 +405,7 @@ describe('control cards, restrictions, reactions, and leaving', () => {
     expect(playing.responseWindow!.priorityPlayerId).toBe('player_0');
     const reaction = response(playing, 1, 'breather');
     const resumed = passWindow(reaction.state).state;
-    expect(resumed.players[1]!.fortitude).toBe(21);
+    expect(resumed.players[1]!.fortitude).toBe(20);
     const controlled = passWindow(resumed).state;
     expect(finishRound(controlled).state.players[2]!.gold).toBe(13);
   });
@@ -541,6 +541,7 @@ describe('control cards, restrictions, reactions, and leaving', () => {
 describe('suspension, authority, idempotency, and Gold boundaries', () => {
   it('suspends normal commands, allows reaction windows, and resumes remaining initiating effects', () => {
     const state = mutable(gamblingActionState());
+    state.players[0]!.fortitude = 18;
     const actionId = cardInHand(state, 0, 'shove');
     state.definitions[state.cards[actionId]!.definitionId]!.effects = [
       { op: 'START_GAMBLING' },
@@ -549,7 +550,7 @@ describe('suspension, authority, idempotency, and Gold boundaries', () => {
     const round = passWindow(
       accepted(state, 'PLAY_CARD', { cardId: actionId }).state,
     ).state;
-    expect(round.players[0]!.fortitude).toBe(20);
+    expect(round.players[0]!.fortitude).toBe(18);
     reject(round, 'SKIP_ACTION', {}, 'RESOLUTION_PENDING', 0);
     reject(round, 'ADVANCE_PHASE', {}, 'RESOLUTION_PENDING', 0);
     expect(
@@ -561,7 +562,7 @@ describe('suspension, authority, idempotency, and Gold boundaries', () => {
       ).state.resolutionStack,
     ).toHaveLength(2);
     const completed = finishRound(round).state;
-    expect(completed.players[0]!.fortitude).toBe(22);
+    expect(completed.players[0]!.fortitude).toBe(20);
     expect(completed.phase).toBe('ORDER_DRINK');
     expect(completed.control.turnNumber).toBe(1);
   });

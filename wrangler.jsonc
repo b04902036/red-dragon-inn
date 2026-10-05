@@ -7,6 +7,7 @@
   "workers_dev": true,
   "vars": {
     "CONTENT_MODE": "production",
+    "DEV_CARD_SELECTION": "false",
     "FIXTURE_CONTENT_VERSION": "",
     "FIXTURE_TIMING_MS": "",
   },
@@ -40,10 +41,75 @@
     "run_worker_first": ["/api", "/api/*"],
   },
   "env": {
+    "dev": {
+      "name": "red-dragon-inn-dev",
+      "vars": {
+        "CONTENT_MODE": "production",
+        "DEV_CARD_SELECTION": "true",
+        "FIXTURE_CONTENT_VERSION": "",
+        "FIXTURE_TIMING_MS": "",
+      },
+      "durable_objects": {
+        "bindings": [{ "name": "ROOMS", "class_name": "GameRoom" }],
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "red-dragon-inn",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations",
+        },
+      ],
+      "ratelimits": [
+        {
+          "name": "CREATE_LIMIT",
+          "namespace_id": "31001",
+          "simple": { "limit": 20, "period": 60 },
+        },
+        {
+          "name": "ENTRY_LIMIT",
+          "namespace_id": "31002",
+          "simple": { "limit": 60, "period": 60 },
+        },
+      ],
+    },
+    "dev-fixture": {
+      "name": "red-dragon-inn-dev-fixture",
+      "vars": {
+        "CONTENT_MODE": "fixture",
+        "DEV_CARD_SELECTION": "true",
+        "FIXTURE_CONTENT_VERSION": "content_sample_localized_v1",
+        "FIXTURE_TIMING_MS": "10000,5000",
+      },
+      "durable_objects": {
+        "bindings": [{ "name": "ROOMS", "class_name": "GameRoom" }],
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "red-dragon-inn",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations",
+        },
+      ],
+      "ratelimits": [
+        {
+          "name": "CREATE_LIMIT",
+          "namespace_id": "31001",
+          "simple": { "limit": 20, "period": 60 },
+        },
+        {
+          "name": "ENTRY_LIMIT",
+          "namespace_id": "31002",
+          "simple": { "limit": 60, "period": 60 },
+        },
+      ],
+    },
     "fixture": {
       "name": "red-dragon-inn-fixture",
       "vars": {
         "CONTENT_MODE": "fixture",
+        "DEV_CARD_SELECTION": "false",
         "FIXTURE_CONTENT_VERSION": "content_sample_localized_v1",
         "FIXTURE_TIMING_MS": "10000,5000",
       },

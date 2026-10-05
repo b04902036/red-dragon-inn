@@ -25,6 +25,7 @@ export function effectTargets(
   return state.players.filter(
     (player) =>
       !player.eliminated &&
+      !state.control.deferredContestPassOutPlayerIds?.includes(player.id) &&
       !frame.ignoredPlayerIds.includes(player.id) &&
       (target === 'ALL_PLAYERS' ||
         (target === 'SELF' &&
@@ -163,6 +164,8 @@ export function executeOperation(
         'INVALID_EFFECT',
       );
       pending.delta += effect.delta;
+      if (pending.stat === 'ALCOHOL' && parent.contestScore !== undefined)
+        parent.contestScore += effect.delta;
       emit({
         type: 'PENDING_EFFECT_MODIFIED',
         resolutionId: parent.id,
@@ -179,6 +182,8 @@ export function executeOperation(
       if (parent!.alcoholAsFortitude) fortitude.delta += effect.alcoholDelta;
       else alcohol.delta += effect.alcoholDelta;
       fortitude.delta += effect.fortitudeDelta;
+      if (parent!.contestScore !== undefined)
+        parent!.contestScore += effect.alcoholDelta;
       emit({
         type: 'DRINK_MODIFIED',
         resolutionId: parent!.id,

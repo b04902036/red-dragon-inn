@@ -32,7 +32,7 @@ test('production lobby selects the four published RDI1 characters and plays a pi
     );
     expect(presentation.status()).toBe(200);
     expect(await presentation.json()).toMatchObject({
-      contentVersionId: 'content_rdi1_mechanics_v1',
+      contentVersionId: 'content_rdi1_mechanics_v2',
       characters: expect.arrayContaining([
         expect.objectContaining({
           name: expect.stringContaining('迪爾德麗・女祭司'),

@@ -37,8 +37,31 @@ export default defineConfig({
     },
     projects: [
       {
+        plugins: [
+          cloudflareTest({
+            wrangler: { configPath: './wrangler.jsonc' },
+            miniflare: {
+              bindings: {
+                CONTENT_MODE: 'fixture',
+                DEV_CARD_SELECTION: 'true',
+                FIXTURE_CONTENT_VERSION: 'content_sample_localized_v1',
+                TEST_MIGRATIONS: migrations,
+                TEST_SAMPLE_SEED: sampleSeed,
+              },
+            },
+          }),
+        ],
+        test: {
+          name: 'development-worker',
+          fileParallelism: false,
+          sequence: { groupOrder: 2 },
+          include: ['tests/worker/dev-card-selection.test.ts'],
+        },
+      },
+      {
         test: {
           name: 'contracts',
+          sequence: { groupOrder: 0 },
           environment: 'node',
           include: [
             'tests/engine/**/*.test.ts',
@@ -51,6 +74,7 @@ export default defineConfig({
         plugins: [react()],
         test: {
           name: 'client',
+          sequence: { groupOrder: 1 },
           environment: 'jsdom',
           include: ['tests/client/**/*.test.tsx'],
           setupFiles: ['tests/client/setup.ts'],
@@ -72,8 +96,11 @@ export default defineConfig({
         ],
         test: {
           name: 'worker',
+          fileParallelism: false,
+          sequence: { groupOrder: 3 },
           include: ['tests/worker/**/*.test.ts'],
           exclude: [
+            'tests/worker/dev-card-selection.test.ts',
             'tests/worker/production-content.test.ts',
             'tests/worker/rdi1-content.test.ts',
           ],
@@ -90,7 +117,11 @@ export default defineConfig({
                 TEST_MIGRATIONS: migrations,
                 TEST_SAMPLE_SEED: sampleSeed,
                 TEST_RDI1_PACK_JSON: readFileSync(
-                  'content-private/imports/rdi1/pack.json',
+                  'content-private/imports/rdi1/pack-content_rdi1_mechanics_v2.json',
+                  'utf8',
+                ),
+                TEST_RDI1_V1_PACK_JSON: readFileSync(
+                  'content-private/imports/rdi1/versions/content_rdi1_mechanics_v1/pack.json',
                   'utf8',
                 ),
               },
@@ -99,6 +130,8 @@ export default defineConfig({
         ],
         test: {
           name: 'production-worker',
+          fileParallelism: false,
+          sequence: { groupOrder: 4 },
           include: [
             'tests/worker/production-content.test.ts',
             'tests/worker/rdi1-content.test.ts',

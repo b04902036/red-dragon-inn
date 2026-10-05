@@ -4,6 +4,7 @@ import { parseArgs } from 'node:util';
 import { format } from 'prettier';
 import { verifyRdi1Source } from '../src/content/rdi1-source';
 import { validateRdi1Matrix } from '../src/content/rdi1-matrix';
+import { verifyRdi1Reaudit } from '../src/content/rdi1-reaudit';
 import {
   renderRdi1EngineGap,
   rdi1LegalityFixturesSchema,
@@ -42,7 +43,22 @@ try {
     required,
   );
   const errors = [...result.errors];
+  let reaudit: ReturnType<typeof verifyRdi1Reaudit> | undefined;
   if (result.source) {
+    if (
+      result.source.mechanics.some((m) => m.verification.status === 'REAUDITED')
+    ) {
+      const directory = 'reference/rdi1/reaudit-2026-10-05/';
+      const ledger = await readFile(
+        directory + 'verification-ledger.json',
+        'utf8',
+      ).catch((error: NodeJS.ErrnoException) => {
+        if (error.code !== 'ENOENT') throw error;
+        return readFile(directory + 'verification-ledger (1).json', 'utf8');
+      });
+      reaudit = verifyRdi1Reaudit(result.source, JSON.parse(ledger) as unknown);
+      errors.push(...reaudit.errors);
+    }
     errors.push(
       ...validateRdi1Matrix(
         result.source,
@@ -71,7 +87,13 @@ try {
   const valid = errors.length === 0;
   process.stdout.write(
     JSON.stringify(
-      { valid, stage: 'SOURCE_VALIDATION_ONLY', ...result.counts, errors },
+      {
+        valid,
+        stage: 'SOURCE_VALIDATION_ONLY',
+        ...result.counts,
+        reaudit,
+        errors,
+      },
       null,
       2,
     ) + '\n',

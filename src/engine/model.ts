@@ -111,10 +111,13 @@ export interface ResolutionFrame {
   readonly pendingTasks?: readonly WorkflowTask[];
   readonly afterTasks?: readonly WorkflowTask[];
   readonly pendingDrinks?: readonly DrinkWork[];
+  readonly pendingDrinkResolutions?: readonly DrinkWork[];
+  readonly batchResponseComplete?: boolean;
   readonly heldDrinkCardIds?: readonly CardInstanceId[];
   readonly drinkProvenance?: readonly CardInstanceId[];
   readonly drinkRecipientId?: PlayerId;
   readonly alcoholAsFortitude?: boolean;
+  readonly contestScore?: number;
   readonly origin?: {
     readonly playerId: PlayerId | null;
     readonly cardId: CardInstanceId | null;

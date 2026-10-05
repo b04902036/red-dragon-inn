@@ -571,13 +571,14 @@
       "context": {
         "event": "DRINK",
         "sourceActor": "OTHER",
-        "timing": "AFTER_REVEAL_BEFORE_RESOLVE",
+        "timing": "AFTER_CHASERS_BEFORE_RESOLVE",
         "localPriority": true,
         "living": true,
-        "responder": "player_1"
+        "responder": "player_1",
+        "chasersCombined": true
       },
       "relation": "The revealed Drink belongs to another source player",
-      "reason": "Another drinker has just revealed a Drink before resolution",
+      "reason": "Another drinker has revealed the complete Drink and every Chaser before resolution",
       "expectedLegalPlays": [
         {
           "cardId": "card_audit_force_extra_drink_on_reveal",
@@ -591,10 +592,11 @@
       "context": {
         "event": "DRINK",
         "sourceActor": "SELF",
-        "timing": "AFTER_REVEAL_BEFORE_RESOLVE",
+        "timing": "BEFORE_CHASERS_COMPLETE",
         "localPriority": true,
         "living": true,
-        "responder": "player_1"
+        "responder": "player_1",
+        "chasersCombined": false
       },
       "relation": "SELF revealed this Drink; its source actor is not another player",
       "reason": "The responder's own reveal is not another player's reveal",
@@ -815,7 +817,8 @@
         "affectsDrinkEvent": false,
         "localPriority": true,
         "living": true,
-        "responder": "player_1"
+        "responder": "player_1",
+        "sourceType": "SOMETIMES"
       },
       "relation": "SELF responds to a negatable Drink-changing source",
       "reason": "The source changes a Drink and has none of the forbidden capabilities",
@@ -840,7 +843,8 @@
         "affectsDrinkEvent": false,
         "localPriority": true,
         "living": true,
-        "responder": "player_1"
+        "responder": "player_1",
+        "sourceType": "SOMETIMES"
       },
       "relation": "SELF responds to a source that orders Drinks without changing a current Drink",
       "reason": "A source that merely orders Drinks is expressly excluded",

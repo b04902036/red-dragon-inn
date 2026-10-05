@@ -16,7 +16,9 @@ export function sourceCapabilities(
         'PASS_CURRENT_DRINK',
         'REPLACE_DRINK_ALCOHOL_WITH_FORTITUDE',
       ].includes(effect.op) ||
-      ((effect.op === 'IGNORE' || effect.op === 'CONTEXT_BRANCH') &&
+      ((effect.op === 'IGNORE' ||
+        effect.op === 'NEGATE' ||
+        effect.op === 'CONTEXT_BRANCH') &&
         parent?.kind === 'DRINK')
     )
       facts.add('CHANGES_DRINK_EFFECT');

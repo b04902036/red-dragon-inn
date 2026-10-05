@@ -76,7 +76,9 @@ test('an out-of-turn player plays Anytime during gambling and reconnect preserve
     }
     const after = await view();
     expect(after.gambling).toEqual(before.gambling);
-    expect(after.players[1]!.fortitude).toBe(before.players[1]!.fortitude + 1);
+    expect(after.players[1]!.fortitude).toBe(
+      Math.min(20, before.players[1]!.fortitude + 1),
+    );
     await guest!.reload();
     await expect(guest!.getByRole('status')).toHaveText('Synced');
     expect((await view()).gambling).toEqual(before.gambling);

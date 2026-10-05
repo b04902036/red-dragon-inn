@@ -20,6 +20,19 @@ function assert(condition: boolean, message: string): asserts condition {
 }
 export function assertGamblingState(state: CoreGameState) {
   z.boolean().parse(state.control.eliminationCheckPending);
+  const deferred = z
+    .array(playerIdSchema)
+    .max(4)
+    .optional()
+    .parse(state.control.deferredContestPassOutPlayerIds);
+  assert(
+    deferred === undefined ||
+      (new Set(deferred).size === deferred.length &&
+        deferred.every((id) =>
+          state.players.some((player) => player.id === id),
+        )),
+    'invalid deferred pass-out',
+  );
   if (state.gambling === null) return;
   const round = gamblingStateSchema.parse(state.gambling);
   const lists = [

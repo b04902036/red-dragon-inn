@@ -1,0 +1,19 @@
+{
+  "valid": true,
+  "characters": 4,
+  "characterDecks": { "deirdre": 40, "fiona": 40, "gerki": 40, "zot": 40 },
+  "characterPhysicalCards": 160,
+  "drinkPhysicalCards": 30,
+  "unknownMechanics": 0,
+  "unknownEffects": 0,
+  "sometimesWithoutStructuredLegality": 0,
+  "missingEnUS": 0,
+  "missingZhTW": 0,
+  "sampleProductionRecords": 0,
+  "errors": [],
+  "sourceSha256": "91357d8e03180e397caf760ac0fbadac9c1260a79a89eeea81751ea5619b2156",
+  "versionId": "content_rdi1_mechanics_v1",
+  "provenance": "PUBLIC_RULES_PARAPHRASE",
+  "distributionLicense": false,
+  "artworkBundled": false
+}

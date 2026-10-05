@@ -24,6 +24,7 @@ export function anytimeSystemOpportunity(
   withSecond = false,
 ) {
   const state = genericState();
+  state.players[1]!.fortitude = 17;
   const first = putCard(
     state,
     1,

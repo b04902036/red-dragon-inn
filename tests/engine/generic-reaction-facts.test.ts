@@ -305,5 +305,5 @@ it('evaluates a phase opportunity predicate and derives declared/excluded operat
     settle(
       play(genericState(), 1, cardInHand(genericState(), 1, 'breather')).state,
     ).players[1]!.fortitude,
-  ).toBe(21);
+  ).toBe(20);
 });

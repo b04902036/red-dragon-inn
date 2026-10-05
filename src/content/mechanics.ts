@@ -23,6 +23,7 @@ export const cardMechanics = {
   phaseOpportunity: z.literal('ORDER_DRINK').optional(),
   counterFamily: mechanicKeySchema.optional(),
   counterPolicy: z.literal('SAME_FAMILY_ONLY').optional(),
+  allowedCounterFamilies: z.array(mechanicKeySchema).min(1).max(8).optional(),
   capabilities: z.array(sourceCapabilitySchema).max(6).optional(),
   mandatoryGoldCost: z.number().int().min(1).max(64).optional(),
 };

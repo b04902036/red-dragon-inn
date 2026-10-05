@@ -7,6 +7,7 @@ import type { EmitEvent } from './event-writer';
 import type { RandomSource } from './rng';
 import { drawFromPiles } from './decks';
 import { requireCommand } from './errors';
+import { payGold } from './gold';
 
 export function drinkModifierEffects(
   frame: MutableGameState['resolutionStack'][number],
@@ -43,6 +44,7 @@ export function buildDrinkFrame(
     source?: 'DRINK_PILE' | 'INN';
     skipEvents?: boolean;
     id?: ResolutionId;
+    payForRefill?: boolean;
   } = {},
 ) {
   const player = state.players.find((entry) => entry.id === actorId)!;
@@ -73,6 +75,13 @@ export function buildDrinkFrame(
       state.rng = draw.rng;
       for (const step of draw.steps)
         if (step.kind === 'RESHUFFLE') {
+          if (options.payForRefill)
+            for (const participant of state.players.filter(
+              (p) =>
+                !p.eliminated &&
+                !state.control.deferredContestPassOutPlayerIds?.includes(p.id),
+            ))
+              payGold(state, participant, 1, emit);
           for (const card of step.cardIds)
             state.cards[card]!.location = {
               zone: 'INN_DRINK_DECK',

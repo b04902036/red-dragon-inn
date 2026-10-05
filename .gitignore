@@ -8,11 +8,6 @@ dist/
 .env
 .env.*
 !.env.example
-private-content/
-content-private/*
-!content-private/README.example.md
-!content-private/.gitkeep
-content/private/
 src/content/private/
 *.sqlite
 *.sqlite-shm

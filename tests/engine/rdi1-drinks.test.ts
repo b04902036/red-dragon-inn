@@ -26,6 +26,7 @@ for (const definition of rdi1Pack.cards.filter(
     const state = rdi1Match(rdi1Pack);
     rdi1Keep(state, []);
     state.phase = 'DRINK';
+    state.players[0]!.fortitude = 18;
     state.players[0]!.alcoholContent = 5;
     rdi1DrinkPile(state, 0, [definition.id.replace('carddef_rdi1_drink_', '')]);
     if (definition.type === 'DRINK_EVENT')
@@ -52,7 +53,9 @@ for (const definition of rdi1Pack.cards.filter(
       expect(final.players[0]!.alcoholContent).toBe(
         5 + definition.alcoholContent,
       );
-      expect(final.players[0]!.fortitude).toBe(20 + definition.fortitudeChange);
+      expect(final.players[0]!.fortitude).toBe(
+        Math.min(20, 18 + definition.fortitudeChange),
+      );
       if (definition.chaser)
         expect(
           result.events.filter((e) => e.type === 'DRINK_REVEALED'),
@@ -73,7 +76,7 @@ for (const definition of rdi1Pack.cards.filter(
       );
     } else {
       expect(final.players.map((p) => p.alcoholContent)).toEqual([7, 2, 2, 2]);
-      expect(final.players.map((p) => p.fortitude)).toEqual([22, 22, 22, 22]);
+      expect(final.players.map((p) => p.fortitude)).toEqual([20, 20, 20, 20]);
       expect(final.innDrinkDiscard).toHaveLength(2);
     }
   });
@@ -92,6 +95,7 @@ it.each(['ORC', 'TROLL'] as const)(
       const state = rdi1Match(rdi1Pack);
       rdi1Keep(state, []);
       state.phase = 'DRINK';
+      state.players[0]!.fortitude = 18;
       state.players[0]!.traits = traits;
       rdi1DrinkPile(state, 0, [
         definition.id.replace('carddef_rdi1_drink_', ''),
@@ -101,7 +105,9 @@ it.each(['ORC', 'TROLL'] as const)(
         ? definition.traitReplacements![0]!
         : definition;
       expect(result.players[0]!.alcoholContent).toBe(values.alcoholContent);
-      expect(result.players[0]!.fortitude).toBe(20 + values.fortitudeChange);
+      expect(result.players[0]!.fortitude).toBe(
+        Math.min(20, 18 + values.fortitudeChange),
+      );
     }
   },
 );

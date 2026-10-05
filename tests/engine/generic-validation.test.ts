@@ -247,6 +247,7 @@ describe('bounded generic contracts and shared legality', () => {
   );
   it('uses collection in the reverse direction and permits validated living self targets', () => {
     const state = genericState();
+    state.players[1]!.fortitude = 18;
     const collect = putCard(
       state,
       0,
@@ -275,7 +276,7 @@ describe('bounded generic contracts and shared legality', () => {
     expect(
       settle(play(state, 1, self, state.players[1]!.id).state).players[1]!
         .fortitude,
-    ).toBe(22);
+    ).toBe(20);
   });
   it('rejects unknown serialized obligation players and provenance', () => {
     const state = genericState();

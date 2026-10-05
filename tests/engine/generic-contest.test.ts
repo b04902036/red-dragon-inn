@@ -61,6 +61,7 @@ it('repeats only tied highest drinkers, scores revealed values despite Ignore, t
 
 it('a contest Drink Event scores zero and executes its own effects instead of being skipped', () => {
   const state = drinkState([]);
+  state.players[0]!.fortitude = 19;
   state.phase = 'ACTION';
   state.rules.timing = { ...DEFAULT_RULES.timing };
   const first = state.innDrinkDeck.cardIds[0]!;

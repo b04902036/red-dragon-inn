@@ -23,6 +23,54 @@ import type { GameRoom } from '../../worker/durable/game-room';
 import type { RoomClient } from './room-helpers';
 
 beforeEach(freshDatabase);
+
+it('keeps published v1 and its old room loadable after publishing and selecting corrected v2', async () => {
+  await seedDatabase();
+  const original = contentPackSchema.parse(
+    JSON.parse(env.TEST_RDI1_V1_PACK_JSON) as unknown,
+  );
+  await repo().saveDraft(original);
+  await repo().publishVersion(original.version.id);
+  await repo().setProductionVersion(original.version.id);
+  const old = await newRoom('Original v1 host');
+  expect((await storedRoom(old.roomId)).contentVersionId).toBe(
+    original.version.id,
+  );
+  const corrected = await publish();
+  expect(corrected.version.id).toBe('content_rdi1_mechanics_v2');
+  const fresh = await newRoom('Corrected v2 host');
+  expect((await storedRoom(fresh.roomId)).contentVersionId).toBe(
+    corrected.version.id,
+  );
+  expect(await repo().loadPack(original.version.id)).toEqual(original);
+  const loaded = (await repo().loadPack(corrected.version.id))!;
+  expect(loaded.cards).toEqual(corrected.cards);
+  expect(loaded.deckCards).toEqual(corrected.deckCards);
+  expect(loaded.translations).toEqual(corrected.translations);
+  await joinRoom(old.roomId, 'Original v1 guest');
+  const client = await connect(old.roomId);
+  try {
+    await client.hello(old.credentials);
+    expect((await sendCommand(client, 'START_MATCH')).result.type).toBe(
+      'COMMAND_ACCEPTED',
+    );
+    expect((await storedRoom(old.roomId)).game!.contentVersionId).toBe(
+      original.version.id,
+    );
+    await evictDurableObject(stubFor(old.roomId));
+    const resumed = await connect(old.roomId);
+    try {
+      await resumed.hello(old.credentials);
+      expect((await storedRoom(old.roomId)).game!.contentVersionId).toBe(
+        original.version.id,
+      );
+    } finally {
+      resumed.socket.close();
+    }
+  } finally {
+    client.socket.close();
+  }
+}, 20_000);
 const pack = () =>
   contentPackSchema.parse(JSON.parse(env.TEST_RDI1_PACK_JSON) as unknown);
 const repo = () => new D1ContentRepository(env.DB);
@@ -102,12 +150,23 @@ it('offers exactly four RDI1 characters, starts a pinned match and reconnects wi
     expect((await storedRoom(host.roomId)).game!.contentVersionId).toBe(
       content.version.id,
     );
+    const bounds = {
+      fortitude: { min: 0, max: 20 },
+      alcoholContent: { min: 0, max: 20 },
+      gold: null,
+    };
+    expect((await storedRoom(host.roomId)).game!.rules.statBounds).toEqual(
+      bounds,
+    );
     await evictDurableObject(stubFor(host.roomId));
     const resumed = await connect(host.roomId);
     try {
       await resumed.hello(host.credentials);
       expect((await storedRoom(host.roomId)).contentVersionId).toBe(
         content.version.id,
+      );
+      expect((await storedRoom(host.roomId)).game!.rules.statBounds).toEqual(
+        bounds,
       );
     } finally {
       resumed.socket.close();

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import {
   cardInstanceIdSchema,
+  cardDefinitionIdSchema,
   commandIdSchema,
   playerIdSchema,
   responseWindowIdSchema,
@@ -35,6 +36,18 @@ const mutationFields = {
 
 // Identity after joining is supplied by the authenticated connection, never by a payload actorId.
 export const clientCommandSchema = z.discriminatedUnion('type', [
+  z.strictObject({
+    type: z.literal('DEV_DISCARD_DRAW'),
+    ...mutationFields,
+    cardIds,
+    definitionIds: z.array(cardDefinitionIdSchema).max(64),
+  }),
+  z.strictObject({
+    type: z.literal('DEV_ORDER_DRINK'),
+    ...mutationFields,
+    targetPlayerId: playerIdSchema,
+    definitionId: cardDefinitionIdSchema,
+  }),
   z.strictObject({
     type: z.literal('PASS_ANYTIME'),
     ...mutationFields,

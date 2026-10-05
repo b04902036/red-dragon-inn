@@ -151,6 +151,17 @@ export const legalPlaySchema = legalResponseSchema.extend({
 });
 
 export const privatePlayerViewSchema = z.strictObject({
+  devChoices: z
+    .strictObject({
+      handSize: count,
+      characterCards: z.array(
+        z.strictObject({ definitionId: cardDefinitionIdSchema, count: count }),
+      ),
+      innCards: z.array(
+        z.strictObject({ definitionId: cardDefinitionIdSchema, count: count }),
+      ),
+    })
+    .optional(),
   schemaVersion: z.literal(1),
   roomId: roomIdSchema,
   matchId: matchIdSchema.nullable(),
