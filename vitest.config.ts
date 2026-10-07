@@ -12,6 +12,7 @@ export default defineConfig({
     maxWorkers: 4,
     coverage: {
       provider: 'istanbul',
+      reportOnFailure: true,
       exclude: ['tests/**', 'scripts/**', '**/*.d.ts'],
       include: [
         'src/client/audio/audio-engine.ts',
@@ -103,6 +104,8 @@ export default defineConfig({
             'tests/worker/dev-card-selection.test.ts',
             'tests/worker/production-content.test.ts',
             'tests/worker/rdi1-content.test.ts',
+            'tests/worker/rdi2-content.test.ts',
+            'tests/worker/rdi2-full-verification.test.ts',
           ],
         },
       },
@@ -124,6 +127,14 @@ export default defineConfig({
                   'content-private/imports/rdi1/versions/content_rdi1_mechanics_v1/pack.json',
                   'utf8',
                 ),
+                TEST_RDI2_PACK_JSON: readFileSync(
+                  'content-private/imports/rdi2/pack.json',
+                  'utf8',
+                ),
+                TEST_RDI1_RDI2_PACK_JSON: readFileSync(
+                  'content-private/imports/rdi2/pack-combined.json',
+                  'utf8',
+                ),
               },
             },
           }),
@@ -135,6 +146,8 @@ export default defineConfig({
           include: [
             'tests/worker/production-content.test.ts',
             'tests/worker/rdi1-content.test.ts',
+            'tests/worker/rdi2-content.test.ts',
+            'tests/worker/rdi2-full-verification.test.ts',
           ],
         },
       },

@@ -15,14 +15,20 @@ export function sourceCapabilities(
         'SPLIT_CURRENT_DRINK',
         'PASS_CURRENT_DRINK',
         'REPLACE_DRINK_ALCOHOL_WITH_FORTITUDE',
+        'REPLACE_DRINK_BASE',
       ].includes(effect.op) ||
+      (effect.op === 'MODIFY_PENDING_EFFECT' && parent?.kind === 'DRINK') ||
       ((effect.op === 'IGNORE' ||
         effect.op === 'NEGATE' ||
         effect.op === 'CONTEXT_BRANCH') &&
         parent?.kind === 'DRINK')
     )
       facts.add('CHANGES_DRINK_EFFECT');
-    if (['ORDER_EXTRA_DRINKS', 'DEAL_DRINKS'].includes(effect.op))
+    if (
+      ['ORDER_EXTRA_DRINKS', 'DEAL_DRINKS'].includes(effect.op) ||
+      (effect.op === 'ORDER_EXTRA_OR_WAIVE_REFILL' &&
+        parent?.task?.kind === 'PHASE')
+    )
       facts.add('ORDERS_DRINK');
     if (
       ['FORCE_DRINK', 'QUEUE_EXTRA_DRINK', 'FORCE_SIMULTANEOUS_DRINK'].includes(
@@ -41,7 +47,8 @@ export function sourceCapabilities(
       facts.add('AVOIDS_ANTE');
     if (
       (effect.op === 'MODIFY_DRINK' || effect.op === 'MODIFY_PENDING_EFFECT') &&
-      effect.allowDrinkEvents
+      effect.allowDrinkEvents &&
+      parent?.kind !== 'DRINK'
     )
       facts.add('AFFECTS_DRINK_EVENT');
   }

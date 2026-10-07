@@ -254,6 +254,13 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     cardIds: ids,
   }),
   z.strictObject({
+    type: z.literal('DRINK_DECK_REFILLED'),
+    ...eventFields,
+    deckId: deckIdSchema,
+    cardIds: z.array(cardInstanceIdSchema).max(30),
+    barRemaining: z.number().int().min(0).max(256),
+  }),
+  z.strictObject({
     type: z.literal('DRAW_SHORTFALL'),
     ...eventFields,
     playerId: playerIdSchema,

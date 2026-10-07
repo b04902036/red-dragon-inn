@@ -9,6 +9,8 @@ export const gamblingStateSchema = publicGamblingViewSchema.extend({
   settlementReady: z.boolean().optional(),
   settlementReason: z.enum(['ALL_PASSED', 'IMMEDIATE_WIN']).optional(),
   potRemoved: z.number().int().nonnegative().safe().optional(),
+  restartBlocked: z.boolean().optional(),
+  restarted: z.boolean().optional(),
   suspended: z.strictObject({
     resolutionId: resolutionIdSchema,
     activePlayerId: playerIdSchema,

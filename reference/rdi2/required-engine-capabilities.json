@@ -14,7 +14,10 @@
     "drink.optional-two-drink-challenge",
     "drink.trait-replacement-half-ogre",
     "bar-deck.multi-set",
-    "effect.sequence"
+    "effect.sequence",
+    "reaction.mitigation-card-history",
+    "reaction.living-player-count-predicate",
+    "damage.exclude-original-source-target"
   ],
   "timingInvariants": [
     "Any legal Sometimes OR Anytime during an event/system response opportunity creates the configured 30-second response window.",
@@ -22,5 +25,38 @@
     "An Anytime-only 30-second response window does not play Sometimes voice.",
     "Core phase end retains the separate 15-second Anytime grace.",
     "Playing any card invalidates old prompt/deadline and recomputes legality."
-  ]
+  ],
+  "step24aM37Audit": {
+    "status": "IMPLEMENTED_SHARED_OPTIONAL_PREDICATES",
+    "resolutionHistory": "Per source effect index and affected player; accepted reduction/Ignore card plays persist even if Negated.",
+    "postLoss": "Original card/player, source kind, actual amount, effect index and playedReduction/playedIgnore.",
+    "legality": "ACTUAL_STAT_LOSS optionally requires player card and excludes played mitigation. Unknown legacy history fails closed for strict cards; legacy cards without these predicates retain existing semantics.",
+    "scope": "Generic engine only; no production RDI2 card compiled."
+  },
+  "step24aFinalAudit": {
+    "status": "STEP24A_COMPLETE_SOURCE_LOCK_VERIFIED_TEAM_MODE_NONBLOCKING_TODO",
+    "verifiedMechanicReviews": 44,
+    "verifiedDrinkReviews": 23,
+    "sourceScope": "No production RDI2 compilation or new gameplay implementation.",
+    "availableBindings": {
+      "M42": "ANYTIME / ANY_LIVING_PLAYER / COLLECT_GOLD 1",
+      "M43": "ACTION / ANY_LIVING_PLAYER / COLLECT_GOLD 2"
+    },
+    "pendingRequiredAcceptance": { "M21": ["J"] },
+    "futureCapabilityAudit": [
+      "Mead built-in split decision after prior responses and independent half responses",
+      "Drink Event copy/search policies distinct from Contest zero-Event scoring",
+      "Fine Ambrosia Event actor/Chaser/Contest rules with explicitly scoped user override",
+      "Challenge user-authorized complete source semantics require shared runtime implementation",
+      "Ogre/Orc/Troll entire-effect trait replacements are source-resolved; runtime implementation pending"
+    ],
+    "nonBlockingTodos": [
+      {
+        "capability": "team.variant-runtime-and-other-player-targeting",
+        "acceptance": "M21/J",
+        "blockingAnyStep": false,
+        "sourceId": "user_team_mode_nonblocking_todo_2026_10_07"
+      }
+    ]
+  }
 }

@@ -35,6 +35,7 @@ export const effectSchema = z.discriminatedUnion('op', [
     target: effectTargetSchema,
     stat: z.enum(['FORTITUDE', 'ALCOHOL', 'GOLD']),
     delta: deltaSchema,
+    allowGoldLossPrevention: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('DRAW_CARDS'),
@@ -50,12 +51,14 @@ export const effectSchema = z.discriminatedUnion('op', [
     op: z.literal('TRANSFER_GOLD'),
     target: effectTargetSchema,
     amount: z.number().int().min(1).max(Number.MAX_SAFE_INTEGER),
+    allowGoldLossPrevention: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('PAY_INN'),
     target: effectTargetSchema,
     amount: z.number().int().min(1).max(Number.MAX_SAFE_INTEGER),
     requireFullPayment: z.boolean().optional(),
+    allowGoldLossPrevention: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('DISCARD_CARDS'),
@@ -124,10 +127,12 @@ export const effectSchema = z.discriminatedUnion('op', [
   z.strictObject({
     op: z.literal('FORCE_LEAVE_GAMBLING'),
     target: z.literal('CHOSEN_PLAYER'),
+    allowSelfTarget: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('REPLACE_GAMBLING_WINNER'),
     target: z.literal('SELF'),
+    blocksRestart: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('END_GAMBLING'),
@@ -140,12 +145,14 @@ export const effectSchema = z.discriminatedUnion('op', [
   z.strictObject({
     op: z.literal('SUBSTITUTE_PAYMENT_FROM_INN'),
     amount: z.literal(1),
+    scope: z.literal('CURRENT_OBLIGATION').optional(),
   }),
   z.strictObject({ op: z.literal('CANCEL_CURRENT_ANTE_FOR_SELF') }),
   z.strictObject({
     op: z.literal('COLLECT_GOLD'),
     target: effectTargetSchema,
     amount: z.number().int().min(1).max(64),
+    allowGoldLossPrevention: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('ORDER_EXTRA_DRINKS'),
@@ -173,11 +180,14 @@ export const effectSchema = z.discriminatedUnion('op', [
   z.strictObject({
     op: z.literal('REDIRECT_FORTITUDE_LOSS'),
     target: z.literal('CHOSEN_PLAYER'),
+    excludeOriginalSource: z.boolean().optional(),
+    twoPlayerIgnoreFallback: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('FORCE_SIMULTANEOUS_DRINK'),
     targets: z.literal('ALL_PLAYERS'),
     source: z.enum(['INN', 'DRINK_PILE']).optional(),
+    skipLeadingEvents: z.boolean().optional(),
   }),
   z.strictObject({
     op: z.literal('DRINKING_CONTEST'),
@@ -211,6 +221,31 @@ export const effectSchema = z.discriminatedUnion('op', [
         'One ante branch and one Drink branch are required',
       ),
   }),
+  z.strictObject({
+    op: z.literal('RESTART_GAMBLING_ROUND'),
+    ante: z.number().int().min(1).max(64),
+  }),
+  z.strictObject({ op: z.literal('PREVENT_CURRENT_GOLD_LOSS') }),
+  z.strictObject({
+    op: z.literal('ORDER_EXTRA_OR_WAIVE_REFILL'),
+    count: z.number().int().min(1).max(8),
+  }),
+  z.strictObject({
+    op: z.literal('REPLACE_DRINK_BASE'),
+    alcohol: deltaSchema,
+    fortitude: deltaSchema,
+  }),
+  z.strictObject({ op: z.literal('SHARE_FORTITUDE_LOSS') }),
+  z.strictObject({
+    op: z.literal('OPTIONAL_DRINK_CHALLENGE'),
+    target: z.literal('SELF'),
+  }),
+  // Server-generated choice operations, also validated when restoring a snapshot.
+  z.strictObject({
+    op: z.literal('DECIDE_DRINK_SPLIT'),
+    target: z.literal('SELF'),
+  }),
+  z.strictObject({ op: z.literal('APPLY_DRINK_SPLIT_CHOICE') }),
 ]);
 
 export type Effect = z.infer<typeof effectSchema>;

@@ -30,10 +30,15 @@ export function assertRuntimePack(pack: ContentPack, fixture: boolean) {
     );
   const inn = pack.decks.filter((deck) => deck.type === 'INN_DRINK');
   if (
-    inn.length !== 1 ||
-    pack.deckCards
-      .filter((row) => row.deckId === inn[0]!.id)
-      .reduce((sum, row) => sum + row.quantity, 0) < 4
+    inn.length < 1 ||
+    inn.length > 8 ||
+    new Set(inn.map((deck) => deck.id)).size !== inn.length ||
+    inn.some(
+      (deck) =>
+        pack.deckCards
+          .filter((row) => row.deckId === deck.id)
+          .reduce((sum, row) => sum + row.quantity, 0) < 4,
+    )
   )
     throw new ContentUnavailable('Content cannot supply an Inn deck');
   const playable = pack.characters.filter((character) => {

@@ -83,6 +83,8 @@ export interface GamblingState {
   readonly settlementReady?: boolean;
   readonly settlementReason?: 'ALL_PASSED' | 'IMMEDIATE_WIN';
   readonly potRemoved?: number;
+  readonly restartBlocked?: boolean;
+  readonly restarted?: boolean;
   readonly initiatorPlayerId: PlayerId;
   readonly priorityPlayerId: PlayerId | null;
   readonly controlPlayerId: PlayerId;
@@ -107,6 +109,17 @@ export interface GamblingState {
 }
 
 export interface ResolutionFrame {
+  readonly builtInSplitAvailable?: boolean;
+  readonly noExternalSplit?: boolean;
+  readonly drinkBase?: { readonly alcohol: number; readonly fortitude: number };
+  readonly fortitudeLossOverrides?: readonly {
+    readonly effectIndex: number;
+    readonly targets: readonly {
+      readonly playerId: PlayerId;
+      readonly delta: number;
+    }[];
+    readonly mitigationLockedPlayerIds: readonly PlayerId[];
+  }[];
   readonly task?: WorkflowTask;
   readonly pendingTasks?: readonly WorkflowTask[];
   readonly afterTasks?: readonly WorkflowTask[];
@@ -127,6 +140,13 @@ export interface ResolutionFrame {
     readonly cardId: CardInstanceId | null;
   };
   readonly redirectedFortitudePlayerId?: PlayerId;
+  /** Accepted mitigation-card plays, scoped to each pending loss operation. */
+  readonly fortitudeMitigationPlays?: readonly {
+    readonly playerId: PlayerId;
+    readonly effectIndex: number;
+    readonly playedReduction: boolean;
+    readonly playedIgnore: boolean;
+  }[];
   readonly id: ResolutionId;
   readonly kind: 'CARD' | 'DRINK' | 'DRINK_EVENT' | 'SYSTEM';
   readonly actorId: PlayerId | null;
@@ -185,6 +205,7 @@ export interface AuthoritativeGameState {
   readonly players: readonly PlayerState[];
   readonly cards: Readonly<Record<CardInstanceId, CardInstance>>;
   readonly innDrinkDeck: CardPile;
+  readonly barDrinkDeck?: readonly CardInstanceId[];
   readonly innDrinkDiscard: readonly CardInstanceId[];
   readonly gambling: GamblingState | null;
   readonly resolutionStack: readonly ResolutionFrame[];

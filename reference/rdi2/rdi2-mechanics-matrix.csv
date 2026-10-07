@@ -40,6 +40,6 @@ share_pain,SOMETIMES,Share the Pain,分攤傷害,0,1,0,0,community_matrix;the_in
 redirect_fortitude_loss,SOMETIMES,Redirect the Hit,轉移傷害,0,1,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
 gain_two_fortitude,ANYTIME,Second Wind,喘口氣,0,0,1,1,community_matrix;official_rdi2_9e
 collect_one_from_each_other,ACTION,Impress the Table,讓全桌買單,1,1,1,1,community_matrix;official_rdi2_9e
-take_one_gold,ACTION,Pocket One Coin,拿走一枚金幣,0,2,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
+take_one_gold,ANYTIME,Pocket One Coin,拿走一枚金幣,0,2,0,0,community_matrix;the_inn_uploaded;official_rdi2_9e;official_eve_errata
 take_two_gold,ACTION,Pocket Two Coins,拿走兩枚金幣,0,0,1,0,community_matrix;the_inn_uploaded;official_rdi2_9e
 tip_wench,ANYTIME,Tip the Wench,給女侍小費,1,1,1,1,community_matrix;official_rdi2_9e

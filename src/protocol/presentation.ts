@@ -4,6 +4,7 @@ import {
   characterIdSchema,
   contentVersionIdSchema,
   playerIdSchema,
+  deckIdSchema,
 } from '../shared/ids';
 import { stateVersionSchema } from '../shared/version';
 
@@ -16,6 +17,12 @@ export const characterSelectionSchema = z.strictObject({
 });
 export const presentationSchema = z.strictObject({
   schemaVersion: z.literal(1),
+  innDrinkDecks: z
+    .array(
+      z.strictObject({ id: deckIdSchema, name: z.string().min(1).max(200) }),
+    )
+    .max(8)
+    .optional(),
   locale: z.enum(['en-US', 'zh-TW']).optional(),
   contentVersionId: contentVersionIdSchema.optional(),
   products: z

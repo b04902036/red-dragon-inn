@@ -33,6 +33,7 @@ export const rulesConfigSchema = z
         chaserSource: z.enum(['SAME_SOURCE', 'INN']),
         chaserEvent: z.enum(['DISCARD_STOP', 'DISCARD_CONTINUE']),
         maxChainCards: z.number().int().min(1).max(32),
+        refillPayment: z.boolean().optional(),
       })
       .prefault({
         emptyPile: 'SOBER',
@@ -86,6 +87,14 @@ export const rulesConfigSchema = z
   });
 export type RulesConfig = z.infer<typeof rulesConfigSchema>;
 export const DEFAULT_RULES: RulesConfig = rulesConfigSchema.parse({
+  drinks: {
+    emptyPile: 'SOBER',
+    soberAmount: 1,
+    chaserSource: 'SAME_SOURCE',
+    chaserEvent: 'DISCARD_STOP',
+    maxChainCards: 32,
+    refillPayment: true,
+  },
   timing: { responseMs: 30000, phaseEndMs: 15000, turnOwnerUntimed: true },
   initialStats: { fortitude: 20, alcoholContent: 0, gold: 10 },
   handSize: 7,

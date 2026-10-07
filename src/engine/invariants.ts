@@ -59,6 +59,15 @@ export function assertCoreInvariants(state: CoreGameState): void {
     'duplicate seat',
   );
   const ids = new Set(state.players.map((p) => playerIdSchema.parse(p.id)));
+  if (state.control.pendingRefillPayers !== undefined)
+    requireInvariant(
+      z
+        .array(playerIdSchema)
+        .max(128)
+        .parse(state.control.pendingRefillPayers)
+        .every((id) => ids.has(id)),
+      'invalid refill payer',
+    );
   assertResolutionState(state);
   assertGamblingState(state);
   requireInvariant(ids.has(state.control.hostPlayerId), 'host is not a player');
@@ -231,6 +240,21 @@ export function assertCoreInvariants(state: CoreGameState): void {
       zone: 'INN_DRINK_DECK',
       deckId: state.innDrinkDeck.deckId,
     });
+  if (state.barDrinkDeck !== undefined) {
+    const reserve = z
+      .array(cardInstanceIdSchema)
+      .max(256)
+      .parse(state.barDrinkDeck);
+    requireInvariant(
+      state.lifecycle === 'SETUP' || state.innDrinkDeck.cardIds.length <= 30,
+      'active Bar Drink deck exceeds 30',
+    );
+    for (const id of reserve)
+      locate(id, null, {
+        zone: 'INN_BAR_DECK',
+        deckId: state.innDrinkDeck.deckId,
+      });
+  }
   for (const id of state.innDrinkDiscard)
     locate(id, null, {
       zone: 'INN_DRINK_DISCARD',

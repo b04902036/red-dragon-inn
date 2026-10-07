@@ -14,6 +14,7 @@ import {
   replayManifestSchema,
   replayEntrySchema,
   replayFromBeginning,
+  coreStateSchema,
 } from '../../src/engine/replay';
 import { matchIdSchema } from '../../src/shared/ids';
 import {
@@ -35,6 +36,15 @@ import {
 } from './room-helpers';
 import type { PlayerId } from '../../src/shared/ids';
 import type { RoomClient } from './room-helpers';
+import {
+  genericState,
+  putCard,
+  play,
+  until,
+  legal,
+  settle,
+  systemTrigger,
+} from '../fixtures/generic-match';
 
 beforeEach(async () => {
   await freshDatabase();
@@ -72,6 +82,105 @@ function firstBatch() {
   });
 }
 describe('atomic D1 history and verified recovery', () => {
+  it('preserves per-loss mitigation play history in D1 snapshots after a Negated response', async () => {
+    const batch = firstBatch();
+    await new D1ReplayRepository(env.DB).commit(batch);
+    const state = genericState();
+    expect(state.matchId).toBe(batch.state.matchId);
+    const attack = putCard(
+      state,
+      0,
+      [
+        {
+          op: 'CHANGE_STAT',
+          target: 'CHOSEN_PLAYER',
+          stat: 'FORTITUDE',
+          delta: -4,
+        },
+      ],
+      { type: 'ACTION' },
+    );
+    const ignore = putCard(
+      state,
+      1,
+      [{ op: 'IGNORE', scope: 'CURRENT_EFFECT' }],
+      {
+        trigger: {
+          event: 'CARD',
+          alternatives: [[{ kind: 'SOURCE_TYPE', types: ['ACTION'] }]],
+        },
+      },
+    );
+    const counter = putCard(state, 2, [{ op: 'NEGATE', scope: 'TOP_STACK' }], {
+      trigger: {
+        event: 'CARD',
+        alternatives: [[{ kind: 'SOURCE_TYPE', types: ['SOMETIMES'] }]],
+      },
+    });
+    const retaliation = putCard(
+      state,
+      1,
+      [
+        {
+          op: 'CHANGE_STAT',
+          target: 'ORIGINAL_SOURCE_PLAYER',
+          stat: 'FORTITUDE',
+          delta: -2,
+        },
+      ],
+      {
+        suffix: 'shove',
+        trigger: systemTrigger('FORTITUDE_LOSS_RESOLVED', [
+          {
+            kind: 'ACTUAL_STAT_LOSS',
+            stat: 'FORTITUDE',
+            relation: 'SELF',
+            minAmount: 1,
+            requirePlayerCard: true,
+            excludeMitigationCardsPlayed: true,
+          },
+          { kind: 'ORIGINAL_SOURCE_PLAYER', relation: 'OTHER' },
+        ]),
+      },
+    );
+    putCard(
+      state,
+      3,
+      [{ op: 'CHANGE_STAT', target: 'SELF', stat: 'GOLD', delta: 1 }],
+      { trigger: systemTrigger('FORTITUDE_LOSS_RESOLVED') },
+    );
+    let pending = until(
+      play(state, 0, attack, state.players[1]!.id).state,
+      (s) => legal(s, 1, ignore) !== undefined,
+    );
+    pending = until(
+      play(pending, 1, ignore).state,
+      (s) => legal(s, 2, counter) !== undefined,
+    );
+    pending = until(
+      play(pending, 2, counter).state,
+      (s) => s.resolutionStack.at(-1)?.task?.kind === 'POST_LOSS',
+    );
+    const repository = new D1EventRepository(env.DB);
+    await repository.saveSnapshot(pending.matchId, {
+      sequence: batch.entry.lastSequence + 1,
+      stateVersion: pending.version,
+      snapshot: JSON.parse(JSON.stringify(pending)),
+    });
+    const restored = coreStateSchema.parse(
+      (await repository.getLatestSnapshot(pending.matchId))!.snapshot,
+    );
+    expect(restored).toEqual(pending);
+    expect(restored.resolutionStack.at(-1)!.task).toMatchObject({
+      sourceKind: 'CARD',
+      playedIgnore: true,
+      playedReduction: false,
+    });
+    expect(legal(restored, 1, retaliation)).toBeUndefined();
+    expect(settle(restored).players[1]!.fortitude).toBe(
+      state.players[1]!.fortitude - 4,
+    );
+  });
   it('stores ordered unique events, snapshots, actor, timestamps and manifest; exact retries perform no duplicate writes', async () => {
     const repository = new D1ReplayRepository(env.DB);
     const batch = firstBatch();

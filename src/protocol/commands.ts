@@ -6,6 +6,7 @@ import {
   playerIdSchema,
   responseWindowIdSchema,
   roomIdSchema,
+  deckIdSchema,
 } from '../shared/ids';
 import { stateVersionSchema } from '../shared/version';
 
@@ -63,7 +64,16 @@ export const clientCommandSchema = z.discriminatedUnion('type', [
       .max(80)
       .refine((name) => name.trim().length > 0, 'Display name is blank'),
   }),
-  z.strictObject({ type: z.literal('START_MATCH'), ...mutationFields }),
+  z.strictObject({
+    type: z.literal('START_MATCH'),
+    ...mutationFields,
+    drinkDeckIds: z
+      .array(deckIdSchema)
+      .min(1)
+      .max(8)
+      .refine((ids) => new Set(ids).size === ids.length)
+      .optional(),
+  }),
   z.strictObject({ type: z.literal('DISCARD'), ...mutationFields, cardIds }),
   z.strictObject({
     type: z.literal('PLAY_CARD'),

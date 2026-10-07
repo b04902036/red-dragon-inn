@@ -7,7 +7,10 @@ import type { MutableGameState } from './types';
 import { drinkModifierEffects } from './drinks';
 import { activeGamblers, validateGamblingStart } from './gambling';
 import { validateGenericEffects } from './generic-effect-validation';
-export function cardEffects(definition: CardDefinition): Effect[] {
+export function cardEffects(
+  definition: CardDefinition,
+  state?: import('./types').CoreGameState,
+): Effect[] {
   return [
     ...(definition.mandatoryGoldCost === undefined
       ? []
@@ -19,7 +22,14 @@ export function cardEffects(definition: CardDefinition): Effect[] {
             requireFullPayment: true,
           },
         ]),
-    ...(JSON.parse(JSON.stringify(definition.effects)) as Effect[]),
+    ...(JSON.parse(JSON.stringify(definition.effects)) as Effect[]).map(
+      (effect) =>
+        effect.op === 'REDIRECT_FORTITUDE_LOSS' &&
+        effect.twoPlayerIgnoreFallback &&
+        state?.players.filter((p) => !p.eliminated).length === 2
+          ? { op: 'IGNORE' as const, scope: 'CURRENT_EFFECT' as const }
+          : effect,
+    ),
   ];
 }
 export function hasChosenTarget(effects: readonly Effect[]) {
@@ -69,12 +79,50 @@ export function validateEffects(
       ? []
       : (JSON.parse(JSON.stringify(parent.effects)) as Effect[]);
   for (const effect of frame.effects) {
-    if (effect.op === 'IGNORE')
+    if (effect.op === 'IGNORE') {
+      const definition =
+        frame.sourceCardId === null
+          ? undefined
+          : state.definitions[state.cards[frame.sourceCardId]!.definitionId];
       requireCommand(
         parent !== undefined &&
           affectedPlayers(state, parent).includes(frame.actorId!),
         'ILLEGAL_TIMING',
       );
+      // An attribute-based Gold Ignore cannot waive a payment on one's own
+      // card. Other-player sources and payment substitutions remain legal.
+      if (
+        parent?.kind === 'CARD' &&
+        parent.actorId === frame.actorId &&
+        definition?.type === 'SOMETIMES' &&
+        definition.responseTrigger?.alternatives.some((conditions) =>
+          conditions.some(
+            (condition) =>
+              condition.kind === 'PENDING_STAT' &&
+              condition.stat === 'GOLD' &&
+              condition.relation !== 'OTHER',
+          ),
+        )
+      )
+        requireCommand(
+          !parent.effects
+            .slice(parent.nextEffectIndex)
+            .some(
+              (pending) =>
+                (pending.op === 'PAY_INN' &&
+                  pending.amount > 0 &&
+                  effectTargets(state, parent, pending.target).some(
+                    (player) => player.id === frame.actorId,
+                  )) ||
+                (pending.op === 'TRANSFER_GOLD' &&
+                  pending.amount > 0 &&
+                  effectTargets(state, parent, pending.target).some(
+                    (player) => player.id !== frame.actorId,
+                  )),
+            ),
+          'ILLEGAL_TIMING',
+        );
+    }
     if (effect.op === 'NEGATE')
       requireCommand(parent !== undefined, 'ILLEGAL_TIMING');
     if (effect.op === 'MODIFY_PENDING_EFFECT') {

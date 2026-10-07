@@ -4,13 +4,18 @@ import { changeGold, goldFloor } from './gold';
 import { requireCommand } from './errors';
 
 /** Simultaneous eligibility is frozen before redistribution; dying players cannot rescue each other. */
-export function checkEliminations(state: MutableGameState, emit: EmitEvent) {
+export function checkEliminations(
+  state: MutableGameState,
+  emit: EmitEvent,
+  workflowCheckpoint = false,
+) {
   if (
     state.lifecycle !== 'PLAYING' ||
     state.gambling !== null ||
-    state.control.phaseEnd !== null ||
-    state.resolutionStack.length > 0 ||
-    state.responseWindow !== null
+    (!workflowCheckpoint &&
+      (state.control.phaseEnd !== null ||
+        state.resolutionStack.length > 0 ||
+        state.responseWindow !== null))
   )
     return;
   const ordered = [...state.players].sort((a, b) => a.seat - b.seat);

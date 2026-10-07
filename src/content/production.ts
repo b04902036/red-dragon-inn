@@ -225,7 +225,8 @@ export function verifyProductionContent(
     pack &&
     (pack.characters.length < 2 ||
       pack.cards.length === 0 ||
-      pack.decks.filter((deck) => deck.type === 'INN_DRINK').length !== 1)
+      pack.decks.filter((deck) => deck.type === 'INN_DRINK').length < 1 ||
+      pack.decks.filter((deck) => deck.type === 'INN_DRINK').length > 8)
   )
     report.errors.push('Pack cannot initialize a playable match.');
   report.complete = Object.values(report).every(

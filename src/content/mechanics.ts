@@ -8,6 +8,8 @@ export const systemEventSchema = z.enum([
   'GAMBLING_WIN_BEFORE_PAYOUT',
   'FORTITUDE_LOSS_RESOLVED',
   'PHASE_OPPORTUNITY',
+  'DRINK_DECK_REFILL_PAYMENT',
+  'CHALLENGE_SURVIVAL',
 ]);
 export const sourceCapabilitySchema = z.enum([
   'CHANGES_DRINK_EFFECT',

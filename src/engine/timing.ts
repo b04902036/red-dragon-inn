@@ -32,9 +32,10 @@ import { buildDrinkFrame } from './drinks';
 import { completePhase, legalAnytimeCards, passAnytime } from './timed-prompts';
 import { cardDefinitionForPlay } from './card-play-legality';
 import { nextResolutionId } from './resolution-ids';
-import { addTask, finishTask } from './workflows';
+import { addTask, finishTask, payment } from './workflows';
 import type { WorkflowTask, DrinkWork } from './workflow-state';
 import { taskEvent } from './workflow-state';
+import { recordFortitudeMitigationPlay } from './fortitude-loss-provenance';
 import {
   activeGamblers,
   passGambling,
@@ -83,6 +84,13 @@ function pushDrinkWork(
 ) {
   requireCommand(state.resolutionStack.length < MAX_STACK_DEPTH, 'STACK_LIMIT');
   const frame: MutableFrame = {
+    ...(work.drinkBase === undefined ? {} : { drinkBase: work.drinkBase }),
+    ...(work.builtInSplitAvailable === undefined
+      ? {}
+      : { builtInSplitAvailable: work.builtInSplitAvailable }),
+    ...(work.noExternalSplit === undefined
+      ? {}
+      : { noExternalSplit: work.noExternalSplit }),
     id: work.id,
     kind: work.kind,
     actorId: work.actorId,
@@ -135,26 +143,24 @@ export function maintainPhaseOpportunity(
 ) {
   if (
     state.lifecycle !== 'PLAYING' ||
-    state.phase !== 'ORDER_DRINK' ||
+    (state.phase !== 'ORDER_DRINK' && state.phase !== 'DRINK') ||
     state.resolutionStack.length > 0
   )
     return false;
-  const key = `${state.control.turnNumber}:${state.activePlayerId}:${state.control.normalOrderDone ? 'AFTER' : 'BEFORE'}`;
+  const key = `${state.control.turnNumber}:${state.activePlayerId}:${state.phase}:${state.control.normalOrderDone ? 'AFTER' : 'BEFORE'}`;
   if (state.control.phaseOpportunityKey === key) return false;
   const frame = taskFrame(state, undefined, {
     kind: 'PHASE',
-    phase: 'ORDER_DRINK',
+    phase: state.phase,
     normalOrderComplete: state.control.normalOrderDone ?? false,
   });
   if (
-    legalResponsesForPlayer(
-      state,
-      state.activePlayerId!,
-      reactionContext(state, frame),
-    ).every(
-      (play) =>
-        state.definitions[state.cards[play.cardId]!.definitionId]!.type !==
-        'SOMETIMES',
+    !state.players.some((p) =>
+      legalResponsesForPlayer(state, p.id, reactionContext(state, frame)).some(
+        (play) =>
+          state.definitions[state.cards[play.cardId]!.definitionId]!.type ===
+          'SOMETIMES',
+      ),
     )
   )
     return false;
@@ -240,7 +246,7 @@ function queueCard(
   const parent = state.resolutionStack.at(-1);
   requireCommand(definition.effects.length <= 32, 'INVALID_EFFECT');
   requireCommand(state.resolutionStack.length < MAX_STACK_DEPTH, 'STACK_LIMIT');
-  const chosen = hasChosenTarget(definition.effects);
+  const chosen = hasChosenTarget(cardEffects(definition, state));
   const targetId =
     'targetPlayerId' in command ? command.targetPlayerId : undefined;
   const target = state.players.find((player) => player.id === targetId);
@@ -274,7 +280,7 @@ function queueCard(
     sourceCardId: command.cardId,
     sourceRevealed: true,
     targetPlayerIds: target === undefined ? [] : [target.id],
-    effects: cardEffects(definition),
+    effects: cardEffects(definition, state),
     nextEffectIndex: 0,
     parentId: parent?.id ?? null,
     stage: 'RESPONSES',
@@ -328,6 +334,16 @@ function queueCard(
       resolutionId: frame.id,
       targetPlayerIds: frame.targetPlayerIds,
     });
+  recordFortitudeMitigationPlay(state, frame, parent);
+  if (
+    state.gambling !== null &&
+    frame.effects.some(
+      (effect) =>
+        effect.op === 'REPLACE_GAMBLING_WINNER' &&
+        effect.blocksRestart !== false,
+    )
+  )
+    state.gambling.restartBlocked = true;
   state.resolutionStack.push(frame);
   emit({
     type: 'RESOLUTION_STARTED',
@@ -419,11 +435,27 @@ function choiceForEffect(
   frame: MutableFrame,
   effect: Extract<
     Effect,
-    { op: 'OPEN_CHOICE' | 'OPEN_OPTION' | 'DISCARD_CARDS' }
+    {
+      op:
+        'OPEN_CHOICE' | 'OPEN_OPTION' | 'DISCARD_CARDS' | 'DECIDE_DRINK_SPLIT';
+    }
   >,
 ): PendingChoice | null {
   const player = effectTargets(state, frame, effect.target)[0];
   if (player === undefined) return null;
+  if (effect.op === 'DECIDE_DRINK_SPLIT')
+    return {
+      playerId: player.id,
+      kind: 'OPTION',
+      options: [
+        { id: 'KEEP', label: 'Drink it all' },
+        ...state.players
+          .filter((p) => !p.eliminated && p.id !== player.id)
+          .map((p) => ({ id: p.id, label: p.displayName })),
+      ],
+      min: 1,
+      max: 1,
+    };
   if (effect.op === 'DISCARD_CARDS') {
     if (player.hand.length === 0) return null;
     const count = Math.min(effect.count, player.hand.length);
@@ -458,7 +490,33 @@ export function drain(
   emit: EmitEvent,
   rng: RandomSource,
 ) {
+  if (state.control.pendingRefillPayers?.length) {
+    requireCommand(
+      state.resolutionStack.length < MAX_STACK_DEPTH,
+      'STACK_LIMIT',
+    );
+    const parent = state.resolutionStack.at(-1);
+    const container = taskFrame(state, parent, {
+      kind: 'PHASE',
+      phase: 'ORDER_DRINK',
+      normalOrderComplete: true,
+    });
+    delete container.task;
+    container.stage = 'OPERATIONS';
+    container.id = nextResolutionId(state);
+    container.pendingTasks = state.control.pendingRefillPayers
+      .splice(0)
+      .map(
+        (id) =>
+          ({ ...payment(id, 1, 'INN'), purpose: 'REFILL' }) as WorkflowTask,
+      );
+    state.resolutionStack.push(container);
+  }
   while (state.resolutionStack.length > 0) {
+    if (state.control.pendingRefillPayers?.length) {
+      drain(state, emit, rng);
+      continue;
+    }
     const frame = state.resolutionStack.at(-1)!;
     if (frame.pendingTasks?.length) {
       const task = frame.pendingTasks.shift()!;
@@ -469,7 +527,11 @@ export function drain(
         state.players.some(
           (p) => legalResponsesForPlayer(state, p.id, context).length > 0,
         );
-      if (eligible || task.kind === 'DRINK_BATCH') {
+      if (
+        eligible ||
+        task.kind === 'DRINK_BATCH' ||
+        task.kind === 'CHALLENGE'
+      ) {
         requireCommand(
           state.resolutionStack.length < MAX_STACK_DEPTH,
           'STACK_LIMIT',
@@ -541,6 +603,18 @@ export function drain(
       }
     }
     if (
+      frame.builtInSplitAvailable &&
+      !frame.canceled &&
+      !frame.ignoredPlayerIds.includes(frame.drinkRecipientId ?? frame.actorId!)
+    ) {
+      frame.builtInSplitAvailable = false;
+      frame.effects.unshift(
+        { op: 'DECIDE_DRINK_SPLIT', target: 'SELF' },
+        { op: 'APPLY_DRINK_SPLIT_CHOICE' },
+      );
+      requireCommand(frame.effects.length <= 32, 'STACK_LIMIT');
+    }
+    if (
       (frame.kind === 'DRINK' || frame.kind === 'DRINK_EVENT') &&
       !frame.batchResponseComplete
     ) {
@@ -567,6 +641,15 @@ export function drain(
           effects: frame.effects,
           score: 0,
           alcoholAsFortitude: frame.alcoholAsFortitude ?? false,
+          ...(frame.drinkBase === undefined
+            ? {}
+            : { drinkBase: frame.drinkBase }),
+          ...(frame.noExternalSplit === undefined
+            ? {}
+            : { noExternalSplit: frame.noExternalSplit }),
+          ...(frame.builtInSplitAvailable === undefined
+            ? {}
+            : { builtInSplitAvailable: frame.builtInSplitAvailable }),
           responseComplete: true,
           canceled: frame.canceled,
           ignoredPlayerIds: frame.ignoredPlayerIds,
@@ -600,7 +683,8 @@ export function drain(
       if (
         effect.op === 'OPEN_CHOICE' ||
         effect.op === 'OPEN_OPTION' ||
-        effect.op === 'DISCARD_CARDS'
+        effect.op === 'DISCARD_CARDS' ||
+        effect.op === 'DECIDE_DRINK_SPLIT'
       ) {
         const choice = choiceForEffect(state, frame, effect);
         if (choice !== null) {
@@ -706,8 +790,10 @@ export function drain(
     }
     state.responseWindow = state.resolutionStack.at(-1)?.window ?? null;
     if (
-      frame.continuation === 'ORDER_DRINK' ||
-      frame.continuation === 'ELIMINATION_CHECK'
+      state.lifecycle === 'PLAYING' &&
+      !player.eliminated &&
+      (frame.continuation === 'ORDER_DRINK' ||
+        frame.continuation === 'ELIMINATION_CHECK')
     ) {
       completePhase(state, frame.continuation, emit);
     } else if (

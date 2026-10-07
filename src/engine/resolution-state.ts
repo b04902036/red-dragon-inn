@@ -54,6 +54,32 @@ export const responseWindowSchema = z.strictObject({
     .nullable(),
 });
 export const resolutionFrameSchema = z.strictObject({
+  builtInSplitAvailable: z.boolean().optional(),
+  noExternalSplit: z.boolean().optional(),
+  drinkBase: z
+    .strictObject({
+      alcohol: z.number().int().safe(),
+      fortitude: z.number().int().safe(),
+    })
+    .optional(),
+  fortitudeLossOverrides: z
+    .array(
+      z.strictObject({
+        effectIndex: z.number().int().min(0).max(31),
+        targets: z
+          .array(
+            z.strictObject({
+              playerId: playerIdSchema,
+              delta: z.number().int().nonpositive().safe(),
+            }),
+          )
+          .min(1)
+          .max(4),
+        mitigationLockedPlayerIds: playerIds,
+      }),
+    )
+    .max(32)
+    .optional(),
   task: workflowTaskSchema.optional(),
   pendingTasks: z.array(workflowTaskSchema).max(64).optional(),
   afterTasks: z.array(workflowTaskSchema).max(8).optional(),
@@ -68,6 +94,24 @@ export const resolutionFrameSchema = z.strictObject({
   origin: originSchema.optional(),
   responseToOrigin: originSchema.optional(),
   redirectedFortitudePlayerId: playerIdSchema.optional(),
+  fortitudeMitigationPlays: z
+    .array(
+      z
+        .strictObject({
+          playerId: playerIdSchema,
+          effectIndex: z.number().int().min(0).max(31),
+          playedReduction: z.boolean(),
+          playedIgnore: z.boolean(),
+        })
+        .refine((play) => play.playedReduction || play.playedIgnore),
+    )
+    .max(128)
+    .refine(
+      (plays) =>
+        new Set(plays.map((play) => `${play.playerId}:${play.effectIndex}`))
+          .size === plays.length,
+    )
+    .optional(),
   id: resolutionIdSchema,
   kind: z.enum(['CARD', 'DRINK', 'DRINK_EVENT', 'SYSTEM']),
   actorId: playerIdSchema.nullable(),
@@ -93,6 +137,7 @@ function taskPlayers(task: WorkflowTask): PlayerId[] {
     case 'PAYMENT':
       return [task.payer, ...(task.recipient === null ? [] : [task.recipient])];
     case 'FORCED_DRINK':
+    case 'CHALLENGE':
       return [task.actorId];
     case 'SETTLEMENT':
       return [task.winner];
@@ -138,6 +183,35 @@ export function assertResolutionState(state: CoreGameState) {
   );
   for (let i = 0; i < frames.length; i += 1) {
     const frame = frames[i]!;
+    assert(
+      (frame.fortitudeLossOverrides ?? []).every(
+        (entry) =>
+          frame.effects[entry.effectIndex]?.op === 'CHANGE_STAT' &&
+          (frame.effects[entry.effectIndex] as { stat?: string }).stat ===
+            'FORTITUDE' &&
+          entry.targets.every((target) => ids.has(target.playerId)) &&
+          entry.mitigationLockedPlayerIds.every((id) => ids.has(id)) &&
+          new Set(entry.targets.map((target) => target.playerId)).size ===
+            entry.targets.length,
+      ) &&
+        new Set(
+          (frame.fortitudeLossOverrides ?? []).map(
+            (entry) => entry.effectIndex,
+          ),
+        ).size === (frame.fortitudeLossOverrides ?? []).length,
+      'invalid Fortitude routing',
+    );
+    assert(
+      (frame.fortitudeMitigationPlays ?? []).every((play) => {
+        const effect = frame.effects[play.effectIndex];
+        return (
+          ids.has(play.playerId) &&
+          effect?.op === 'CHANGE_STAT' &&
+          effect.stat === 'FORTITUDE'
+        );
+      }),
+      'invalid Fortitude mitigation provenance',
+    );
     const tasks = [
       ...(frame.task === undefined ? [] : [frame.task]),
       ...(frame.pendingTasks ?? []),

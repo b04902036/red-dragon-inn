@@ -71,7 +71,12 @@ export function send(
       ),
   now = state.control.timedPrompt?.openedAt ?? 1000,
 ) {
-  const command = intent(state, type, fields);
+  const command = intent(state, type, {
+    ...(type.startsWith('CHOOSE_')
+      ? { responseWindowId: state.responseWindow!.id }
+      : {}),
+    ...fields,
+  });
   const result = applyCommand(state, command, {
     actorId: state.players[seat]!.id,
     clock: { now: () => now },
@@ -187,7 +192,9 @@ export function systemTrigger(
     | 'PAYMENT_REQUIRED'
     | 'GAMBLING_CHECKPOINT'
     | 'GAMBLING_WIN_BEFORE_PAYOUT'
-    | 'FORTITUDE_LOSS_RESOLVED',
+    | 'FORTITUDE_LOSS_RESOLVED'
+    | 'DRINK_DECK_REFILL_PAYMENT'
+    | 'CHALLENGE_SURVIVAL',
   extra: ResponseTrigger['alternatives'][number] = [],
 ): ResponseTrigger {
   return {

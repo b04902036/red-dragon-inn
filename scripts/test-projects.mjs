@@ -20,7 +20,10 @@ const groups = [
     .sort()
     .map((name) => ({
       projects: [
-        name === 'production-content.test.ts' || name === 'rdi1-content.test.ts'
+        name === 'production-content.test.ts' ||
+        name === 'rdi1-content.test.ts' ||
+        name === 'rdi2-content.test.ts' ||
+        name === 'rdi2-full-verification.test.ts'
           ? 'production-worker'
           : 'worker',
       ],

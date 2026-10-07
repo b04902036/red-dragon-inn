@@ -6,7 +6,7 @@ import { playAction, startDrink } from './timing';
 import { completePhase } from './timed-prompts';
 import type { PlayerId } from '../shared/ids';
 
-import { drawFromPiles } from './decks';
+import { drawInnDrinks } from './inn-deck';
 import { shuffle } from './rng';
 import type { RandomSource } from './rng';
 import type { EmitEvent } from './event-writer';
@@ -24,37 +24,18 @@ export function dealDrinks(
   emit: EmitEvent,
   rng: RandomSource,
 ) {
-  const draw = drawFromPiles(
-    state.innDrinkDeck.cardIds,
-    state.innDrinkDiscard,
+  const drawn = drawInnDrinks(
+    state,
     count,
-    state.rng,
+    emit,
     rng,
+    state.rules.drinks.refillPayment === true,
   );
-  state.innDrinkDeck.cardIds = draw.deck;
-  state.innDrinkDiscard = draw.discard;
-  state.rng = draw.rng;
-  for (const step of draw.steps) {
-    if (step.kind === 'RESHUFFLE') {
-      for (const id of step.cardIds)
-        state.cards[id]!.location = {
-          zone: 'INN_DRINK_DECK',
-          deckId: state.innDrinkDeck.deckId,
-        };
-      emit({
-        type: 'DECK_SHUFFLED',
-        deckId: state.innDrinkDeck.deckId,
-        playerId: null,
-        reason: 'EXHAUSTED',
-        cardIds: step.cardIds,
-      });
-    } else
-      for (const id of step.cardIds) {
-        state.cards[id]!.location = { zone: 'DRINK_PILE', playerId: target.id };
-        target.drinkPile.unshift(id);
-      }
+  for (const id of drawn) {
+    state.cards[id]!.location = { zone: 'DRINK_PILE', playerId: target.id };
+    target.drinkPile.unshift(id);
   }
-  return draw.drawn;
+  return drawn;
 }
 function startMatch(
   state: MutableGameState,
@@ -98,6 +79,14 @@ function startMatch(
     reason: 'INITIAL',
     cardIds: shuffled.cards,
   });
+  if (state.barDrinkDeck !== undefined) {
+    state.barDrinkDeck = state.innDrinkDeck.cardIds.splice(30);
+    for (const id of state.barDrinkDeck)
+      state.cards[id]!.location = {
+        zone: 'INN_BAR_DECK',
+        deckId: state.innDrinkDeck.deckId,
+      };
+  }
   for (const player of state.players) {
     const cardIds = dealDrinks(
       state,

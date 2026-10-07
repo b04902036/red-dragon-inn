@@ -99,6 +99,7 @@ export const publicGameViewSchema = z.strictObject({
   activePlayerId: playerIdSchema.nullable(),
   players: z.array(publicPlayerViewSchema).max(4),
   innDrinkDeckCount: count,
+  barDrinkDeckCount: count.optional(),
   innDrinkDiscardCount: count,
   gambling: publicGamblingViewSchema.nullable(),
   resolutionStack: z.array(

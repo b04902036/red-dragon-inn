@@ -9,6 +9,9 @@ dist/
 .env.*
 !.env.example
 src/content/private/
+private-content/
+content/private/
+content-private/imports/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal

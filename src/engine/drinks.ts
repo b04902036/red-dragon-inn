@@ -5,9 +5,8 @@ import { matchNamespace } from './identity';
 import type { MutableGameState } from './types';
 import type { EmitEvent } from './event-writer';
 import type { RandomSource } from './rng';
-import { drawFromPiles } from './decks';
+import { drawInnDrinks } from './inn-deck';
 import { requireCommand } from './errors';
-import { payGold } from './gold';
 
 export function drinkModifierEffects(
   frame: MutableGameState['resolutionStack'][number],
@@ -45,6 +44,7 @@ export function buildDrinkFrame(
     skipEvents?: boolean;
     id?: ResolutionId;
     payForRefill?: boolean;
+    allowBuiltInSplit?: boolean;
   } = {},
 ) {
   const player = state.players.find((entry) => entry.id === actorId)!;
@@ -63,39 +63,13 @@ export function buildDrinkFrame(
     let cardId: CardInstanceId | undefined;
     if (source === 'DRINK_PILE') cardId = player.drinkPile.shift();
     else {
-      const draw = drawFromPiles(
-        state.innDrinkDeck.cardIds,
-        state.innDrinkDiscard,
+      cardId = drawInnDrinks(
+        state,
         1,
-        state.rng,
+        emit,
         rng,
-      );
-      state.innDrinkDeck.cardIds = draw.deck;
-      state.innDrinkDiscard = draw.discard;
-      state.rng = draw.rng;
-      for (const step of draw.steps)
-        if (step.kind === 'RESHUFFLE') {
-          if (options.payForRefill)
-            for (const participant of state.players.filter(
-              (p) =>
-                !p.eliminated &&
-                !state.control.deferredContestPassOutPlayerIds?.includes(p.id),
-            ))
-              payGold(state, participant, 1, emit);
-          for (const card of step.cardIds)
-            state.cards[card]!.location = {
-              zone: 'INN_DRINK_DECK',
-              deckId: state.innDrinkDeck.deckId,
-            };
-          emit({
-            type: 'DECK_SHUFFLED',
-            deckId: state.innDrinkDeck.deckId,
-            playerId: null,
-            reason: 'EXHAUSTED',
-            cardIds: step.cardIds,
-          });
-        }
-      cardId = draw.drawn[0];
+        options.payForRefill === true,
+      )[0];
     }
     if (cardId === undefined) return null;
     cards.push(cardId);
@@ -137,6 +111,7 @@ export function buildDrinkFrame(
     }
     requireCommand(definition?.type !== 'DRINK_EVENT', 'INVALID_EFFECT');
   }
+  const initialDefinition = definition;
   if (definition === null) {
     emit({
       type: 'DRINK_EMPTY',
@@ -216,6 +191,13 @@ export function buildDrinkFrame(
     kind,
   });
   return {
+    ...(kind === 'DRINK' ? { drinkBase: { alcohol, fortitude } } : {}),
+    ...(initialDefinition?.type === 'DRINK' && initialDefinition.builtInSplit
+      ? {
+          noExternalSplit: true,
+          builtInSplitAvailable: options.allowBuiltInSplit !== false,
+        }
+      : {}),
     id,
     kind,
     actorId,

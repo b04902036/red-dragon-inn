@@ -624,6 +624,18 @@ export class GameRoom extends DurableObject<Env> {
         this.reject(ws, room, 'NOT_ALLOWED', command.commandId);
         return;
       }
+      const innDecks = content.decks.filter(
+        (deck) => deck.type === 'INN_DRINK',
+      );
+      if (
+        (innDecks.length > 1 && command.drinkDeckIds === undefined) ||
+        command.drinkDeckIds?.some(
+          (id) => !innDecks.some((deck) => deck.id === id),
+        )
+      ) {
+        this.reject(ws, room, 'INVALID_COMMAND', command.commandId);
+        return;
+      }
       manifest = replayManifestSchema.parse({
         schemaVersion: 1,
         setup: {
@@ -633,6 +645,9 @@ export class GameRoom extends DurableObject<Env> {
           seed: room.seed,
           version: room.version,
           content,
+          ...(command.drinkDeckIds === undefined
+            ? {}
+            : { innDrinkDeckIds: command.drinkDeckIds }),
           rules: rulesConfigSchema.parse({
             ...(this.env.CONTENT_MODE === 'fixture' &&
             this.env.FIXTURE_TIMING_MS

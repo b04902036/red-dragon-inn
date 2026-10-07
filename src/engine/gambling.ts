@@ -165,7 +165,8 @@ export function finishGamblingAntes(state: MutableGameState, emit: EmitEvent) {
     ]!;
   if (
     (definition.type === 'GAMBLING' || definition.type === 'CHEATING') &&
-    definition.gambling?.immediateWin
+    definition.gambling?.immediateWin &&
+    !round.restarted
   )
     requestImmediateWin(state, state.resolutionStack[0]!, emit);
 }

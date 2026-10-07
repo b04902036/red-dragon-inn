@@ -289,7 +289,12 @@ export function GameTable({
         presentation.choiceOptions?.find(
           (item) =>
             item.cardDefinitionId === source && item.optionId === option.id,
-        )?.label ?? option.label
+        )?.label ??
+        (option.id === 'ACCEPT' ||
+        option.id === 'DECLINE' ||
+        option.id === 'KEEP'
+          ? t(`table.choice.${option.id}`)
+          : option.label)
       );
     }
     return option.label;

@@ -41,7 +41,7 @@ Schemas do not trim or coerce IDs. `player_a1` cannot be used where `RoomId` is 
 | Type             | Additional fields                                             |
 | ---------------- | ------------------------------------------------------------- |
 | `JOIN_ROOM`      | `displayName` (1–80 characters, not blank)                    |
-| `START_MATCH`    | None                                                          |
+| `START_MATCH`    | Optional `drinkDeckIds` (1–8 unique deck IDs)                 |
 | `DISCARD`        | `cardIds` (0–64 unique card instance IDs)                     |
 | `PLAY_CARD`      | `cardId`, optional `targetPlayerId`                           |
 | `PLAY_RESPONSE`  | `responseWindowId`, `cardId`, optional `targetPlayerId`       |
@@ -58,6 +58,8 @@ Schemas do not trim or coerce IDs. `player_a1` cannot be used where `RoomId` is 
 | `CHOOSE_OPTION`  | `responseWindowId`, `optionId` (1–128 characters)             |
 
 These size limits are distinct from configured hand size. `DISCARD` permits zero discards and performs the core redraw/phase transition. `SKIP_ACTION` passes the action phase. `TAKE_DRINK` reveals and queues the server-owned top Drink/Chaser chain or Event. `ADVANCE_PHASE` performs the same Drink resolution in DRINK, or advances ELIMINATION_CHECK/NEXT_TURN; it cannot bypass pending effects. `PLAY_CARD` supplies an optional target for a chosen-player Action; the engine checks whether it is required/allowed and whether the target is another living player. `PLAY_CARD` also supports Anytime sources between commands. Response and choice commands validate the active window, priority or designated chooser, card ownership, and offered selections. Gambling intents execute the configured ante/control/pass/leave/payout flow while normal turns suspend; see [the gambling guide](gambling-engine.md). See [the timing guide](timing-engine.md). `JOIN_ROOM` reserves a membership request; player identity and seat will be assigned by the server. It has no expected version because the joining client has not received room state, and it is not executed by the core engine.
+
+Step 24C requires an explicit host-selected `drinkDeckIds` list when the pinned edition has multiple Inn decks. The server verifies every ID belongs to that edition and persists the selection in the replay manifest. The combined lobby offers either single deck or both as a Bar Deck. Optional presentation `innDrinkDecks` lists public deck IDs/names; optional public `barDrinkDeckCount` exposes only reserve size. Server-only `DRINK_DECK_REFILLED` records the active batch and remaining reserve for history; hidden order is never broadcast. See [RDI2 compilation/publication](rdi2-compile-publish.md).
 
 Step 06 adds internal DRINK_EMPTY, DRINK_CHAIN_STOPPED, DRINK_EVENT_DISCARDED (CHASER context), DRINK_QUEUED, DRINK_DISCARDED, DRINK_MODIFIED, ELIMINATION_CHECKED, and GOLD_REDISTRIBUTED batches. ELIMINATION_CHECK_REQUESTED includes BROKE or PASSED_OUT. RESOLUTION_STARTED.cardId is nullable for an empty-pile fallback. Public resolution kinds include DRINK_EVENT; optional `sourceCards` contains at most 32 explicitly revealed references for a compound source. It excludes unrevealed cards. None of these additions permit raw internal event broadcasts or client stat/payout inputs.
 

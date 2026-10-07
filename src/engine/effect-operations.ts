@@ -15,6 +15,7 @@ import type { EmitEvent } from './event-writer';
 import type { RandomSource } from './rng';
 import type { MutableGameState } from './types';
 import { executeGenericOperation, queuePostLoss } from './workflows';
+import { fortitudeTargets } from './fortitude-routing';
 export type MutableFrame = MutableGameState['resolutionStack'][number];
 
 export function effectTargets(
@@ -50,19 +51,17 @@ export function affectedPlayers(
         frame.effects
           .slice(frame.nextEffectIndex)
           .some(
-            (effect) =>
+            (effect, offset) =>
               'target' in effect &&
-              ((effect.op === 'CHANGE_STAT' &&
-              effect.stat === 'FORTITUDE' &&
-              effect.delta < 0 &&
-              frame.redirectedFortitudePlayerId !== undefined
-                ? state.players.filter(
-                    (p) =>
-                      p.id === frame.redirectedFortitudePlayerId &&
-                      !p.eliminated &&
-                      !frame.ignoredPlayerIds.includes(p.id),
-                  )
-                : effectTargets(state, frame, effect.target)
+              ((
+                fortitudeTargets(
+                  state,
+                  frame,
+                  effect,
+                  frame.nextEffectIndex + offset,
+                )?.map((entry) =>
+                  state.players.find((p) => p.id === entry.playerId)!,
+                ) ?? effectTargets(state, frame, effect.target)
               ).some((target) => target.id === player.id) ||
                 ((effect.op === 'TRANSFER_GOLD' ||
                   effect.op === 'COLLECT_GOLD') &&
@@ -98,7 +97,10 @@ export function executeOperation(
   frame: MutableFrame,
   effect: Exclude<
     Effect,
-    { op: 'OPEN_CHOICE' | 'OPEN_OPTION' | 'DISCARD_CARDS' }
+    {
+      op:
+        'OPEN_CHOICE' | 'OPEN_OPTION' | 'DISCARD_CARDS' | 'DECIDE_DRINK_SPLIT';
+    }
   >,
   emit: EmitEvent,
   rng: RandomSource,
@@ -109,18 +111,15 @@ export function executeOperation(
   const parent = state.resolutionStack.at(-2);
   switch (effect.op) {
     case 'CHANGE_STAT':
-      for (const player of effect.stat === 'FORTITUDE' &&
-      effect.delta < 0 &&
-      frame.redirectedFortitudePlayerId !== undefined
-        ? state.players.filter(
-            (p) =>
-              p.id === frame.redirectedFortitudePlayerId &&
-              !p.eliminated &&
-              !frame.ignoredPlayerIds.includes(p.id),
-          )
-        : targets) {
+      for (const entry of fortitudeTargets(
+        state,
+        frame,
+        effect,
+        frame.nextEffectIndex,
+      ) ?? targets.map((p) => ({ playerId: p.id, delta: effect.delta }))) {
+        const player = state.players.find((p) => p.id === entry.playerId)!;
         const previous = player.fortitude;
-        changeStat(state, player, effect.stat, effect.delta, emit);
+        changeStat(state, player, effect.stat, entry.delta, emit);
         if (effect.stat === 'FORTITUDE' && player.fortitude < previous)
           queuePostLoss(frame, player.id, previous - player.fortitude);
       }
@@ -163,7 +162,15 @@ export function executeOperation(
         Number.isSafeInteger(pending.delta + effect.delta),
         'INVALID_EFFECT',
       );
-      pending.delta += effect.delta;
+      const routing = parent.fortitudeLossOverrides?.find(
+        (entry) => entry.effectIndex === effect.effectIndex,
+      );
+      if (routing)
+        for (const target of routing.targets.filter(
+          (entry) => entry.playerId === frame.actorId,
+        ))
+          target.delta = Math.min(0, target.delta + effect.delta);
+      else pending.delta += effect.delta;
       if (pending.stat === 'ALCOHOL' && parent.contestScore !== undefined)
         parent.contestScore += effect.delta;
       emit({

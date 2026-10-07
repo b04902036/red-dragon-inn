@@ -19,6 +19,7 @@ export function RoomScreen({
   const { t, message } = useLocale();
   const [notice, setNotice] = useState<UiMessage | null>(null);
   const [selecting, setSelecting] = useState(false);
+  const [drinkSetup, setDrinkSetup] = useState('');
   const view = state.publicView;
   const invite = `${location.origin}/?room=${credentials.roomId}`;
   const copyInvite = async () => {
@@ -163,6 +164,27 @@ export function RoomScreen({
             </label>
           )}
           <div className="lobby-actions">
+            {state.hostPlayerId === credentials.playerId &&
+              (presentation?.innDrinkDecks?.length ?? 0) > 1 && (
+                <label>
+                  {t('room.drinkDeck')}
+                  <select
+                    value={drinkSetup || presentation!.innDrinkDecks![0]!.id}
+                    disabled={
+                      state.status !== 'synced' ||
+                      state.pendingCommandId !== null
+                    }
+                    onChange={(event) => setDrinkSetup(event.target.value)}
+                  >
+                    {presentation!.innDrinkDecks!.map((deck) => (
+                      <option key={deck.id} value={deck.id}>
+                        {deck.name}
+                      </option>
+                    ))}
+                    <option value="BAR">{t('room.barDeck')}</option>
+                  </select>
+                </label>
+              )}
             {state.hostPlayerId === credentials.playerId ? (
               <button
                 disabled={
@@ -172,7 +194,24 @@ export function RoomScreen({
                   selecting ||
                   presentation === null
                 }
-                onClick={() => send('START_MATCH')}
+                onClick={() =>
+                  send(
+                    'START_MATCH',
+                    (presentation?.innDrinkDecks?.length ?? 0) > 1
+                      ? {
+                          drinkDeckIds:
+                            drinkSetup === 'BAR'
+                              ? presentation!.innDrinkDecks!.map(
+                                  (deck) => deck.id,
+                                )
+                              : [
+                                  drinkSetup ||
+                                    presentation!.innDrinkDecks![0]!.id,
+                                ],
+                        }
+                      : {},
+                  )
+                }
               >
                 {t('room.start')}
               </button>

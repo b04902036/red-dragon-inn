@@ -30,6 +30,8 @@ export const reactionConditionSchema = z.discriminatedUnion('kind', [
     stat: z.literal('FORTITUDE'),
     relation,
     minAmount: z.number().int().min(1).max(1000),
+    requirePlayerCard: z.literal(true).optional(),
+    excludeMitigationCardsPlayed: z.literal(true).optional(),
   }),
   z.strictObject({ kind: z.literal('ORIGINAL_SOURCE_PLAYER'), relation }),
   z.strictObject({
@@ -43,7 +45,7 @@ export const reactionConditionSchema = z.discriminatedUnion('kind', [
   }),
   z.strictObject({
     kind: z.literal('PHASE_OPPORTUNITY'),
-    phase: z.literal('ORDER_DRINK'),
+    phase: z.enum(['ORDER_DRINK', 'DRINK']),
     actor: relation,
   }),
   z.strictObject({
@@ -54,6 +56,13 @@ export const reactionConditionSchema = z.discriminatedUnion('kind', [
     potMin: z.number().int().min(0).max(1000),
   }),
   z.strictObject({ kind: z.literal('SOURCE_ACTOR'), relation }),
+  z
+    .strictObject({
+      kind: z.literal('LIVING_PLAYER_COUNT'),
+      min: z.number().int().min(2).max(4),
+      max: z.number().int().min(2).max(4),
+    })
+    .refine((v) => v.min <= v.max),
   z.strictObject({ kind: z.literal('AFFECTS'), relation }),
   z.strictObject({
     kind: z.literal('SOURCE_TYPE'),

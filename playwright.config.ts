@@ -4,6 +4,8 @@ export default defineConfig({
   testDir: './tests/e2e',
   testIgnore: [
     '**/rdi1-content.spec.ts',
+    '**/rdi2-content.spec.ts',
+    '**/rdi2-full-verification.spec.ts',
     '**/rdi1-full-verification.spec.ts',
     '**/dev-card-selection.spec.ts',
   ],
@@ -23,6 +25,8 @@ export default defineConfig({
         '**/replay-inspector.spec.ts',
         '**/localization.spec.ts',
         '**/rdi1-content.spec.ts',
+        '**/rdi2-content.spec.ts',
+        '**/rdi2-full-verification.spec.ts',
         '**/rdi1-full-verification.spec.ts',
       ],
       use: { ...devices['Desktop Chrome'] },

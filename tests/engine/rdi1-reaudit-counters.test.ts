@@ -48,6 +48,7 @@ const cases: {
   legal: boolean;
   type?: 'SOMETIMES' | 'ANYTIME' | 'ACTION';
   family?: string;
+  parentKind?: 'DRINK_EVENT';
 }[] = [
   {
     name: 'numeric Drink modification',
@@ -96,7 +97,20 @@ const cases: {
     legal: false,
   },
   {
+    name: 'actual Drink when the modifier also supports Events',
+    effects: [
+      {
+        op: 'MODIFY_DRINK',
+        alcoholDelta: 1,
+        fortitudeDelta: 0,
+        allowDrinkEvents: true,
+      },
+    ],
+    legal: true,
+  },
+  {
     name: 'affect Drink Events',
+    parentKind: 'DRINK_EVENT',
     effects: [
       {
         op: 'MODIFY_DRINK',
@@ -122,7 +136,7 @@ const cases: {
 ];
 it.each(cases)(
   'the compiled counter enforces the server predicate for $name',
-  ({ effects, legal, type = 'SOMETIMES', family }) => {
+  ({ effects, legal, type = 'SOMETIMES', family, parentKind }) => {
     const { state: initial, counter, modifier } = response();
     const state = mutable(initial);
     const id = state.cards[modifier]!.definitionId;
@@ -146,6 +160,22 @@ it.each(cases)(
     });
     const frame = state.resolutionStack.at(-1)!;
     frame.effects = effects;
+    if (parentKind !== undefined) {
+      const parent = state.resolutionStack.find(
+        (p) => p.id === frame.parentId,
+      )!;
+      parent.kind = parentKind;
+      const definitionId = state.cards[parent.sourceCardId!]!.definitionId;
+      state.definitions[definitionId] = cardDefinitionSchema.parse({
+        id: definitionId,
+        source: 'TEST_FIXTURE',
+        name: 'Original synthetic Drink Event',
+        rulesText:
+          'An actual Event parent for this direct-effect predicate probe.',
+        type: 'DRINK_EVENT',
+        effects: parent.effects,
+      });
+    }
     const actor = state.cards[counter]!.ownerId!;
     expect(
       legalResponsesForPlayer(state, actor, reactionContext(state, frame)).some(

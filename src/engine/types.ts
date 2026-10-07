@@ -27,6 +27,7 @@ export interface CoreGameState extends AuthoritativeGameState {
     readonly resolutionOrdinal?: number;
     readonly normalOrderDone?: boolean;
     readonly phaseOpportunityKey?: string;
+    readonly pendingRefillPayers?: readonly PlayerId[];
     readonly hostPlayerId: PlayerId;
     readonly turnNumber: number;
     readonly eliminationCheckPending: boolean;

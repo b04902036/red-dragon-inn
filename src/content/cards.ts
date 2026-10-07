@@ -67,6 +67,7 @@ export const cardDefinitionSchema = z
       fortitudeChange: z.number().int().min(-1000).max(1000),
       chaser: z.boolean(),
       chaserSource: z.enum(['SAME_SOURCE', 'INN']).optional(),
+      builtInSplit: z.literal(true).optional(),
       traitReplacements: z
         .array(
           z.strictObject({
@@ -147,6 +148,7 @@ export const cardLocationSchema = z.discriminatedUnion('zone', [
   }),
   z.strictObject({ zone: z.literal('DRINK_PILE'), playerId: playerIdSchema }),
   z.strictObject({ zone: z.literal('INN_DRINK_DECK'), deckId: deckIdSchema }),
+  z.strictObject({ zone: z.literal('INN_BAR_DECK'), deckId: deckIdSchema }),
   z.strictObject({
     zone: z.literal('INN_DRINK_DISCARD'),
     deckId: deckIdSchema,

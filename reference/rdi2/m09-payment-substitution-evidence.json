@@ -1,0 +1,91 @@
+{
+  "mechanicId": "substitute_payment_from_inn",
+  "step": "24A",
+  "ledgerId": "M09",
+  "sourcePolicy": "No guessing. Exact Dimli/Fleck source files are linked. Gog exact card text remains unavailable and is bridged only by an explicit project-rule override.",
+  "distribution": {
+    "dimli": 2,
+    "eve": 0,
+    "fleck": 2,
+    "gog": 2,
+    "basis": "Fresh complete RDI2 mechanic/quantity matrix."
+  },
+  "exactSourceFiles": {
+    "dimli": {
+      "url": "https://raw.githubusercontent.com/HaxxonHax/the-inn/main/Cards/base/dimli/dimli.json",
+      "matchingCardNames": [
+        "Dwarves always have money.",
+        "Lemme check the money belt..."
+      ],
+      "evidenceTier": "ORIGINAL_UNOFFICIAL_JSON"
+    },
+    "fleck": {
+      "url": "https://raw.githubusercontent.com/HaxxonHax/the-inn/main/Cards/base/fleck/fleck.json",
+      "matchingCardNames": [
+        "Appreciative listeners! How nice!",
+        "I got this from playing in the Town Square."
+      ],
+      "evidenceTier": "ORIGINAL_UNOFFICIAL_JSON"
+    }
+  },
+  "officialClarifications": [
+    {
+      "source": "RDI6 / combined rules",
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/05/RDI6-3rdEd.pdf",
+      "facts": [
+        "Cards that pay with Gold from the Inn are allowed even for Gold payments caused by a card the payer played themselves.",
+        "Official team example shows a payment owed to another player being paid with Gold from the Inn instead; the original recipient remains the recipient.",
+        "Merchant Ship explicitly treats four Gold as four separate payment instances; a pay-from-Inn card replaces one such payment instance. This establishes that the response attaches to a payment instance rather than globally to all future losses."
+      ]
+    },
+    {
+      "source": "RDI9 official card image / rules",
+      "url": "https://slugfestgames.com/wp-content/uploads/2023/07/RDI9RulesForWeb.pdf",
+      "facts": [
+        "A current official Sometimes card in the same mechanic family triggers when the player would lose Gold and substitutes Inn Gold for the player's own Stash.",
+        "The official generic wording is not limited to ante only."
+      ]
+    }
+  ],
+  "normalizedProjectSemantics": {
+    "type": "SOMETIMES",
+    "trigger": {
+      "systemEvent": "GOLD_LOSS_REQUIRED",
+      "actor": "SELF",
+      "covers": [
+        "PAY_TO_INN",
+        "PAY_TO_PLAYER",
+        "ANTE_TO_POT",
+        "GOLD_TAKEN_BY_OTHER_PLAYER"
+      ]
+    },
+    "amount": "ENTIRE_CURRENT_GOLD_LOSS_INSTANCE",
+    "sourceOfGold": "INN",
+    "destination": "PRESERVE_ORIGINAL_DESTINATION",
+    "selfStashLoss": 0,
+    "timing": "BEFORE_CURRENT_GOLD_TRANSFER_OR_ANTE_RESOLVES",
+    "oneCardScope": "ONE_CURRENT_PAYMENT_OR_GOLD_LOSS_CONTEXT",
+    "specialCases": {
+      "paymentToInn": "Payer's stash does not decrease; destination remains the Inn, so abstract Inn balance has no net change.",
+      "ante": "Inn supplies the Gold to the gambling pot.",
+      "paymentToPlayer": "Inn supplies the Gold to the original recipient player.",
+      "goldTakenByPlayer": "Inn supplies the Gold to the player who would have taken it."
+    },
+    "exclusions": [
+      "Does not override an effect that explicitly forbids avoidance/substitution/payment from the Inn.",
+      "Does not apply to future independent payment contexts; each separate payment/loss is evaluated separately.",
+      "Does not change the recipient/destination or convert a payment into a gain for the payer."
+    ]
+  },
+  "gog": {
+    "exactCardTextAvailable": false,
+    "quantityAndMechanicFamilyVerified": true,
+    "quantity": 2,
+    "mechanicFamily": "Pay or Ante with found gold",
+    "projectRuleOverride": {
+      "enabled": true,
+      "rule": "Gog's two M09 cards use the exact same normalized M09 semantics as the verified Dimli/Fleck mechanic family, with no extra card-specific restrictions.",
+      "mustNotClaim": "Do not label Gog's exact wording or absence of extra printed restrictions as official-source-verified."
+    }
+  }
+}

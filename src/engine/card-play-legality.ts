@@ -208,7 +208,7 @@ export function legalCardPlays(
       if (error instanceof CommandError) continue;
       throw error;
     }
-    const requiresTarget = hasChosenTarget(definition.effects);
+    const requiresTarget = hasChosenTarget(cardEffects(definition, state));
     const targets = requiresTarget
       ? state.players
           .filter(
@@ -233,7 +233,7 @@ export function legalCardPlays(
             sourceCardId: cardId,
             sourceRevealed: true,
             targetPlayerIds: target === undefined ? [] : [target],
-            effects: cardEffects(definition),
+            effects: cardEffects(definition, state),
             nextEffectIndex: 0,
             parentId: parent?.id ?? null,
             stage: 'RESPONSES',

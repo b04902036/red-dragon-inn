@@ -16,6 +16,8 @@ import type { ResolutionFrame, TurnPhase, MatchLifecycle } from './model';
 import type { CoreGameState, MutableGameState } from './types';
 import { taskEvent } from './workflow-state';
 import { sourceCapabilities } from './source-capabilities';
+import { fortitudeTargets } from './fortitude-routing';
+import { effectTargets } from './effect-operations';
 
 export interface ReactionContext {
   readonly systemEvent: ReturnType<typeof taskEvent>;
@@ -57,34 +59,23 @@ export function reactionContext(
     stat: 'FORTITUDE' | 'ALCOHOL' | 'GOLD';
     delta: number;
   }[] = [];
-  for (const effect of pending) {
+  for (const [offset, effect] of pending.entries()) {
+    const routed = fortitudeTargets(
+      state,
+      frame,
+      effect,
+      frame.nextEffectIndex + offset,
+    );
     const targets =
-      effect.op === 'CHANGE_STAT' &&
-      effect.stat === 'FORTITUDE' &&
-      effect.delta < 0 &&
-      frame.redirectedFortitudePlayerId !== undefined
-        ? state.players.filter(
-            (p) =>
-              p.id === frame.redirectedFortitudePlayerId &&
-              !p.eliminated &&
-              !frame.ignoredPlayerIds.includes(p.id),
+      routed !== null
+        ? routed.map((entry) =>
+            state.players.find((p) => p.id === entry.playerId)!,
           )
         : 'target' in effect
-          ? state.players.filter(
-              (player) =>
-                !player.eliminated &&
-                !frame.ignoredPlayerIds.includes(player.id) &&
-                (effect.target === 'ALL_PLAYERS' ||
-                  (effect.target === 'SELF' &&
-                    player.id === (frame.drinkRecipientId ?? frame.actorId)) ||
-                  (effect.target === 'ORIGINAL_SOURCE_PLAYER' &&
-                    player.id === frame.responseToOrigin?.playerId) ||
-                  (effect.target === 'SOURCE_ACTOR' &&
-                    player.id === frame.responseToOrigin?.playerId) ||
-                  (effect.target === 'CHOSEN_PLAYER' &&
-                    frame.targetPlayerIds.includes(player.id)) ||
-                  (effect.target === 'EACH_OTHER_PLAYER' &&
-                    player.id !== frame.actorId)),
+          ? effectTargets(
+              state as MutableGameState,
+              frame as MutableGameState['resolutionStack'][number],
+              effect.target,
             )
           : [];
     for (const player of targets) {
@@ -93,7 +84,9 @@ export function reactionContext(
         deltas.push({
           playerId: player.id,
           stat: effect.stat,
-          delta: effect.delta,
+          delta:
+            routed?.find((entry) => entry.playerId === player.id)?.delta ??
+            effect.delta,
         });
       if (effect.op === 'PAY_INN')
         deltas.push({
@@ -179,6 +172,7 @@ function conditionMatches(
       return (
         task?.kind === 'PAYMENT' &&
         !task.canceled &&
+        !task.prevented &&
         task.amount - task.substituted >= condition.minAmount &&
         relates(task.payer, playerId, condition.payer) &&
         (condition.purpose === 'ANY' || condition.purpose === task.purpose)
@@ -189,14 +183,25 @@ function conditionMatches(
       return (
         task?.kind === 'POST_LOSS' &&
         task.amount >= condition.minAmount &&
+        (!condition.requirePlayerCard ||
+          (task.sourceKind === 'CARD' &&
+            task.originalCard !== null &&
+            task.originalPlayer !== null)) &&
+        (!condition.excludeMitigationCardsPlayed ||
+          (task.playedReduction === false && task.playedIgnore === false)) &&
         relates(task.affected, playerId, condition.relation)
       );
     }
     case 'ORIGINAL_SOURCE_PLAYER': {
       const task = context.frame.task;
+      const original =
+        task?.kind === 'POST_LOSS'
+          ? task.originalPlayer
+          : context.sourceKind === 'CARD'
+            ? (context.frame.origin?.playerId ?? context.sourceActorId)
+            : null;
       return (
-        task?.kind === 'POST_LOSS' &&
-        relates(task.originalPlayer, playerId, condition.relation)
+        original !== null && relates(original, playerId, condition.relation)
       );
     }
     case 'SOURCE_CAPABILITY':
@@ -236,6 +241,14 @@ function conditionMatches(
     }
     case 'SOURCE_ACTOR':
       return relates(context.sourceActorId, playerId, condition.relation);
+    case 'LIVING_PLAYER_COUNT': {
+      const count = state.players.filter(
+        (p) =>
+          !p.eliminated &&
+          !state.control.deferredContestPassOutPlayerIds?.includes(p.id),
+      ).length;
+      return count >= condition.min && count <= condition.max;
+    }
     case 'AFFECTS':
       return context.affectedPlayerIds.some((id) =>
         relates(id, playerId, condition.relation),
@@ -477,7 +490,7 @@ export function legalResponsesForPlayer(
           definition.counterFamily !== context.counterFamily)
     )
       continue;
-    const requiresTarget = hasChosenTarget(definition.effects);
+    const requiresTarget = hasChosenTarget(cardEffects(definition, state));
     const candidates = requiresTarget
       ? state.players
           .filter(
@@ -511,7 +524,7 @@ export function legalResponsesForPlayer(
         sourceCardId: cardId,
         sourceRevealed: true,
         targetPlayerIds: target === undefined ? [] : [target],
-        effects: cardEffects(definition),
+        effects: cardEffects(definition, state),
         nextEffectIndex: 0,
         parentId: context.frame.id,
         stage: 'RESPONSES' as const,

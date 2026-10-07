@@ -31,6 +31,15 @@ export function contentPresentation(
   ) => localizedField(pack, locale, type, id, key, canonical, !fixture);
   return presentationSchema.parse({
     schemaVersion: 1,
+    innDrinkDecks: pack.decks
+      .filter((deck) => deck.type === 'INN_DRINK')
+      .map((deck) => ({
+        id: deck.id,
+        name:
+          locale === 'zh-TW'
+            ? deck.name.replace('Inn Drink deck', '飲料牌庫')
+            : deck.name,
+      })),
     locale,
     contentVersionId: pack.version.id,
     products: pack.products.map((row) => ({

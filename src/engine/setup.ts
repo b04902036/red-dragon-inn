@@ -7,6 +7,7 @@ import {
   matchIdSchema,
   playerIdSchema,
   roomIdSchema,
+  deckIdSchema,
 } from '../shared/ids';
 import type { CardInstanceId, DeckId } from '../shared/ids';
 import { stateVersionSchema } from '../shared/version';
@@ -21,6 +22,12 @@ export const matchSetupSchema = z.strictObject({
   matchId: matchIdSchema,
   hostPlayerId: playerIdSchema,
   content: contentPackSchema,
+  innDrinkDeckIds: z
+    .array(deckIdSchema)
+    .min(1)
+    .max(8)
+    .refine((ids) => new Set(ids).size === ids.length)
+    .optional(),
   seed: z.number().int().min(0).max(0xffffffff),
   rules: rulesConfigSchema.prefault(DEFAULT_RULES),
   version: stateVersionSchema.default(stateVersionSchema.parse(0)),
@@ -111,10 +118,32 @@ export function createMatch(input: MatchSetup): CoreGameState {
         },
       };
     });
-  const innDecks = pack.decks.filter((deck) => deck.type === 'INN_DRINK');
-  if (innDecks.length !== 1)
-    throw new RangeError('Match requires exactly one Inn deck');
+  const availableInnDecks = pack.decks.filter(
+    (deck) => deck.type === 'INN_DRINK',
+  );
+  const innDecks =
+    setup.innDrinkDeckIds === undefined
+      ? availableInnDecks
+      : setup.innDrinkDeckIds.map((id) =>
+          availableInnDecks.find((deck) => deck.id === id),
+        );
+  if (
+    innDecks.some((deck) => deck === undefined) ||
+    (setup.innDrinkDeckIds === undefined && innDecks.length !== 1)
+  )
+    throw new RangeError('Match requires an explicit valid Inn deck selection');
   const innDrinkDeck = instantiate(innDecks[0]!.id, null, 'INN_DRINK_DECK');
+  for (const deck of innDecks.slice(1)) {
+    const additional = instantiate(deck!.id, null, 'INN_DRINK_DECK');
+    for (const id of additional.cardIds)
+      cards[id]!.location = {
+        zone: 'INN_DRINK_DECK',
+        deckId: innDrinkDeck.deckId,
+      };
+    innDrinkDeck.cardIds.push(...additional.cardIds);
+  }
+  if (innDrinkDeck.cardIds.length > 256)
+    throw new RangeError('Bar deck exceeds 256 copies');
   if (
     innDrinkDeck.cardIds.length <
     players.length * setup.rules.initialDrinkCount
@@ -131,6 +160,7 @@ export function createMatch(input: MatchSetup): CoreGameState {
     players,
     cards,
     innDrinkDeck,
+    ...(innDecks.length > 1 ? { barDrinkDeck: [] } : {}),
     innDrinkDiscard: [],
     gambling: null,
     resolutionStack: [],

@@ -1,6 +1,6 @@
 # Step 24A item-by-item verification checklist
 
-Nothing in this file may be bulk-marked verified. Check each row and record evidence.
+Nothing in this file may be bulk-marked verified. Check each row and record evidence. The final user resolution individually qualifies M41/M44 and eight Drinks. All 44 mechanics and 23 Drinks pass the fresh source re-audit. M21 team acceptance J remains a non-blocking TODO under the latest user decision; see the [current resolution report](../../docs/rdi2-step24a-final-source-resolution.md).
 
 ## Character mechanic rows
 
@@ -8,85 +8,85 @@ Nothing in this file may be bulk-marked verified. Check each row and record evid
 - [x] **M02 `gambling_raise_one`** — Dimli 2, Eve 2, Fleck 2, Gog 2. Individually verified on 2026-10-05; evidence and all seven checks recorded in the private ledger.
 - [x] **M03 `gambling_winning_hand`** — Dimli 2, Eve 2, Fleck 2, Gog 2. Individually verified on 2026-10-05; evidence and all seven checks recorded in the private ledger.
 - [x] **M04 `cheat_take_control`** — Dimli 0, Eve 3, Fleck 4, Gog 0. Individually verified on 2026-10-05; evidence and all seven checks recorded in the private ledger.
-- [ ] **M05 `cheat_control_and_eject`** — Dimli 0, Eve 1, Fleck 1, Gog 0. **STOP: original Eve/Fleck card text is missing.** Counts/types agree, and official rules establish forced-leave response timing, but the precise target and full effect cannot be individually verified from the supplied aggregate crosscheck.
-- [ ] **M06 `anti_cheat_win_round`** — Dimli 0, Eve 0, Fleck 0, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M07 `dump_gambling_pot_to_inn`** — Dimli 1, Eve 1, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M08 `restart_gambling_round`** — Dimli 1, Eve 0, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M09 `substitute_payment_from_inn`** — Dimli 2, Eve 0, Fleck 2, Gog 2. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M10 `illusionary_payment`** — Dimli 0, Eve 2, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M11 `take_one_from_pot`** — Dimli 0, Eve 1, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M12 `avoid_ante_leave`** — Dimli 2, Eve 0, Fleck 1, Gog 2. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M13 `avoid_ante_leave_or_ignore_drink`** — Dimli 1, Eve 1, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M14 `ignore_card_all_stats`** — Dimli 0, Eve 2, Fleck 0, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M15 `ignore_card_fortitude`** — Dimli 1, Eve 0, Fleck 0, Gog 2. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M16 `negate_sometimes_counter`** — Dimli 1, Eve 1, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M17 `ignore_drink`** — Dimli 2, Eve 2, Fleck 2, Gog 2. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M18 `order_two_extra_drinks_paid`** — Dimli 2, Eve 2, Fleck 0, Gog 2. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M19 `order_two_extra_drinks_free_or_waive_refill`** — Dimli 0, Eve 0, Fleck 2, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M20 `all_players_drink_from_inn`** — Dimli 0, Eve 0, Fleck 1, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M21 `force_extra_drink_during_other_drink_phase`** — Dimli 1, Eve 0, Fleck 0, Gog 2. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M22 `pass_own_drink`** — Dimli 2, Eve 0, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M23 `split_own_drink`** — Dimli 1, Eve 0, Fleck 2, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M24 `alcohol_to_fortitude`** — Dimli 1, Eve 0, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M25 `add_two_alcohol_to_drink`** — Dimli 2, Eve 0, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M26 `replace_drink_with_four_alcohol`** — Dimli 0, Eve 1, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M27 `negate_drink_change_card`** — Dimli 1, Eve 1, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M28 `all_lose_one_alcohol_collect_one_each_other`** — Dimli 0, Eve 0, Fleck 1, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M29 `give_two_alcohol`** — Dimli 0, Eve 2, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M30 `damage_one`** — Dimli 1, Eve 2, Fleck 1, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M31 `damage_two`** — Dimli 5, Eve 0, Fleck 2, Gog 5. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M32 `damage_three`** — Dimli 0, Eve 2, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M33 `damage_three_pay_inn_one`** — Dimli 0, Eve 0, Fleck 0, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M34 `damage_four`** — Dimli 0, Eve 0, Fleck 0, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M35 `damage_all_others_one`** — Dimli 0, Eve 0, Fleck 0, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M36 `rowdy_song`** — Dimli 0, Eve 0, Fleck 2, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M37 `hit_back_two_after_loss`** — Dimli 1, Eve 0, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M38 `share_pain`** — Dimli 0, Eve 1, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M39 `redirect_fortitude_loss`** — Dimli 0, Eve 1, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M40 `gain_two_fortitude`** — Dimli 0, Eve 0, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M41 `collect_one_from_each_other`** — Dimli 1, Eve 1, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M42 `take_one_gold`** — Dimli 0, Eve 2, Fleck 0, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M43 `take_two_gold`** — Dimli 0, Eve 0, Fleck 1, Gog 0. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
-- [ ] **M44 `tip_wench`** — Dimli 1, Eve 1, Fleck 1, Gog 1. Verify quantity, type, numeric values, targets, timing, trigger and restrictions.
+- [x] **M05 `cheat_control_and_eject`** — Dimli 0, Eve 1, Fleck 1, Gog 0. Individually verified on 2026-10-05 using both original records (canonical hashes reproduced) and current generic gambling rules. `ANY_ACTIVE_GAMBLER` and self-target `ALLOWED` are explicitly **PROJECT_RULE_OVERRIDE**, never official-source-verified. All per-item checks and evidence are recorded in the private ledger.
+- [x] **M06 `anti_cheat_win_round`** — Gog 1, other characters 0. **VERIFIED_FOR_PROJECT_RULESET**: identity, quantity, anti-cheat classification, forced-leave opportunity and win-round semantics VERIFIED; `negatesCheatingCardRule` and `requiresActiveParticipation` explicitly PROJECT_RULE_OVERRIDE, never official-source-verified. Candidate and ledger provenance match; required behavior covered by synthetic generic-engine tests.
+- [x] **M07 `dump_gambling_pot_to_inn`** — Dimli/Eve/Fleck/Gog each 1. Individually VERIFIED using publisher printed shared card, current rules and Gambling 102. Explicit post-leave permission corrected; active-Round and source restrictions retained. All seven checks recorded.
+- [x] **M08 `restart_gambling_round`** — Dimli 1, other characters 0. Individually VERIFIED using publisher Dimli card, current timing and official variant crosscheck. Keeps pot, remaining players ante 1, self currently winning, continue left. Exact printed named-card exclusion replaces unverified broader winner-replacement restriction. All seven checks recorded.
+- [x] **M09 `substitute_payment_from_inn`** — VERIFIED_FOR_PROJECT_RULESET. Dimli 2, Eve 0, Fleck 2, Gog 2. Four exact Dimli/Fleck original JSON records individually inspected and file hashes reproduced. Full current self payment/ante/theft instance, original recipient, own-card cost legality and separate-payment scope verified. Gog exact text UNAVAILABLE; equivalent semantics explicitly PROJECT_RULE_OVERRIDE, never official-source-verified.
+- [x] **M10 `illusionary_payment`** — VERIFIED. Dimli 0, Eve 2, Fleck 0, Gog 0. Both original Eve records inspected. Prevents current qualifying Gold loss; no Gold moves, prevented ante counts, other source effects and separate future payments continue.
+- [x] **M11 `take_one_from_pot`** — VERIFIED. Dimli 0, Eve 1, Fleck 0, Gog 0. Original Eve record inspected: one Gold from pot to self during active Round, legal after leaving, no other effect on Round. Official Prize clarification confirms taking the last Gold does not award a Prize.
+- [x] **M12 `avoid_ante_leave`** — Dimli 2, Eve 0, Fleck 1, Gog 2. **COMPLETE / VERIFIED_FOR_PROJECT_RULESET**, with final checks and existing repository failures recorded in the progress report. Exact pure-mode Dimli/Fleck records verified. Independent **M12 USER OVERRIDE** establishes Gog's dual Ignore Drink template and initial/later ante response, including I raise!; no official wording claim. Current ante canceled before deduction, prior contributions retained, other players still ante, departed players excluded from future antes. Both templates tested on the shared generic engine. Gog's separate M13 dual copy remains one; its completed review is recorded below.
+- [x] **M13 `avoid_ante_leave_or_ignore_drink`** — Dimli/Eve/Fleck/Gog each 1 Sometimes. COMPLETE / VERIFIED_FOR_PROJECT_RULESET: three exact original records independently checked and hashed; Gog semantics use the existing M12 USER OVERRIDE Template B, exact wording UNAVAILABLE. Seven per-item checks pass, with current self-ante and whole-Drink contexts. Final checks recorded in the continuation report.
+- [x] **M14 `ignore_card_all_stats`** — COMPLETE / VERIFIED. Dimli 0 / Eve 2 / Fleck 0 / Gog 1 individually checked. Both Eve records/current official revised card and readable Gog printed-card photograph verified separately, with reviewer hosting explicit. Pending direct own-stat response only to Action/Sometimes/Anytime; gambling and own-card Gold payment excluded. Seven checks pass; final results in the M14 report.
+- [x] **M15 `ignore_card_fortitude`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET / **M15 USER OVERRIDE**. Dimli 1 / Eve 0 / Fleck 0 / Gog 2 individually checked. Dimli original/current rules verified; Gog's two identical copies use the explicitly authorized direct own-Fortitude Action/Sometimes/Anytime shared Ignore template. Official example remains separate partial evidence; exact physical wording UNAVAILABLE, never publisher-verified. Nine engine cases and source/provenance regressions pass; final required checks in [M15 continuation](../../docs/rdi2-step24a-m15-progress.md). M16/M17 subsequently completed; M18 has a separate provenance-only override. All Drinks have now been individually reviewed, with unresolved rows retained below.
+- [x] **M16 `negate_sometimes_counter`** — COMPLETE / VERIFIED. Dimli/Eve/Fleck/Gog each one, individually checked. Three exact original records and the complete official Ninth Edition Gog not think so! card verify Sometimes Negate and both directions of protected-counter equivalence. Shared family metadata; no project override or engine title check. All seven source checks and focused counter tests pass; final checks in [M16 report](../../docs/rdi2-step24a-m16-progress.md).
+- [x] **M17 `ignore_drink`** — COMPLETE / VERIFIED. Each character two copies independently checked: six original Dimli/Eve/Fleck records and two complete Gog publisher card images. Whole own Drink after all Chasers, no payment or Event broadening; second copy can respond after first Negated. No override. Seven source checks and focused regressions pass; final checks in [M17 report](../../docs/rdi2-step24a-m17-progress.md).
+- [x] **M18 `order_two_extra_drinks_paid`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET / **M18 USER OVERRIDE**, with final required command results and existing repository failures recorded. Dimli 2/Eve 2 exact originals independently rechecked; Fleck 0. Gog 2, ownership and identical standard-copy assignment are PROJECT_RULE_OVERRIDE. Standard Sometimes/own-order-phase/one-Gold-to-Inn/two-extra-Drinks effect is independently publisher-supported; current RDI2 rules supply face-down other-player distribution. No Gog publisher-direct provenance claim or reuse of M09/M12/M15. See [M18 continuation](../../docs/rdi2-step24a-m18-progress.md).
+- [x] **M19 `order_two_extra_drinks_free_or_waive_refill`** — COMPLETE / VERIFIED, final checks and existing repository failures recorded. Both original Fleck Sometimes records individually inspected and hashes reproduced; Dimli/Eve originals and supplied matrix separately verify absence. Two free additional face-down orders to other players during own Order a Drink phase OR only pending current self one-Gold refill exemption; no refunds, future/global waiver or simultaneous alternatives. Current rules reconcile legacy phase/targets; no project override or publisher-direct card claim. Shared refill response/waiver capability remains for Step 24B. See [M19 report](../../docs/rdi2-step24a-m19-progress.md).
+- [x] **M20 `all_players_drink_from_inn`** — COMPLETE / VERIFIED, final checks and existing repository failures recorded. One complete original Fleck Action record checked and hashed separately; Dimli/Eve originals and supplied matrix verify absence. Separate Inn Drinks for all active players including self, leading Events discarded/search continued, current Chasers and independent responses before simultaneous consumption. No project override, publisher-direct original-card claim, contest or single shared Drink copy. Existing shared-engine support is partial: leading-Event skipping requires Step 24B. See [M20 report](../../docs/rdi2-step24a-m20-progress.md).
+- [x] **M21 `force_extra_drink_during_other_drink_phase`** — SOURCE_REVIEW_COMPLETE / VERIFIED_FOR_PROJECT_RULESET. Existing Dimli/Gog source semantics unchanged. Runtime tests A–I pass; real team test J stays pending as a user-authorized non-blocking TODO for all steps, without a team-runtime or passing-test claim.
+- [x] **M22 `pass_own_drink`** — SOURCE_REVIEW_COMPLETE / VERIFIED. Two Dimli Sometimes records inspected separately and hashed; other owners absent. Pass whole own imminent actual Drink with complete Chasers to another legal recipient, inspection allowed, recipient responses refreshed, original Contest comparison unchanged. Shared team/static-immunity targeting gaps retained. See [continuation](../../docs/rdi2-step24a-m22-m27-progress.md).
+- [x] **M23 `split_own_drink`** — SOURCE_REVIEW_COMPLETE / VERIFIED. One Dimli and two Fleck Sometimes originals individually inspected/hashed. Combine each like numeric Chaser effect before ceil-halving; independent halves, prior modifiers included, later modifiers one half, Contest comparison unchanged. Publisher Mead external-split prohibition retained as engine gap. See [continuation](../../docs/rdi2-step24a-m22-m27-progress.md).
+- [x] **M24 `alcohol_to_fortitude`** — SOURCE_REVIEW_COMPLETE / VERIFIED. One exact Dimli Sometimes original; own actual Drink Alcohol becomes Fortitude, other effects retained, 20 cap. Publisher named-card clarification excludes separate effect-only Alcohol bonus from gain. No override. See [continuation](../../docs/rdi2-step24a-m22-m27-progress.md).
+- [x] **M25 `add_two_alcohol_to_drink`** — SOURCE_REVIEW_COMPLETE / VERIFIED. Two exact Dimli Sometimes originals; precisely +2 to own/other current actual Drink after Chasers, not direct player Alcohol. Shared split/Contest/counter rules applied, no override. See [continuation](../../docs/rdi2-step24a-m22-m27-progress.md).
+- [x] **M26 `replace_drink_with_four_alcohol`** — SOURCE_REVIEW_COMPLETE / VERIFIED. One exact Eve Sometimes original; other original revealer trigger, whole Drink/Chaser effects replaced by +4 Alcohol, all existing/future non-Drink modifiers preserved. Candidate trigger and future-only summary corrected. Replacement engine capability absent. See [continuation](../../docs/rdi2-step24a-m22-m27-progress.md).
+- [x] **M27 `negate_drink_change_card`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. Publisher mechanic and protection unchanged; only Gog one-copy provenance uses the explicit M27 USER OVERRIDE. All decks remain 40. See [current report](../../docs/rdi2-step24a-m27-m31-progress.md).
+- [x] **M28 `all_lose_one_alcohol_collect_one_each_other`** — VERIFIED. Fleck one original Action, all players lose one Alcohol; each other pays actor one Gold even at zero Alcohol. Shared binding tests pass. See [current report](../../docs/rdi2-step24a-m27-m31-progress.md).
+- [x] **M29 `give_two_alcohol`** — VERIFIED. Both Eve originals inspected; own Action, another player gains two Alcohol, publisher current +2 erratum independently checked. See [current report](../../docs/rdi2-step24a-m27-m31-progress.md).
+- [x] **M30 `damage_one`** — VERIFIED. Dimli one, Eve two, Fleck one originals inspected; own Action, another player loses one Fortitude. No Gog copy or borrowed fire-card erratum. See [current report](../../docs/rdi2-step24a-m27-m31-progress.md).
+- [x] **M31 `damage_two`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. One Gog quantity-five family uses the publisher standard Action/another-player/-2 Fortitude binding; M31 USER OVERRIDE waives four unknown printed identities without invented titles. A–H and regressions pass; decks remain forty.
+- [x] **M32 `damage_three`** — VERIFIED. Both original Eve fire records individually inspected/hashed; current publisher erratum confirms three Fortitude loss to another player, normal Action. No M31 override reuse.
+- [x] **M33 `damage_three_pay_inn_one`** — COMPLETE / VERIFIED. Actual Gog physical photo identifies Sorry, Gog not see you sitting there...; Action, another player loses three Fortitude, then owner pays one Gold to Inn as resolving effect. No override, no upfront cost. Publisher payment rules and A–H engine tests pass.
+- [x] **M34 `damage_four`** — COMPLETE / VERIFIED. Dance with Gog!: photo and publisher named example verify Action, other player loses four Fortitude; no extra effects.
+- [x] **M35 `damage_all_others_one`** — COMPLETE / VERIFIED. Gog loves everyone!: separate photo plus publisher Ignore example; each other loses one Fortitude, owner excluded.
+- [x] **M36 `rowdy_song`** — COMPLETE / VERIFIED. Both Fleck Rowdy Drinking Song originals inspected separately: other players lose one Fortitude, everyone gains one Alcohol, actor then pays one Inn Gold. No override.
+- [x] **M37 `hit_back_two_after_loss`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. M37 USER OVERRIDE supplies unavailable Gog semantics; original Dimli/Fleck evidence separate. Post-loss other-player card, original source loses two; any self-played reduce/Ignore disqualifies even if Negated. A–J and per-loss history/replay/D1 regressions pass.
+- [x] **M38 `share_pain`** — COMPLETE_SOURCE_VERIFICATION / VERIFIED. One original Eve Share Pain, half rounded up. Only responder locked against further self reduction/Ignore; publisher Erin example permits source Ignore. Split/lock runtime capabilities absent; source audit only.
+- [x] **M39 `redirect_fortitude_loss`** — COMPLETE_SOURCE_VERIFICATION / VERIFIED. One original Eve redirect; Fortitude only, original source excluded as target and preserved, each redirect once. Separate two-player standard Action/Sometimes/Anytime Fortitude Ignore branch. Exact target/branch runtime capabilities recorded.
+- [x] **M40 `gain_two_fortitude`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. Explicit M40 USER OVERRIDE: Gog one Anytime, SELF +2 Fortitude, no extra restrictions/cost; normal cap20, final rescue and Negate tested. Missing printed title waived; normalized fallback labeled separately. Fleck original independently verified.
+- [x] **M41 `collect_one_from_each_other`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. M41 USER OVERRIDE — Gog physical identity and normalized mechanic; printed Gog title unavailable and explicitly waived. All individual checks pass.
+- [x] **M42 `take_one_gold`** — VERIFIED. Both Eve originals are Anytime, quantity two, chosen living player including self pays one Gold. Corrected Action type and other-only target, current publisher payment/timing rules reconciled; all seven checks pass.
+- [x] **M43 `take_two_gold`** — VERIFIED. One original Fleck Action, chosen living player including self pays two Gold. Other-only restriction removed; all seven checks pass.
+- [x] **M44 `tip_wench`** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. M44 USER OVERRIDE — provenance only; standard type/target/payment remain publisher-verified. All individual checks pass.
 
 ## Drink records
 
-- [ ] **D01 `dark_ale` ×2** — verify type/classification and exact effects.
-- [ ] **D02 `dark_ale_chaser` ×1** — verify type/classification and exact effects.
-- [ ] **D03 `dirty_dishwater` ×1** — verify type/classification and exact effects.
-- [ ] **D04 `dragon_breath_ale` ×1** — verify type/classification and exact effects.
-- [ ] **D05 `drinking_contest` ×2** — verify type/classification and exact effects.
-- [ ] **D06 `dwarven_firewater` ×2** — verify type/classification and exact effects.
-- [ ] **D07 `elven_wine` ×2** — verify type/classification and exact effects.
-- [ ] **D08 `elven_wine_chaser` ×1** — verify type/classification and exact effects.
-- [ ] **D09 `fine_ambrosia` ×1** — user override confirmed on 2026-10-05: Drink Event, +1 Alcohol, +4 Fortitude, pay Inn 2 Gold. Remaining individual checks are pending; conflicting historical candidates are preserved.
-- [ ] **D10 `holy_water` ×1** — verify type/classification and exact effects.
-- [ ] **D11 `light_ale` ×2** — verify type/classification and exact effects.
-- [ ] **D12 `light_ale_chaser` ×1** — verify type/classification and exact effects.
-- [ ] **D13 `mead` ×1** — verify type/classification and exact effects.
-- [ ] **D14 `ogre_brew` ×1** — verify type/classification and exact effects.
-- [ ] **D15 `orcish_rotgut` ×1** — verify type/classification and exact effects.
-- [ ] **D16 `round_on_house` ×2** — verify type/classification and exact effects.
-- [ ] **D17 `the_challenge` ×1** — verify type/classification and exact effects.
-- [ ] **D18 `troll_swill` ×1** — verify type/classification and exact effects.
-- [ ] **D19 `water` ×1** — verify type/classification and exact effects.
-- [ ] **D20 `cutting_off` ×1** — verify type/classification and exact effects.
-- [ ] **D21 `wine` ×2** — verify type/classification and exact effects.
-- [ ] **D22 `wine_chaser` ×1** — verify type/classification and exact effects.
-- [ ] **D23 `wizards_brew` ×1** — verify type/classification and exact effects.
+- [x] **D01 `dark_ale` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D02 `dark_ale_chaser` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D03 `dirty_dishwater` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D03 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D04 `dragon_breath_ale` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D05 `drinking_contest` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D06 `dwarven_firewater` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D07 `elven_wine` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D08 `elven_wine_chaser` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D09 `fine_ambrosia` ×1** — VERIFIED_FOR_PROJECT_RULESET; all five individual checks pass.
+- [x] **D10 `holy_water` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D11 `light_ale` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D12 `light_ale_chaser` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D13 `mead` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D14 `ogre_brew` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D14 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D15 `orcish_rotgut` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D15 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D16 `round_on_house` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D17 `the_challenge` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D17 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D18 `troll_swill` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D18 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D19 `water` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D19 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D20 `cutting_off` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D20 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
+- [x] **D21 `wine` ×2** — VERIFIED; all five individual checks pass.
+- [x] **D22 `wine_chaser` ×1** — VERIFIED; all five individual checks pass.
+- [x] **D23 `wizards_brew` ×1** — COMPLETE / VERIFIED_FOR_PROJECT_RULESET. D23 USER OVERRIDE; publisher-supported shared rules and numeric facts preserved separately. All individual checks pass.
 
 ## Lock gate
 
-- [ ] All 44 mechanic rows VERIFIED
-- [ ] Dimli = 40
-- [ ] Eve = 40
-- [ ] Fleck = 40
-- [ ] Gog = 40
-- [ ] Character total = 160
-- [ ] RDI2 Drink total = 30
+- [x] All 44 mechanic rows qualify individually for the project ruleset
+- [x] Dimli = 40
+- [x] Eve = 40
+- [x] Fleck = 40
+- [x] Gog = 40
+- [x] Character total = 160
+- [x] RDI2 Drink total = 30
 - [x] Fine Ambrosia classification/effects explicitly resolved by the user's 2026-10-05 rule override; not claimed as official card verification
-- [ ] Eve current errata applied
-- [ ] Mead current Ninth Edition behavior applied
-- [ ] No UNKNOWN / TODO / ASSUMED / GUESSED entry remains
-- [ ] Every Sometimes has structured server-evaluable legality
-- [ ] Source lock JSON contains SHA-256 of final normalized source
+- [x] Eve current errata applied
+- [x] Mead current Ninth Edition behavior applied
+- [x] No unresolved source markers remain; team mode is a separately authorized non-blocking TODO
+- [x] Every Sometimes has structured server-evaluable legality
+- [x] Source lock JSON contains actual SHA-256 hashes of the final normalized source, ledger and matrix; read-back and separate verification pass

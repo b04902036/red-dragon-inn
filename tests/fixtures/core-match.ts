@@ -114,6 +114,15 @@ export function fullTurn(state: CoreGameState) {
   )!;
   result = accepted(result.state, 'ORDER_DRINK', { targetPlayerId: target.id });
   results.push(result);
+  while (result.state.responseWindow !== null) {
+    result = accepted(
+      result.state,
+      'PASS_RESPONSE',
+      { responseWindowId: result.state.responseWindow.id },
+      result.state.responseWindow.priorityPlayerId!,
+    );
+    results.push(result);
+  }
   phaseResults.push(result);
   for (let i = 0; i < 3; i += 1) {
     result = accepted(result.state, 'ADVANCE_PHASE');

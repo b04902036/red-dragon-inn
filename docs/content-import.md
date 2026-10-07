@@ -6,6 +6,10 @@ The importer accepts a complete version-one JSON pack matching [the content form
 
 Step 21C adds a deterministic private RDI1 compiler and truthful `PUBLIC_RULES_PARAPHRASE` provenance. See [RDI1 compilation/publication](rdi1-compile-publish.md) for source verification, local activation and production visual checks. CI running the RDI1 suites must provision the ignored inputs; it cannot substitute samples or skip missing-source validation.
 
+Step 24C adds the locked RDI2 compiler and a new combined RDI1 + RDI2 edition without rewriting RDI1. See [RDI2 compilation/publication](rdi2-compile-publish.md) for the private outputs, local publication commands, source verification and three Drink setup choices.
+
+Step 24D adds [per-definition gameplay verification](rdi2-full-verification.md). Generate its public matrix with `npm run content:coverage:rdi2`, or check that it matches the locked private inputs with `npm run content:coverage:rdi2 -- --check`. The matrix includes all compiled definitions and links to their actual legality and resolution tests.
+
 ```sh
 npm run content:import -- --input content/samples/pack.json --dry-run
 npm run content:import -- --input content-private/imports/my-pack.json --dry-run

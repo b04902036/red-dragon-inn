@@ -17,10 +17,12 @@ export const workflowTaskSchema = z.discriminatedUnion('kind', [
   z.strictObject({ kind: z.literal('FORCED_DRINK'), actorId: player }),
   z.strictObject({
     kind: z.literal('PAYMENT'),
-    purpose: z.enum(['ANTE', 'PAYMENT']),
+    purpose: z.enum(['ANTE', 'PAYMENT', 'REFILL']),
     payer: player,
     amount: positive,
-    substituted: z.number().int().min(0).max(1),
+    substituted: z.number().int().nonnegative().safe(),
+    prevented: z.boolean().optional(),
+    preventionAllowed: z.boolean().optional(),
     canceled: z.boolean(),
     destination: z.enum(['POT', 'INN', 'PLAYER']),
     recipient: player.nullable(),
@@ -37,6 +39,7 @@ export const workflowTaskSchema = z.discriminatedUnion('kind', [
     kind: z.literal('SETTLEMENT'),
     winner: player,
     toInn: z.boolean(),
+    restarted: z.boolean().optional(),
   }),
   z.strictObject({
     kind: z.literal('POST_LOSS'),
@@ -44,10 +47,14 @@ export const workflowTaskSchema = z.discriminatedUnion('kind', [
     amount: z.number().int().min(1).safe(),
     originalPlayer: player.nullable(),
     originalCard: cardInstanceIdSchema.nullable(),
+    sourceKind: z.enum(['CARD', 'DRINK', 'DRINK_EVENT', 'SYSTEM']).optional(),
+    effectIndex: z.number().int().min(0).max(31).optional(),
+    playedReduction: z.boolean().optional(),
+    playedIgnore: z.boolean().optional(),
   }),
   z.strictObject({
     kind: z.literal('PHASE'),
-    phase: z.literal('ORDER_DRINK'),
+    phase: z.enum(['ORDER_DRINK', 'DRINK']),
     normalOrderComplete: z.boolean(),
   }),
   z.strictObject({
@@ -76,6 +83,13 @@ export const workflowTaskSchema = z.discriminatedUnion('kind', [
     deferDrinkConsumption: z.boolean().optional(),
     consumingDrinks: z.boolean().optional(),
     payForRefill: z.boolean().optional(),
+    skipLeadingEvents: z.boolean().optional(),
+  }),
+  z.strictObject({
+    kind: z.literal('CHALLENGE'),
+    actorId: player,
+    remaining: z.number().int().min(0).max(2),
+    stage: z.enum(['DRINKS', 'SURVIVAL', 'PAYOUT']),
   }),
 ]);
 export type WorkflowTask = z.infer<typeof workflowTaskSchema>;
@@ -94,22 +108,36 @@ export const drinkWorkSchema = z.strictObject({
   ignoredPlayerIds: z.array(player).max(4).optional(),
   drinkRecipientId: player.optional(),
   afterTasks: z.array(workflowTaskSchema).max(8).optional(),
+  builtInSplitAvailable: z.boolean().optional(),
+  noExternalSplit: z.boolean().optional(),
+  drinkBase: z
+    .strictObject({
+      alcohol: z.number().int().safe(),
+      fortitude: z.number().int().safe(),
+    })
+    .optional(),
 });
 export type DrinkWork = z.infer<typeof drinkWorkSchema>;
 export function taskEvent(task: WorkflowTask | undefined) {
   switch (task?.kind) {
     case 'PAYMENT':
-      return task.purpose === 'ANTE'
-        ? ('ANTE_REQUIRED' as const)
-        : ('PAYMENT_REQUIRED' as const);
+      return task.purpose === 'REFILL'
+        ? ('DRINK_DECK_REFILL_PAYMENT' as const)
+        : task.purpose === 'ANTE'
+          ? ('ANTE_REQUIRED' as const)
+          : ('PAYMENT_REQUIRED' as const);
     case 'CHECKPOINT':
       return 'GAMBLING_CHECKPOINT' as const;
     case 'SETTLEMENT':
-      return task.toInn ? null : ('GAMBLING_WIN_BEFORE_PAYOUT' as const);
+      return task.toInn || task.restarted
+        ? null
+        : ('GAMBLING_WIN_BEFORE_PAYOUT' as const);
     case 'POST_LOSS':
       return 'FORTITUDE_LOSS_RESOLVED' as const;
     case 'PHASE':
       return 'PHASE_OPPORTUNITY' as const;
+    case 'CHALLENGE':
+      return task.stage === 'SURVIVAL' ? ('CHALLENGE_SURVIVAL' as const) : null;
     default:
       return null;
   }

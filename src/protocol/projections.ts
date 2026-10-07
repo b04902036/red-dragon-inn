@@ -105,6 +105,9 @@ export function projectPublicGame(
       sideDecks: visibleSideDecks(player, false),
     })),
     innDrinkDeckCount: state.innDrinkDeck.cardIds.length,
+    ...(state.barDrinkDeck === undefined
+      ? {}
+      : { barDrinkDeckCount: state.barDrinkDeck.length }),
     innDrinkDiscardCount: state.innDrinkDiscard.length,
     gambling:
       state.gambling === null
