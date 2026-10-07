@@ -1,0 +1,48 @@
+{
+  "rdi2": {
+    "valid": true,
+    "versionId": "content_rdi2_mechanics_v1",
+    "characters": 4,
+    "decks": {
+      "deck_rdi2_dimli": 40,
+      "deck_rdi2_eve": 40,
+      "deck_rdi2_fleck": 40,
+      "deck_rdi2_gog": 40,
+      "deck_rdi2_inn": 30
+    },
+    "unknownEffects": [],
+    "errors": []
+  },
+  "combined": {
+    "valid": true,
+    "versionId": "content_rdi1_rdi2_mechanics_v1",
+    "characters": 8,
+    "decks": {
+      "deck_rdi1_deirdre": 40,
+      "deck_rdi1_fiona": 40,
+      "deck_rdi1_gerki": 40,
+      "deck_rdi1_zot": 40,
+      "deck_rdi1_inn": 30,
+      "deck_rdi2_dimli": 40,
+      "deck_rdi2_eve": 40,
+      "deck_rdi2_fleck": 40,
+      "deck_rdi2_gog": 40,
+      "deck_rdi2_inn": 30
+    },
+    "unknownEffects": [],
+    "errors": []
+  },
+  "sourceHashes": {
+    "normalizedSha256": "f56289e545573f02db93f6cd51dfa59df388668a0fcaaa938e21b6e56191bc29",
+    "ledgerSha256": "5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe",
+    "matrixSha256": "7edc87560666234a3dc37007212a6cd8b22a37c5c86d94248bfb738d5bc21e7d"
+  },
+  "rdi1SourceSha256": "12412c1a6deea2729c78667ae7bccead734f0590dcc84c33e4dcd2b50a3982d7",
+  "rdi1PackSha256": "01bc1e9c5172e299e7074a46801b10bbb604c88b50b5bec853e937d1dc481b61",
+  "provenance": "PUBLIC_RULES_PARAPHRASE",
+  "translationProvenance": "MANUAL_REVIEWED_IMPLEMENTATION_NOT_OFFICIAL",
+  "distributionLicense": false,
+  "artworkBundled": false,
+  "teamRuntime": "NON_BLOCKING_TODO",
+  "projectOverridesPreservedInSourceLedger": true
+}

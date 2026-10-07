@@ -1,0 +1,4682 @@
+{
+  "date": "2026-10-07",
+  "valid": true,
+  "mechanics": 44,
+  "drinks": 23,
+  "counts": {
+    "characters": {
+      "dimli": 40,
+      "eve": 40,
+      "fleck": 40,
+      "gog": 40
+    },
+    "characterPhysical": 160,
+    "drinkPhysical": 30
+  },
+  "freshOriginals": {
+    "dimli": {
+      "sha256": "7d820fd65ae6eb283d9548e0a932eefa13649444d9236589798e89f2903e5bfe",
+      "physicalCards": 40
+    },
+    "eve": {
+      "sha256": "6615dd874459844e499bcf607c1efa48f77d5d913d5edebbc147e712952b82c1",
+      "physicalCards": 40
+    },
+    "fleck": {
+      "sha256": "0eeea03f64b4e787a2766d7a79627a69ce5e1f8709ba2ae5c6d62150dbdea648",
+      "physicalCards": 40
+    }
+  },
+  "independentlyCachedArtifacts": 196,
+  "entries": [
+    {
+      "ledgerId": "M01",
+      "id": "gambling_start_or_control",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 6,
+        "eve": 6,
+        "fleck": 6,
+        "gog": 6
+      },
+      "kind": "GAMBLING",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "33c3f9c2ff1b587039b95337d3b0ae245bdec3178744a266389ef1d2b51f9511",
+      "evidence": [
+        {
+          "id": "matrix-m01",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-m01",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m01",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M02",
+      "id": "gambling_raise_one",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 2,
+        "fleck": 2,
+        "gog": 2
+      },
+      "kind": "GAMBLING",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "4fc03b99389c3fead0a72b7d6733bdcf22a5aed004629c5d34ed7ae3fd5e8384",
+      "evidence": [
+        {
+          "id": "matrix-m02",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-m02",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m02",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "errata-m02",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M03",
+      "id": "gambling_winning_hand",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 2,
+        "fleck": 2,
+        "gog": 2
+      },
+      "kind": "GAMBLING",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "3cfc257165fa7477928de9763c74e81d8a25527a3b7c7a40ff1127363d1aeea3",
+      "evidence": [
+        {
+          "id": "matrix-m03",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-m03",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m03",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M04",
+      "id": "cheat_take_control",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 3,
+        "fleck": 4,
+        "gog": 0
+      },
+      "kind": "CHEATING",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "91ea322c725ae324452556b46f06739fdd20250627270e9e2dc9974da7daa6dd",
+      "evidence": [
+        {
+          "id": "matrix-m04",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-m04",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m04",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M05",
+      "id": "cheat_control_and_eject",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 0
+      },
+      "kind": "CHEATING",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "83ca9c3723b35eda22e9f8ba510e8022df536035545844258e7e52f8cbeebeee",
+      "evidence": [
+        {
+          "id": "matrix-m05",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-counts-m05",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-eve-m05",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-fleck-m05",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-forced-leave-m05",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-family-m05",
+          "sourceId": "official_gambling_102",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "project-target-m05",
+          "sourceId": "project_m05_target_override_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M06",
+      "id": "anti_cheat_win_round",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "1cca285cb609bea05b49dcbf157d740ba8da2759fec4f7ce8eb7ce6a8bb08bd8",
+      "evidence": [
+        {
+          "id": "matrix-m06",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m06",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "project-m06",
+          "sourceId": "project_m06_overrides_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M07",
+      "id": "dump_gambling_pot_to_inn",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "d5863f60c01d6d822bc6619caa222e136c4a91985022c80f7b8eff9c277851f8",
+      "evidence": [
+        {
+          "id": "matrix-m07",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-m07",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-card-m07",
+          "sourceId": "official_gambling_102",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-clarification-m07",
+          "sourceId": "official_gambling_102",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-current-m07",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M08",
+      "id": "restart_gambling_round",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "1f53d3759f5ee31125cc6aa0506c0242fe82cb065058fb1cea568a614723fec2",
+      "evidence": [
+        {
+          "id": "matrix-m08",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "uploaded-m08",
+          "sourceId": "the_inn_uploaded",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-card-m08",
+          "sourceId": "official_gambling_102",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-example-m08",
+          "sourceId": "official_gambling_102",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-variant-m08",
+          "sourceId": "official_gambling_variant",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-current-m08",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-errata-m08",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M09",
+      "id": "substitute_payment_from_inn",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 0,
+        "fleck": 2,
+        "gog": 2
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "d9cec8b1a02a7f0091b5c0e3966d9757bad8484e4cc943966c166c7cb1d405e0",
+      "evidence": [
+        {
+          "id": "matrix-m09",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m09-dimli-1",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m09-dimli-2",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m09-fleck-1",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m09-fleck-2",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-own-payment-m09",
+          "sourceId": "official_rdi6_payment_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-instance-m09",
+          "sourceId": "official_combined_rdi7",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-broad-trigger-m09",
+          "sourceId": "official_rdi9_payment_example",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-ante-timing-m09",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "project-gog-m09",
+          "sourceId": "project_m09_gog_override_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M10",
+      "id": "illusionary_payment",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 2,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "6a2b31ae7efb5278c5f4dea53fdd7de469e7f5d46ce0c96e00dff0255d5d8ebd",
+      "evidence": [
+        {
+          "id": "matrix-m10",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m10-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-no-transfer-m10",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-current-m10",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-scope-m10",
+          "sourceId": "official_combined_rdi7",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-eve-reconcile-m10",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M11",
+      "id": "take_one_from_pot",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 1,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "a21aaa727a51fd22f915a97b4368ff48e29f4fc28d6e3cf670c4fa7d953ba5f4",
+      "evidence": [
+        {
+          "id": "matrix-m11",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m11-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-prize-m11",
+          "sourceId": "official_combined_rdi7",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-timing-m11",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-errata-m11",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M12",
+      "id": "avoid_ante_leave",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 0,
+        "fleck": 1,
+        "gog": 2
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "3a9e935f5451e8b74585f0674f76c28d898da72e02988962aedff245416def47",
+      "evidence": [
+        {
+          "id": "matrix-m12",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m12-dimli-1",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m12-dimli-2",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m12-fleck-3",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-gog-example-m12",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "project-m12-user",
+          "sourceId": "project_m12_gog_override_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        },
+        {
+          "id": "matrix-template-b-m12",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "runtime-m12",
+          "sourceId": "project_m12_gog_override_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M13",
+      "id": "avoid_ante_leave_or_ignore_drink",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "4a78f58db11ae902e573db1a07d96a263554a76c2ec27f8f4d957e0d0b4e11a9",
+      "evidence": [
+        {
+          "id": "matrix-m13",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m13-dimli",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m13-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m13-fleck",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m13-leaving",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m13-ignore",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m13-errata",
+          "sourceId": "official_m13_ignore_timing",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "project-m13-gog",
+          "sourceId": "project_m12_gog_override_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M14",
+      "id": "ignore_card_all_stats",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 2,
+        "fleck": 0,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "fba107d365ad3d51bfb009dbc1a1390c759cd61825753952a97be7eee0158707",
+      "evidence": [
+        {
+          "id": "matrix-m14",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m14-eve-1",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m14-eve-2",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m14-eve-update",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m14-eve-image",
+          "sourceId": "official_m14_eve_card",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "photo-m14-gog",
+          "sourceId": "gog_m14_printed_card_photo",
+          "authority": "PRIMARY_CARD_ARTIFACT_SECONDARY_HOST"
+        },
+        {
+          "id": "official-m14-direct",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m14-own-cost",
+          "sourceId": "official_rdi6_payment_rules",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M15",
+      "id": "ignore_card_fortitude",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 2
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "fba107d365ad3d51bfb009dbc1a1390c759cd61825753952a97be7eee0158707",
+      "evidence": [
+        {
+          "id": "matrix-m15",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m15-dimli",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m15-dimli",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m15-gog-example",
+          "sourceId": "official_m15_adonis_example",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "user-m15-gog",
+          "sourceId": "project_m15_gog_override_2026_10_06",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M16",
+      "id": "negate_sometimes_counter",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "74bb8d748e9ebebdb63990c0e29c80b15a79d9eb847e8aa0dd58e153ac87c3fe",
+      "evidence": [
+        {
+          "id": "matrix-m16",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m16-dimli",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m16-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m16-fleck",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m16-gog-card",
+          "sourceId": "official_m16_gog_card",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m16-negate-timing",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m16-errata-check",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M17",
+      "id": "ignore_drink",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 2,
+        "fleck": 2,
+        "gog": 2
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "80a5650f1254234b00f7b0321d64fa9df27556eb3cf4e35eef7ea90f075cdbce",
+      "evidence": [
+        {
+          "id": "matrix-m17",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m17-dimli-1",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m17-dimli-2",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m17-eve-1",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m17-eve-2",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m17-fleck-1",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m17-fleck-2",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m17-gog-1",
+          "sourceId": "official_m17_gog_cards",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m17-gog-2",
+          "sourceId": "official_m17_gog_cards",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m17-timing",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m17-second-copy",
+          "sourceId": "official_m17_repeated_ignore",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M18",
+      "id": "order_two_extra_drinks_paid",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 2,
+        "fleck": 0,
+        "gog": 2
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "86615b1db11c116930d389b3c860b2034ca3f6147cc57571735ecdab3f7e73c0",
+      "evidence": [
+        {
+          "id": "matrix-m18",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m18-dimli-1",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m18-dimli-2",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m18-eve-1",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m18-eve-2",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m18-phase-rename",
+          "sourceId": "official_m18_order_phase",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m18-ordering",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m18-errata",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m18-gog-catalog",
+          "sourceId": "official_gog",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m18-standard-card",
+          "sourceId": "official_m18_standard_card",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m18-current-standard",
+          "sourceId": "official_m18_standard_current_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "project-m18-gog-1",
+          "sourceId": "project_m18_gog_override_2026_10_06",
+          "authority": "USER_SPECIFIED"
+        },
+        {
+          "id": "project-m18-gog-2",
+          "sourceId": "project_m18_gog_override_2026_10_06",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M19",
+      "id": "order_two_extra_drinks_free_or_waive_refill",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 2,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "a0ba1a28dab731f4b3b59c946d0dcfc90769c51f65270cec91576701a47cedcb",
+      "evidence": [
+        {
+          "id": "matrix-m19",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m19-fleck-1",
+          "sourceId": "the_inn_m19_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m19-fleck-2",
+          "sourceId": "the_inn_m19_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m19-absent-dimli",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m19-absent-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m19-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m19-phase",
+          "sourceId": "official_m19_phase_rename",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m19-errata",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M20",
+      "id": "all_players_drink_from_inn",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 1,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "fa3ce41a1f6b6661bdd61a60e09b3d3e569bcea344cea94afadd5500669a6c73",
+      "evidence": [
+        {
+          "id": "matrix-m20",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m20-fleck-1",
+          "sourceId": "the_inn_m20_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m20-absent-dimli",
+          "sourceId": "the_inn_m09_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m20-absent-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m20-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m20-errata",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M21",
+      "id": "force_extra_drink_during_other_drink_phase",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 2
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "9bcbc4a5615518dcc2b6a40fcbd1f5a864fcda041cabb6bee03714a9af56ad4f",
+      "evidence": [
+        {
+          "id": "matrix-m21",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m21-dimli-1",
+          "sourceId": "the_inn_m21_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m21-dimli-template",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "original-m21-absent-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m21-absent-fleck",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m21-gog-rdi8-example",
+          "sourceId": "official_m21_gog_rdi8_example",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m21-gog-rdi10-example",
+          "sourceId": "official_m21_gog_rdi10_example",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m21-gog-art-only",
+          "sourceId": "official_gog",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "user-m21-override",
+          "sourceId": "project_m21_gog_override_2026_10_06",
+          "authority": "USER_SPECIFIED"
+        },
+        {
+          "id": "secondary-m21-reveal-wording",
+          "sourceId": "project_m21_gog_override_2026_10_06",
+          "authority": "USER_SPECIFIED"
+        },
+        {
+          "id": "official-m21-generic-team-drink-rules",
+          "sourceId": "official_m21_shared_drink_team_rules",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M22",
+      "id": "pass_own_drink",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "9b1fe8375d4655da2b4322758df80d79da692d27c7d0b7238755401605f4ee8c",
+      "evidence": [
+        {
+          "id": "matrix-m22",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m22-dimli-1",
+          "sourceId": "the_inn_m22_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m22-dimli-2",
+          "sourceId": "the_inn_m22_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m22-absent-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m22-absent-fleck",
+          "sourceId": "the_inn_m09_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m22-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m22-target",
+          "sourceId": "official_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m22-team",
+          "sourceId": "official_m21_shared_drink_team_rules",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M23",
+      "id": "split_own_drink",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 0,
+        "fleck": 2,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "62980db823e8f80080122f9cc6a320d52d7fa482ebd806cfe625222392303b26",
+      "evidence": [
+        {
+          "id": "matrix-m23",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m23-dimli-1",
+          "sourceId": "the_inn_m23_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m23-fleck-1",
+          "sourceId": "the_inn_m23_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m23-fleck-2",
+          "sourceId": "the_inn_m23_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m23-absent-eve",
+          "sourceId": "the_inn_m10_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m23-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m23-mead",
+          "sourceId": "official_rdi10_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m23-team",
+          "sourceId": "official_m21_shared_drink_team_rules",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M24",
+      "id": "alcohol_to_fortitude",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "06a714ed4b3894e4a6ffeaefa0e7dadb5a77a6e08822aeee6814c74c555f7292",
+      "evidence": [
+        {
+          "id": "matrix-m24",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m24-dimli-1",
+          "sourceId": "the_inn_m24_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m24-absent-eve",
+          "sourceId": "the_inn_m24_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m24-absent-fleck",
+          "sourceId": "the_inn_m24_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m24-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m24-conversion",
+          "sourceId": "official_m24_conversion_clarification",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M25",
+      "id": "add_two_alcohol_to_drink",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 2,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "cca21847ab4e78d3e7acdc2b074a2b7c98db77cd8774ade05e29d00cd0dd753f",
+      "evidence": [
+        {
+          "id": "matrix-m25",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m25-dimli-1",
+          "sourceId": "the_inn_m25_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m25-dimli-2",
+          "sourceId": "the_inn_m25_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m25-absent-eve",
+          "sourceId": "the_inn_m25_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m25-absent-fleck",
+          "sourceId": "the_inn_m25_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m25-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M26",
+      "id": "replace_drink_with_four_alcohol",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 1,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "0bfe8770058274e2cf8e23c7d27bdb9046d4c01a5906b81c1a9e26fbf61ff78f",
+      "evidence": [
+        {
+          "id": "matrix-m26",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m26-absent-dimli",
+          "sourceId": "the_inn_m26_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m26-eve-1",
+          "sourceId": "the_inn_m26_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m26-absent-fleck",
+          "sourceId": "the_inn_m26_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m26-current",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m26-chaser",
+          "sourceId": "official_m26_chaser_clarification",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m26-eve-update",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M27",
+      "id": "negate_drink_change_card",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "74bb8d748e9ebebdb63990c0e29c80b15a79d9eb847e8aa0dd58e153ac87c3fe",
+      "evidence": [
+        {
+          "id": "matrix-m27",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m27-dimli-1",
+          "sourceId": "the_inn_m27_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m27-eve-1",
+          "sourceId": "the_inn_m27_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m27-fleck-1",
+          "sourceId": "the_inn_m27_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m27-shared-template",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m27-direct-effect",
+          "sourceId": "official_m27_direct_effect_clarification",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m27-special-reserve",
+          "sourceId": "official_m27_special_reserve_exclusion",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "instruction-m27-publisher-unblock",
+          "sourceId": "user_m27_official_evidence_unblock_2026_10_06",
+          "authority": "WORKFLOW_INSTRUCTION"
+        },
+        {
+          "id": "m27-gog-physical-provenance-user-override",
+          "sourceId": "user_m27_gog_physical_provenance_2026_10_06",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M28",
+      "id": "all_lose_one_alcohol_collect_one_each_other",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 1,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "de26f0d761040629cefad11a997f4cd3aa365eb6ec23080d865573ebafce7551",
+      "evidence": [
+        {
+          "id": "original-m28-fleck-1",
+          "sourceId": "the_inn_m28_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m28-limits",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m28",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M29",
+      "id": "give_two_alcohol",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 2,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "f1b9801a5088e598874a983b86e8bc5c089be5dc9098d480a185da9a13aded61",
+      "evidence": [
+        {
+          "id": "original-m29-eve-1",
+          "sourceId": "the_inn_m29_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m29-eve-2",
+          "sourceId": "the_inn_m29_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m29-errata",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m29-action",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m29",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M30",
+      "id": "damage_one",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 2,
+        "fleck": 1,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "bdee61f17b0d2d7da83cc8dce5ec203056423bc8a9e36f5690a1609b3771b685",
+      "evidence": [
+        {
+          "id": "original-m30-dimli-1",
+          "sourceId": "the_inn_m30_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m30-eve-1",
+          "sourceId": "the_inn_m30_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m30-eve-2",
+          "sourceId": "the_inn_m30_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m30-fleck-1",
+          "sourceId": "the_inn_m30_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m30-action",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m30-eve-errata",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m30",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M31",
+      "id": "damage_two",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 5,
+        "eve": 0,
+        "fleck": 2,
+        "gog": 5
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "165b0f038fa69c256e29106dba3e74a740d9eebc11093269454de2e844a2524d",
+      "evidence": [
+        {
+          "id": "original-m31-dimli-1",
+          "sourceId": "the_inn_m31_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m31-dimli-2",
+          "sourceId": "the_inn_m31_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m31-dimli-3",
+          "sourceId": "the_inn_m31_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m31-dimli-4",
+          "sourceId": "the_inn_m31_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m31-dimli-5",
+          "sourceId": "the_inn_m31_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m31-fleck-1",
+          "sourceId": "the_inn_m31_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m31-fleck-2",
+          "sourceId": "the_inn_m31_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m31-gog-template",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m31",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m31-gog-page",
+          "sourceId": "official_gog_page",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "m31-gog-family-normalization-user-override",
+          "sourceId": "user_m31_physical_identity_normalization_2026_10_06",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M32",
+      "id": "damage_three",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 2,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "3ac716fd36675910a759283adc038feacde8cabbb3a0852c5abf19152a82185c",
+      "evidence": [
+        {
+          "id": "original-m32-eve-1",
+          "sourceId": "the_inn_m32_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m32-eve-2",
+          "sourceId": "the_inn_m32_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m32-errata",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m32-action",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m32",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M33",
+      "id": "damage_three_pay_inn_one",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 1
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "6fe9bf5c0ae8b775b7073958cf94c7d16918c3adb139be860691e638a1f9c0bd",
+      "evidence": [
+        {
+          "id": "physical-m33-gog",
+          "sourceId": "physical_gog_review_photo_2015",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "matrix-m33",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m33-action",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m33-payment",
+          "sourceId": "official_m33_payment_rules_rdi9",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m33-true-cost",
+          "sourceId": "official_m33_cost_rules_rdi6",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "user-m33-evidence",
+          "sourceId": "user_m33_verified_evidence_2026_10_06",
+          "authority": "USER_PROVIDED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M34",
+      "id": "damage_four",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 1
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "8f506bb0db488083419e6b3f1cd8f79baff4c7671bb354de31941fd086032bba",
+      "evidence": [
+        {
+          "id": "physical-m34-gog",
+          "sourceId": "physical_gog_review_photo_2015",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m34-named-example",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m34",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M35",
+      "id": "damage_all_others_one",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 0,
+        "gog": 1
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "9b4fb130953edd9bd87f3a157aa400b7362cd1adcb9ecccb765c1b44aab63ac6",
+      "evidence": [
+        {
+          "id": "physical-m35-gog",
+          "sourceId": "physical_gog_review_photo_2_2015",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m35-ignore-example",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m35",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M36",
+      "id": "rowdy_song",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 2,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "c83acae047936962eaefdea89c0bc8224e0b57c5e128eac4c2eb37e4481cca57",
+      "evidence": [
+        {
+          "id": "original-m36-fleck-1",
+          "sourceId": "the_inn_m36_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m36-fleck-2",
+          "sourceId": "the_inn_m36_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m36-shared-rules",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "official-m36-payment-rules",
+          "sourceId": "official_m33_payment_rules_rdi9",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m36",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M37",
+      "id": "hit_back_two_after_loss",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 0,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "f5517efadd78823ebc7e0011532f98ea9ec83acd6f85806da9de7850a5f75b54",
+      "evidence": [
+        {
+          "id": "original-m37-dimli",
+          "sourceId": "the_inn_m37_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m37-fleck",
+          "sourceId": "the_inn_m37_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "official-m37-post-loss",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m37",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "physical-m37-not-present",
+          "sourceId": "physical_gog_review_photo_2_2015",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "user-m37-retaliation",
+          "sourceId": "user_m37_gog_retaliation_override_2026_10_06",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M38",
+      "id": "share_pain",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 1,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "676641aa3f6fa9096e061f355d068478236368876e698b40f641306c3397610a",
+      "evidence": [
+        {
+          "id": "original-m38-eve",
+          "sourceId": "the_inn_m38_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m38-source-defense",
+          "sourceId": "official_m38_erin_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "publisher-m38-generic",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "publisher-m38-eve-errata",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m38",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M39",
+      "id": "redirect_fortitude_loss",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 1,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "SOMETIMES",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "8afd02d3f4a6f44356530f565b2a85258ae8626b96b9778700275c1c7a4fb852",
+      "evidence": [
+        {
+          "id": "original-m39-eve",
+          "sourceId": "the_inn_m39_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m39-redirect",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "publisher-m39-eve-errata",
+          "sourceId": "official_eve_errata",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "matrix-m39",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M40",
+      "id": "gain_two_fortitude",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "ANYTIME",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "7bae8c28210b08786685cded1e96b71cefd4cecaac9d1161b6f6dd7fd9e554f8",
+      "evidence": [
+        {
+          "id": "original-m40-fleck",
+          "sourceId": "the_inn_m40_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "matrix-m40",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m40-general",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "user-m40-healing",
+          "sourceId": "user_m40_gog_healing_override_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M41",
+      "id": "collect_one_from_each_other",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "f17cc4eceec18f242e0bebdc145363853bee310035ea3e75b8da7328f7650cc9",
+      "evidence": [
+        {
+          "id": "original-m41-dimli",
+          "sourceId": "the_inn_m41_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m41-eve",
+          "sourceId": "the_inn_m41_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m41-fleck",
+          "sourceId": "the_inn_m41_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "matrix-m41",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m41-general",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-M41",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M42",
+      "id": "take_one_gold",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 2,
+        "fleck": 0,
+        "gog": 0
+      },
+      "kind": "ANYTIME",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "d9f4ad6349697ee68fb8bbd7850499bcc0373be76846eba4edebee4cfc97ada8",
+      "evidence": [
+        {
+          "id": "original-m42-eve-0",
+          "sourceId": "the_inn_m42_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m42-eve-1",
+          "sourceId": "the_inn_m42_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "matrix-m42",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m42",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M43",
+      "id": "take_two_gold",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 0,
+        "eve": 0,
+        "fleck": 1,
+        "gog": 0
+      },
+      "kind": "ACTION",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "224f2662cf7be5b0b8410e9106e556f64992a051d7ca20b74f19a75111cad8ce",
+      "evidence": [
+        {
+          "id": "original-m43-fleck-0",
+          "sourceId": "the_inn_m43_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "matrix-m43",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m43",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "M44",
+      "id": "tip_wench",
+      "status": "PASS",
+      "physicalCounts": {
+        "dimli": 1,
+        "eve": 1,
+        "fleck": 1,
+        "gog": 1
+      },
+      "kind": "ANYTIME",
+      "checks": [
+        {
+          "check": "quantity per character",
+          "status": "PASS"
+        },
+        {
+          "check": "card type/timing",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric values",
+          "status": "PASS"
+        },
+        {
+          "check": "targets",
+          "status": "PASS"
+        },
+        {
+          "check": "response trigger if Sometimes/Anytime",
+          "status": "PASS"
+        },
+        {
+          "check": "special restrictions/edge cases",
+          "status": "PASS"
+        },
+        {
+          "check": "current errata override if applicable",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "1551dbaa9039156a48e4e08f370d934e040f2dfb347e4c912c05bcad49a5a363",
+      "evidence": [
+        {
+          "id": "original-m44-dimli-0",
+          "sourceId": "the_inn_m44_original_dimli",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m44-eve-1",
+          "sourceId": "the_inn_m44_original_eve",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "original-m44-fleck-2",
+          "sourceId": "the_inn_m44_original_fleck",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "matrix-m44",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "publisher-m44",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "publisher-m44-current-payment-target",
+          "sourceId": "official_rdi10_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-M44",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D01",
+      "id": "dark_ale",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "3dcf2a54878f5404dba4e2f1f2d4f9950541245dc64b0a9656f8df7214775f9e",
+      "evidence": [
+        {
+          "id": "inventory-D01",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D01",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D01",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D01",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D02",
+      "id": "dark_ale_chaser",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "02905348432e44d56a7131c3265cd0e49eb40b05f055b04119333ef7d4456ae7",
+      "evidence": [
+        {
+          "id": "inventory-D02",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D02",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D02",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D02",
+          "sourceId": "publisher_drink_chaser_chain_image",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D03",
+      "id": "dirty_dishwater",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "a69b58f02082ab4cf753069e92d7cf5c512bab404d7c3a2edbca9394e67d08eb",
+      "evidence": [
+        {
+          "id": "inventory-D03",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D03",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D03",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D03",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D04",
+      "id": "dragon_breath_ale",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "8b44546d0479def74e1ec3e3771cd92046d5228f4c2f09cb6e958e2e02378ad7",
+      "evidence": [
+        {
+          "id": "inventory-D04",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D04",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D04",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D04",
+          "sourceId": "publisher_wine_dragon_image",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D05",
+      "id": "drinking_contest",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK_EVENT",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "2614bed0fe5f63130161b6c6b09b86bf02d6ed931690216126443c76efb00c79",
+      "evidence": [
+        {
+          "id": "inventory-D05",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D05",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D05",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D05",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D06",
+      "id": "dwarven_firewater",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "8b44546d0479def74e1ec3e3771cd92046d5228f4c2f09cb6e958e2e02378ad7",
+      "evidence": [
+        {
+          "id": "inventory-D06",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D06",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D06",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D06",
+          "sourceId": "official_drink_natyli",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D07",
+      "id": "elven_wine",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "12ad10f037e5c1935b18216b93412453eb353fb394b05204d8a8a6e6dc834f17",
+      "evidence": [
+        {
+          "id": "inventory-D07",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D07",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D07",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D07",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D08",
+      "id": "elven_wine_chaser",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "90d36b167be0b1673994a87c60abcd475080a486c853b679a0acd2ea867e4608",
+      "evidence": [
+        {
+          "id": "inventory-D08",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D08",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D08",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D08",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D09",
+      "id": "fine_ambrosia",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK_EVENT",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "827c9b85970985e251c8fb84ca9faa5b342a588f395a12ab6241ced787274af7",
+      "evidence": [
+        {
+          "id": "inventory-D09",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D09",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D09",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D09",
+          "sourceId": "user_fine_ambrosia_override_2026_10_05",
+          "authority": "USER_SPECIFIED"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D10",
+      "id": "holy_water",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "34f37b88003559292d6560a8eea738e3399c8a0972ca2b70423df4899df947a1",
+      "evidence": [
+        {
+          "id": "inventory-D10",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D10",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D10",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D10",
+          "sourceId": "publisher_holy_water_image",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D11",
+      "id": "light_ale",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "3dcf2a54878f5404dba4e2f1f2d4f9950541245dc64b0a9656f8df7214775f9e",
+      "evidence": [
+        {
+          "id": "inventory-D11",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D11",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D11",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D11",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D12",
+      "id": "light_ale_chaser",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "02905348432e44d56a7131c3265cd0e49eb40b05f055b04119333ef7d4456ae7",
+      "evidence": [
+        {
+          "id": "inventory-D12",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D12",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D12",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D12",
+          "sourceId": "publisher_drink_chaser_chain_image",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D13",
+      "id": "mead",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "12ad10f037e5c1935b18216b93412453eb353fb394b05204d8a8a6e6dc834f17",
+      "evidence": [
+        {
+          "id": "inventory-D13",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D13",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D13",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D13",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D14",
+      "id": "ogre_brew",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "921d600bb482c09d521933883a4c99c2ffcade7dd6ce823abe94faba7df02b25",
+      "evidence": [
+        {
+          "id": "inventory-D14",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D14",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D14",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D14",
+          "sourceId": "official_drink_erin",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D14",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D15",
+      "id": "orcish_rotgut",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "d8f0f43e269adcbdb91a2659f9939019a65c967862f82a35eddd40cf1cdd56db",
+      "evidence": [
+        {
+          "id": "inventory-D15",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D15",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D15",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D15",
+          "sourceId": "official_rdi10_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D15",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D16",
+      "id": "round_on_house",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK_EVENT",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "5e213c67a2f3695d2e35289dbea19d1e92b1e88f3dd4d6947a46afc52351f86b",
+      "evidence": [
+        {
+          "id": "inventory-D16",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D16",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D16",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D16",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "image-D16",
+          "sourceId": "publisher_round_house_image",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D17",
+      "id": "the_challenge",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK_EVENT",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "80bc1a99907b8716fb8153c8f94c50d856f679506954c5f44e57b56492882159",
+      "evidence": [
+        {
+          "id": "inventory-D17",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D17",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D17",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D17",
+          "sourceId": "official_rdi10_rules",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D17",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D18",
+      "id": "troll_swill",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "d50d7306338d5b7aad610d5493231bd72d11672ef9a53906168ff2183ddd0cba",
+      "evidence": [
+        {
+          "id": "inventory-D18",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D18",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D18",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D18",
+          "sourceId": "official_drink_natyli",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D18",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D19",
+      "id": "water",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "evidence": [
+        {
+          "id": "inventory-D19",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D19",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D19",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D19",
+          "sourceId": "official_combined_rdi7",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D19",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D20",
+      "id": "cutting_off",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "9dad0dcfbb8d581e82688a22bf764bfa77de54c9412bbeaa4546203f907c63f3",
+      "evidence": [
+        {
+          "id": "inventory-D20",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D20",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D20",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D20",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D20",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D21",
+      "id": "wine",
+      "status": "PASS",
+      "physicalCounts": 2,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "51a5b3750b66afe707fc8b1ec6a3a3eb768793b7ec12ce3f4c2fb48534178b67",
+      "evidence": [
+        {
+          "id": "inventory-D21",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D21",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D21",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D21",
+          "sourceId": "official_drink_chasers",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "teleconference-D21",
+          "sourceId": "official_drink_teleconference",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "publisher-D21-explicit-wine-two",
+          "sourceId": "official_drink_rdi3",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D22",
+      "id": "wine_chaser",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "c51ad5ba84c7fbbb053bda2635b2d1f1ff147a9e6aa4d6224e4afef5bd664601",
+      "evidence": [
+        {
+          "id": "inventory-D22",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D22",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D22",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "primary-D22",
+          "sourceId": "publisher_wine_dragon_image",
+          "authority": "PRIMARY"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "ledgerId": "D23",
+      "id": "wizards_brew",
+      "status": "PASS",
+      "physicalCounts": 1,
+      "kind": "DRINK",
+      "checks": [
+        {
+          "check": "quantity",
+          "status": "PASS"
+        },
+        {
+          "check": "Drink vs Drink Event classification",
+          "status": "PASS"
+        },
+        {
+          "check": "numeric effects",
+          "status": "PASS"
+        },
+        {
+          "check": "Chaser/event rules",
+          "status": "PASS"
+        },
+        {
+          "check": "current-edition overrides",
+          "status": "PASS"
+        }
+      ],
+      "effectPlanSha256": "5eac45f291febd46f2637ebf133a36fa16831644ab135d43f32e256b77b9a93f",
+      "evidence": [
+        {
+          "id": "inventory-D23",
+          "sourceId": "bgg_rdi2_drink_inventory",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "legacy-D23",
+          "sourceId": "community_matrix",
+          "authority": "SECONDARY"
+        },
+        {
+          "id": "shared-D23",
+          "sourceId": "official_rdi2_9e",
+          "authority": "PRIMARY"
+        },
+        {
+          "id": "final-resolution-D23",
+          "sourceId": "user_step24a_final_resolution_2026_10_07",
+          "authority": "PROJECT_RULE_OVERRIDE"
+        }
+      ],
+      "problems": []
+    }
+  ],
+  "errors": []
+}

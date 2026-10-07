@@ -1,0 +1,2728 @@
+{
+  "schemaVersion": "rdi1-mechanics-normalized-v1",
+  "status": "READY_FOR_ENGINE_COMPILATION",
+  "copyrightStrategy": {
+    "cardNames": "Original implementation-facing names or descriptive labels; not intended as a reproduction of original card titles.",
+    "rulesText": "Paraphrased mechanical summaries; no full original card text or art.",
+    "publicDistributionNote": "This mechanics package is not a license to distribute SlugFest Games trademarks, artwork, or proprietary card text. Keep under content-private unless you have distribution permission."
+  },
+  "sourceRefs": {
+    "official_rules_current": {
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/10/RDI1-15thEd.pdf",
+      "role": "Current RDI1 Fifteenth Edition core rules and clarifications."
+    },
+    "official_rules_html": {
+      "url": "https://www.64ouncegames.com/pages/the-red-dragon-inn",
+      "role": "Searchable mirror/reference for current rule clarifications and examples."
+    },
+    "deck_matrix": {
+      "url": "https://forums.giantitp.com/archive/index.php/t-211309.html",
+      "role": "Community transcription of RDI1 character-deck mechanical effect categories and quantities. Each character totals 40."
+    },
+    "deck_matrix_single_post": {
+      "url": "https://forums.giantitp.com/showsinglepost.php?p=11628882&postcount=2",
+      "role": "Indexed copy of the RDI1 effect/quantity matrix."
+    },
+    "drink_list": {
+      "url": "https://boardgamegeek.com/boardgame/24310/the-red-dragon-inn/wiki",
+      "role": "RDI1 30-card Drink-deck composition cross-check."
+    },
+    "anti_cheat_ruling": {
+      "url": "https://boardgames.stackexchange.com/questions/38935/can-you-play-an-anti-cheating-card-in-response-to-a-cheating-card-that-would-for",
+      "role": "Clarifies anti-cheat response timing when a cheating card would force a player out."
+    },
+    "sometimes_rule": {
+      "url": "https://slugfestgames.com/rulesfest-the-first-rule-of-sometimes/",
+      "role": "Clarifies what directly affects Fortitude/Alcohol/Gold for Sometimes legality."
+    },
+    "official_rules_12e_historical": {
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/10/RDI1RulesForWeb-12thEd-1.pdf",
+      "role": "Historical RDI1 Twelfth Edition; superseded by Fifteenth Edition."
+    },
+    "official_rdi1_15e": {
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/10/RDI1-15thEd.pdf",
+      "role": "PRIMARY_CURRENT: Current RDI1 rules located in this audit: Fifteenth Edition. 4 x 40-card character decks and one 30-card Drink Deck. Current timing, Chasers, Gambling, direct-stat, Negate/Ignore, split Drinks, Round on the House, Drinking Contest."
+    },
+    "official_rulesfest_first_sometimes": {
+      "url": "https://slugfestgames.com/rulesfest-the-first-rule-of-sometimes/",
+      "role": "PRIMARY: Direct-stat response legality; Drink modifiers are not direct Alcohol-stat effects."
+    },
+    "official_rulesfest_gambling_101": {
+      "url": "https://slugfestgames.com/rulesfest-gambling-101/",
+      "role": "PRIMARY: Base gambling/control/raise/Winning Hand behavior."
+    },
+    "official_rulesfest_gambling_102": {
+      "url": "https://slugfestgames.com/rulesfest-gambling-102/",
+      "role": "PRIMARY: Special gambling Sometimes restrictions; Gerki post-win behavior."
+    },
+    "official_rdi6_3e": {
+      "url": "https://slugfestgames.com/wp-content/uploads/2021/05/RDI6-3rdEd.pdf",
+      "role": "PRIMARY_LATER_CROSSCHECK: Deirdre Let's toast the Goddess => each player drinks from the Drink Deck. Gerki may take a Gold from gambling pot even when not participating. Fiona Liquid Courage converts Drink Alcohol gain to equal Fortitude gain."
+    },
+    "official_combined_rdi7": {
+      "url": "https://slugfestgames.com/wp-content/uploads/2019/02/Red_Dragon_Inn_Combined_Rules_as_of_RDI_7_v_1.1.pdf",
+      "role": "PRIMARY_LATER_CROSSCHECK: Later combined-rules examples for RDI1 cards and generic interactions."
+    },
+    "fresh_character_matrix": {
+      "url": "https://forums.giantitp.com/showsinglepost.php?p=11628882&postcount=2",
+      "role": "SECONDARY_COMPLETE_MATRIX: Complete 40-row RDI1 effect/quantity matrix. All 40 rows match the current source quantities exactly. Secondary source: must not override official current rules."
+    },
+    "fresh_drink_table": {
+      "url": "https://forums.giantitp.com/archive/index.php/t-211309.html",
+      "role": "SECONDARY_COMPLETE_MECHANICS_TABLE: Complete RDI1 Drink quantities/numeric values; matches current source physical quantities and numeric effects."
+    },
+    "fresh_bgg_drink_catalog": {
+      "url": "https://boardgamegeek.com/boardgame/24310/the-red-dragon-inn/wiki",
+      "role": "SECONDARY_CATALOG: Current web-indexed RDI1 30-card Drink composition; matches current source."
+    }
+  },
+  "product": {
+    "id": "rdi1",
+    "canonicalName": "The Red Dragon Inn",
+    "display": {
+      "en-US": "Red Dragon Inn — Core Set",
+      "zh-TW": "紅龍酒館—核心組"
+    },
+    "characterCount": 4,
+    "characterPhysicalCards": 160,
+    "drinkPhysicalCards": 30
+  },
+  "characters": [
+    {
+      "id": "deirdre",
+      "canonicalName": "Deirdre the Priestess",
+      "display": {
+        "en-US": "Deirdre the Priestess",
+        "zh-TW": "迪爾德麗・女祭司"
+      },
+      "role": { "en-US": "Priestess", "zh-TW": "女祭司" },
+      "primaryDeckPhysicalCount": 40,
+      "cards": [
+        {
+          "cardKey": "deirdre.gambling_start_or_control",
+          "mechanicId": "gambling_start_or_control",
+          "quantity": 6,
+          "display": { "en-US": "Join the Game!", "zh-TW": "加入賭局！" },
+          "rulesSummary": {
+            "en-US": "During your Action phase, start a gambling round; during an existing gambling round, take control.",
+            "zh-TW": "在你的出牌行動階段可開始一輪賭博；若賭博已進行中，則取得主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "deirdre.gambling_raise_one",
+          "mechanicId": "gambling_raise_one",
+          "quantity": 2,
+          "display": { "en-US": "Raise the Stakes", "zh-TW": "加注" },
+          "rulesSummary": {
+            "en-US": "Take control of the gambling round and make every active participant ante 1 additional Gold.",
+            "zh-TW": "取得賭博主導權，並使所有仍在賭局中的玩家各再投入 1 金幣。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "deirdre.gambling_winning_hand",
+          "mechanicId": "gambling_winning_hand",
+          "quantity": 2,
+          "display": { "en-US": "Strong Hand", "zh-TW": "好牌在手" },
+          "rulesSummary": {
+            "en-US": "Take control. Until a Cheating card takes control, Gambling cards cannot take control.",
+            "zh-TW": "取得賭博主導權；在有作弊牌奪取主導權之前，一般賭博牌不能再奪取主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "deirdre.anti_cheat_win_round",
+          "mechanicId": "anti_cheat_win_round",
+          "quantity": 1,
+          "display": {
+            "en-US": "Caught You Cheating",
+            "zh-TW": "抓到你作弊了"
+          },
+          "rulesSummary": {
+            "en-US": "When a Cheating card is played while you are still participating, negate that Cheating card and immediately win the gambling round.",
+            "zh-TW": "當你仍參與賭局且有人打出作弊牌時，可取消該作弊牌，並立即贏得本輪賭博。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.dump_gambling_pot_to_inn",
+          "mechanicId": "dump_gambling_pot_to_inn",
+          "quantity": 1,
+          "display": {
+            "en-US": "The House Takes the Pot",
+            "zh-TW": "酒館收走賭池"
+          },
+          "rulesSummary": {
+            "en-US": "During a gambling round, end the round immediately and move the entire pot to the Inn. It cannot be used after the final pass, to dodge an ante caused by starting/raising, or in response to an effect that will itself end the round.",
+            "zh-TW": "在賭博進行中，可立即結束本輪，並把整個賭池交給酒館。不能在最後一人已跳過後使用，也不能用來逃避開局／加注造成的投入，或回應本來就會結束賭局的效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.substitute_one_gold_from_inn",
+          "mechanicId": "substitute_one_gold_from_inn",
+          "quantity": 2,
+          "display": { "en-US": "Found Coin", "zh-TW": "撿到一枚金幣" },
+          "rulesSummary": {
+            "en-US": "When you must pay or ante Gold, satisfy exactly 1 Gold of that cost using Gold from the Inn instead of your stash.",
+            "zh-TW": "當你必須支付或投入金幣時，其中恰好 1 金幣改由酒館支付，而不是從你的金幣中扣除。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.avoid_ante_leave",
+          "mechanicId": "avoid_ante_leave",
+          "quantity": 2,
+          "display": { "en-US": "Sit This One Out", "zh-TW": "這局我不玩" },
+          "rulesSummary": {
+            "en-US": "When you are required to ante, do not pay that ante and leave the gambling round. Previously anted Gold stays in the pot.",
+            "zh-TW": "當你必須投入金幣時，不支付這次投入並離開本輪賭博；之前已投入的金幣仍留在賭池。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.avoid_ante_leave_or_ignore_drink",
+          "mechanicId": "avoid_ante_leave_or_ignore_drink",
+          "quantity": 1,
+          "display": { "en-US": "Excuse or Escape", "zh-TW": "閃人或擋酒" },
+          "rulesSummary": {
+            "en-US": "Choose the applicable branch: when required to ante, avoid that ante and leave the round; or when a Drink would affect you, ignore that entire Drink.",
+            "zh-TW": "依目前情境選擇適用效果：必須投入時可免除該次投入並離開賭局；或當飲料將影響你時，忽略整杯飲料。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.ignore_action_sometimes_fort_alcohol",
+          "mechanicId": "ignore_action_sometimes_fort_alcohol",
+          "quantity": 1,
+          "display": { "en-US": "Steady Yourself", "zh-TW": "穩住自己" },
+          "rulesSummary": {
+            "en-US": "Ignore an Action or Sometimes card that directly affects your Fortitude or Alcohol Content.",
+            "zh-TW": "忽略一張會直接影響你耐力值或酒精值的行動牌或 Sometimes 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.ignore_action_sometimes_fort_loss",
+          "mechanicId": "ignore_action_sometimes_fort_loss",
+          "quantity": 2,
+          "display": { "en-US": "Brace for Impact", "zh-TW": "擋下傷害" },
+          "rulesSummary": {
+            "en-US": "Ignore an Action or Sometimes card that would directly make you lose Fortitude.",
+            "zh-TW": "忽略一張會直接使你損失耐力值的行動牌或 Sometimes 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.negate_sometimes_counter",
+          "mechanicId": "negate_sometimes_counter",
+          "quantity": 1,
+          "display": { "en-US": "Hard No", "zh-TW": "強硬否決" },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card. This counter belongs to a protected counter family: it may itself only be negated by another card in the same family.",
+            "zh-TW": "取消一張 Sometimes 牌。本牌屬於特殊反制系列：它本身只能被同系列的反制牌取消。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.order_two_extra_drinks",
+          "mechanicId": "order_two_extra_drinks",
+          "quantity": 2,
+          "display": {
+            "en-US": "Extra Round for My Friends",
+            "zh-TW": "再請朋友兩杯"
+          },
+          "rulesSummary": {
+            "en-US": "During your Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks. Each extra Drink may be placed on any other player's Drink Me! pile.",
+            "zh-TW": "在你的請客階段，支付 1 金幣給酒館並額外請 2 杯。每杯都可放到任一其他玩家的暢飲區。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.all_players_drink_now",
+          "mechanicId": "all_players_drink_now",
+          "quantity": 1,
+          "display": { "en-US": "Communal Toast", "zh-TW": "全桌乾杯" },
+          "rulesSummary": {
+            "en-US": "Every living player, including you, reveals and resolves a Drink from the central Drink Deck, with any Chasers. Their Drink Me! piles are not used.",
+            "zh-TW": "所有仍在遊戲中的玩家（包含你）立刻從中央酒牌堆各翻開並結算一杯酒，包含追加酒；不使用各自的暢飲區。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "deirdre.pass_own_drink",
+          "mechanicId": "pass_own_drink",
+          "quantity": 1,
+          "display": { "en-US": "You Need This More", "zh-TW": "這杯更適合你" },
+          "rulesSummary": {
+            "en-US": "When you are about to drink a Drink, give that entire Drink to another player. They become the affected drinker.",
+            "zh-TW": "當你即將喝一杯飲料時，把整杯交給另一名玩家；該玩家改為承受這杯飲料。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.add_two_alcohol_to_drink",
+          "mechanicId": "add_two_alcohol_to_drink",
+          "quantity": 2,
+          "display": { "en-US": "Bless the Beverage", "zh-TW": "祝福這杯" },
+          "rulesSummary": {
+            "en-US": "Add 2 Alcohol Content to one Drink that has been revealed and is currently being resolved.",
+            "zh-TW": "使一杯已翻開、正在結算的飲料額外增加 2 點酒精值。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.reduce_drink_alcohol_two",
+          "mechanicId": "reduce_drink_alcohol_two",
+          "quantity": 1,
+          "display": { "en-US": "Dilute the Spirits", "zh-TW": "淨化烈酒" },
+          "rulesSummary": {
+            "en-US": "Reduce one revealed Drink's Alcohol Content by 2, to a minimum effective value of 0 where rules require.",
+            "zh-TW": "使一杯已翻開飲料的酒精值效果降低 2；依規則需要時最低視為 0。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.negate_drink_change_card",
+          "mechanicId": "negate_drink_change_card",
+          "quantity": 1,
+          "display": {
+            "en-US": "Hands Off the Drinks",
+            "zh-TW": "別再動飲料了"
+          },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card that changes a Drink: modifying, Negating, Ignoring, passing or splitting it. Excludes another copy of this counter, ordering Drinks, forcing drinking, direct player Alcohol changes and Drink Events. Only the protected hard-counter family can affect this counter.",
+            "zh-TW": "取消一張會改變酒效果的 Sometimes 牌：修改、取消、忽略、轉交或平分酒。不能取消同機制反制牌、請客、強迫喝酒、直接改變玩家酒精值或影響酒事件的牌。只有受保護的強硬反制系列能影響本牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.damage_one",
+          "mechanicId": "damage_one",
+          "quantity": 1,
+          "display": { "en-US": "Minor Smite", "zh-TW": "小型神罰" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 1 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 1 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "deirdre.damage_two",
+          "mechanicId": "damage_two",
+          "quantity": 4,
+          "display": { "en-US": "Sacred Rebuke", "zh-TW": "神聖斥責" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 2 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "deirdre.hit_back_two_after_loss",
+          "mechanicId": "hit_back_two_after_loss",
+          "quantity": 1,
+          "display": { "en-US": "Divine Retribution", "zh-TW": "神聖反擊" },
+          "rulesSummary": {
+            "en-US": "Immediately after another player causes you to actually lose Fortitude, that original source player loses 2 Fortitude. You cannot use this if the loss was fully ignored/reduced to 0.",
+            "zh-TW": "當另一名玩家使你實際失去耐力值後立刻使用；原始來源玩家失去 2 點耐力值。若該次損失被完全忽略或降為 0，則不能使用。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "deirdre.gain_two_fortitude",
+          "mechanicId": "gain_two_fortitude",
+          "quantity": 2,
+          "display": { "en-US": "Healing Prayer", "zh-TW": "療癒祈禱" },
+          "rulesSummary": {
+            "en-US": "Gain 2 Fortitude.",
+            "zh-TW": "獲得 2 點耐力值。"
+          },
+          "type": "ANYTIME"
+        },
+        {
+          "cardKey": "deirdre.heal_other_charge_gold",
+          "mechanicId": "heal_other_charge_gold",
+          "quantity": 1,
+          "display": { "en-US": "Temple Healing", "zh-TW": "神殿治療" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They gain 2 Fortitude, then pay you 1 Gold. The payment still applies even if their Fortitude is already at its maximum.",
+            "zh-TW": "選擇另一名玩家；其獲得 2 點耐力值，接著支付你 1 金幣。即使其耐力值已達上限，付款仍照常發生。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "deirdre.heal_all_and_collect",
+          "mechanicId": "heal_all_and_collect",
+          "quantity": 1,
+          "display": {
+            "en-US": "Blessing and Offering",
+            "zh-TW": "祝福與奉獻"
+          },
+          "rulesSummary": {
+            "en-US": "Every living player gains 1 Fortitude. Then each other player pays you 1 Gold.",
+            "zh-TW": "所有仍在遊戲中的玩家各獲得 1 點耐力值；接著其他每位玩家各支付你 1 金幣。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "deirdre.tip_wench",
+          "mechanicId": "tip_wench",
+          "quantity": 1,
+          "display": { "en-US": "Tip the Wench", "zh-TW": "給女侍小費" },
+          "rulesSummary": {
+            "en-US": "Choose a player. That player pays 1 Gold to the Inn.",
+            "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+          },
+          "type": "ANYTIME"
+        }
+      ]
+    },
+    {
+      "id": "fiona",
+      "canonicalName": "Fiona the Volatile",
+      "display": { "en-US": "Fiona the Volatile", "zh-TW": "菲奧娜・暴烈戰士" },
+      "role": { "en-US": "Warrior", "zh-TW": "戰士" },
+      "primaryDeckPhysicalCount": 40,
+      "cards": [
+        {
+          "cardKey": "fiona.gambling_start_or_control",
+          "mechanicId": "gambling_start_or_control",
+          "quantity": 6,
+          "display": { "en-US": "Join the Game!", "zh-TW": "加入賭局！" },
+          "rulesSummary": {
+            "en-US": "During your Action phase, start a gambling round; during an existing gambling round, take control.",
+            "zh-TW": "在你的出牌行動階段可開始一輪賭博；若賭博已進行中，則取得主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "fiona.gambling_raise_one",
+          "mechanicId": "gambling_raise_one",
+          "quantity": 2,
+          "display": { "en-US": "Raise the Stakes", "zh-TW": "加注" },
+          "rulesSummary": {
+            "en-US": "Take control of the gambling round and make every active participant ante 1 additional Gold.",
+            "zh-TW": "取得賭博主導權，並使所有仍在賭局中的玩家各再投入 1 金幣。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "fiona.gambling_winning_hand",
+          "mechanicId": "gambling_winning_hand",
+          "quantity": 2,
+          "display": { "en-US": "Strong Hand", "zh-TW": "好牌在手" },
+          "rulesSummary": {
+            "en-US": "Take control. Until a Cheating card takes control, Gambling cards cannot take control.",
+            "zh-TW": "取得賭博主導權；在有作弊牌奪取主導權之前，一般賭博牌不能再奪取主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "fiona.anti_cheat_win_round",
+          "mechanicId": "anti_cheat_win_round",
+          "quantity": 1,
+          "display": {
+            "en-US": "Caught You Cheating",
+            "zh-TW": "抓到你作弊了"
+          },
+          "rulesSummary": {
+            "en-US": "When a Cheating card is played while you are still participating, negate that Cheating card and immediately win the gambling round.",
+            "zh-TW": "當你仍參與賭局且有人打出作弊牌時，可取消該作弊牌，並立即贏得本輪賭博。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.dump_gambling_pot_to_inn",
+          "mechanicId": "dump_gambling_pot_to_inn",
+          "quantity": 1,
+          "display": {
+            "en-US": "The House Takes the Pot",
+            "zh-TW": "酒館收走賭池"
+          },
+          "rulesSummary": {
+            "en-US": "During a gambling round, end the round immediately and move the entire pot to the Inn. It cannot be used after the final pass, to dodge an ante caused by starting/raising, or in response to an effect that will itself end the round.",
+            "zh-TW": "在賭博進行中，可立即結束本輪，並把整個賭池交給酒館。不能在最後一人已跳過後使用，也不能用來逃避開局／加注造成的投入，或回應本來就會結束賭局的效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.substitute_one_gold_from_inn",
+          "mechanicId": "substitute_one_gold_from_inn",
+          "quantity": 2,
+          "display": { "en-US": "Found Coin", "zh-TW": "撿到一枚金幣" },
+          "rulesSummary": {
+            "en-US": "When you must pay or ante Gold, satisfy exactly 1 Gold of that cost using Gold from the Inn instead of your stash.",
+            "zh-TW": "當你必須支付或投入金幣時，其中恰好 1 金幣改由酒館支付，而不是從你的金幣中扣除。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.avoid_ante_leave",
+          "mechanicId": "avoid_ante_leave",
+          "quantity": 2,
+          "display": { "en-US": "Sit This One Out", "zh-TW": "這局我不玩" },
+          "rulesSummary": {
+            "en-US": "When you are required to ante, do not pay that ante and leave the gambling round. Previously anted Gold stays in the pot.",
+            "zh-TW": "當你必須投入金幣時，不支付這次投入並離開本輪賭博；之前已投入的金幣仍留在賭池。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.ignore_action_sometimes_fort_loss",
+          "mechanicId": "ignore_action_sometimes_fort_loss",
+          "quantity": 2,
+          "display": { "en-US": "Brace for Impact", "zh-TW": "擋下傷害" },
+          "rulesSummary": {
+            "en-US": "Ignore an Action or Sometimes card that would directly make you lose Fortitude.",
+            "zh-TW": "忽略一張會直接使你損失耐力值的行動牌或 Sometimes 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.negate_sometimes_counter",
+          "mechanicId": "negate_sometimes_counter",
+          "quantity": 1,
+          "display": { "en-US": "Hard No", "zh-TW": "強硬否決" },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card. This counter belongs to a protected counter family: it may itself only be negated by another card in the same family.",
+            "zh-TW": "取消一張 Sometimes 牌。本牌屬於特殊反制系列：它本身只能被同系列的反制牌取消。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.ignore_drink",
+          "mechanicId": "ignore_drink",
+          "quantity": 2,
+          "display": { "en-US": "No Thanks", "zh-TW": "這杯免了" },
+          "rulesSummary": {
+            "en-US": "Ignore the entire Drink that you are about to drink, including its Chasers.",
+            "zh-TW": "忽略你即將喝下的整杯飲料，包含所有續杯效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.order_two_extra_drinks",
+          "mechanicId": "order_two_extra_drinks",
+          "quantity": 2,
+          "display": {
+            "en-US": "Extra Round for My Friends",
+            "zh-TW": "再請朋友兩杯"
+          },
+          "rulesSummary": {
+            "en-US": "During your Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks. Each extra Drink may be placed on any other player's Drink Me! pile.",
+            "zh-TW": "在你的請客階段，支付 1 金幣給酒館並額外請 2 杯。每杯都可放到任一其他玩家的暢飲區。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.force_extra_drink_on_reveal",
+          "mechanicId": "force_extra_drink_on_reveal",
+          "quantity": 1,
+          "display": { "en-US": "Drink Another", "zh-TW": "再喝一杯" },
+          "rulesSummary": {
+            "en-US": "After another player reveals their complete Drink, including all Chasers, but before it resolves, make them take one additional Drink from their Drink Me! pile. The additional Drink resolves separately.",
+            "zh-TW": "當另一名玩家翻開完整的酒（包含所有追加酒）後、結算前，使其再從自己的暢飲區喝一杯酒；額外的酒分別結算。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.force_other_player_drink_now",
+          "mechanicId": "force_other_player_drink_now",
+          "quantity": 1,
+          "display": { "en-US": "You Look Thirsty", "zh-TW": "你看起來很渴" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They immediately reveal and resolve the top card of their Drink Me! pile.",
+            "zh-TW": "選擇另一名玩家；該玩家立刻翻開並結算自己暢飲區最上方的一張飲料。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "fiona.split_own_drink",
+          "mechanicId": "split_own_drink",
+          "quantity": 1,
+          "display": { "en-US": "Share a Mug", "zh-TW": "分一杯" },
+          "rulesSummary": {
+            "en-US": "When you are about to drink, split the combined numeric effects of the Drink with another player. Each numeric effect is halved and rounded up, creating two independent Drinks.",
+            "zh-TW": "當你即將喝下一杯飲料時，與另一名玩家平分此飲料合併後的數值效果；每個數值效果除以二並向上取整，形成兩杯獨立飲料。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.alcohol_to_fortitude",
+          "mechanicId": "alcohol_to_fortitude",
+          "quantity": 1,
+          "display": { "en-US": "Liquid Courage", "zh-TW": "液體勇氣" },
+          "rulesSummary": {
+            "en-US": "When you are about to drink, replace that Drink's Alcohol Content gain with an equal Fortitude gain. Other effects of the Drink remain.",
+            "zh-TW": "當你即將喝一杯飲料時，把該飲料造成的酒精值增加改成等量的耐力值增加；飲料的其他效果仍照常。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.negate_drink_change_card",
+          "mechanicId": "negate_drink_change_card",
+          "quantity": 1,
+          "display": {
+            "en-US": "Hands Off the Drinks",
+            "zh-TW": "別再動飲料了"
+          },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card that changes a Drink: modifying, Negating, Ignoring, passing or splitting it. Excludes another copy of this counter, ordering Drinks, forcing drinking, direct player Alcohol changes and Drink Events. Only the protected hard-counter family can affect this counter.",
+            "zh-TW": "取消一張會改變酒效果的 Sometimes 牌：修改、取消、忽略、轉交或平分酒。不能取消同機制反制牌、請客、強迫喝酒、直接改變玩家酒精值或影響酒事件的牌。只有受保護的強硬反制系列能影響本牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.damage_one",
+          "mechanicId": "damage_one",
+          "quantity": 3,
+          "display": { "en-US": "Pommel Tap", "zh-TW": "劍柄敲擊" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 1 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 1 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "fiona.damage_two",
+          "mechanicId": "damage_two",
+          "quantity": 3,
+          "display": { "en-US": "Sword Strike", "zh-TW": "劍刃重擊" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 2 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "fiona.damage_three",
+          "mechanicId": "damage_three",
+          "quantity": 1,
+          "display": { "en-US": "Overhead Smash", "zh-TW": "奮力重砍" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 3 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 3 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "fiona.hit_back_two_after_loss",
+          "mechanicId": "hit_back_two_after_loss",
+          "quantity": 2,
+          "display": { "en-US": "Counterblow", "zh-TW": "反擊" },
+          "rulesSummary": {
+            "en-US": "Immediately after another player causes you to actually lose Fortitude, that original source player loses 2 Fortitude. You cannot use this if the loss was fully ignored/reduced to 0.",
+            "zh-TW": "當另一名玩家使你實際失去耐力值後立刻使用；原始來源玩家失去 2 點耐力值。若該次損失被完全忽略或降為 0，則不能使用。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "fiona.gain_two_fortitude",
+          "mechanicId": "gain_two_fortitude",
+          "quantity": 1,
+          "display": { "en-US": "Shake It Off", "zh-TW": "撐住" },
+          "rulesSummary": {
+            "en-US": "Gain 2 Fortitude.",
+            "zh-TW": "獲得 2 點耐力值。"
+          },
+          "type": "ANYTIME"
+        },
+        {
+          "cardKey": "fiona.collect_one_from_each_other",
+          "mechanicId": "collect_one_from_each_other",
+          "quantity": 1,
+          "display": { "en-US": "Impress the Table", "zh-TW": "讓全桌買單" },
+          "rulesSummary": {
+            "en-US": "Each other living player pays you 1 Gold.",
+            "zh-TW": "其他每位仍在遊戲中的玩家各支付你 1 金幣。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "fiona.tip_wench",
+          "mechanicId": "tip_wench",
+          "quantity": 1,
+          "display": { "en-US": "Tip the Wench", "zh-TW": "給女侍小費" },
+          "rulesSummary": {
+            "en-US": "Choose a player. That player pays 1 Gold to the Inn.",
+            "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+          },
+          "type": "ANYTIME"
+        }
+      ]
+    },
+    {
+      "id": "gerki",
+      "canonicalName": "Gerki the Sneak",
+      "display": { "en-US": "Gerki the Sneak", "zh-TW": "戈爾基・潛行者" },
+      "role": { "en-US": "Rogue", "zh-TW": "盜賊" },
+      "primaryDeckPhysicalCount": 40,
+      "cards": [
+        {
+          "cardKey": "gerki.gambling_start_or_control",
+          "mechanicId": "gambling_start_or_control",
+          "quantity": 6,
+          "display": { "en-US": "Join the Game!", "zh-TW": "加入賭局！" },
+          "rulesSummary": {
+            "en-US": "During your Action phase, start a gambling round; during an existing gambling round, take control.",
+            "zh-TW": "在你的出牌行動階段可開始一輪賭博；若賭博已進行中，則取得主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "gerki.gambling_raise_one",
+          "mechanicId": "gambling_raise_one",
+          "quantity": 2,
+          "display": { "en-US": "Raise the Stakes", "zh-TW": "加注" },
+          "rulesSummary": {
+            "en-US": "Take control of the gambling round and make every active participant ante 1 additional Gold.",
+            "zh-TW": "取得賭博主導權，並使所有仍在賭局中的玩家各再投入 1 金幣。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "gerki.gambling_winning_hand",
+          "mechanicId": "gambling_winning_hand",
+          "quantity": 2,
+          "display": { "en-US": "Strong Hand", "zh-TW": "好牌在手" },
+          "rulesSummary": {
+            "en-US": "Take control. Until a Cheating card takes control, Gambling cards cannot take control.",
+            "zh-TW": "取得賭博主導權；在有作弊牌奪取主導權之前，一般賭博牌不能再奪取主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "gerki.cheat_take_control",
+          "mechanicId": "cheat_take_control",
+          "quantity": 3,
+          "display": { "en-US": "Marked Cards", "zh-TW": "做記號的牌" },
+          "rulesSummary": {
+            "en-US": "Take control of the gambling round. Cheating can take control even after a Strong Hand.",
+            "zh-TW": "取得賭博主導權；作弊牌可在「好牌在手」之後奪取主導權。"
+          },
+          "type": "CHEATING"
+        },
+        {
+          "cardKey": "gerki.cheat_control_and_eject",
+          "mechanicId": "cheat_control_and_eject",
+          "quantity": 1,
+          "display": { "en-US": "Rigged Exit", "zh-TW": "作弊趕人" },
+          "rulesSummary": {
+            "en-US": "Take control, then choose another active participant; that player leaves the gambling round.",
+            "zh-TW": "取得賭博主導權，接著選擇另一名仍在賭局中的玩家，使其離開本輪賭博。"
+          },
+          "type": "CHEATING"
+        },
+        {
+          "cardKey": "gerki.dump_gambling_pot_to_inn",
+          "mechanicId": "dump_gambling_pot_to_inn",
+          "quantity": 1,
+          "display": {
+            "en-US": "The House Takes the Pot",
+            "zh-TW": "酒館收走賭池"
+          },
+          "rulesSummary": {
+            "en-US": "During a gambling round, end the round immediately and move the entire pot to the Inn. It cannot be used after the final pass, to dodge an ante caused by starting/raising, or in response to an effect that will itself end the round.",
+            "zh-TW": "在賭博進行中，可立即結束本輪，並把整個賭池交給酒館。不能在最後一人已跳過後使用，也不能用來逃避開局／加注造成的投入，或回應本來就會結束賭局的效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.steal_winners_pot",
+          "mechanicId": "steal_winners_pot",
+          "quantity": 1,
+          "display": { "en-US": "Change of Winner", "zh-TW": "偷換勝者" },
+          "rulesSummary": {
+            "en-US": "After a winner is determined but before payout is finalized, replace the winner with yourself and take the pot.",
+            "zh-TW": "在賭局已決定勝者、但賭池尚未完成支付前，把勝者改成自己並取得賭池。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.substitute_one_gold_from_inn",
+          "mechanicId": "substitute_one_gold_from_inn",
+          "quantity": 2,
+          "display": { "en-US": "Found Coin", "zh-TW": "撿到一枚金幣" },
+          "rulesSummary": {
+            "en-US": "When you must pay or ante Gold, satisfy exactly 1 Gold of that cost using Gold from the Inn instead of your stash.",
+            "zh-TW": "當你必須支付或投入金幣時，其中恰好 1 金幣改由酒館支付，而不是從你的金幣中扣除。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.take_one_from_pot",
+          "mechanicId": "take_one_from_pot",
+          "quantity": 1,
+          "display": { "en-US": "Palm the Pot", "zh-TW": "賭池摸金" },
+          "rulesSummary": {
+            "en-US": "During an active gambling round, take 1 Gold from the pot and add it to your stash without changing control.",
+            "zh-TW": "在賭博進行中，從賭池拿走 1 金幣加入自己的金幣，不改變賭局主導權。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.ignore_card_all_stats_or_drink",
+          "mechanicId": "ignore_card_all_stats_or_drink",
+          "quantity": 1,
+          "display": { "en-US": "Slip Away Completely", "zh-TW": "全身而退" },
+          "rulesSummary": {
+            "en-US": "Ignore either a Drink affecting you, or an Action/Sometimes/Anytime card that directly affects your Fortitude, Alcohol Content, or Gold.",
+            "zh-TW": "忽略一杯會影響你的飲料；或忽略一張會直接影響你耐力值、酒精值或金幣的行動／Sometimes／Anytime 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.ignore_action_sometimes_fort_alcohol",
+          "mechanicId": "ignore_action_sometimes_fort_alcohol",
+          "quantity": 1,
+          "display": { "en-US": "Steady Yourself", "zh-TW": "穩住自己" },
+          "rulesSummary": {
+            "en-US": "Ignore an Action or Sometimes card that directly affects your Fortitude or Alcohol Content.",
+            "zh-TW": "忽略一張會直接影響你耐力值或酒精值的行動牌或 Sometimes 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.negate_sometimes_counter",
+          "mechanicId": "negate_sometimes_counter",
+          "quantity": 1,
+          "display": { "en-US": "Hard No", "zh-TW": "強硬否決" },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card. This counter belongs to a protected counter family: it may itself only be negated by another card in the same family.",
+            "zh-TW": "取消一張 Sometimes 牌。本牌屬於特殊反制系列：它本身只能被同系列的反制牌取消。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.ignore_drink",
+          "mechanicId": "ignore_drink",
+          "quantity": 3,
+          "display": { "en-US": "No Thanks", "zh-TW": "這杯免了" },
+          "rulesSummary": {
+            "en-US": "Ignore the entire Drink that you are about to drink, including its Chasers.",
+            "zh-TW": "忽略你即將喝下的整杯飲料，包含所有續杯效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.order_two_extra_drinks",
+          "mechanicId": "order_two_extra_drinks",
+          "quantity": 2,
+          "display": {
+            "en-US": "Extra Round for My Friends",
+            "zh-TW": "再請朋友兩杯"
+          },
+          "rulesSummary": {
+            "en-US": "During your Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks. Each extra Drink may be placed on any other player's Drink Me! pile.",
+            "zh-TW": "在你的請客階段，支付 1 金幣給酒館並額外請 2 杯。每杯都可放到任一其他玩家的暢飲區。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.add_two_alcohol_to_drink",
+          "mechanicId": "add_two_alcohol_to_drink",
+          "quantity": 2,
+          "display": { "en-US": "Spike the Mug", "zh-TW": "往酒裡加料" },
+          "rulesSummary": {
+            "en-US": "Add 2 Alcohol Content to one Drink that has been revealed and is currently being resolved.",
+            "zh-TW": "使一杯已翻開、正在結算的飲料額外增加 2 點酒精值。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.negate_drink_change_card",
+          "mechanicId": "negate_drink_change_card",
+          "quantity": 1,
+          "display": {
+            "en-US": "Hands Off the Drinks",
+            "zh-TW": "別再動飲料了"
+          },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card that changes a Drink: modifying, Negating, Ignoring, passing or splitting it. Excludes another copy of this counter, ordering Drinks, forcing drinking, direct player Alcohol changes and Drink Events. Only the protected hard-counter family can affect this counter.",
+            "zh-TW": "取消一張會改變酒效果的 Sometimes 牌：修改、取消、忽略、轉交或平分酒。不能取消同機制反制牌、請客、強迫喝酒、直接改變玩家酒精值或影響酒事件的牌。只有受保護的強硬反制系列能影響本牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "gerki.damage_two",
+          "mechanicId": "damage_two",
+          "quantity": 4,
+          "display": { "en-US": "Hidden Knife", "zh-TW": "暗藏匕首" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 2 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "gerki.damage_three",
+          "mechanicId": "damage_three",
+          "quantity": 2,
+          "display": { "en-US": "Poisoned Surprise", "zh-TW": "毒刃偷襲" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 3 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 3 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "gerki.collect_one_from_each_other",
+          "mechanicId": "collect_one_from_each_other",
+          "quantity": 1,
+          "display": { "en-US": "Impress the Table", "zh-TW": "讓全桌買單" },
+          "rulesSummary": {
+            "en-US": "Each other living player pays you 1 Gold.",
+            "zh-TW": "其他每位仍在遊戲中的玩家各支付你 1 金幣。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "gerki.take_one_gold",
+          "mechanicId": "take_one_gold",
+          "quantity": 2,
+          "display": { "en-US": "Quick Fingers", "zh-TW": "快手摸金" },
+          "rulesSummary": {
+            "en-US": "Choose a player. Take 1 Gold from that player's stash.",
+            "zh-TW": "選擇一名玩家，從其金幣中拿走 1 金幣。"
+          },
+          "type": "ANYTIME"
+        },
+        {
+          "cardKey": "gerki.tip_wench",
+          "mechanicId": "tip_wench",
+          "quantity": 1,
+          "display": { "en-US": "Tip the Wench", "zh-TW": "給女侍小費" },
+          "rulesSummary": {
+            "en-US": "Choose a player. That player pays 1 Gold to the Inn.",
+            "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+          },
+          "type": "ANYTIME"
+        }
+      ]
+    },
+    {
+      "id": "zot",
+      "canonicalName": "Zot the Wizard and Pooky",
+      "display": {
+        "en-US": "Zot the Wizard & Pooky",
+        "zh-TW": "佐特與普奇・法師與使魔"
+      },
+      "role": { "en-US": "Wizard & Familiar", "zh-TW": "法師與使魔" },
+      "primaryDeckPhysicalCount": 40,
+      "cards": [
+        {
+          "cardKey": "zot.gambling_start_or_control",
+          "mechanicId": "gambling_start_or_control",
+          "quantity": 6,
+          "display": { "en-US": "Join the Game!", "zh-TW": "加入賭局！" },
+          "rulesSummary": {
+            "en-US": "During your Action phase, start a gambling round; during an existing gambling round, take control.",
+            "zh-TW": "在你的出牌行動階段可開始一輪賭博；若賭博已進行中，則取得主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "zot.gambling_raise_one",
+          "mechanicId": "gambling_raise_one",
+          "quantity": 2,
+          "display": { "en-US": "Raise the Stakes", "zh-TW": "加注" },
+          "rulesSummary": {
+            "en-US": "Take control of the gambling round and make every active participant ante 1 additional Gold.",
+            "zh-TW": "取得賭博主導權，並使所有仍在賭局中的玩家各再投入 1 金幣。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "zot.gambling_winning_hand",
+          "mechanicId": "gambling_winning_hand",
+          "quantity": 2,
+          "display": { "en-US": "Strong Hand", "zh-TW": "好牌在手" },
+          "rulesSummary": {
+            "en-US": "Take control. Until a Cheating card takes control, Gambling cards cannot take control.",
+            "zh-TW": "取得賭博主導權；在有作弊牌奪取主導權之前，一般賭博牌不能再奪取主導權。"
+          },
+          "type": "GAMBLING"
+        },
+        {
+          "cardKey": "zot.cheat_take_control",
+          "mechanicId": "cheat_take_control",
+          "quantity": 3,
+          "display": { "en-US": "Arcane Tell", "zh-TW": "魔法讀牌" },
+          "rulesSummary": {
+            "en-US": "Take control of the gambling round. Cheating can take control even after a Strong Hand.",
+            "zh-TW": "取得賭博主導權；作弊牌可在「好牌在手」之後奪取主導權。"
+          },
+          "type": "CHEATING"
+        },
+        {
+          "cardKey": "zot.cheat_control_and_eject",
+          "mechanicId": "cheat_control_and_eject",
+          "quantity": 1,
+          "display": {
+            "en-US": "Now You See Your Seat...",
+            "zh-TW": "座位消失術"
+          },
+          "rulesSummary": {
+            "en-US": "Take control, then choose another active participant; that player leaves the gambling round.",
+            "zh-TW": "取得賭博主導權，接著選擇另一名仍在賭局中的玩家，使其離開本輪賭博。"
+          },
+          "type": "CHEATING"
+        },
+        {
+          "cardKey": "zot.dump_gambling_pot_to_inn",
+          "mechanicId": "dump_gambling_pot_to_inn",
+          "quantity": 1,
+          "display": {
+            "en-US": "The House Takes the Pot",
+            "zh-TW": "酒館收走賭池"
+          },
+          "rulesSummary": {
+            "en-US": "During a gambling round, end the round immediately and move the entire pot to the Inn. It cannot be used after the final pass, to dodge an ante caused by starting/raising, or in response to an effect that will itself end the round.",
+            "zh-TW": "在賭博進行中，可立即結束本輪，並把整個賭池交給酒館。不能在最後一人已跳過後使用，也不能用來逃避開局／加注造成的投入，或回應本來就會結束賭局的效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.substitute_one_gold_from_inn",
+          "mechanicId": "substitute_one_gold_from_inn",
+          "quantity": 1,
+          "display": { "en-US": "Found Coin", "zh-TW": "撿到一枚金幣" },
+          "rulesSummary": {
+            "en-US": "When you must pay or ante Gold, satisfy exactly 1 Gold of that cost using Gold from the Inn instead of your stash.",
+            "zh-TW": "當你必須支付或投入金幣時，其中恰好 1 金幣改由酒館支付，而不是從你的金幣中扣除。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.avoid_ante_leave_or_ignore_drink",
+          "mechanicId": "avoid_ante_leave_or_ignore_drink",
+          "quantity": 2,
+          "display": { "en-US": "Excuse or Escape", "zh-TW": "閃人或擋酒" },
+          "rulesSummary": {
+            "en-US": "Choose the applicable branch: when required to ante, avoid that ante and leave the round; or when a Drink would affect you, ignore that entire Drink.",
+            "zh-TW": "依目前情境選擇適用效果：必須投入時可免除該次投入並離開賭局；或當飲料將影響你時，忽略整杯飲料。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.avoid_ante_leave_or_ignore_drink_pay_one",
+          "mechanicId": "avoid_ante_leave_or_ignore_drink_pay_one",
+          "quantity": 1,
+          "display": {
+            "en-US": "Pay the Tab or Leave",
+            "zh-TW": "付帳擋酒，或退出"
+          },
+          "rulesSummary": {
+            "en-US": "When required to ante, avoid the ante and leave the round; or ignore a Drink affecting you and pay 1 Gold to the Inn.",
+            "zh-TW": "必須投入時可免除該次投入並離開賭局；或忽略一杯會影響你的飲料，並支付 1 金幣給酒館。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.ignore_card_all_stats",
+          "mechanicId": "ignore_card_all_stats",
+          "quantity": 1,
+          "display": { "en-US": "Arcane Refusal", "zh-TW": "奧術拒絕" },
+          "rulesSummary": {
+            "en-US": "Ignore an Action/Sometimes/Anytime card that directly affects your Fortitude, Alcohol Content, or Gold.",
+            "zh-TW": "忽略一張會直接影響你耐力值、酒精值或金幣的行動／Sometimes／Anytime 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.ignore_action_sometimes_fort_loss",
+          "mechanicId": "ignore_action_sometimes_fort_loss",
+          "quantity": 1,
+          "display": { "en-US": "Brace for Impact", "zh-TW": "擋下傷害" },
+          "rulesSummary": {
+            "en-US": "Ignore an Action or Sometimes card that would directly make you lose Fortitude.",
+            "zh-TW": "忽略一張會直接使你損失耐力值的行動牌或 Sometimes 牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.negate_sometimes_counter",
+          "mechanicId": "negate_sometimes_counter",
+          "quantity": 1,
+          "display": { "en-US": "Hard No", "zh-TW": "強硬否決" },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card. This counter belongs to a protected counter family: it may itself only be negated by another card in the same family.",
+            "zh-TW": "取消一張 Sometimes 牌。本牌屬於特殊反制系列：它本身只能被同系列的反制牌取消。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.ignore_drink",
+          "mechanicId": "ignore_drink",
+          "quantity": 1,
+          "display": { "en-US": "No Thanks", "zh-TW": "這杯免了" },
+          "rulesSummary": {
+            "en-US": "Ignore the entire Drink that you are about to drink, including its Chasers.",
+            "zh-TW": "忽略你即將喝下的整杯飲料，包含所有續杯效果。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.order_two_extra_drinks",
+          "mechanicId": "order_two_extra_drinks",
+          "quantity": 2,
+          "display": {
+            "en-US": "Extra Round for My Friends",
+            "zh-TW": "再請朋友兩杯"
+          },
+          "rulesSummary": {
+            "en-US": "During your Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks. Each extra Drink may be placed on any other player's Drink Me! pile.",
+            "zh-TW": "在你的請客階段，支付 1 金幣給酒館並額外請 2 杯。每杯都可放到任一其他玩家的暢飲區。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.force_other_player_drink_now",
+          "mechanicId": "force_other_player_drink_now",
+          "quantity": 1,
+          "display": { "en-US": "Pooky Says Drink", "zh-TW": "普奇叫你喝" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They immediately reveal and resolve the top card of their Drink Me! pile.",
+            "zh-TW": "選擇另一名玩家；該玩家立刻翻開並結算自己暢飲區最上方的一張飲料。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "zot.pass_own_drink",
+          "mechanicId": "pass_own_drink",
+          "quantity": 1,
+          "display": { "en-US": "Teleport the Mug", "zh-TW": "把杯子傳走" },
+          "rulesSummary": {
+            "en-US": "When you are about to drink a Drink, give that entire Drink to another player. They become the affected drinker.",
+            "zh-TW": "當你即將喝一杯飲料時，把整杯交給另一名玩家；該玩家改為承受這杯飲料。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.negate_drink_change_card",
+          "mechanicId": "negate_drink_change_card",
+          "quantity": 1,
+          "display": {
+            "en-US": "Hands Off the Drinks",
+            "zh-TW": "別再動飲料了"
+          },
+          "rulesSummary": {
+            "en-US": "Negate a Sometimes card that changes a Drink: modifying, Negating, Ignoring, passing or splitting it. Excludes another copy of this counter, ordering Drinks, forcing drinking, direct player Alcohol changes and Drink Events. Only the protected hard-counter family can affect this counter.",
+            "zh-TW": "取消一張會改變酒效果的 Sometimes 牌：修改、取消、忽略、轉交或平分酒。不能取消同機制反制牌、請客、強迫喝酒、直接改變玩家酒精值或影響酒事件的牌。只有受保護的強硬反制系列能影響本牌。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.damage_one",
+          "mechanicId": "damage_one",
+          "quantity": 1,
+          "display": { "en-US": "Pooky's Peck", "zh-TW": "普奇的小襲擊" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 1 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 1 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "zot.damage_two",
+          "mechanicId": "damage_two",
+          "quantity": 5,
+          "display": { "en-US": "Arcane Blast", "zh-TW": "奧術衝擊" },
+          "rulesSummary": {
+            "en-US": "Choose another player. They lose 2 Fortitude.",
+            "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "zot.damage_all_others_one",
+          "mechanicId": "damage_all_others_one",
+          "quantity": 2,
+          "display": { "en-US": "Pooky's Rampage", "zh-TW": "普奇暴走" },
+          "rulesSummary": {
+            "en-US": "Each other living player loses 1 Fortitude.",
+            "zh-TW": "其他所有仍在遊戲中的玩家各失去 1 點耐力值。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "zot.hit_back_two_after_loss",
+          "mechanicId": "hit_back_two_after_loss",
+          "quantity": 1,
+          "display": { "en-US": "Pooky Defends a Friend", "zh-TW": "普奇護友" },
+          "rulesSummary": {
+            "en-US": "Immediately after another player causes you to actually lose Fortitude, that original source player loses 2 Fortitude. You cannot use this if the loss was fully ignored/reduced to 0.",
+            "zh-TW": "當另一名玩家使你實際失去耐力值後立刻使用；原始來源玩家失去 2 點耐力值。若該次損失被完全忽略或降為 0，則不能使用。"
+          },
+          "type": "SOMETIMES"
+        },
+        {
+          "cardKey": "zot.collect_one_from_each_other",
+          "mechanicId": "collect_one_from_each_other",
+          "quantity": 1,
+          "display": { "en-US": "Impress the Table", "zh-TW": "讓全桌買單" },
+          "rulesSummary": {
+            "en-US": "Each other living player pays you 1 Gold.",
+            "zh-TW": "其他每位仍在遊戲中的玩家各支付你 1 金幣。"
+          },
+          "type": "ACTION"
+        },
+        {
+          "cardKey": "zot.take_one_gold",
+          "mechanicId": "take_one_gold",
+          "quantity": 1,
+          "display": { "en-US": "Magical Misplacement", "zh-TW": "魔法挪用" },
+          "rulesSummary": {
+            "en-US": "Choose a player. Take 1 Gold from that player's stash.",
+            "zh-TW": "選擇一名玩家，從其金幣中拿走 1 金幣。"
+          },
+          "type": "ANYTIME"
+        },
+        {
+          "cardKey": "zot.tip_wench",
+          "mechanicId": "tip_wench",
+          "quantity": 1,
+          "display": { "en-US": "Tip the Wench", "zh-TW": "給女侍小費" },
+          "rulesSummary": {
+            "en-US": "Choose a player. That player pays 1 Gold to the Inn.",
+            "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+          },
+          "type": "ANYTIME"
+        }
+      ]
+    }
+  ],
+  "mechanics": [
+    {
+      "id": "gambling_start_or_control",
+      "type": "GAMBLING",
+      "display": { "en-US": "Join the Game!", "zh-TW": "加入賭局！" },
+      "rulesSummary": {
+        "en-US": "During your Action phase, start a gambling round; during an existing gambling round, take control.",
+        "zh-TW": "在你的出牌行動階段可開始一輪賭博；若賭博已進行中，則取得主導權。"
+      },
+      "responseKind": null,
+      "legality": { "modes": ["ACTION_PHASE", "GAMBLING_PRIORITY"] },
+      "effects": [{ "op": "START_OR_TAKE_GAMBLING_CONTROL" }],
+      "engineRequirements": ["gambling.start-or-control"],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M01"
+      }
+    },
+    {
+      "id": "gambling_raise_one",
+      "type": "GAMBLING",
+      "display": { "en-US": "Raise the Stakes", "zh-TW": "加注" },
+      "rulesSummary": {
+        "en-US": "Take control of the gambling round and make every active participant ante 1 additional Gold.",
+        "zh-TW": "取得賭博主導權，並使所有仍在賭局中的玩家各再投入 1 金幣。"
+      },
+      "responseKind": null,
+      "legality": {
+        "modes": ["GAMBLING_PRIORITY"],
+        "blockedAfter": ["WINNING_HAND_LOCK"]
+      },
+      "effects": [
+        { "op": "TAKE_GAMBLING_CONTROL" },
+        { "op": "ANTE_ALL_ACTIVE", "amount": 1 }
+      ],
+      "engineRequirements": ["gambling.ante-all"],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M02"
+      }
+    },
+    {
+      "id": "gambling_winning_hand",
+      "type": "GAMBLING",
+      "display": { "en-US": "Strong Hand", "zh-TW": "好牌在手" },
+      "rulesSummary": {
+        "en-US": "Take control. Until a Cheating card takes control, Gambling cards cannot take control.",
+        "zh-TW": "取得賭博主導權；在有作弊牌奪取主導權之前，一般賭博牌不能再奪取主導權。"
+      },
+      "responseKind": null,
+      "legality": {
+        "modes": ["GAMBLING_PRIORITY"],
+        "blockedAfter": ["WINNING_HAND_LOCK"]
+      },
+      "effects": [
+        { "op": "TAKE_GAMBLING_CONTROL", "allowedNextCategories": ["CHEATING"] }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M03"
+      }
+    },
+    {
+      "id": "cheat_take_control",
+      "type": "CHEATING",
+      "display": { "en-US": "Under-the-Table Trick", "zh-TW": "桌下花招" },
+      "rulesSummary": {
+        "en-US": "Take control of the gambling round. Cheating can take control even after a Strong Hand.",
+        "zh-TW": "取得賭博主導權；作弊牌可在「好牌在手」之後奪取主導權。"
+      },
+      "responseKind": null,
+      "legality": { "modes": ["GAMBLING_PRIORITY"] },
+      "effects": [
+        {
+          "op": "TAKE_GAMBLING_CONTROL",
+          "allowedNextCategories": ["GAMBLING", "CHEATING"]
+        }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M04"
+      }
+    },
+    {
+      "id": "cheat_control_and_eject",
+      "type": "CHEATING",
+      "display": { "en-US": "Rig the Table", "zh-TW": "做局趕人" },
+      "rulesSummary": {
+        "en-US": "Take control, then choose another active participant; that player leaves the gambling round.",
+        "zh-TW": "取得賭博主導權，接著選擇另一名仍在賭局中的玩家，使其離開本輪賭博。"
+      },
+      "responseKind": null,
+      "legality": {
+        "modes": ["GAMBLING_PRIORITY"],
+        "target": "OTHER_ACTIVE_GAMBLER"
+      },
+      "effects": [
+        { "op": "TAKE_GAMBLING_CONTROL" },
+        { "op": "FORCE_LEAVE_GAMBLING", "target": "CHOSEN_PLAYER" }
+      ],
+      "engineRequirements": [
+        "gambling.force-leave",
+        "gambling.final-response-before-leave"
+      ],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M05"
+      }
+    },
+    {
+      "id": "anti_cheat_win_round",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Caught You Cheating", "zh-TW": "抓到你作弊了" },
+      "rulesSummary": {
+        "en-US": "When a Cheating card is played while you are still participating, negate that Cheating card and immediately win the gambling round.",
+        "zh-TW": "當你仍參與賭局且有人打出作弊牌時，可取消該作弊牌，並立即贏得本輪賭博。"
+      },
+      "responseKind": "NEGATE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "CARD",
+          "all": [
+            { "kind": "SOURCE_TYPE", "types": ["CHEATING"] },
+            { "kind": "GAMBLING", "fact": "PARTICIPANT" },
+            { "kind": "NEGATABLE", "value": true }
+          ]
+        }
+      },
+      "effects": [{ "op": "NEGATE_CURRENT_SOURCE" }, { "op": "WIN_GAMBLING" }],
+      "engineRequirements": ["gambling.win-from-response"],
+      "notes": [
+        "The response happens before a cheating effect such as forced ejection finishes resolving."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M06"
+      }
+    },
+    {
+      "id": "dump_gambling_pot_to_inn",
+      "type": "SOMETIMES",
+      "display": {
+        "en-US": "The House Takes the Pot",
+        "zh-TW": "酒館收走賭池"
+      },
+      "rulesSummary": {
+        "en-US": "During a gambling round, end the round immediately and move the entire pot to the Inn. It cannot be used after the final pass, to dodge an ante caused by starting/raising, or in response to an effect that will itself end the round.",
+        "zh-TW": "在賭博進行中，可立即結束本輪，並把整個賭池交給酒館。不能在最後一人已跳過後使用，也不能用來逃避開局／加注造成的投入，或回應本來就會結束賭局的效果。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "GAMBLING_CHECKPOINT",
+        "requires": {
+          "gamblingActive": true,
+          "notAfterFinalPass": true,
+          "notAnteAvoidance": true,
+          "sourceWillNotEndRound": true
+        }
+      },
+      "effects": [{ "op": "END_GAMBLING", "potDestination": "INN" }],
+      "engineRequirements": [
+        "reaction.gambling-checkpoint",
+        "gambling.end-to-inn"
+      ],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M07"
+      }
+    },
+    {
+      "id": "steal_winners_pot",
+      "type": "SOMETIMES",
+      "display": {
+        "en-US": "Not So Fast—That Pot Is Mine",
+        "zh-TW": "等等，這賭池是我的"
+      },
+      "rulesSummary": {
+        "en-US": "After a winner is determined but before payout is finalized, replace the winner with yourself and take the pot.",
+        "zh-TW": "在賭局已決定勝者、但賭池尚未完成支付前，把勝者改成自己並取得賭池。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "SYSTEM_RESPONSE",
+        "trigger": { "systemEvent": "GAMBLING_WIN_BEFORE_PAYOUT" }
+      },
+      "effects": [{ "op": "REPLACE_GAMBLING_WINNER", "target": "SELF" }],
+      "engineRequirements": [
+        "reaction.post-gambling-settlement",
+        "gambling.replace-winner"
+      ],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M08"
+      }
+    },
+    {
+      "id": "substitute_one_gold_from_inn",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Found Coin", "zh-TW": "撿到一枚金幣" },
+      "rulesSummary": {
+        "en-US": "When you must pay or ante Gold, satisfy exactly 1 Gold of that cost using Gold from the Inn instead of your stash.",
+        "zh-TW": "當你必須支付或投入金幣時，其中恰好 1 金幣改由酒館支付，而不是從你的金幣中扣除。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "SYSTEM_RESPONSE",
+        "trigger": {
+          "systemEvent": ["PAYMENT_REQUIRED", "ANTE_REQUIRED"],
+          "actor": "SELF",
+          "minAmount": 1
+        }
+      },
+      "effects": [{ "op": "SUBSTITUTE_PAYMENT_FROM_INN", "amount": 1 }],
+      "engineRequirements": [
+        "reaction.payment-context",
+        "gold.payment-substitution"
+      ],
+      "notes": [
+        "It cannot retroactively reclaim Gold already placed in the gambling pot.",
+        "Fresh complete matrix confirms 'Pay or Ante with found gold' and exact quantities.",
+        "Official later examples confirm paying a 1-Gold obligation with Inn Gold. Public primary text located in this audit does not fully establish how this exact RDI1 card generalizes to obligations greater than 1 Gold. Keep the implementation at one substituted Gold unless primary card text says otherwise; do not generalize."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "LIMITED_PRIMARY_CARD_TEXT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M09"
+      }
+    },
+    {
+      "id": "take_one_from_pot",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Palm a Coin", "zh-TW": "順手摸走一枚" },
+      "rulesSummary": {
+        "en-US": "During an active gambling round, take 1 Gold from the pot and add it to your stash without changing control.",
+        "zh-TW": "在賭博進行中，從賭池拿走 1 金幣加入自己的金幣，不改變賭局主導權。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "GAMBLING_CHECKPOINT",
+        "requires": { "gamblingActive": true, "potMin": 1 }
+      },
+      "effects": [{ "op": "TAKE_FROM_GAMBLING_POT", "amount": 1 }],
+      "engineRequirements": [
+        "reaction.gambling-checkpoint",
+        "gambling.take-from-pot"
+      ],
+      "notes": [
+        "Later official RDI6 rules explicitly confirm Gerki may do this even while not participating in the gambling round."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "LATER_OFFICIAL_CROSSCHECK",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": [
+          "fresh_character_matrix",
+          "official_rdi1_15e",
+          "official_rdi6_3e"
+        ],
+        "ledgerId": "M10"
+      }
+    },
+    {
+      "id": "avoid_ante_leave",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Sit This One Out", "zh-TW": "這局我不玩" },
+      "rulesSummary": {
+        "en-US": "When you are required to ante, do not pay that ante and leave the gambling round. Previously anted Gold stays in the pot.",
+        "zh-TW": "當你必須投入金幣時，不支付這次投入並離開本輪賭博；之前已投入的金幣仍留在賭池。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "SYSTEM_RESPONSE",
+        "trigger": { "systemEvent": "ANTE_REQUIRED", "actor": "SELF" }
+      },
+      "effects": [
+        { "op": "CANCEL_CURRENT_ANTE_FOR_SELF" },
+        { "op": "LEAVE_GAMBLING", "target": "SELF" }
+      ],
+      "engineRequirements": [
+        "reaction.ante-context",
+        "gambling.cancel-ante-and-leave"
+      ],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M11"
+      }
+    },
+    {
+      "id": "avoid_ante_leave_or_ignore_drink",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Excuse or Escape", "zh-TW": "閃人或擋酒" },
+      "rulesSummary": {
+        "en-US": "Choose the applicable branch: when required to ante, avoid that ante and leave the round; or when a Drink would affect you, ignore that entire Drink.",
+        "zh-TW": "依目前情境選擇適用效果：必須投入時可免除該次投入並離開賭局；或當飲料將影響你時，忽略整杯飲料。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "MULTI_TRIGGER",
+        "triggers": [
+          { "systemEvent": "ANTE_REQUIRED", "actor": "SELF" },
+          { "event": "DRINK", "affects": "SELF" }
+        ]
+      },
+      "effects": [
+        {
+          "op": "CONTEXT_BRANCH",
+          "branches": ["CANCEL_ANTE_AND_LEAVE", "IGNORE_CURRENT_DRINK"]
+        }
+      ],
+      "engineRequirements": [
+        "reaction.multi-trigger",
+        "gambling.cancel-ante-and-leave",
+        "drink.ignore"
+      ],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M12"
+      }
+    },
+    {
+      "id": "avoid_ante_leave_or_ignore_drink_pay_one",
+      "type": "SOMETIMES",
+      "display": {
+        "en-US": "Pay the Tab or Leave",
+        "zh-TW": "付帳擋酒，或退出"
+      },
+      "rulesSummary": {
+        "en-US": "When required to ante, avoid the ante and leave the round; or ignore a Drink affecting you and pay 1 Gold to the Inn.",
+        "zh-TW": "必須投入時可免除該次投入並離開賭局；或忽略一杯會影響你的飲料，並支付 1 金幣給酒館。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "MULTI_TRIGGER",
+        "triggers": [
+          { "systemEvent": "ANTE_REQUIRED", "actor": "SELF" },
+          { "event": "DRINK", "affects": "SELF" }
+        ]
+      },
+      "effects": [
+        {
+          "op": "CONTEXT_BRANCH",
+          "branches": ["CANCEL_ANTE_AND_LEAVE", "IGNORE_DRINK_AND_PAY_INN_1"]
+        }
+      ],
+      "engineRequirements": [
+        "reaction.multi-trigger",
+        "drink.ignore-with-cost",
+        "gambling.cancel-ante-and-leave"
+      ],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M13"
+      }
+    },
+    {
+      "id": "ignore_card_all_stats_or_drink",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Slip Away Completely", "zh-TW": "全身而退" },
+      "rulesSummary": {
+        "en-US": "Ignore either a Drink affecting you, or an Action/Sometimes/Anytime card that directly affects your Fortitude, Alcohol Content, or Gold.",
+        "zh-TW": "忽略一杯會影響你的飲料；或忽略一張會直接影響你耐力值、酒精值或金幣的行動／Sometimes／Anytime 牌。"
+      },
+      "responseKind": "IGNORE",
+      "legality": {
+        "mode": "MULTI_TRIGGER",
+        "triggers": [
+          { "event": "DRINK", "affects": "SELF" },
+          {
+            "event": "CARD",
+            "sourceTypes": ["ACTION", "SOMETIMES", "ANYTIME"],
+            "directStat": ["FORTITUDE", "ALCOHOL", "GOLD"],
+            "affects": "SELF"
+          }
+        ]
+      },
+      "effects": [{ "op": "IGNORE_CONTEXT_FOR_SELF" }],
+      "engineRequirements": ["reaction.multi-trigger"],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M14"
+      }
+    },
+    {
+      "id": "ignore_card_all_stats",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Arcane Refusal", "zh-TW": "奧術拒絕" },
+      "rulesSummary": {
+        "en-US": "Ignore an Action/Sometimes/Anytime card that directly affects your Fortitude, Alcohol Content, or Gold.",
+        "zh-TW": "忽略一張會直接影響你耐力值、酒精值或金幣的行動／Sometimes／Anytime 牌。"
+      },
+      "responseKind": "IGNORE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "CARD",
+          "sourceTypes": ["ACTION", "SOMETIMES", "ANYTIME"],
+          "directStat": ["FORTITUDE", "ALCOHOL", "GOLD"],
+          "affects": "SELF"
+        }
+      },
+      "effects": [{ "op": "IGNORE_CURRENT_EFFECT_FOR_SELF" }],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M15"
+      }
+    },
+    {
+      "id": "ignore_action_sometimes_fort_alcohol",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Steady Yourself", "zh-TW": "穩住自己" },
+      "rulesSummary": {
+        "en-US": "Ignore an Action or Sometimes card that directly affects your Fortitude or Alcohol Content.",
+        "zh-TW": "忽略一張會直接影響你耐力值或酒精值的行動牌或 Sometimes 牌。"
+      },
+      "responseKind": "IGNORE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "CARD",
+          "sourceTypes": ["ACTION", "SOMETIMES"],
+          "directStat": ["FORTITUDE", "ALCOHOL"],
+          "affects": "SELF"
+        }
+      },
+      "effects": [{ "op": "IGNORE_CURRENT_EFFECT_FOR_SELF" }],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M16"
+      }
+    },
+    {
+      "id": "ignore_action_sometimes_fort_loss",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Brace for Impact", "zh-TW": "擋下傷害" },
+      "rulesSummary": {
+        "en-US": "Ignore an Action or Sometimes card that would directly make you lose Fortitude.",
+        "zh-TW": "忽略一張會直接使你損失耐力值的行動牌或 Sometimes 牌。"
+      },
+      "responseKind": "IGNORE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "CARD",
+          "sourceTypes": ["ACTION", "SOMETIMES"],
+          "directStatLoss": "FORTITUDE",
+          "affects": "SELF"
+        }
+      },
+      "effects": [{ "op": "IGNORE_CURRENT_EFFECT_FOR_SELF" }],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M17"
+      }
+    },
+    {
+      "id": "negate_sometimes_counter",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Hard No", "zh-TW": "強硬否決" },
+      "rulesSummary": {
+        "en-US": "Negate a Sometimes card. This counter belongs to a protected counter family: it may itself only be negated by another card in the same family.",
+        "zh-TW": "取消一張 Sometimes 牌。本牌屬於特殊反制系列：它本身只能被同系列的反制牌取消。"
+      },
+      "responseKind": "NEGATE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "CARD",
+          "sourceTypes": ["SOMETIMES"],
+          "negatable": true
+        }
+      },
+      "effects": [{ "op": "NEGATE_CURRENT_SOURCE" }],
+      "engineRequirements": ["reaction.counter-family"],
+      "notes": [
+        "Compile with counterFamily='rdi_core_hard_no' and negationPolicy='SAME_FAMILY_ONLY'."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M18"
+      }
+    },
+    {
+      "id": "ignore_drink",
+      "type": "SOMETIMES",
+      "display": { "en-US": "No Thanks", "zh-TW": "這杯免了" },
+      "rulesSummary": {
+        "en-US": "Ignore the entire Drink that you are about to drink, including its Chasers.",
+        "zh-TW": "忽略你即將喝下的整杯飲料，包含所有續杯效果。"
+      },
+      "responseKind": "IGNORE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": { "event": "DRINK", "affects": "SELF" }
+      },
+      "effects": [{ "op": "IGNORE_CURRENT_DRINK" }],
+      "engineRequirements": ["drink.ignore"],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M19"
+      }
+    },
+    {
+      "id": "order_two_extra_drinks",
+      "type": "SOMETIMES",
+      "display": {
+        "en-US": "Extra Round for My Friends",
+        "zh-TW": "再請朋友兩杯"
+      },
+      "rulesSummary": {
+        "en-US": "During your Order a Drink phase, pay 1 Gold to the Inn and order 2 additional Drinks. Each extra Drink may be placed on any other player's Drink Me! pile.",
+        "zh-TW": "在你的請客階段，支付 1 金幣給酒館並額外請 2 杯。每杯都可放到任一其他玩家的暢飲區。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "PHASE_OPPORTUNITY",
+        "phase": "ORDER_DRINK",
+        "actor": "SELF"
+      },
+      "effects": [
+        { "op": "PAY_INN", "target": "SELF", "amount": 1 },
+        {
+          "op": "ORDER_EXTRA_DRINKS",
+          "count": 2,
+          "targets": "OTHER_PLAYERS_EACH_CARD"
+        }
+      ],
+      "engineRequirements": ["reaction.phase-sometimes", "drink.order-extra"],
+      "notes": [
+        "Must be legal both before and after the normal Order-a-Drink special action while still in this phase."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M20"
+      }
+    },
+    {
+      "id": "all_players_drink_now",
+      "type": "ACTION",
+      "display": { "en-US": "Drinks for Everyone", "zh-TW": "大家一起喝" },
+      "rulesSummary": {
+        "en-US": "Every living player, including you, reveals and resolves a Drink from the central Drink Deck, with any Chasers. Their Drink Me! piles are not used.",
+        "zh-TW": "所有仍在遊戲中的玩家（包含你）立刻從中央酒牌堆各翻開並結算一杯酒，包含追加酒；不使用各自的暢飲區。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE", "actor": "SELF" },
+      "effects": [
+        {
+          "op": "FORCE_SIMULTANEOUS_DRINK",
+          "targets": "ALL_PLAYERS",
+          "source": "INN"
+        }
+      ],
+      "engineRequirements": ["drink.force-simultaneous"],
+      "notes": [
+        "Confirmed by later official RDI6 and RDI10 examples naming Deirdre's card."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "LATER_OFFICIAL_CROSSCHECK",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": [
+          "fresh_character_matrix",
+          "official_rdi1_15e",
+          "official_rdi6_3e"
+        ],
+        "ledgerId": "M21"
+      }
+    },
+    {
+      "id": "force_extra_drink_on_reveal",
+      "type": "SOMETIMES",
+      "display": { "en-US": "One More for You", "zh-TW": "你再喝一杯" },
+      "rulesSummary": {
+        "en-US": "After another player reveals their complete Drink, including all Chasers, but before it resolves, make them take one additional Drink from their Drink Me! pile. The additional Drink resolves separately.",
+        "zh-TW": "當另一名玩家翻開完整的酒（包含所有追加酒）後、結算前，使其再從自己的暢飲區喝一杯酒；額外的酒分別結算。"
+      },
+      "responseKind": null,
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "DRINK",
+          "sourceActor": "OTHER",
+          "timing": "AFTER_CHASERS_BEFORE_RESOLVE"
+        }
+      },
+      "effects": [
+        {
+          "op": "QUEUE_EXTRA_DRINK",
+          "target": "SOURCE_ACTOR",
+          "source": "DRINK_ME_PILE",
+          "separateDrink": true
+        }
+      ],
+      "engineRequirements": ["drink.queue-extra"],
+      "notes": [
+        "Current Fifteenth Edition explicitly forbids responses before all Chasers are revealed."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M22"
+      }
+    },
+    {
+      "id": "force_other_player_drink_now",
+      "type": "ACTION",
+      "display": { "en-US": "Have Another Drink", "zh-TW": "你再喝一杯吧" },
+      "rulesSummary": {
+        "en-US": "Choose another player. They immediately reveal and resolve the top card of their Drink Me! pile.",
+        "zh-TW": "選擇另一名玩家；該玩家立刻翻開並結算自己暢飲區最上方的一張飲料。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE", "target": "OTHER_PLAYER" },
+      "effects": [
+        {
+          "op": "FORCE_DRINK",
+          "target": "CHOSEN_PLAYER",
+          "source": "DRINK_ME_PILE"
+        }
+      ],
+      "engineRequirements": ["drink.force-one"],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M23"
+      }
+    },
+    {
+      "id": "pass_own_drink",
+      "type": "SOMETIMES",
+      "display": { "en-US": "You Need This More", "zh-TW": "這杯更適合你" },
+      "rulesSummary": {
+        "en-US": "When you are about to drink a Drink, give that entire Drink to another player. They become the affected drinker.",
+        "zh-TW": "當你即將喝一杯飲料時，把整杯交給另一名玩家；該玩家改為承受這杯飲料。"
+      },
+      "responseKind": null,
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "DRINK",
+          "affects": "SELF",
+          "timing": "AFTER_CHASERS_BEFORE_RESOLVE"
+        },
+        "target": "OTHER_PLAYER"
+      },
+      "effects": [{ "op": "PASS_CURRENT_DRINK", "target": "CHOSEN_PLAYER" }],
+      "engineRequirements": ["drink.pass"],
+      "notes": [
+        "Current official rules show the RDI1 pass-a-Drink card and current Drinking Contest behavior."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M24"
+      }
+    },
+    {
+      "id": "split_own_drink",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Share the Drink", "zh-TW": "一起分這杯" },
+      "rulesSummary": {
+        "en-US": "When you are about to drink, split the combined numeric effects of the Drink with another player. Each numeric effect is halved and rounded up, creating two independent Drinks.",
+        "zh-TW": "當你即將喝下一杯飲料時，與另一名玩家平分此飲料合併後的數值效果；每個數值效果除以二並向上取整，形成兩杯獨立飲料。"
+      },
+      "responseKind": null,
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "DRINK",
+          "affects": "SELF",
+          "timing": "AFTER_CHASERS_BEFORE_RESOLVE"
+        },
+        "target": "OTHER_PLAYER"
+      },
+      "effects": [
+        {
+          "op": "SPLIT_CURRENT_DRINK",
+          "target": "CHOSEN_PLAYER",
+          "rounding": "CEIL_EACH_NUMERIC_EFFECT"
+        }
+      ],
+      "engineRequirements": ["drink.split"],
+      "notes": [
+        "Current official rules define independent split Drinks, pre-split modifications, combined numeric effects, and ceil rounding."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M25"
+      }
+    },
+    {
+      "id": "alcohol_to_fortitude",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Liquid Courage", "zh-TW": "液體勇氣" },
+      "rulesSummary": {
+        "en-US": "When you are about to drink, replace that Drink's Alcohol Content gain with an equal Fortitude gain. Other effects of the Drink remain.",
+        "zh-TW": "當你即將喝一杯飲料時，把該飲料造成的酒精值增加改成等量的耐力值增加；飲料的其他效果仍照常。"
+      },
+      "responseKind": null,
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": { "event": "DRINK", "affects": "SELF" }
+      },
+      "effects": [{ "op": "REPLACE_DRINK_ALCOHOL_WITH_FORTITUDE" }],
+      "engineRequirements": ["drink.replace-alcohol-with-fortitude"],
+      "notes": [
+        "Later official RDI6 example confirms Dragon Breath +4 Alcohol becomes +4 Fortitude."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "LATER_OFFICIAL_CROSSCHECK",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": [
+          "fresh_character_matrix",
+          "official_rdi1_15e",
+          "official_rdi6_3e"
+        ],
+        "ledgerId": "M26"
+      }
+    },
+    {
+      "id": "add_two_alcohol_to_drink",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Spike the Drink", "zh-TW": "把酒加烈" },
+      "rulesSummary": {
+        "en-US": "Add 2 Alcohol Content to one Drink that has been revealed and is currently being resolved.",
+        "zh-TW": "使一杯已翻開、正在結算的飲料額外增加 2 點酒精值。"
+      },
+      "responseKind": null,
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "DRINK",
+          "timing": "AFTER_CHASERS_BEFORE_RESOLVE"
+        },
+        "target": "CURRENT_DRINK"
+      },
+      "effects": [
+        { "op": "MODIFY_DRINK", "alcoholDelta": 2, "fortitudeDelta": 0 }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M27"
+      }
+    },
+    {
+      "id": "reduce_drink_alcohol_two",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Water It Down", "zh-TW": "把酒沖淡" },
+      "rulesSummary": {
+        "en-US": "Reduce one revealed Drink's Alcohol Content by 2, to a minimum effective value of 0 where rules require.",
+        "zh-TW": "使一杯已翻開飲料的酒精值效果降低 2；依規則需要時最低視為 0。"
+      },
+      "responseKind": null,
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "DRINK",
+          "timing": "AFTER_CHASERS_BEFORE_RESOLVE"
+        },
+        "target": "CURRENT_DRINK"
+      },
+      "effects": [
+        { "op": "MODIFY_DRINK", "alcoholDelta": -2, "fortitudeDelta": 0 }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M28"
+      }
+    },
+    {
+      "id": "negate_drink_change_card",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Hands Off the Drinks", "zh-TW": "別再動飲料了" },
+      "rulesSummary": {
+        "en-US": "Negate a Sometimes card that changes a Drink: modifying, Negating, Ignoring, passing or splitting it. Excludes another copy of this counter, ordering Drinks, forcing drinking, direct player Alcohol changes and Drink Events. Only the protected hard-counter family can affect this counter.",
+        "zh-TW": "取消一張會改變酒效果的 Sometimes 牌：修改、取消、忽略、轉交或平分酒。不能取消同機制反制牌、請客、強迫喝酒、直接改變玩家酒精值或影響酒事件的牌。只有受保護的強硬反制系列能影響本牌。"
+      },
+      "responseKind": "NEGATE",
+      "legality": {
+        "mode": "RESPONSE",
+        "trigger": {
+          "event": "CARD",
+          "sourceFact": "CHANGES_DRINK_EFFECT",
+          "negatable": true,
+          "sourceTypes": ["SOMETIMES"]
+        },
+        "excludeSourceFacts": [
+          "SAME_COUNTER_FAMILY",
+          "ORDERS_DRINK",
+          "FORCES_DRINK",
+          "DIRECT_ALCOHOL_STAT",
+          "AFFECTS_DRINK_EVENT"
+        ]
+      },
+      "effects": [{ "op": "NEGATE_CURRENT_SOURCE" }],
+      "engineRequirements": ["reaction.source-capabilities"],
+      "notes": [
+        "Current Fifteenth Edition prints this restriction and protection."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M29"
+      },
+      "counterMetadata": {
+        "family": "rdi_core_drink_change",
+        "allowedCounterFamilies": ["rdi_core_hard_no"]
+      }
+    },
+    {
+      "id": "damage_one",
+      "type": "ACTION",
+      "display": { "en-US": "Quick Jab", "zh-TW": "快速一擊" },
+      "rulesSummary": {
+        "en-US": "Choose another player. They lose 1 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 1 點耐力值。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE", "target": "OTHER_PLAYER" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "CHOSEN_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -1
+        }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M30"
+      }
+    },
+    {
+      "id": "damage_two",
+      "type": "ACTION",
+      "display": { "en-US": "Solid Hit", "zh-TW": "強力一擊" },
+      "rulesSummary": {
+        "en-US": "Choose another player. They lose 2 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 2 點耐力值。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE", "target": "OTHER_PLAYER" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "CHOSEN_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -2
+        }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M31"
+      }
+    },
+    {
+      "id": "damage_three",
+      "type": "ACTION",
+      "display": { "en-US": "Heavy Blow", "zh-TW": "猛烈重擊" },
+      "rulesSummary": {
+        "en-US": "Choose another player. They lose 3 Fortitude.",
+        "zh-TW": "選擇另一名玩家；其失去 3 點耐力值。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE", "target": "OTHER_PLAYER" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "CHOSEN_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -3
+        }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M32"
+      }
+    },
+    {
+      "id": "damage_all_others_one",
+      "type": "ACTION",
+      "display": { "en-US": "Tablewide Trouble", "zh-TW": "全桌鬧事" },
+      "rulesSummary": {
+        "en-US": "Each other living player loses 1 Fortitude.",
+        "zh-TW": "其他所有仍在遊戲中的玩家各失去 1 點耐力值。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "EACH_OTHER_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -1
+        }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M33"
+      }
+    },
+    {
+      "id": "hit_back_two_after_loss",
+      "type": "SOMETIMES",
+      "display": { "en-US": "Hit Back", "zh-TW": "打回去" },
+      "rulesSummary": {
+        "en-US": "Immediately after another player causes you to actually lose Fortitude, that original source player loses 2 Fortitude. You cannot use this if the loss was fully ignored/reduced to 0.",
+        "zh-TW": "當另一名玩家使你實際失去耐力值後立刻使用；原始來源玩家失去 2 點耐力值。若該次損失被完全忽略或降為 0，則不能使用。"
+      },
+      "responseKind": "SOMETIMES",
+      "legality": {
+        "mode": "SYSTEM_RESPONSE",
+        "trigger": {
+          "systemEvent": "FORTITUDE_LOSS_RESOLVED",
+          "affected": "SELF",
+          "sourcePlayer": "OTHER",
+          "actualLossMin": 1
+        }
+      },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "ORIGINAL_SOURCE_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -2
+        }
+      ],
+      "engineRequirements": ["reaction.post-stat-event"],
+      "notes": [
+        "If damage was redirected, the original source of the Fortitude loss remains the source for this retaliation.",
+        "Current timing example confirms this occurs after actual Fortitude loss resolves, not while damage is merely pending."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M34"
+      }
+    },
+    {
+      "id": "gain_two_fortitude",
+      "type": "ANYTIME",
+      "display": { "en-US": "Second Wind", "zh-TW": "喘口氣" },
+      "rulesSummary": {
+        "en-US": "Gain 2 Fortitude.",
+        "zh-TW": "獲得 2 點耐力值。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ANYTIME" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "SELF",
+          "stat": "FORTITUDE",
+          "delta": 2
+        }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M35"
+      }
+    },
+    {
+      "id": "heal_other_charge_gold",
+      "type": "ACTION",
+      "display": { "en-US": "Paid Healing", "zh-TW": "收費治療" },
+      "rulesSummary": {
+        "en-US": "Choose another player. They gain 2 Fortitude, then pay you 1 Gold. The payment still applies even if their Fortitude is already at its maximum.",
+        "zh-TW": "選擇另一名玩家；其獲得 2 點耐力值，接著支付你 1 金幣。即使其耐力值已達上限，付款仍照常發生。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE", "target": "OTHER_PLAYER" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "CHOSEN_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": 2
+        },
+        { "op": "TRANSFER_GOLD", "target": "CHOSEN_PLAYER", "amount": 1 }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M36"
+      }
+    },
+    {
+      "id": "heal_all_and_collect",
+      "type": "ACTION",
+      "display": {
+        "en-US": "Group Blessing, Suggested Donation",
+        "zh-TW": "群體祝福，自由樂捐"
+      },
+      "rulesSummary": {
+        "en-US": "Every living player gains 1 Fortitude. Then each other player pays you 1 Gold.",
+        "zh-TW": "所有仍在遊戲中的玩家各獲得 1 點耐力值；接著其他每位玩家各支付你 1 金幣。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE" },
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "ALL_PLAYERS",
+          "stat": "FORTITUDE",
+          "delta": 1
+        },
+        { "op": "TRANSFER_GOLD", "target": "EACH_OTHER_PLAYER", "amount": 1 }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M37"
+      }
+    },
+    {
+      "id": "collect_one_from_each_other",
+      "type": "ACTION",
+      "display": { "en-US": "Impress the Table", "zh-TW": "讓全桌買單" },
+      "rulesSummary": {
+        "en-US": "Each other living player pays you 1 Gold.",
+        "zh-TW": "其他每位仍在遊戲中的玩家各支付你 1 金幣。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ACTION_PHASE" },
+      "effects": [
+        { "op": "TRANSFER_GOLD", "target": "EACH_OTHER_PLAYER", "amount": 1 }
+      ],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M38"
+      }
+    },
+    {
+      "id": "take_one_gold",
+      "type": "ANYTIME",
+      "display": { "en-US": "Light Fingers", "zh-TW": "順手拿一枚" },
+      "rulesSummary": {
+        "en-US": "Choose a player. Take 1 Gold from that player's stash.",
+        "zh-TW": "選擇一名玩家，從其金幣中拿走 1 金幣。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ANYTIME", "target": "ANY_LIVING_PLAYER" },
+      "effects": [
+        { "op": "TRANSFER_GOLD", "target": "CHOSEN_PLAYER", "amount": 1 }
+      ],
+      "engineRequirements": [],
+      "notes": [
+        "Choosing yourself is mechanically harmless; UI may prefer other players."
+      ],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "FRESH_COMPLETE_MATRIX_PLUS_CURRENT_GENERIC_RULES",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M39"
+      }
+    },
+    {
+      "id": "tip_wench",
+      "type": "ANYTIME",
+      "display": { "en-US": "Tip the Wench", "zh-TW": "給女侍小費" },
+      "rulesSummary": {
+        "en-US": "Choose a player. That player pays 1 Gold to the Inn.",
+        "zh-TW": "選擇一名玩家；該玩家支付 1 金幣給酒館。"
+      },
+      "responseKind": null,
+      "legality": { "mode": "ANYTIME", "target": "ANY_LIVING_PLAYER" },
+      "effects": [{ "op": "PAY_INN", "target": "CHOSEN_PLAYER", "amount": 1 }],
+      "engineRequirements": [],
+      "notes": [],
+      "verification": {
+        "status": "REAUDITED",
+        "evidenceTier": "CURRENT_OFFICIAL_DIRECT",
+        "quantityEvidenceTier": "SECONDARY_COMPLETE_MATRIX",
+        "basis": ["fresh_character_matrix", "official_rdi1_15e"],
+        "ledgerId": "M40"
+      }
+    }
+  ],
+  "drinkDeck": {
+    "physicalCount": 30,
+    "cards": [
+      {
+        "drinkKey": "light_ale",
+        "quantity": 3,
+        "type": "DRINK",
+        "display": { "en-US": "Light Tavern Ale", "zh-TW": "酒館淡啤酒" },
+        "alcoholContent": 1,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 1 Alcohol Content.",
+          "zh-TW": "增加 1 點酒精值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "light_ale_chaser",
+        "quantity": 2,
+        "type": "DRINK",
+        "display": {
+          "en-US": "Light Ale with a Chaser",
+          "zh-TW": "淡啤酒＋續杯"
+        },
+        "alcoholContent": 1,
+        "fortitudeChange": 0,
+        "chaser": true,
+        "rulesSummary": {
+          "en-US": "Gain 1 Alcohol Content; reveal and add a Chaser from the same source.",
+          "zh-TW": "增加 1 點酒精值；從同一來源翻開續杯並合併效果。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "dark_ale",
+        "quantity": 3,
+        "type": "DRINK",
+        "display": { "en-US": "Dark Tavern Ale", "zh-TW": "酒館黑啤酒" },
+        "alcoholContent": 1,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 1 Alcohol Content.",
+          "zh-TW": "增加 1 點酒精值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "dark_ale_chaser",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": {
+          "en-US": "Dark Ale with a Chaser",
+          "zh-TW": "黑啤酒＋續杯"
+        },
+        "alcoholContent": 1,
+        "fortitudeChange": 0,
+        "chaser": true,
+        "rulesSummary": {
+          "en-US": "Gain 1 Alcohol Content; reveal and add a Chaser from the same source.",
+          "zh-TW": "增加 1 點酒精值；從同一來源翻開續杯並合併效果。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "dirty_dishwater",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Questionable Dishwater", "zh-TW": "可疑洗碗水" },
+        "alcoholContent": 0,
+        "fortitudeChange": -1,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Lose 1 Fortitude.",
+          "zh-TW": "失去 1 點耐力值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "wine",
+        "quantity": 3,
+        "type": "DRINK",
+        "display": { "en-US": "House Wine", "zh-TW": "招牌葡萄酒" },
+        "alcoholContent": 2,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 2 Alcohol Content.",
+          "zh-TW": "增加 2 點酒精值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "wine_chaser",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": {
+          "en-US": "House Wine with a Chaser",
+          "zh-TW": "葡萄酒＋續杯"
+        },
+        "alcoholContent": 2,
+        "fortitudeChange": 0,
+        "chaser": true,
+        "rulesSummary": {
+          "en-US": "Gain 2 Alcohol Content; reveal and add a Chaser from the same source.",
+          "zh-TW": "增加 2 點酒精值；從同一來源翻開續杯並合併效果。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "troll_swill",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Trollish Swill", "zh-TW": "食人妖餿酒" },
+        "alcoholContent": 1,
+        "fortitudeChange": -1,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 1 Alcohol Content; Lose 1 Fortitude.",
+          "zh-TW": "增加 1 點酒精值；失去 1 點耐力值。"
+        },
+        "specialMechanics": [
+          {
+            "op": "TRAIT_REPLACEMENT",
+            "trait": "TROLL",
+            "replace": { "alcohol": 2, "fortitude": 0 }
+          }
+        ]
+      },
+      {
+        "drinkKey": "orcish_rotgut",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Orcish Rotgut", "zh-TW": "獸人烈酒" },
+        "alcoholContent": 0,
+        "fortitudeChange": -2,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Lose 2 Fortitude.",
+          "zh-TW": "失去 2 點耐力值。"
+        },
+        "specialMechanics": [
+          {
+            "op": "TRAIT_REPLACEMENT",
+            "trait": "ORC",
+            "replace": { "alcohol": 2, "fortitude": 0 }
+          }
+        ]
+      },
+      {
+        "drinkKey": "elven_wine",
+        "quantity": 2,
+        "type": "DRINK",
+        "display": { "en-US": "Elven Vintage", "zh-TW": "精靈佳釀" },
+        "alcoholContent": 3,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 3 Alcohol Content.",
+          "zh-TW": "增加 3 點酒精值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "elven_wine_chaser",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": {
+          "en-US": "Elven Vintage with a Chaser",
+          "zh-TW": "精靈佳釀＋續杯"
+        },
+        "alcoholContent": 3,
+        "fortitudeChange": 0,
+        "chaser": true,
+        "rulesSummary": {
+          "en-US": "Gain 3 Alcohol Content; reveal and add a Chaser from the same source.",
+          "zh-TW": "增加 3 點酒精值；從同一來源翻開續杯並合併效果。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "dragon_breath",
+        "quantity": 3,
+        "type": "DRINK",
+        "display": { "en-US": "Dragonfire Ale", "zh-TW": "龍火麥酒" },
+        "alcoholContent": 4,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 4 Alcohol Content.",
+          "zh-TW": "增加 4 點酒精值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "water",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Water", "zh-TW": "水" },
+        "alcoholContent": 0,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "No numeric effect.",
+          "zh-TW": "沒有數值效果。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "wizards_brew",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Wizard's Tonic", "zh-TW": "法師特釀" },
+        "alcoholContent": 2,
+        "fortitudeChange": 2,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 2 Alcohol Content; Gain 2 Fortitude.",
+          "zh-TW": "增加 2 點酒精值；獲得 2 點耐力值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "cutting_off",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Cut Off for the Night", "zh-TW": "今晚禁酒" },
+        "alcoholContent": -1,
+        "fortitudeChange": 0,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Lose 1 Alcohol Content.",
+          "zh-TW": "降低 1 點酒精值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "holy_water",
+        "quantity": 1,
+        "type": "DRINK",
+        "display": { "en-US": "Blessed Water", "zh-TW": "祝福聖水" },
+        "alcoholContent": 0,
+        "fortitudeChange": 2,
+        "chaser": false,
+        "rulesSummary": {
+          "en-US": "Gain 2 Fortitude.",
+          "zh-TW": "獲得 2 點耐力值。"
+        },
+        "specialMechanics": []
+      },
+      {
+        "drinkKey": "drinking_contest",
+        "quantity": 2,
+        "type": "DRINK_EVENT",
+        "display": { "en-US": "Drinking Contest", "zh-TW": "飲酒大賽" },
+        "rulesSummary": {
+          "en-US": "Each player reveals a complete Drink from the central Drink Deck, including Chasers, then may modify it before drinking. A revealed Drink Event has no effect and scores 0. The highest modified Alcohol total wins 1 Gold from each other player; negative totals score 0 but still resolve normally. Passing, splitting, Ignoring and extra Drinks do not transfer or replace the revealed Drink score. Tied highest players repeat, subject to the current pass-out rules. Settle contest Gold before redistributing passed-out players' Gold.",
+          "zh-TW": "每位玩家從中央酒牌堆翻開完整的酒（包含追加酒），可在飲用前修改。翻開的酒事件沒有效果，分數為 0。修改後酒精總值最高者向其他每位玩家收取 1 金幣；負值以 0 分計，但仍正常結算實際效果。轉交、平分、忽略或額外喝酒不會轉移或取代原翻開酒的分數。最高分平手者依現行昏倒規則繼續比賽。先結算比賽金幣，再分配昏倒玩家的剩餘金幣。"
+        },
+        "effectPlan": [
+          {
+            "op": "DRINKING_CONTEST",
+            "rules": {
+              "drinkEvents": "IGNORE",
+              "scoring": "REVEALED_WITH_MODIFIERS",
+              "settlement": "AFTER_CONTEST"
+            }
+          }
+        ],
+        "engineRequirements": [
+          "drink.simultaneous-reveal",
+          "drink.contest-score",
+          "drink.contest-tie-loop",
+          "gold.contest-payout"
+        ]
+      },
+      {
+        "drinkKey": "round_on_house",
+        "quantity": 2,
+        "type": "DRINK_EVENT",
+        "display": { "en-US": "Round for the House", "zh-TW": "全場招待" },
+        "rulesSummary": {
+          "en-US": "Reveal a complete Drink from the central Drink Deck, with possible Chasers, discarding Drink Events while finding the source Drink. Create an independent copy for each living player before any modifications. Each player may then modify and resolve their own copy.",
+          "zh-TW": "從中央酒牌堆翻開完整的酒（包含可能的追加酒）；尋找來源酒時棄掉酒事件並繼續翻牌。在任何修改前，為每位仍在遊戲中的玩家建立獨立副本，再由各玩家修改並結算自己的酒。"
+        },
+        "effectPlan": [{ "op": "ROUND_ON_HOUSE", "payForRefill": true }],
+        "engineRequirements": [
+          "drink.copy-for-all",
+          "drink.skip-events-for-source",
+          "drink.independent-copies"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "deckTotals": { "deirdre": 40, "fiona": 40, "gerki": 40, "zot": 40 },
+    "characterPhysicalTotal": 160,
+    "drinkPhysicalTotal": 30,
+    "expected": {
+      "deirdre": 40,
+      "fiona": 40,
+      "gerki": 40,
+      "zot": 40,
+      "drink": 30
+    }
+  },
+  "contentVersion": {
+    "id": "content_rdi1_mechanics_v2",
+    "name": "RDI1 corrected mechanics re-audit 2026-10-05",
+    "createdAt": "2026-10-05T00:00:00.000Z"
+  }
+}
