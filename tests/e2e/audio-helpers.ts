@@ -4,6 +4,7 @@ export async function mockPlayback(page: Page) {
     const state = window;
     state.__audioCalls = [];
     state.__audioCreated = [];
+    state.__audioInstances = [];
     const music = '/audio/bgm/the-old-tower-inn.wav';
     Object.defineProperty(window, 'Audio', {
       value: class extends EventTarget {
@@ -13,6 +14,7 @@ export async function mockPlayback(page: Page) {
         constructor(path) {
           super();
           this.path = path;
+          state.__audioInstances.push(this);
           state.__audioCreated.push(path);
         }
         play() {

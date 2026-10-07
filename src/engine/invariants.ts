@@ -47,6 +47,7 @@ export function assertCoreInvariants(state: CoreGameState): void {
   stateVersionSchema.parse(state.version);
   rngStateSchema.parse(state.rng);
   z.literal(1).parse(state.schemaVersion);
+  z.literal(1).optional().parse(state.publicNarrationVersion);
   z.enum(MATCH_LIFECYCLES).parse(state.lifecycle);
   const rules = rulesConfigSchema.parse(state.rules);
   z.number().int().min(2).max(4).parse(state.players.length);

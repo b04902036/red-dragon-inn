@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave_or_ignore_drink",
+      "spokenText": "Can't you see I'm talking to this pretty, bearded lass here?",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M13: original-m13-dimli"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_card_fortitude",
+      "spokenText": "Good thing I was wearing my great-grandfather's helmet!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M15: original-m15-dimli"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_sometimes_counter",
+      "spokenText": "I don't think so!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M16: original-m16-dimli"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_order_two_extra_drinks_paid",
+      "spokenText": "Wench, bring some drinks for my friends!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M18: original-m18-dimli-1, original-m18-dimli-2"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_force_extra_drink_during_other_drink_phase",
+      "spokenText": "Drink up, friend!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M21: original-m21-dimli-1"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_pass_own_drink",
+      "spokenText": "You have this. I'm waiting for the good stuff!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M22: original-m22-dimli-1, original-m22-dimli-2"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_split_own_drink",
+      "spokenText": "Now this stuff is actually good! Try some!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M23: original-m23-dimli-1"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_alcohol_to_fortitude",
+      "spokenText": "Uuurp! That hit the spot!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M24: original-m24-dimli-1"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_add_two_alcohol_to_drink",
+      "spokenText": "Spike it with Firewater",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M25: original-m25-dimli-1, original-m25-dimli-2"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_drink_change_card",
+      "spokenText": "The Wench thinks you should stop playing with the drinks.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M27: original-m27-dimli-1"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_one",
+      "spokenText": "Stop using my head as a table!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M30: original-m30-dimli-1"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_hit_back_two_after_loss",
+      "spokenText": "Hey! You almost damaged the beard!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M37: original-m37-dimli"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_collect_one_from_each_other",
+      "spokenText": "Impressive Dwarven War Belch!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M41: original-m41-dimli"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_tip_wench",
+      "spokenText": "Tip the Wench.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M44: original-m44-dimli-0"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave",
+      "spokenText": "Oh, Hey! This looks like a serious game.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M12: original-m12-fleck-3"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave_or_ignore_drink",
+      "spokenText": "Leave me be! I'm trying to read lore here!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M13: original-m13-fleck"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_sometimes_counter",
+      "spokenText": "I don't think so!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M16: original-m16-fleck"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_order_two_extra_drinks_free_or_waive_refill",
+      "spokenText": "Wench, please allow me to pay for these drinks with a song!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M19: original-m19-fleck-1, original-m19-fleck-2"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_players_drink_from_inn",
+      "spokenText": "A toast! To my friends!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M20: original-m20-fleck-1"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_split_own_drink",
+      "spokenText": "I do so hate to drink alone...",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M23: original-m23-fleck-1, original-m23-fleck-2"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_drink_change_card",
+      "spokenText": "The Wench thinks you should stop playing with the drinks.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M27: original-m27-fleck-1"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_lose_one_alcohol_collect_one_each_other",
+      "spokenText": "And now I'm going to play something really sad.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M28: original-m28-fleck-1"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_one",
+      "spokenText": "Excuse me... I think you're sitting on my tuning fork.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M30: original-m30-fleck-1"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_two",
+      "spokenText": "Oh, I hate it when the strings break!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M31: original-m31-fleck-1, original-m31-fleck-2"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_rowdy_song",
+      "spokenText": "How about a rowdy drinking song?",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M36: original-m36-fleck-1, original-m36-fleck-2"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_hit_back_two_after_loss",
+      "spokenText": "Allow me to introduce you to my biggest fan.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M37: original-m37-fleck"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gain_two_fortitude",
+      "spokenText": "Who knew? One of my fans is a priest!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M40: original-m40-fleck"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_collect_one_from_each_other",
+      "spokenText": "I've composed a poem about our most recent adventure.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M41: original-m41-fleck"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_take_two_gold",
+      "spokenText": "This is in payment for that heroic ballad I wrote about you!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M43: original-m43-fleck-0"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_tip_wench",
+      "spokenText": "Tip the Wench.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M44: original-m44-fleck-2"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_all_stats",
+      "spokenText": "Shut up!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M14: photo-m14-gog"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_sometimes_counter",
+      "spokenText": "Gog not think so!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M16: official-m16-gog-card"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_drink",
+      "spokenText": "This taste yucky!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M17: official-m17-gog-1, official-m17-gog-2"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_three_pay_inn_one",
+      "spokenText": "Sorry, Gog not see you sitting there...",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M33: physical-m33-gog"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_four",
+      "spokenText": "Dance with Gog!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M34: physical-m34-gog"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_all_others_one",
+      "spokenText": "Gog loves everyone!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M35: physical-m35-gog"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_start_or_control",
+      "spokenText": "Gambling? I'm in!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M01: individually inspected original physical indices 0,1,2,3,4,5; .tools/step24a-source-lock-resolution/evidence/dimli.json sha256=7d820fd65ae6eb283d9548e0a932eefa13649444d9236589798e89f2903e5bfe; names and face names identical; quantities agree with locked row"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_raise_one",
+      "spokenText": "I raise!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M02: individually inspected original physical indices 6,7; .tools/step24a-source-lock-resolution/evidence/dimli.json sha256=7d820fd65ae6eb283d9548e0a932eefa13649444d9236589798e89f2903e5bfe; names and face names identical; quantities agree with locked row"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_winning_hand",
+      "spokenText": "Winning Hand!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M03: individually inspected original physical indices 8,9; .tools/step24a-source-lock-resolution/evidence/dimli.json sha256=7d820fd65ae6eb283d9548e0a932eefa13649444d9236589798e89f2903e5bfe; names and face names identical; quantities agree with locked row"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_start_or_control",
+      "spokenText": "Gambling? I'm in!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M01: individually inspected original physical indices 0,1,2,3,4,5; .tools/step24a-source-lock-resolution/evidence/fleck.json sha256=0eeea03f64b4e787a2766d7a79627a69ce5e1f8709ba2ae5c6d62150dbdea648; names and face names identical; quantities agree with locked row"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_raise_one",
+      "spokenText": "I raise!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M02: individually inspected original physical indices 6,7; .tools/step24a-source-lock-resolution/evidence/fleck.json sha256=0eeea03f64b4e787a2766d7a79627a69ce5e1f8709ba2ae5c6d62150dbdea648; names and face names identical; quantities agree with locked row"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_winning_hand",
+      "spokenText": "Winning Hand!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M03: individually inspected original physical indices 8,9; .tools/step24a-source-lock-resolution/evidence/fleck.json sha256=0eeea03f64b4e787a2766d7a79627a69ce5e1f8709ba2ae5c6d62150dbdea648; names and face names identical; quantities agree with locked row"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_control_and_eject",
+      "spokenText": "What's that up your sleeve?",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M05: original-fleck-m05; user-supplied original record name and face name agree"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_restart_gambling_round",
+      "spokenText": "Best two out of three?",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M08: official-card-m08; exact title in locked direct publisher-image inspection"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_dump_gambling_pot_to_inn",
+      "spokenText": "Oh, I guess the Wench thought that was her tip...",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M07: official-card-m07; publisher shared printed card; re-inspected .tools/step24a-m06-resume/official-pot-to-inn.png; M07 identifies one standard shared copy per character"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_dump_gambling_pot_to_inn",
+      "spokenText": "Oh, I guess the Wench thought that was her tip...",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M07: official-card-m07; publisher shared printed card; re-inspected .tools/step24a-m06-resume/official-pot-to-inn.png; M07 identifies one standard shared copy per character"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_dump_gambling_pot_to_inn",
+      "spokenText": "Oh, I guess the Wench thought that was her tip...",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M07: official-card-m07; publisher shared printed card; re-inspected .tools/step24a-m06-resume/official-pot-to-inn.png; M07 identifies one standard shared copy per character"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_anti_cheat_win_round",
+      "spokenText": "Gog think you cheating! Gog no like cheaters!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M06: official-m06; verified canonical printed identity"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_fortitude",
+      "spokenText": "Stop poking Gog",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M15: user-m15-gog; exact user-authorized two identical card identities"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_order_two_extra_drinks_paid",
+      "spokenText": "Wench, bring some drinks for my friends!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M18: project-m18-gog-1, project-m18-gog-2; M18 USER OVERRIDE ownership, two standard identical copies"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_force_extra_drink_during_other_drink_phase",
+      "spokenText": "Gog say you drink MORE!",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M21: user-m21-override; identical copies and official named identity"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_drink_change_card",
+      "spokenText": "The Wench thinks you should stop playing with the drinks.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M27: M27 USER OVERRIDE — physical provenance only"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_tip_wench",
+      "spokenText": "Tip the Wench.",
+      "evidence": "content-private/imports/rdi2/verification-ledger.json sha256=5ff240ebacbf2b0cd697f44ff670d21a3c2f099da56d1c4c9f1e05263e6511fe; M44: M44 USER OVERRIDE — physical provenance only"
+    }
+  ]
+}

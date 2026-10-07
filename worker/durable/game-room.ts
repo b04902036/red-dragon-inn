@@ -1,4 +1,5 @@
 import { DurableObject } from 'cloudflare:workers';
+import { PublicTimeline } from './public-timeline';
 import { z } from 'zod';
 import {
   resolveRuntimePack,
@@ -69,6 +70,7 @@ type Rejection = Extract<ServerMessage, { type: 'COMMAND_REJECTED' }>;
 export class GameRoom extends DurableObject<Env> {
   private clock: Clock = { now: () => Date.now() };
   private historyAvailable = true;
+  private timeline = new PublicTimeline();
   private async readRoom() {
     this.historyAvailable = await this.flushHistory(true);
     const value = await this.ctx.storage.get(ROOM_STORAGE_KEY);
@@ -130,7 +132,8 @@ export class GameRoom extends DurableObject<Env> {
       updated,
     );
     this.historyAvailable = await this.flushHistory();
-    if (this.historyAvailable) await this.broadcast(updated);
+    if (this.historyAvailable)
+      await this.broadcast(updated, entry.firstSequence);
     else await this.ctx.storage.setAlarm(now + 1000);
     return updated;
   }
@@ -437,11 +440,13 @@ export class GameRoom extends DurableObject<Env> {
     return parsed.success ? parsed.data : null;
   }
   private send(ws: WebSocket, message: ServerMessage) {
-    if (ws.readyState !== WebSocket.OPEN) return;
+    if (ws.readyState !== WebSocket.OPEN) return false;
     try {
       ws.send(encodeServerMessage(message));
+      return true;
     } catch {
       /* A closing peer must not interrupt delivery to other players. */
+      return false;
     }
   }
   private reject(
@@ -639,6 +644,7 @@ export class GameRoom extends DurableObject<Env> {
       manifest = replayManifestSchema.parse({
         schemaVersion: 1,
         setup: {
+          publicNarrationVersion: 1,
           roomId: room.roomId,
           matchId: matchIdSchema.parse(opaqueId('match')),
           hostPlayerId: room.hostPlayerId,
@@ -755,13 +761,14 @@ export class GameRoom extends DurableObject<Env> {
       commandId: command.commandId,
       stateVersion: result.acceptedVersion,
     });
-    await this.broadcast(updated);
+    await this.broadcast(updated, entry.firstSequence);
   }
 
   private async snapshot(
     ws: WebSocket,
     room: RoomRecord,
     forcePrivate = false,
+    liveFrom: number | null = null,
   ) {
     const session = this.attachment(ws);
     if (
@@ -773,6 +780,38 @@ export class GameRoom extends DurableObject<Env> {
       )
     )
       return;
+    // Presentation failures must never prevent authoritative state delivery.
+    try {
+      if (room.game !== null) {
+        await this.timeline.refresh(this.env.DB, room.game);
+        let after =
+          session.timelineMatchId === room.game.matchId
+            ? (session.timelineSequence ?? 0)
+            : 0;
+        const batches =
+          liveFrom === null
+            ? this.timeline.batches(after, 'HISTORY')
+            : [
+                ...this.timeline.batches(
+                  after,
+                  'HISTORY',
+                  Math.max(after, liveFrom - 1),
+                ),
+                ...this.timeline.batches(Math.max(after, liveFrom - 1), 'LIVE'),
+              ];
+        for (const batch of batches) {
+          if (!this.send(ws, batch)) break;
+          after = batch.lastSequence;
+        }
+        session.timelineMatchId = room.game.matchId;
+        session.timelineSequence = after;
+        ws.serializeAttachment(session);
+      }
+    } catch {
+      console.warn(
+        'Public timeline delivery unavailable; authoritative state remains available',
+      );
+    }
     this.send(ws, { type: 'PUBLIC_STATE', view: roomPublicView(room) });
     const privateView =
       room.game !== null
@@ -797,8 +836,9 @@ export class GameRoom extends DurableObject<Env> {
       ws.serializeAttachment({ ...session, privateSignature: signature });
     }
   }
-  private async broadcast(room: RoomRecord) {
-    for (const ws of this.ctx.getWebSockets()) await this.snapshot(ws, room);
+  private async broadcast(room: RoomRecord, liveFrom: number | null = null) {
+    for (const ws of this.ctx.getWebSockets())
+      await this.snapshot(ws, room, false, liveFrom);
   }
   private broadcastPresence(room: RoomRecord) {
     const players = room.players.map((player) => ({

@@ -357,6 +357,234 @@ button:disabled {
 .event-log {
   margin-top: 16px;
 }
+.timeline-scroll {
+  max-height: 520px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+.presentation-zone {
+  min-height: 140px;
+  text-align: start;
+  border: 1px solid #9e8068;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+}
+.presentation-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.presentation-controls button {
+  font-size: 0.75rem;
+  padding: 6px 8px;
+}
+.presentation-beat {
+  animation: presentation-arrive 0.35s ease-out;
+}
+.presentation-chain {
+  list-style: none;
+  padding-inline-start: 14px;
+}
+.presentation-chain li {
+  padding: 10px;
+  border-inline-start: 3px solid #edb876;
+  background: #201713;
+  border-radius: 6px;
+  margin-block: 8px;
+}
+.presentation-chain strong,
+.presentation-chain small,
+.causal-connector,
+.resolution-status {
+  display: block;
+}
+.presentation-chain [data-canceled='true'] > strong {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+.causal-connector {
+  color: #edb876;
+  font-size: 0.8rem;
+}
+.drink-presentation-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.drink-presentation-chain span {
+  border: 1px solid #edb876;
+  padding: 8px;
+  border-radius: 6px;
+}
+.presentation-drink_revealed .drink-presentation-chain {
+  animation: drink-flip 0.4s ease-out;
+}
+.presentation-card-backs {
+  margin: 12px;
+}
+.presentation-card-backs .deck-back {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 64px;
+  border: 1px solid #edb876;
+  border-radius: 6px;
+  font-size: 1.3rem;
+}
+.presentation-zone.reduced-motion .presentation-beat,
+.presentation-zone.reduced-motion .drink-presentation-chain {
+  animation: none;
+}
+@keyframes presentation-arrive {
+  from {
+    transform: translateY(12px);
+    opacity: 0.3;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes drink-flip {
+  from {
+    transform: rotateY(90deg);
+  }
+  to {
+    transform: rotateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .presentation-beat,
+  .presentation-drink_revealed .drink-presentation-chain {
+    animation: none;
+  }
+}
+.timeline-scroll:focus-visible {
+  outline: 3px solid #edb876;
+  outline-offset: 4px;
+}
+.timeline-scroll li {
+  padding-block: 5px;
+  border-bottom: 1px solid #72554255;
+  overflow-wrap: anywhere;
+}
+.player-panel {
+  position: relative;
+}
+.player-hud {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.player-hud > div {
+  background: #201713;
+  border: 1px solid #725542;
+  padding: 8px;
+  border-radius: 8px;
+}
+.player-hud dt {
+  font-size: 0.8rem;
+}
+.player-hud dd {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+.stat-live-value {
+  animation: stat-value 0.85s ease-out;
+}
+.presentation-card_played {
+  animation: played-from-seat 0.45s ease-out;
+}
+@keyframes stat-value {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  55% {
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes played-from-seat {
+  from {
+    transform: translate(var(--source-x, 0px), var(--source-y, 0px)) scale(0.5);
+    opacity: 0.4;
+  }
+  to {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-live-value,
+  .presentation-card_played {
+    animation: none;
+  }
+}
+.pile-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-weight: 700;
+}
+.knockout-meter {
+  position: relative;
+  height: 10px;
+  background: #201713;
+  margin-block: 10px 4px;
+  border-radius: 6px;
+}
+.knockout-meter span {
+  position: absolute;
+  left: 0;
+  height: 5px;
+}
+.fortitude-meter {
+  top: 0;
+  background: #b5d197;
+}
+.alcohol-meter {
+  bottom: 0;
+  background: #edb876;
+}
+.knockout-label {
+  display: block;
+  font-size: 0.7rem;
+}
+.hud-delta {
+  background: #201713;
+  border: 1px solid #edb876;
+  border-radius: 6px;
+  padding: 6px;
+  font-weight: 800;
+  animation: hud-delta 0.7s ease-out;
+}
+.player-panel[data-presentation-actor='true'] {
+  outline: 3px solid #edb876;
+}
+.player-panel[data-presentation-target='true'] {
+  outline: 3px dashed #b5d197;
+}
+@keyframes hud-delta {
+  from {
+    transform: translateY(10px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hud-delta {
+    animation: none;
+  }
+}
 .event-log ol {
   padding-left: 20px;
   font-size: 0.85rem;

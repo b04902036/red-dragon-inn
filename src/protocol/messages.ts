@@ -4,9 +4,11 @@ import { sessionIdSchema } from './rooms';
 import { presenceSchema } from './presentation';
 import { stateVersionSchema } from '../shared/version';
 import { privatePlayerViewSchema, publicGameViewSchema } from './views';
+import { publicTimelineBatchSchema } from './public-narration';
 
 // There is deliberately no raw DOMAIN_EVENT or authoritative-state socket variant.
 export const serverMessageSchema = z.discriminatedUnion('type', [
+  publicTimelineBatchSchema,
   z.strictObject({
     type: z.literal('ROOM_PRESENCE'),
     roomId: roomIdSchema,

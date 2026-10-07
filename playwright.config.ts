@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/e2e',
   testIgnore: [
+    '**/public-presentation.spec.ts',
     '**/rdi1-content.spec.ts',
     '**/rdi2-content.spec.ts',
     '**/rdi2-full-verification.spec.ts',
@@ -21,6 +22,7 @@ export default defineConfig({
     {
       name: 'chromium',
       testIgnore: [
+        '**/public-presentation.spec.ts',
         '**/dev-card-selection.spec.ts',
         '**/replay-inspector.spec.ts',
         '**/localization.spec.ts',

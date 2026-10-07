@@ -33,7 +33,12 @@ export default tseslint.config(
     },
   },
   {
-    files: ['*.config.{js,ts}', 'scripts/**/*.{ts,mjs}', 'tests/e2e/**/*.ts'],
+    files: [
+      '*.config.{js,ts}',
+      'scripts/**/*.{ts,mjs}',
+      'tests/e2e/**/*.ts',
+      'tests/voice/**/*.mjs',
+    ],
     languageOptions: { globals: globals.node },
   },
   prettier,

@@ -1,5 +1,9 @@
 # Audio provenance
 
+Step 25R uses user-selected Gog, Dimli and Fleck Voice IDs with offline ElevenLabs Text-to-Speech. No API Voice Design or promotion is required. Managed title assets and their provenance belong under `cards/`, with character/definition/title/voice/model/format/input hash/audio hash/date/source/author/terms in `cards/manifest.json`. The manifest is currently empty while printed-title associations are incomplete. No generated-asset completion or ownership is asserted.
+
+Attribution for generated Free-plan assets: ElevenLabs — https://elevenlabs.io. The [provider's publishing guidance](https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform) requires attribution for Free-plan generation; no commercial license is inferred. Existing supplied audio retains its separate provenance below.
+
 The reaction voice is the user's existing `voice/en-US/sometimes-response.mp3`, supplied for this integration on 2026-10-03. Both UI locales use these same bytes. Creator, source page, license and original creation/retrieval date were not supplied; no third-party provenance is inferred. No conversion or modification was performed. SHA-256: `ffc0cfc1981dc4dee03c39e5ee4f4ca47819b1814407c2ce4d767aa7e614909c`.
 
 The user supplied both local WAV files on 2026-10-03, after the initial audio implementation. Their original download dates and any prior edits were not recorded. This integration preserves the supplied bytes; no runtime hotlinks are used.

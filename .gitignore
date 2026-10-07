@@ -1,4 +1,5 @@
 node_modules/
+!content-private/README.example.md
 dist/
 .tools/
 .wrangler/

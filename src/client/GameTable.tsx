@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { PublicTimelineLog } from './PublicTimelineLog';
+import { usePresentation } from './use-presentation';
+import { PresentationZone } from './PresentationZone';
+import type { PublicNarrationEvent } from '../protocol/public-narration';
 import type {
   PublicGameView,
   PrivatePlayerView,
@@ -14,6 +18,7 @@ import { useLocale } from './i18n/context';
 import type { MessageKey } from '../shared/ui-messages';
 import { useAttentionChime } from './audio/use-attention-chime';
 import { useResponseVoice } from './audio/use-response-voice';
+import { useCardVoices } from './audio/use-card-voices';
 import { PromptCountdown } from './PromptCountdown';
 import { DevCardPicker } from './DevCardPicker';
 import { HandCard } from './cards/HandCard';
@@ -44,6 +49,7 @@ export function PlayerPanel({
   active,
   connected,
   mechanicName = (name) => name,
+  presentationEvent = null,
 }: {
   player: PublicGameView['players'][number];
   characterName: string;
@@ -51,10 +57,25 @@ export function PlayerPanel({
   active: boolean;
   connected: boolean;
   mechanicName?: (name: string) => string;
+  presentationEvent?: PublicNarrationEvent | null;
 }) {
   const { t } = useLocale();
   return (
     <article
+      data-player-id={player.id}
+      data-presentation-actor={
+        presentationEvent &&
+        'playerId' in presentationEvent &&
+        presentationEvent.playerId === player.id
+          ? 'true'
+          : undefined
+      }
+      data-presentation-target={
+        presentationEvent?.type === 'CARD_PLAYED' &&
+        presentationEvent.targetPlayerIds.includes(player.id)
+          ? 'true'
+          : undefined
+      }
       className={`player-panel${own ? ' own-player' : ''}${active ? ' active-player' : ''}${player.eliminated ? ' eliminated' : ''}`}
       aria-label={
         own
@@ -84,20 +105,85 @@ export function PlayerPanel({
               ? t('status.connected')
               : t('status.offline')}
       </p>
-      <dl className="stats">
+      <dl className="stats player-hud">
         <div>
           <dt>{t('player.fortitude')}</dt>
-          <dd>{player.fortitude}</dd>
+          <dd
+            className={
+              presentationEvent?.type === 'STAT_CHANGED' &&
+              presentationEvent.playerId === player.id &&
+              presentationEvent.stat === 'FORTITUDE'
+                ? 'stat-live-value'
+                : undefined
+            }
+          >
+            {player.fortitude}
+          </dd>
         </div>
         <div>
           <dt>{t('player.alcohol')}</dt>
-          <dd>{player.alcoholContent}</dd>
+          <dd
+            className={
+              presentationEvent?.type === 'STAT_CHANGED' &&
+              presentationEvent.playerId === player.id &&
+              presentationEvent.stat === 'ALCOHOL'
+                ? 'stat-live-value'
+                : undefined
+            }
+          >
+            {player.alcoholContent}
+          </dd>
         </div>
         <div>
           <dt>{t('player.gold')}</dt>
-          <dd>{player.gold}</dd>
+          <dd
+            className={
+              presentationEvent?.type === 'STAT_CHANGED' &&
+              presentationEvent.playerId === player.id &&
+              presentationEvent.stat === 'GOLD'
+                ? 'stat-live-value'
+                : undefined
+            }
+          >
+            {player.gold}
+          </dd>
         </div>
       </dl>
+      <div className="knockout-meter" aria-hidden="true">
+        <span
+          className="fortitude-meter"
+          style={{ width: `${Math.min(100, player.fortitude * 5)}%` }}
+        />
+        <span
+          className="alcohol-meter"
+          style={{ width: `${Math.min(100, player.alcoholContent * 5)}%` }}
+        />
+      </div>
+      <small className="knockout-label">
+        {t(
+          player.alcoholContent >= player.fortitude
+            ? 'timeline.knockout'
+            : 'timeline.threshold',
+        )}
+      </small>
+      {presentationEvent?.type === 'STAT_CHANGED' &&
+        presentationEvent.playerId === player.id && (
+          <p
+            key={presentationEvent.id}
+            className="hud-delta"
+            aria-live="polite"
+          >
+            {presentationEvent.delta > 0 ? '+' : ''}
+            {presentationEvent.delta}{' '}
+            {t(
+              presentationEvent.stat === 'FORTITUDE'
+                ? 'player.fortitude'
+                : presentationEvent.stat === 'ALCOHOL'
+                  ? 'player.alcohol'
+                  : 'player.gold',
+            )}
+          </p>
+        )}
       <p className="pile-counts">
         <span aria-label={t('player.handCount', { count: player.handCount })}>
           {t('player.hand', { count: player.handCount })}
@@ -248,7 +334,9 @@ export function GameTable({
 }) {
   const { locale, t, message } = useLocale();
   const view = state.publicView!;
+  const directed = usePresentation(state);
   useAttentionChime(view, playerId);
+  useCardVoices(state);
   useResponseVoice(state.privateView, playerId);
   const own = view.players.find((player) => player.id === playerId)!;
   const selection = useCardSelection(
@@ -413,6 +501,7 @@ export function GameTable({
                   player={player}
                   characterName={character(player.characterId)}
                   mechanicName={mechanicName}
+                  presentationEvent={directed.event}
                   own={false}
                   active={player.id === view.activePlayerId}
                   connected={state.presence.some(
@@ -423,6 +512,14 @@ export function GameTable({
               ))}
           </div>
           <section className="inn-center" aria-label={t('table.inn')}>
+            <PresentationZone
+              snapshot={directed}
+              history={state.log}
+              view={view}
+              presentation={presentation}
+              skip={directed.skip}
+              toggleFast={directed.toggleFast}
+            />
             <div className="inn-piles">
               <div className="deck-back">
                 <span>{t('table.deck')}</span>
@@ -499,6 +596,7 @@ export function GameTable({
             }}
             characterName={character(own.characterId)}
             mechanicName={mechanicName}
+            presentationEvent={directed.event}
             own
             active={own.id === view.activePlayerId}
             connected={state.status === 'synced'}
@@ -567,14 +665,7 @@ export function GameTable({
                 </p>
               )}
           </section>
-          <section className="event-log" aria-label={t('table.logAria')}>
-            <h2>{t('table.logTitle')}</h2>
-            <ol>
-              {state.log.map((line, index) => (
-                <li key={`${index}_${line.key}`}>{message(line)}</li>
-              ))}
-            </ol>
-          </section>
+          <PublicTimelineLog state={state} presentation={presentation} />
         </aside>
       </div>
       {state.privateView?.devChoices &&

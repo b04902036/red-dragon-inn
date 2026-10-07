@@ -25,6 +25,28 @@ const eventFields = {
   stateVersion: stateVersionSchema,
   // All events from one accepted command share a version and have ordered indexes.
   eventIndex: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+  /** Internal correlation metadata, projected through an explicit public allowlist. */
+  narration: z
+    .strictObject({
+      resolutionId: resolutionIdSchema.nullable(),
+      frames: z.array(
+        z.strictObject({
+          resolutionId: resolutionIdSchema,
+          parentId: resolutionIdSchema.nullable(),
+          kind: z.enum(['CARD', 'DRINK', 'DRINK_EVENT', 'SYSTEM']),
+          playerId: playerIdSchema.nullable(),
+          definitionId: cardDefinitionIdSchema.nullable(),
+          targetPlayerIds: z.array(playerIdSchema).max(4),
+          operations: z.array(
+            z
+              .string()
+              .regex(/^[A-Z_]+$/)
+              .max(64),
+          ),
+        }),
+      ),
+    })
+    .optional(),
 };
 const ids = z.array(cardInstanceIdSchema).max(64);
 const players = z.array(playerIdSchema).max(4);
@@ -41,6 +63,55 @@ const controlCategories = z
 
 /** Append-only internal events can contain hidden data; they are not socket messages. */
 export const domainEventSchema = z.discriminatedUnion('type', [
+  z.strictObject({
+    type: z.literal('CHALLENGE_DECIDED'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    playerId: playerIdSchema,
+    accepted: z.boolean(),
+  }),
+  z.strictObject({
+    type: z.literal('GAMBLING_RAISED'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    playerId: playerIdSchema,
+    amount: integer.positive(),
+  }),
+  z.strictObject({
+    type: z.literal('PAYMENT_SETTLED'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    playerId: playerIdSchema,
+    recipientPlayerId: playerIdSchema.nullable(),
+    destination: z.enum(['POT', 'INN', 'PLAYER']),
+    amount: integer.nonnegative(),
+    payerAmount: integer.nonnegative(),
+    innSubstitution: integer.nonnegative(),
+  }),
+  z.strictObject({
+    type: z.literal('DRINK_CONTEST_ROUND_STARTED'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    round: z.number().int().min(1).max(256),
+    playerIds: players.min(1),
+  }),
+  z.strictObject({
+    type: z.literal('DRINK_CONTEST_RESULT'),
+    ...eventFields,
+    resolutionId: resolutionIdSchema,
+    round: z.number().int().min(1).max(256),
+    scores: z
+      .array(
+        z.strictObject({
+          playerId: playerIdSchema,
+          score: integer.nonnegative(),
+        }),
+      )
+      .min(1)
+      .max(4),
+    highestScore: integer.nonnegative(),
+    winnerIds: players,
+  }),
   z.strictObject({
     type: z.literal('WORKFLOW_CHANGED'),
     ...eventFields,
@@ -355,6 +426,11 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     playerId: playerIdSchema,
     cardId: cardInstanceIdSchema,
     definitionId: cardDefinitionIdSchema,
+    resolutionId: resolutionIdSchema.optional(),
+    chainPosition: z.number().int().nonnegative().max(64).optional(),
+    hasChaser: z.boolean().optional(),
+    source: z.enum(['INN', 'DRINK_PILE']).optional(),
+    parentResolutionId: resolutionIdSchema.nullable().optional(),
   }),
   z.strictObject({
     type: z.literal('GOLD_CHANGED'),

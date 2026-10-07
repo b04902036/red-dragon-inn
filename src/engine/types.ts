@@ -17,6 +17,8 @@ export interface CommandReceipt {
   readonly acceptedVersion: StateVersion;
 }
 export interface CoreGameState extends AuthoritativeGameState {
+  /** Opt-in presentation metadata; absent in historical replay manifests. */
+  readonly publicNarrationVersion?: 1;
   readonly matchId: MatchId;
   readonly contentVersionId: ContentVersionId;
   readonly rules: RulesConfig;

@@ -1,7 +1,7 @@
 import { expect, type Page } from '@playwright/test';
 import { roomMetadataSchema } from '../../src/protocol/rooms';
 export async function passPhaseEnd(pages: Page[], roomId: string) {
-  for (let limit = 0; limit < 4; limit++) {
+  for (let limit = 0; limit <= 4; limit++) {
     const response = await pages[0]!.request.get(`/api/rooms/${roomId}`);
     const view = roomMetadataSchema.parse(await response.json()).view;
     if (!view.phaseEnd || view.responseWindow) return;

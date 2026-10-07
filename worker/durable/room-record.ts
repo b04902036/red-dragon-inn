@@ -3,6 +3,7 @@ import { assertCoreInvariants } from '../../src/engine/invariants';
 import type { CoreGameState } from '../../src/engine/types';
 import {
   characterIdSchema,
+  matchIdSchema,
   contentVersionIdSchema,
   playerIdSchema,
   roomIdSchema,
@@ -71,6 +72,8 @@ export const roomRecordSchema = z
   });
 export type RoomRecord = z.infer<typeof roomRecordSchema>;
 export const attachmentSchema = z.strictObject({
+  timelineMatchId: matchIdSchema.optional(),
+  timelineSequence: z.number().int().safe().nonnegative().optional(),
   abuse: socketAbuseSchema.optional(),
   playerId: playerIdSchema,
   sessionId: sessionIdSchema,

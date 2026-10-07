@@ -198,6 +198,13 @@ function beginBatch(
   task.round++;
   task.initialized = true;
   task.scores = [];
+  if (task.mode === 'CONTEST' && state.publicNarrationVersion === 1)
+    emit({
+      type: 'DRINK_CONTEST_ROUND_STARTED',
+      resolutionId: frame.id,
+      round: task.round,
+      playerIds: task.participants,
+    });
   if (task.deferDrinkConsumption) task.consumingDrinks = false;
   if (task.mode === 'HOUSE') {
     const work = prepareDrink(
@@ -265,6 +272,11 @@ export function finishTask(
         changed(frame, 'UNPAID_COST', emit, payer.id, remaining);
         return true;
       }
+      const previousGold = payer.gold;
+      const previousRecipientGold =
+        task.destination === 'PLAYER'
+          ? state.players.find((p) => p.id === task.recipient)!.gold
+          : 0;
       if (task.destination === 'PLAYER') {
         const recipient = state.players.find((p) => p.id === task.recipient)!;
         transferGold(state, payer, recipient, remaining, emit);
@@ -285,6 +297,21 @@ export function finishTask(
             });
         }
       }
+      if (state.publicNarrationVersion === 1)
+        emit({
+          type: 'PAYMENT_SETTLED',
+          resolutionId: frame.id,
+          playerId: payer.id,
+          recipientPlayerId: task.recipient,
+          destination: task.destination,
+          amount:
+            task.destination === 'PLAYER'
+              ? state.players.find((p) => p.id === task.recipient)!.gold -
+                previousRecipientGold
+              : previousGold - payer.gold + task.substituted,
+          payerAmount: previousGold - payer.gold,
+          innSubstitution: task.substituted,
+        });
       return true;
     }
     case 'GAMBLING_READY':
@@ -347,12 +374,30 @@ export function finishTask(
           winners = winners.filter(
             (id) => !task.passedOutPlayerIds!.includes(id),
           );
+        if (state.publicNarrationVersion === 1)
+          emit({
+            type: 'DRINK_CONTEST_RESULT',
+            resolutionId: frame.id,
+            round: task.round,
+            scores: task.scores,
+            highestScore: max,
+            winnerIds: winners,
+          });
         if (winners.length === 0) {
           task.mode = 'SIMULTANEOUS';
           changed(frame, 'CONTEST_NO_WINNER', emit, null, max);
           return true;
         }
       }
+      if (task.contestRules === undefined && state.publicNarrationVersion === 1)
+        emit({
+          type: 'DRINK_CONTEST_RESULT',
+          resolutionId: frame.id,
+          round: task.round,
+          scores: task.scores,
+          highestScore: max,
+          winnerIds: winners,
+        });
       if (winners.length > 1) {
         task.participants = winners;
         task.initialized = false;
@@ -468,6 +513,13 @@ export function executeGenericOperation(
         );
       return true;
     case 'ANTE_ALL_ACTIVE':
+      if (state.publicNarrationVersion === 1)
+        emit({
+          type: 'GAMBLING_RAISED',
+          resolutionId: frame.id,
+          playerId: actor.id,
+          amount: effect.amount,
+        });
       for (const id of activeGamblers(state))
         addTask(frame, payment(id, effect.amount, 'POT'));
       return true;
@@ -663,6 +715,13 @@ export function executeGenericOperation(
           actorId: actor.id,
           remaining: 2,
           stage: 'DRINKS',
+        });
+      if (frame.selectedOptionId !== null && state.publicNarrationVersion === 1)
+        emit({
+          type: 'CHALLENGE_DECIDED',
+          resolutionId: frame.id,
+          playerId: actor.id,
+          accepted: frame.selectedOptionId === 'ACCEPT',
         });
       changed(frame, effect.op, emit);
       return true;

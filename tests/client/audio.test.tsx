@@ -130,6 +130,8 @@ it.each(['en-US', 'zh-TW'])(
     );
     expect(voice.play).toHaveBeenCalledTimes(1);
     ui.rerender(renderVoice(voiceView('prompt_after_card')));
+    // Speech now queues; completing the prior clip permits the next prompt.
+    act(() => voice.listeners.get('ended')?.());
     expect(voice.play).toHaveBeenCalledTimes(2);
   },
 );

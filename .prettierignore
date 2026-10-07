@@ -9,5 +9,6 @@ RDI2_PACKAGE_VALIDATION.json
 reference/rdi1/reaudit-2026-10-05/
 reference/rdi2/
 # Released versions and supplied correction evidence must retain their exact bytes.
+content-private/
 content-private/imports/rdi1/versions/
 content-private/imports/rdi1/reaudit-required-corrections.json

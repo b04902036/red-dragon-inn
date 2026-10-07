@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "characters": [
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "enabled": false,
+      "voiceId": null,
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "enabled": false,
+      "voiceId": null,
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "enabled": false,
+      "voiceId": null,
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "enabled": false,
+      "voiceId": null,
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "enabled": true,
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "enabled": false,
+      "voiceId": null,
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "enabled": true,
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "enabled": true,
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import './scripts/runtime-env.mjs';
 import { cloudflareTest, readD1Migrations } from '@cloudflare/vitest-plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';

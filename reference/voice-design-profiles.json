@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "slug": "deirdre",
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "name": "Deirdre",
+      "voiceDescription": "An adult female priestess speaking clear English. Warm, composed, reassuring and educated, with a medium-low voice. Calm and confident fantasy tavern presence, expressive but never timid. Natural conversational projection.",
+      "previewText": "Ah, welcome! Set your worries beside your cloak and take a comfortable seat. We have earned a quiet moment after that long road. Now, raise your cups, friends; tonight we celebrate making it home together!"
+    },
+    {
+      "slug": "fiona",
+      "characterId": "character_rdi_fiona_the_volatile",
+      "name": "Fiona",
+      "voiceDescription": "An adult female warrior speaking clear English. Bold, strong, energetic and confident, with crisp delivery and playful aggression. A lively tavern personality, laughing readily and projecting clearly over a crowded room.",
+      "previewText": "Ha! That was a fine adventure, and I am ready for another. Pull up a chair, tell me your best story, and let us see who laughs first. Come on, friends, raise those cups; the evening has only just begun!"
+    },
+    {
+      "slug": "gerki",
+      "characterId": "character_rdi_gerki_the_sneak",
+      "name": "Gerki",
+      "voiceDescription": "An adult male rogue speaking clear English. Sly, quick, clever and mischievous, with dry humor and a lightly raspy voice. Agile, conversational delivery with a friendly conspiratorial smile, never cartoonishly evil.",
+      "previewText": "Well, well! I saved you the most comfortable chair, which is almost as generous as it sounds. Sit down and tell me what I missed. Oh, this is going to be a splendid evening; I can already hear the laughter!"
+    },
+    {
+      "slug": "zot",
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "name": "Zot",
+      "voiceDescription": "An older adult male fantasy wizard speaking clear English. Eccentric, theatrical, scholarly and expressive, with a resonant educated voice and slightly unpredictable emphasis. Warm tavern conversation with clear intelligible diction.",
+      "previewText": "Aha! A most intriguing gathering, and precisely the company I hoped to find. Allow me to put away these notes before we begin. Wonderful, wonderful; there is a whole evening ahead for stories, laughter, and delightful surprises!"
+    },
+    {
+      "slug": "dimli",
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "name": "Dimli",
+      "voiceDescription": "An adult male dwarf speaking clear English. Low, rough and gravelly but jovial and sturdy. Compact energetic delivery with full tavern projection, a hearty laugh and a welcoming tone. Clear words despite the gravel.",
+      "previewText": "Oi! There is room at this table if you bring a good story. I have walked a long road today, and this chair feels better than a throne. Now that is the spirit; gather round, friends, and let the whole room hear us laugh!"
+    },
+    {
+      "slug": "eve",
+      "characterId": "character_rdi_eve_the_illusionist",
+      "name": "Eve",
+      "voiceDescription": "An adult female illusionist speaking clear English. Mysterious, elegant, soft and airy, yet confident and controlled. A lightly magical, uncanny quality without obscuring words. Intelligible, expressive conversational delivery.",
+      "previewText": "Oh, lovely! The candlelight makes this little room seem almost enchanted. Come closer and tell me what you saw on the road. What a marvelous evening this will be; even the shadows look ready to join our celebration!"
+    },
+    {
+      "slug": "fleck",
+      "characterId": "character_rdi_fleck_the_bard",
+      "name": "Fleck",
+      "voiceDescription": "An adult male bard speaking clear English. Charismatic, theatrical, rhythmic, playful and expressive, with clear projection. A lively performer who speaks naturally rather than singing every line, welcoming and witty.",
+      "previewText": "Bravo! You have arrived just in time for the finest stories at this table. Take a seat and give me a tale worth remembering. Friends, lift your voices; tonight our laughter will be the melody that carries us all home!"
+    },
+    {
+      "slug": "gog",
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "name": "Gog",
+      "voiceDescription": "An adult male half-ogre speaking clear English. Extremely deep, large, booming, slow and resonant, with a warm, goofy, lovable personality. Simple earnest delivery, joyful excitement and clear intelligible words. Friendly rather than an evil monster.",
+      "previewText": "Oh! Gog glad friends here. Big table has room for everyone, and Gog saved a strong chair just for you. Tell Gog a happy story. Hooray, this will be a good night; Gog wants everyone laughing together before we go home!"
+    }
+  ]
+}

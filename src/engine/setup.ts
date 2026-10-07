@@ -22,6 +22,7 @@ export const matchSetupSchema = z.strictObject({
   matchId: matchIdSchema,
   hostPlayerId: playerIdSchema,
   content: contentPackSchema,
+  publicNarrationVersion: z.literal(1).optional(),
   innDrinkDeckIds: z
     .array(deckIdSchema)
     .min(1)
@@ -151,6 +152,9 @@ export function createMatch(input: MatchSetup): CoreGameState {
     throw new RangeError('Inn deck cannot supply initial drinks');
   const state: CoreGameState = {
     schemaVersion: 1,
+    ...(setup.publicNarrationVersion === undefined
+      ? {}
+      : { publicNarrationVersion: setup.publicNarrationVersion }),
     roomId: setup.roomId,
     matchId: setup.matchId,
     version: setup.version,

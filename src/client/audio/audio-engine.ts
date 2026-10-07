@@ -1,5 +1,6 @@
 import type { AudioSettings } from './settings';
 import { BufferedMusic } from './buffered-music';
+import { VoiceQueue } from './voice-queue';
 export const audioPaths = {
   music: '/audio/bgm/the-old-tower-inn.wav',
   chime: '/audio/sfx/turn-chime.wav',
@@ -20,7 +21,9 @@ export type AudioStatus = 'locked' | 'ready' | 'unavailable';
 export class AudioEngine {
   private music: AudioElement | null = null;
   private chime: AudioElement | null = null;
-  private voice: AudioElement | null = null;
+  private voices: VoiceQueue;
+  private voiceActive = false;
+  private cardSeen = new Set<string>();
   private musicPlaying = false;
   private unlocked = false;
   private disposed = false;
@@ -33,7 +36,18 @@ export class AudioEngine {
       path === audioPaths.music ? new BufferedMusic(path) : new Audio(path),
     private session: Pick<Storage, 'getItem' | 'setItem'> | null = null,
   ) {
+    this.voices = new VoiceQueue(settings, factory, (active) => {
+      this.voiceActive = active;
+      if (this.music) this.music.volume = this.musicVolume();
+    });
     try {
+      const cards: unknown = JSON.parse(
+        session?.getItem('rdi:card-voice-seen') ?? '[]',
+      );
+      if (Array.isArray(cards))
+        this.cardSeen = new Set(
+          cards.filter((key): key is string => typeof key === 'string'),
+        );
       const saved: unknown = JSON.parse(
         session?.getItem('rdi:attention-seen') ?? '[]',
       );
@@ -100,15 +114,11 @@ export class AudioEngine {
   }
   applySettings(settings: AudioSettings) {
     this.settings = settings;
-    if (this.music) this.music.volume = settings.musicVolume;
+    this.voices.applySettings(settings);
+    if (this.music) this.music.volume = this.musicVolume();
     if (this.chime) this.chime.volume = settings.sfxVolume;
     if (!settings.enabled || settings.sfxMuted || settings.sfxVolume === 0)
       this.chime?.pause();
-    if (this.voice) {
-      this.voice.volume = settings.sfxVolume;
-      if (!settings.enabled || settings.sfxMuted || settings.sfxVolume === 0)
-        this.voice.pause();
-    }
     if (
       !settings.enabled ||
       settings.musicMuted ||
@@ -157,32 +167,57 @@ export class AudioEngine {
     )
       return;
     try {
-      if (voice && !this.voice) this.voice = this.factory(audioPaths.voice);
-      const audio = voice ? this.voice : this.chime;
+      if (voice) {
+        this.voices.enqueue({ path: audioPaths.voice, kind: 'ATTENTION' });
+        return;
+      }
+      const audio = this.chime;
       if (!audio) return;
       audio.volume = this.settings.sfxVolume;
       audio.currentTime = 0;
-      void audio.play().catch(
-        voice
-          ? () => {
-              /* Optional voice failure never blocks gameplay/music. */
-            }
-          : this.playbackError,
-      );
+      void audio.play().catch(this.playbackError);
     } catch {
       /* Missing optional voice does not affect gameplay. */
     }
   }
+  private musicVolume() {
+    return (
+      this.settings.musicVolume *
+      (this.voiceActive && this.settings.duckMusic ? 0.3 : 1)
+    );
+  }
+  observeCard(key: string, path: string | null, live: boolean) {
+    if (this.cardSeen.has(key)) return;
+    this.cardSeen.add(key);
+    try {
+      this.session?.setItem(
+        'rdi:card-voice-seen',
+        JSON.stringify([...this.cardSeen]),
+      );
+    } catch {
+      /* In-memory deduplication remains active. */
+    }
+    if (
+      !live ||
+      !path ||
+      !/^\/audio\/cards\/[a-z][a-z0-9_]*\/[a-z][a-z0-9_]*\.mp3$/.test(path) ||
+      this.disposed ||
+      !this.unlocked ||
+      this.status !== 'ready'
+    )
+      return;
+    this.voices.enqueue({ path, kind: 'CARD' });
+  }
   dispose() {
     this.disposed = true;
-    for (const audio of [this.music, this.chime, this.voice]) {
+    this.voices.dispose();
+    for (const audio of [this.music, this.chime]) {
       audio?.pause();
       audio?.removeEventListener('error', this.mediaError);
       audio?.dispose?.();
     }
     this.music = null;
     this.chime = null;
-    this.voice = null;
     this.musicPlaying = false;
     this.unlocked = false;
     this.status = 'locked';

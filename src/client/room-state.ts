@@ -1,6 +1,7 @@
 import type { PublicGameView, PrivatePlayerView } from '../protocol/views';
 import type { ServerMessage } from '../protocol/messages';
 import type { Presence } from '../protocol/presentation';
+import type { PublicNarrationEvent } from '../protocol/public-narration';
 import { uiMessage, formatMessage } from '../shared/ui-messages';
 import type { UiMessage, MessageKey } from '../shared/ui-messages';
 import type { Locale } from '../shared/locales';
@@ -15,7 +16,9 @@ export interface RoomClientState {
   presence: Presence;
   pendingCommandId: string | null;
   error: UiMessage | null;
-  log: UiMessage[];
+  log: PublicNarrationEvent[];
+  timelineMatchId: string | null;
+  liveEventIds: string[];
 }
 export const initialRoomState: RoomClientState = {
   status: 'connecting',
@@ -26,6 +29,8 @@ export const initialRoomState: RoomClientState = {
   pendingCommandId: null,
   error: null,
   log: [],
+  timelineMatchId: null,
+  liveEventIds: [],
 };
 export function phaseKey(phase: PublicGameView['phase']): MessageKey {
   return phase === null ? 'phase.waiting' : `phase.${phase}`;
@@ -77,6 +82,27 @@ export function receiveRoomMessage(
         : state;
     case 'PONG':
       return state;
+    case 'PUBLIC_TIMELINE': {
+      if (
+        state.publicView?.matchId &&
+        state.publicView.matchId !== message.matchId
+      )
+        return state;
+      const sameMatch = state.timelineMatchId === message.matchId;
+      const existing = sameMatch ? state.log : [];
+      const seen = new Set(existing.map((event) => event.sequence));
+      const fresh = message.events.filter((event) => !seen.has(event.sequence));
+      if (sameMatch && fresh.length === 0) return state;
+      return {
+        ...state,
+        timelineMatchId: message.matchId,
+        log: [...existing, ...fresh].sort((a, b) => a.sequence - b.sequence),
+        liveEventIds: [
+          ...(sameMatch ? state.liveEventIds : []),
+          ...(message.mode === 'LIVE' ? fresh.map((event) => event.id) : []),
+        ],
+      };
+    }
     case 'PUBLIC_STATE': {
       const view = message.view;
       if (
@@ -84,73 +110,6 @@ export function receiveRoomMessage(
         view.version < (state.publicView?.version ?? 0)
       )
         return state;
-      const lines: UiMessage[] = [];
-      if (view.version !== (state.publicView?.version ?? -1)) {
-        for (const player of view.players) {
-          const previous = state.publicView?.players.find(
-            (before) => before.id === player.id,
-          );
-          if (previous && previous.fortitude !== player.fortitude)
-            lines.push(
-              uiMessage('log.stat', {
-                name: player.displayName,
-                stat: 'player.fortitude',
-                before: previous.fortitude,
-                after: player.fortitude,
-              }),
-            );
-          if (previous && previous.alcoholContent !== player.alcoholContent)
-            lines.push(
-              uiMessage('log.stat', {
-                name: player.displayName,
-                stat: 'player.alcohol',
-                before: previous.alcoholContent,
-                after: player.alcoholContent,
-              }),
-            );
-          if (previous && previous.gold !== player.gold)
-            lines.push(
-              uiMessage('log.stat', {
-                name: player.displayName,
-                stat: 'player.gold',
-                before: previous.gold,
-                after: player.gold,
-              }),
-            );
-          if (player.eliminated && !previous?.eliminated)
-            lines.push(
-              uiMessage('log.eliminated', { name: player.displayName }),
-            );
-        }
-        if (view.lifecycle === 'FINISHED')
-          lines.push(
-            view.winners.length === 0
-              ? uiMessage('log.tie')
-              : uiMessage('table.winner', {
-                  name: view.players.find((player) =>
-                    view.winners.includes(player.id),
-                  )!.displayName,
-                }),
-          );
-        else if (view.gambling !== null && state.publicView?.gambling === null)
-          lines.push(uiMessage('log.gamblingStarted'));
-        else if (state.publicView?.gambling && view.gambling === null)
-          lines.push(uiMessage('log.gamblingPaid'));
-        else if (view.phase !== state.publicView?.phase)
-          lines.push(
-            view.activePlayerId
-              ? uiMessage('log.phasePlayer', {
-                  phase: phaseKey(view.phase),
-                  name: view.players.find(
-                    (player) => player.id === view.activePlayerId,
-                  )!.displayName,
-                })
-              : uiMessage('log.phase', {
-                  phase: phaseKey(view.phase),
-                  player: '',
-                }),
-          );
-      }
       return {
         ...state,
         publicView: view,
@@ -159,7 +118,6 @@ export function receiveRoomMessage(
           state.privateView?.matchId === view.matchId
             ? state.privateView
             : null,
-        log: [...state.log, ...lines].slice(-10),
       };
     }
     case 'PRIVATE_STATE':

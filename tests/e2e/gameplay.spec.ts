@@ -224,9 +224,9 @@ test('two players use the table, reactions, Drinks, gambling, refresh and mobile
     await expect(
       guest.getByRole('heading', { name: 'Gambling round' }),
     ).toHaveCount(0);
-    await expect(guest.locator('.event-log')).toContainText(
-      'pot has been paid',
-    );
+    await expect(
+      guest.locator('.timeline-scroll [data-event-type="GAMBLING_PAYOUT"]'),
+    ).toContainText('Guest won the Round and received 2 Gold.');
     const guestHand = await guest
       .locator('[data-card-id]')
       .evaluateAll((cards) =>

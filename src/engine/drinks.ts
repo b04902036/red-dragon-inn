@@ -80,6 +80,15 @@ export function buildDrinkFrame(
       playerId: actorId,
       cardId,
       definitionId: definition.id,
+      ...(state.publicNarrationVersion === 1
+        ? {
+            resolutionId: id,
+            chainPosition: cards.length - 1,
+            hasChaser: definition.type === 'DRINK' ? definition.chaser : false,
+            source,
+            parentResolutionId: state.resolutionStack.at(-1)?.id ?? null,
+          }
+        : {}),
     });
     requireCommand(
       definition.type === 'DRINK' || definition.type === 'DRINK_EVENT',

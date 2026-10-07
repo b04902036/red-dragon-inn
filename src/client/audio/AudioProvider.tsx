@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { AudioEngine } from './audio-engine';
 import type { AudioStatus } from './audio-engine';
@@ -9,7 +9,30 @@ import {
   defaultAudioSettings,
 } from './settings';
 import { useLocale } from '../i18n/context';
+import { parseCardVoices, emptyCardVoices } from './card-voice-catalog';
+import type { CardVoiceCatalog } from './card-voice-catalog';
 export function AudioProvider({ children }: { children: ReactNode }) {
+  const [cardVoices, setCardVoices] = useState<CardVoiceCatalog | null>(null);
+  const [catalogRequested, setCatalogRequested] = useState(false);
+  const requestCardVoices = useCallback(() => setCatalogRequested(true), []);
+  useEffect(() => {
+    if (!catalogRequested) return;
+    let canceled = false;
+    void fetch('/audio/cards/manifest.json')
+      .then((response) => {
+        if (!response.ok) throw new Error('Voice catalog unavailable');
+        return response.json() as Promise<unknown>;
+      })
+      .then((value) => {
+        if (!canceled) setCardVoices(parseCardVoices(value));
+      })
+      .catch(() => {
+        if (!canceled) setCardVoices(emptyCardVoices);
+      });
+    return () => {
+      canceled = true;
+    };
+  }, [catalogRequested]);
   const [settings, setSettings] = useState(() => {
     try {
       return readAudioSettings(localStorage);
@@ -80,6 +103,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         engine,
         status,
         settings,
+        cardVoices,
+        requestCardVoices,
         update: (next) => {
           setSettings(next);
           engine.applySettings(next);
@@ -164,6 +189,49 @@ export function AudioControls() {
               update({ ...settings, sfxVolume: Number(event.target.value) })
             }
           />
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.cardVoicesEnabled}
+            onChange={(event) =>
+              update({ ...settings, cardVoicesEnabled: event.target.checked })
+            }
+          />
+          {t('audio.cardVoices')}
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={!settings.voiceMuted}
+            onChange={(event) =>
+              update({ ...settings, voiceMuted: !event.target.checked })
+            }
+          />
+          {t('audio.voiceSound')}
+        </label>
+        <label>
+          {t('audio.voiceVolume')}
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value={settings.voiceVolume}
+            onChange={(event) =>
+              update({ ...settings, voiceVolume: Number(event.target.value) })
+            }
+          />
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.duckMusic}
+            onChange={(event) =>
+              update({ ...settings, duckMusic: event.target.checked })
+            }
+          />
+          {t('audio.duckMusic')}
         </label>
       </div>
     </details>
