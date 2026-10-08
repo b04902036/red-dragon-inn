@@ -1,58 +1,70 @@
-# Offline character title voices
+# Physical card-title voices
 
-Step 25R uses manually selected ElevenLabs Voice IDs. API Voice Design returned `403 feature_unavailable` on the user's Free account and is no longer part of the required workflow. No project command creates or promotes a voice. The user independently verified Free-plan TTS using `eleven_flash_v2_5` and `mp3_44100_128`.
+Step 26 extends the existing offline ElevenLabs Text-to-Speech pipeline. Batch 1 generated 82 local MP3s: Dimli 28, Fleck 29 and Gog 25. Their 120 physical cards reuse clips when copies have identical titles. Deirdre, Fiona, Gerki, Zot and Eve have complete title mappings but remain disabled until their Voice IDs are supplied. No Voice Design or model fallback is used.
 
-1. Manually create/select a voice on the ElevenLabs website.
-2. Provide its Voice ID and add it to `content/presentation/character-voices.json`.
-3. Supply verified printed English title associations in ignored `content-private/voice/canonical-titles.json`.
-4. Run `npm run voice:plan`, then `npm run voice:generate`.
-5. Run `npm run voice:verify:partial` while some voices remain unconfigured.
-6. Run strict `npm run voice:verify` only when all eight mappings and assets are ready for the final audit.
+## Authoritative inputs and import
 
-Batch 1 configures Gog, Dimli and Fleck with the exact user-selected IDs, Flash v2.5 and MP3 44.1 kHz/128 kbps. Deirdre, Fiona, Gerki, Zot and Eve remain explicitly unconfigured. Pooky is not a separate selectable voice.
+`npm run voice:titles` reads the four `content-private/imports/rdi1/rdi1-<character>-printed-titles.json` files and the four corresponding RDI2 files, plus the locked combined pack. It validates all eight 40-card decks, 320 physical title assignments, exact row title counts, deck membership, definition ownership and quantities. Unknown, duplicate, missing or ambiguous rows fail before TTS. Gog's existing project overrides remain unchanged. Two historical Gog input keys map explicitly to the locked `ignore_card_fortitude` and `order_two_extra_drinks_paid` definitions at the import boundary; no engine rule changes are involved.
 
-## Canonical text and ownership
-
-The locked production combined pack provides primary CHARACTER decks and `deckCards` membership. Required assets deduplicate repeated physical copies only by character and definition; no Drink or Drink Event deck assets are generated. Names or card-name prefixes never determine ownership.
-
-Many current pack names are intentional paraphrases. They are unsuitable as spoken printed titles. The private title input must use:
+The deterministic private output is `content-private/voice/canonical-titles.json`, schema version 2:
 
 ```json
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "entries": [
     {
       "characterId": "character_rdi_gog_the_half_ogre",
       "cardDefinitionId": "carddef_rdi2_gog_force_extra_drink_during_other_drink_phase",
-      "spokenText": "Gog say you drink MORE!",
-      "evidence": "User-confirmed printed title; locked M21 ownership"
+      "variants": [
+        {
+          "variantId": "v_<24 hexadecimal SHA-256 digits>",
+          "spokenText": "Gog say you drink MORE!",
+          "quantity": 2
+        }
+      ]
     }
   ]
 }
 ```
 
-Generation rejects unknown ownership, duplicate title mappings or any missing configured title before making API requests. It never substitutes `name`, rules, localized text, IDs or effect summaries. `.tools/voice-generation/title-audit.json` lists unresolved associations using clearly labeled descriptive names. If a normalized mechanic definition combines different physical printed titles, a verified physical presentation mapping is required; do not arbitrarily pick one title.
+Variant IDs derive from the exact UTF-8 title bytes. Reordering input rows or physical copies does not change the output. Repeated identical titles within a definition deduplicate; distinct titles never merge. The importer also emits `content/presentation/card-title-assignments.json`, containing only character/definition/variant IDs and quantities, pinned to the combined content version. It contains no title text, source evidence or credentials. Rebuild before planning if any input changes; planning rejects an outdated private mapping.
+
+## Physical identity and replay
+
+The server pins presentation assignments in the replay setup for new matches using the combined pack. At engine setup, character-card instances receive an optional `presentationVariantId` from sorted variant IDs and their quantities, before any shuffle. Gameplay still uses only `definitionId`. Assignment consumes no RNG. Drawing, discarding, reshuffling, snapshots, Durable Object eviction and replay preserve each instance's identity. Old states without assignments remain compatible.
+
+Public/private game projections do not publish the hidden instance variants. Only revealed `CARD_PLAYED` domain/public narration includes the played variant ID. No title selection takes place at playback time.
 
 ## Generation and cache
 
-The offline command reads `ELEVENLABS_API_KEY` through Node's `--env-file-if-exists=.env.local`. Keep it out of chat, source, client env variables, Worker bindings and manifests. `.env.example` contains only an empty variable. Runtime tooling disables Cloudflare dotenv loading. No live API requests occur in normal automated tests.
+```bash
+npm run voice:titles
+npm run voice:plan
+npm run voice:generate
+npm run voice:verify:partial
+npm run voice:security
+```
 
-Only the [Text-to-Speech endpoint](https://elevenlabs.io/docs/api-reference/text-to-speech/convert) is called. Requests submit the exact canonical `text`, configured `model_id`, MP3 format and explicit voice settings. No model fallback occurs.
+Keep `ELEVENLABS_API_KEY` in ignored `.env.local` or the process environment. `voice:generate` loads it using Node's existing secure environment-file mechanism. Never put the key in chat, source, client environment variables, Worker bindings or manifests. The offline generator calls only Text-to-Speech, sending exact `spokenText` without prefixes, rules, translations, case changes or punctuation normalization. The configured model is `eleven_flash_v2_5`, format `mp3_44100_128`; existing explicit voice settings are preserved.
 
-The manifest is `public/audio/cards/manifest.json`. Deterministic assets use `public/audio/cards/<characterId>/<cardDefinitionId>.mp3`. Each entry stores character, definition, exact title, selected voice/model/format/settings, input content hash, audio SHA-256, asset path, generation date, source service, author and terms. Voice IDs are public configuration; API keys are not.
+Before requests, planning validates all eight decks and reports enabled characters, unique assets, valid cache hits and required API assets. Batch 1 used the existing user-selected IDs:
 
-Unchanged valid assets skip without any API request, even if no key is available. Cached and newly returned MP3s must also decode successfully in Chromium; header validation alone does not establish valid compressed audio. Missing, corrupted or changed-input assets regenerate individually. Decoding happens before replacing any existing file. Each successful asset and manifest entry save immediately through temporary-file rename. Retryable 409/429/500/502/503/504 responses get at most three retries with 500/1000/2000 ms waits. A terminal error stops the batch and preserves completed work. Network timeouts do not automatically retry because the provider may already have charged the request. Resume with the same command; do not restart the batch.
+| Character | Voice ID             | Generated clips |
+| --------- | -------------------- | --------------: |
+| Dimli     | iDHk3E7ojf3zi6XPDM2o |              28 |
+| Fleck     | kJ1WJLsLiz0CnWmEPesT |              29 |
+| Gog       | LSaaFXnHBKjbbNrMtOsH |              25 |
 
-## Verification
+Manifest v2 is `public/audio/cards/manifest.json`. Assets use `/audio/cards/<characterId>/<cardDefinitionId>/<variantId>.mp3`. Entries include exact title, variant, character/definition, voice/model/format/settings, input hash, audio SHA-256, path, generation timestamp, service, author and license. Complete `families` metadata lists every definition's variants, including disabled voices, so a partial asset manifest cannot accidentally imply that a multi-title definition has only one title.
 
-`voice:verify:partial` requires every configured association to be complete and current. Unconfigured characters are listed without failing. It checks file existence, byte hashes, MPEG-1 Layer III frames at the exact requested 44.1 kHz/128 kbps, mapping uniqueness, canonical input hashes, orphan files and stale records. It then decodes every required asset in Chromium using Web Audio. Strict verification additionally requires all eight mappings. It must not be reported as passing before the missing voices are supplied.
+Unchanged clips with matching hashes, valid MP3 frames and successful Chromium decoding require zero requests. Missing, stale or corrupt clips regenerate individually. Every successful file and manifest update uses temporary-file rename; a later failure preserves earlier work. Authentication, quota and rate errors stop safely. Transient 409/500/502/503/504 responses have at most three retries; network failures do not automatically retry, since a request may already have consumed credits. Resume with `npm run voice:generate`.
 
-`voice:test` uses sample content and mocked HTTP to exercise title-only payloads, deck ownership, cache hits, repairs, partial failures/resume, retry bounds and verifier rejection. `voice:security` checks source/build isolation. No voices may be deleted from ElevenLabs until all configured Batch 1 assets pass both generation and partial verification.
+To enable another character, add only its supplied Voice ID in `content/presentation/character-voices.json` and set `enabled` to true. Then run `voice:plan`, `voice:generate` and `voice:verify:partial`. Existing clips remain cache hits; only newly enabled or invalid assets need requests. Do not choose IDs automatically. Strict `voice:verify` remains a final gate for all eight characters and intentionally fails while five mappings are disabled.
 
-## Playback
+## Verification and playback
 
-The browser loads only the bundled local manifest and MP3 paths. Only LIVE `CARD_PLAYED` public narration can enqueue title speech, using the actor's selectable character and definition association. HISTORY, rerender and reconnect are silent; consumed timeline identities persist for the session. Missing mappings/assets remain optional and never block gameplay.
+Partial verification requires every enabled variant to be present and current. It checks input hashes, physical ownership, family metadata, duplicate keys/paths, orphan files, audio hashes and MPEG-1 Layer III format, then decodes every clip in Chromium. `voice:test` uses mocked HTTP for request text/configuration, cache repair, partial failure/resume, newly enabled voices and invalid mappings. `voice:security` checks runtime/build isolation and exposed credentials.
 
-Title speech and the existing Sometimes attention voice share one serialized media queue. Card voices have independent enable/mute/volume controls; music ducking temporarily multiplies the current music volume and restores it when speech ends, fails or is muted. A broken clip advances the queue; autoplay unlock still requires a gesture. The queue has no server state, prompt or command access. Response controls and countdowns remain immediately usable while voices play or wait.
+The existing browser audio system loads bundled manifest/MP3s only. LIVE `CARD_PLAYED` lookup uses character + definition + variant. HISTORY, reconnect, rerender and late manifest loading do not replay speech. Missing assets skip speech without blocking gameplay. Legacy instances without a variant may resolve only a family known to contain exactly one variant; multi-variant legacy cards remain silent, even when only one family asset has been generated.
 
-Free-plan asset attribution and terms are documented in `public/audio/LICENSES.md`; no commercial license is inferred. Step 25 remains incomplete. The final strict audit and RDI3+ work do not begin with this batch.
+Card-title speech and Sometimes attention speech share the existing serialized voice queue, card voice enable/mute/volume settings and music ducking. Autoplay still unlocks after a gesture. Response controls and countdowns stay usable during speech. BGM, SFX and Sometimes attention behavior are unchanged. Free-plan attribution and terms remain in `public/audio/LICENSES.md`; generation asserts no commercial license and never deletes provider voices.

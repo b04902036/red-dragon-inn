@@ -38,7 +38,7 @@ class Media implements AudioElement {
   }
 }
 const path = (name: string) =>
-  `/audio/cards/character_sample/carddef_${name}.mp3`;
+  `/audio/cards/character_sample/carddef_${name}/v_test.mp3`;
 function engineFixture() {
   const media: Media[] = [];
   const engine = new AudioEngine(
@@ -105,9 +105,14 @@ it('consumes HISTORY, duplicate, locked and muted events; reconnect/session remo
 it('voice controls are independent from SFX, cancel muted speech and restore music without altering stored settings', async () => {
   const { engine, media } = engineFixture();
   await engine.unlock();
-  engine.applySettings({ ...defaultAudioSettings, sfxMuted: true });
+  engine.applySettings({
+    ...defaultAudioSettings,
+    sfxMuted: true,
+    voiceVolume: 0.4,
+  });
   engine.observeCard('match:1', path('a'), true);
   expect(media[2]!.play).toHaveBeenCalledOnce();
+  expect(media[2]!.volume).toBe(0.4);
   engine.applySettings({ ...defaultAudioSettings, cardVoicesEnabled: false });
   expect(media[2]!.pause).toHaveBeenCalled();
   expect(media[0]!.volume).toBe(defaultAudioSettings.musicVolume);
@@ -138,21 +143,33 @@ it('catalog rejects external URLs, path collisions and ownership mismatches', ()
   const entry = {
     characterId: 'character_sample',
     cardDefinitionId: 'carddef_a',
+    variantId: 'v_test',
     assetPath: path('a'),
   };
-  expect(parseCardVoices({ schemaVersion: 1, entries: [entry] }).size).toBe(1);
+  const families = [
+    {
+      characterId: entry.characterId,
+      cardDefinitionId: entry.cardDefinitionId,
+      variantIds: ['v_test'],
+    },
+  ];
+  expect(
+    parseCardVoices({ schemaVersion: 2, families, entries: [entry] }).size,
+  ).toBe(2);
   expect(() =>
-    parseCardVoices({ schemaVersion: 1, entries: [entry, entry] }),
+    parseCardVoices({ schemaVersion: 2, families, entries: [entry, entry] }),
   ).toThrow();
   expect(() =>
     parseCardVoices({
-      schemaVersion: 1,
+      schemaVersion: 2,
+      families,
       entries: [{ ...entry, characterId: 'character_other' }],
     }),
   ).toThrow();
   expect(() =>
     parseCardVoices({
-      schemaVersion: 1,
+      schemaVersion: 2,
+      families,
       entries: [{ ...entry, assetPath: 'https://example.com/file.mp3' }],
     }),
   ).toThrow();
@@ -163,18 +180,32 @@ it('only LIVE CARD_PLAYED speaks with the owning player character; rerender/hist
   const view = projectPublicGame(started(1, 7));
   const actor = view.players[0]!;
   const definition = 'carddef_sample_title';
-  const assetPath = `/audio/cards/${actor.characterId}/${definition}.mp3`;
+  const assetPath = `/audio/cards/${actor.characterId}/${definition}/v_test.mp3`;
   const catalog = parseCardVoices({
-    schemaVersion: 1,
+    schemaVersion: 2,
+    families: [
+      {
+        characterId: actor.characterId,
+        cardDefinitionId: definition,
+        variantIds: ['v_test', 'v_other'],
+      },
+    ],
     entries: [
       {
         characterId: actor.characterId,
         cardDefinitionId: definition,
+        variantId: 'v_test',
         assetPath,
+      },
+      {
+        characterId: actor.characterId,
+        cardDefinitionId: definition,
+        variantId: 'v_other',
+        assetPath: `/audio/cards/${actor.characterId}/${definition}/v_other.mp3`,
       },
     ],
   });
-  const played = (sequence: number) =>
+  const played = (sequence: number, variant = 'v_test') =>
     publicNarrationEventSchema.parse({
       type: 'CARD_PLAYED',
       id: `${view.matchId}:${sequence}`,
@@ -184,6 +215,7 @@ it('only LIVE CARD_PLAYED speaks with the owning player character; rerender/hist
       eventIndex: 0,
       playerId: actor.id,
       cardDefinitionId: definition,
+      presentationVariantId: variant,
       resolutionId: null,
       parentId: null,
       targetPlayerIds: [],
@@ -233,8 +265,14 @@ it('only LIVE CARD_PLAYED speaks with the owning player character; rerender/hist
   });
   const live = {
     ...initial,
-    log: [played(1), played(2), played(3), nonCard],
-    liveEventIds: [played(2).id, played(3).id, nonCard.id],
+    log: [
+      played(1),
+      played(2),
+      played(3, 'v_other'),
+      played(5, 'v_missing'),
+      nonCard,
+    ],
+    liveEventIds: [played(2).id, played(3).id, played(5).id, nonCard.id],
   };
   rendered.rerender(ui(live));
   expect(media[2]!.path).toBe(assetPath);
@@ -243,6 +281,42 @@ it('only LIVE CARD_PLAYED speaks with the owning player character; rerender/hist
   fireEvent.click(screen.getByRole('button', { name: 'Respond immediately' }));
   expect(respond).toHaveBeenCalledOnce();
   await act(async () => media[2]!.end());
-  expect(media[2]!.play).toHaveBeenCalledTimes(2);
+  expect(media[3]!.path).toBe(
+    `/audio/cards/${actor.characterId}/${definition}/v_other.mp3`,
+  );
+  expect(media[2]!.play).toHaveBeenCalledTimes(1);
+  await act(async () => media[3]!.end());
+  expect(media).toHaveLength(4);
   engine.dispose();
+});
+it('legacy instances resolve only a known single-variant family, including partially populated manifests', () => {
+  const families = [
+    {
+      characterId: 'character_sample',
+      cardDefinitionId: 'carddef_a',
+      variantIds: ['v_only'],
+    },
+    {
+      characterId: 'character_sample',
+      cardDefinitionId: 'carddef_b',
+      variantIds: ['v_one', 'v_two'],
+    },
+  ];
+  const entries = families.map((family) => ({
+    characterId: family.characterId,
+    cardDefinitionId: family.cardDefinitionId,
+    variantId: family.variantIds[0],
+    assetPath: `/audio/cards/${family.characterId}/${family.cardDefinitionId}/${family.variantIds[0]}.mp3`,
+  }));
+  const catalog = parseCardVoices({ schemaVersion: 2, families, entries });
+  expect(catalog.get('character_sample:carddef_a')).toBe(entries[0]!.assetPath);
+  expect(catalog.get('character_sample:carddef_b')).toBeUndefined();
+  expect(catalog.get('character_sample:carddef_b:v_two')).toBeUndefined();
+  expect(() =>
+    parseCardVoices({
+      schemaVersion: 2,
+      families: [...families, families[0]],
+      entries,
+    }),
+  ).toThrow();
 });

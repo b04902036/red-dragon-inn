@@ -134,6 +134,14 @@ it.each([
       );
       const replay = new D1ReplayRepository(env.DB);
       const manifest = await replay.manifest(game.matchId);
+      expect(manifest.setup.presentationVariants).toBeDefined();
+      const physical = Object.values(game.cards).filter(
+        (card) => card.ownerId !== null,
+      );
+      expect(physical).toHaveLength(80);
+      expect(
+        physical.every((card) => card.presentationVariantId !== undefined),
+      ).toBe(true);
       expect(manifest.setup.innDrinkDeckIds).toEqual(drinkDeckIds);
       expect(
         replayFromBeginning(manifest, await replay.commands(game.matchId))
@@ -144,6 +152,11 @@ it.each([
       try {
         await resumed.hello(host.credentials);
         expect((await storedRoom(host.roomId)).game).toEqual(game);
+        expect(
+          Object.values((await storedRoom(host.roomId)).game!.cards)
+            .filter((card) => card.ownerId !== null)
+            .map((card) => card.presentationVariantId),
+        ).toEqual(physical.map((card) => card.presentationVariantId));
       } finally {
         resumed.socket.close();
       }

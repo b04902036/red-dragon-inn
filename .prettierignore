@@ -10,5 +10,8 @@ reference/rdi1/reaudit-2026-10-05/
 reference/rdi2/
 # Released versions and supplied correction evidence must retain their exact bytes.
 content-private/
+# Deterministic generated presentation/audio metadata.
+content/presentation/card-title-assignments.json
+public/audio/cards/manifest.json
 content-private/imports/rdi1/versions/
 content-private/imports/rdi1/reaudit-required-corrections.json

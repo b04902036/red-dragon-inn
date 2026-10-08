@@ -13,7 +13,9 @@ export function useCardVoices(state: RoomClientState) {
         (player) => player.id === event.playerId,
       )?.characterId;
       const path = character
-        ? (cardVoices?.get(`${character}:${event.cardDefinitionId}`) ?? null)
+        ? (cardVoices?.get(
+            `${character}:${event.cardDefinitionId}${event.presentationVariantId === undefined ? '' : `:${event.presentationVariantId}`}`,
+          ) ?? null)
         : null;
       engine.observeCard(event.id, path, live.has(event.id));
     }

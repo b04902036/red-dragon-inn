@@ -50,6 +50,13 @@ export function eventWriter(
     events.push(
       domainEventSchema.parse({
         ...payload,
+        ...(payload.type === 'CARD_PLAYED' &&
+        state.cards[payload.cardId]?.presentationVariantId !== undefined
+          ? {
+              presentationVariantId:
+                state.cards[payload.cardId]!.presentationVariantId,
+            }
+          : {}),
         ...(narration === undefined ? {} : { narration }),
         eventId: eventIdSchema.parse(
           `event_${matchNamespace(state.matchId)}_${version}_${eventIndex}`,

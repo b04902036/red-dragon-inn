@@ -1,0 +1,14 @@
+# Source-lock hashes describe exact evidence bytes; preserve committed line endings.
+reference/** -text
+content-private/** -text
+codex-prompts/** -text
+# These older evidence hashes were recorded from CRLF originals.
+codex-prompts/step-24a-final-source-lock-resolution.md text eol=crlf
+codex-prompts/step-24a-m12-user-override.md text eol=crlf
+codex-prompts/step-24a-m21-user-override.md text eol=crlf
+codex-prompts/step-24a-m27-official-evidence-unblock.md text eol=crlf
+codex-prompts/step-24a-m31-gog-identity-normalization.md text eol=crlf
+codex-prompts/step-24a-m33-payment-semantics-resolution.md text eol=crlf
+codex-prompts/step-24a-m37-retaliation-user-override.md text eol=crlf
+codex-prompts/step-24a-m40-gog-healing-user-override.md text eol=crlf
+content-private/imports/rdi1/versions/content_rdi1_mechanics_v1/reference/rdi1/rdi1-mechanics-matrix.csv text eol=crlf

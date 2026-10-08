@@ -172,6 +172,11 @@ export const cardLocationSchema = z.discriminatedUnion('zone', [
 export const cardInstanceSchema = z.strictObject({
   id: cardInstanceIdSchema,
   definitionId: cardDefinitionIdSchema,
+  presentationVariantId: z
+    .string()
+    .regex(/^[a-z][a-z0-9_]*$/)
+    .max(100)
+    .optional(),
   ownerId: playerIdSchema.nullable(),
   location: cardLocationSchema,
 });

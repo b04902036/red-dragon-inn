@@ -171,6 +171,9 @@ export function projectPublicNarration(
           type: event.type,
           playerId: event.playerId,
           cardDefinitionId: event.definitionId,
+          ...(event.presentationVariantId === undefined
+            ? {}
+            : { presentationVariantId: event.presentationVariantId }),
           resolutionId: id,
           parentId: publicResolution(card?.parentId ?? null),
           targetPlayerIds: card?.targetPlayerIds ?? [],

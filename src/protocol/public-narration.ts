@@ -87,6 +87,11 @@ export const publicNarrationEventSchema = z
       type: z.literal('CARD_PLAYED'),
       playerId: playerIdSchema,
       cardDefinitionId: cardDefinitionIdSchema,
+      presentationVariantId: z
+        .string()
+        .regex(/^[a-z][a-z0-9_]*$/)
+        .max(100)
+        .optional(),
       targetPlayerIds: players,
       responseRelation: narrationRelationSchema.nullable(),
     }),

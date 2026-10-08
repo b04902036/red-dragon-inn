@@ -2,10 +2,17 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import {
   configurationSchema,
   titlesSchema,
-  requiredCards,
+  planAssets,
+  readManifest,
+  currentAsset,
   generateAssets,
   verifyAssets,
 } from './card-voice-assets.mjs';
+import {
+  buildTitleVariants,
+  buildTitleAssignments,
+  loadTitleSources,
+} from './card-title-variants.mjs';
 import { verifyDecoding, verifyAudioBytes } from './voice-decode.mjs';
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
 try {
@@ -15,89 +22,80 @@ try {
   const pack = await readJson(
     'content-private/imports/rdi2/pack-combined.json',
   );
-  let titles;
-  try {
-    titles = titlesSchema.parse(
-      await readJson('content-private/voice/canonical-titles.json'),
-    );
-  } catch (error) {
-    if (error.code !== 'ENOENT')
-      throw new Error(
-        'Invalid canonical-title input; repair before generation.',
-        { cause: error },
-      );
-    titles = { schemaVersion: 1, entries: [] };
-  }
-  const configured = requiredCards(pack, configuration).filter(
-    (card) => card.character.enabled,
+  const titles = titlesSchema.parse(
+    await readJson('content-private/voice/canonical-titles.json'),
   );
-  const missing = configured
-    .filter(
-      (card) =>
-        !titles.entries.some(
-          (title) =>
-            title.characterId === card.character.characterId &&
-            title.cardDefinitionId === card.cardDefinitionId,
-        ),
-    )
-    .map((card) => ({
-      characterId: card.character.characterId,
-      cardDefinitionId: card.cardDefinitionId,
-      descriptiveLabel: card.displayName,
-    }));
-  await mkdir('.tools/voice-generation', { recursive: true });
-  await writeFile(
-    '.tools/voice-generation/title-audit.json',
-    JSON.stringify(
-      {
-        requiredDefinitions: configured.length,
-        missingTitles: missing,
-        warning:
-          'Labels are descriptive, not verified printed titles. Different physical titles grouped into one mechanic definition require explicit provenance and a runtime presentation mapping, not an arbitrary choice.',
-      },
-      null,
-      2,
-    ) + '\n',
-  );
-  console.log(
-    `Unconfigured: ${configuration.characters
-      .filter((c) => !c.enabled)
-      .map((c) => c.characterId)
-      .join(', ')}`,
-  );
-  const args = process.argv.slice(2);
   if (
-    args.length !== 1 ||
-    !['generate', 'partial', 'strict', 'plan'].includes(args[0])
+    JSON.stringify(titles) !==
+    JSON.stringify(buildTitleVariants(pack, await loadTitleSources()))
   )
+    throw new Error(
+      'Title inputs changed; run npm run voice:titles before generating.',
+    );
+  const assets = planAssets(pack, configuration, titles);
+  if (
+    JSON.stringify(
+      await readJson('content/presentation/card-title-assignments.json'),
+    ) !== JSON.stringify(buildTitleAssignments(pack, titles))
+  )
+    throw new Error(
+      'Runtime presentation assignments are outdated; run npm run voice:titles.',
+    );
+  const [mode, ...extra] = process.argv.slice(2);
+  if (extra.length || !['generate', 'partial', 'strict', 'plan'].includes(mode))
     throw new Error(
       'Use voice:generate, voice:verify:partial, voice:verify or voice:plan.',
     );
-  if (args[0] === 'plan')
-    console.log(
-      `Configured definitions: ${configured.length}; missing printed titles: ${missing.length}. See .tools/voice-generation/title-audit.json.`,
-    );
-  else if (args[0] === 'generate') {
-    const result = await generateAssets({
-      pack,
-      configuration,
-      titles,
-      apiKey: process.env.ELEVENLABS_API_KEY,
-      validateAudio: verifyAudioBytes,
-      report: console.log,
-    });
+  await mkdir('.tools/voice-generation', { recursive: true });
+  if (mode === 'plan' || mode === 'generate') {
+    const manifest = await readManifest('public');
+    let hits = 0;
+    for (const asset of assets) {
+      const entry = manifest.entries.find(
+        (entry) =>
+          entry.characterId === asset.characterId &&
+          entry.cardDefinitionId === asset.cardDefinitionId &&
+          entry.variantId === asset.variantId,
+      );
+      if (await currentAsset(entry, asset, 'public', verifyAudioBytes)) hits++;
+    }
+    const plan = {
+      enabled: configuration.characters
+        .filter((character) => character.enabled)
+        .map((character) => character.characterId),
+      physicalAssignments: 320,
+      mappingErrors: 0,
+      uniqueAssets: assets.length,
+      cacheHits: hits,
+      apiRequired: assets.length - hits,
+    };
     await writeFile(
-      '.tools/voice-generation/last-run.json',
-      JSON.stringify(result, null, 2) + '\n',
+      '.tools/voice-generation/plan.json',
+      JSON.stringify(plan, null, 2) + '\n',
     );
-    console.log(JSON.stringify(result));
-    if (result.failures.length) process.exitCode = 1;
+    console.log(JSON.stringify(plan));
+    if (mode === 'generate') {
+      const result = await generateAssets({
+        pack,
+        configuration,
+        titles,
+        apiKey: process.env.ELEVENLABS_API_KEY,
+        validateAudio: verifyAudioBytes,
+        report: console.log,
+      });
+      await writeFile(
+        '.tools/voice-generation/last-run.json',
+        JSON.stringify(result, null, 2) + '\n',
+      );
+      console.log(JSON.stringify(result));
+      if (result.failures.length) process.exitCode = 1;
+    }
   } else {
     const result = await verifyAssets({
       pack,
       configuration,
       titles,
-      strict: args[0] === 'strict',
+      strict: mode === 'strict',
     });
     const decoded = await verifyDecoding(result.assets);
     await writeFile(

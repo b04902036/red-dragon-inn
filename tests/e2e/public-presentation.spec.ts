@@ -24,7 +24,8 @@ test('full log refresh, four-player HUD and accepted response during animation w
         .map((card) => ({
           characterId: deck.characterId,
           cardDefinitionId: card.cardId,
-          assetPath: `/audio/cards/${deck.characterId}/${card.cardId}.mp3`,
+          variantId: 'v_fixture',
+          assetPath: `/audio/cards/${deck.characterId}/${card.cardId}/v_fixture.mp3`,
         })),
     );
   const uniqueVoices = [
@@ -38,7 +39,17 @@ test('full log refresh, four-player HUD and accepted response during animation w
   await Promise.all(
     pages.map((page) =>
       page.route('**/audio/cards/manifest.json', (route) =>
-        route.fulfill({ json: { schemaVersion: 1, entries: uniqueVoices } }),
+        route.fulfill({
+          json: {
+            schemaVersion: 2,
+            families: uniqueVoices.map((entry) => ({
+              characterId: entry.characterId,
+              cardDefinitionId: entry.cardDefinitionId,
+              variantIds: [entry.variantId],
+            })),
+            entries: uniqueVoices,
+          },
+        }),
       ),
     ),
   );

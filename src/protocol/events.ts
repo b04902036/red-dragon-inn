@@ -391,6 +391,11 @@ export const domainEventSchema = z.discriminatedUnion('type', [
     playerId: playerIdSchema,
     cardId: cardInstanceIdSchema,
     definitionId: cardDefinitionIdSchema,
+    presentationVariantId: z
+      .string()
+      .regex(/^[a-z][a-z0-9_]*$/)
+      .max(100)
+      .optional(),
   }),
   z.strictObject({
     type: z.literal('RESPONSE_WINDOW_OPENED'),

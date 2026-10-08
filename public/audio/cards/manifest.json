@@ -1,4 +1,3223 @@
 {
-  "schemaVersion": 1,
-  "entries": []
+  "schemaVersion": 2,
+  "families": [
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_add_two_alcohol_to_drink",
+      "variantIds": [
+        "v_848eca348a8c5e496d4c93cd"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_all_players_drink_now",
+      "variantIds": [
+        "v_e3e3d3a94bff441ece25ef68"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_anti_cheat_win_round",
+      "variantIds": [
+        "v_5d178562a7a636edec05b493"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_avoid_ante_leave",
+      "variantIds": [
+        "v_7a3690a935854867e8bc8cc8",
+        "v_9b2d9fb6ffb03057ed75d2be"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_avoid_ante_leave_or_ignore_drink",
+      "variantIds": [
+        "v_44a842e36e8e9ea64f8298d3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_damage_one",
+      "variantIds": [
+        "v_def356b88784f2e2a574587e"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_damage_two",
+      "variantIds": [
+        "v_2d6f656463ea182171d0a946",
+        "v_7cd2a0c13964728506b8f71a",
+        "v_9b1ec7591707a76870f9be55"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gain_two_fortitude",
+      "variantIds": [
+        "v_277b064d907750b954a143ce"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_heal_all_and_collect",
+      "variantIds": [
+        "v_17458817b7c698880d28d067"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_heal_other_charge_gold",
+      "variantIds": [
+        "v_506dfecb6215a446822e7b49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_hit_back_two_after_loss",
+      "variantIds": [
+        "v_590e41e2d9baa0d380d5b898"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_ignore_action_sometimes_fort_alcohol",
+      "variantIds": [
+        "v_7c3d146de3212e6202095019"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_ignore_action_sometimes_fort_loss",
+      "variantIds": [
+        "v_db8b073c40e3383ad4ebf667"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_negate_sometimes_counter",
+      "variantIds": [
+        "v_3c24235150cf85617c5446b8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_order_two_extra_drinks",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_pass_own_drink",
+      "variantIds": [
+        "v_5c18297d2138efd8b3886b54"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_reduce_drink_alcohol_two",
+      "variantIds": [
+        "v_b61bc59a0066c54866c4cb2b"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_substitute_one_gold_from_inn",
+      "variantIds": [
+        "v_0b05283150dfa9d0d9d02229",
+        "v_ae548c6c28f766dedfc96af1"
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_add_two_alcohol_to_drink",
+      "variantIds": [
+        "v_71262b80d48f996e50604311"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_alcohol_to_fortitude",
+      "variantIds": [
+        "v_07b231b9119f492e2615f893"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave",
+      "variantIds": [
+        "v_4cc03e149a10c38d62725fa5",
+        "v_89db185ebab0e7dfb3d1996d"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave_or_ignore_drink",
+      "variantIds": [
+        "v_51e5dcc85b4d99f7e0a4fe18"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_collect_one_from_each_other",
+      "variantIds": [
+        "v_64155892458ba887a3b0b20f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_one",
+      "variantIds": [
+        "v_0fb8616d9a210be3a0e5dadb"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_two",
+      "variantIds": [
+        "v_1bc91de24d9f0121e148d3f8",
+        "v_b51a3c3afe9e85a063871799",
+        "v_c03dbeafac4a471870a17c68"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_force_extra_drink_during_other_drink_phase",
+      "variantIds": [
+        "v_8c85e0f4887b18cd197782b7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_hit_back_two_after_loss",
+      "variantIds": [
+        "v_eb0b93912687016a4a0f8b86"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_card_fortitude",
+      "variantIds": [
+        "v_3f60b879a790b0787a2d42d7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_drink",
+      "variantIds": [
+        "v_9ed891a81459fbbc9f10ac2b",
+        "v_9f0e4f571b0e02b2f4501864"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_sometimes_counter",
+      "variantIds": [
+        "v_3c24235150cf85617c5446b8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_order_two_extra_drinks_paid",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_pass_own_drink",
+      "variantIds": [
+        "v_ef22e13aacbe2df397186d36"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_restart_gambling_round",
+      "variantIds": [
+        "v_f5b3abc9b763002ea4dbf9da"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_split_own_drink",
+      "variantIds": [
+        "v_606be2e52a0e353e550cc3ef"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_substitute_payment_from_inn",
+      "variantIds": [
+        "v_c9aae5b53b6dfe3d3791dbc2",
+        "v_f43de1f3d5da90d4f0dd374a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_avoid_ante_leave_or_ignore_drink",
+      "variantIds": [
+        "v_42c185c4aa30ee3bc6ec421a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_cheat_control_and_eject",
+      "variantIds": [
+        "v_12420e23f4ea7535c4643706"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_cheat_take_control",
+      "variantIds": [
+        "v_26ede0211bfadc3e47f5d491",
+        "v_2967be7bc952b7ae654f8ffa",
+        "v_84f9f564e2187d544a1b0329"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_collect_one_from_each_other",
+      "variantIds": [
+        "v_a1347129aa912bcf2739d2bd"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_damage_one",
+      "variantIds": [
+        "v_c07e53e4224e1807d85d0752"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_damage_three",
+      "variantIds": [
+        "v_615d6601ab502d635ba7bd9b"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_give_two_alcohol",
+      "variantIds": [
+        "v_de0cf2485b2501ebf45afcef"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_ignore_card_all_stats",
+      "variantIds": [
+        "v_7e152f55fcc07c23de52310b",
+        "v_e5b09328c79d77baf6a3cf94"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_ignore_drink",
+      "variantIds": [
+        "v_89d2fb79c4d9b00a8057b51c"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_illusionary_payment",
+      "variantIds": [
+        "v_aaed30a8311bb5a546697ba4"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_negate_sometimes_counter",
+      "variantIds": [
+        "v_99b73aefbb382811ea641ffb"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_order_two_extra_drinks_paid",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_redirect_fortitude_loss",
+      "variantIds": [
+        "v_882027c09b2a330635582998"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_replace_drink_with_four_alcohol",
+      "variantIds": [
+        "v_14c1c8b6f40ab05d26199b20"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_share_pain",
+      "variantIds": [
+        "v_b852d185b510049f64d5bd34"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_take_one_from_pot",
+      "variantIds": [
+        "v_5d0641b11388a8043d691b66"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_take_one_gold",
+      "variantIds": [
+        "v_390f45d9c72d592bb93f0c39",
+        "v_ac9d1c9492dccffb7f3aa9d4"
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_alcohol_to_fortitude",
+      "variantIds": [
+        "v_0ef972801c3160f60de0152c"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_anti_cheat_win_round",
+      "variantIds": [
+        "v_28164a9e71d3be451b3a05a7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_avoid_ante_leave",
+      "variantIds": [
+        "v_7741af61cc8910e4bd45399c",
+        "v_7f6e9f37010f0b6563a3b3d2"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_collect_one_from_each_other",
+      "variantIds": [
+        "v_b24b7257605164c2236d3916"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_damage_one",
+      "variantIds": [
+        "v_243861909f141d8d107c2678",
+        "v_4c9122f3c4d852cd06e79d01"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_damage_three",
+      "variantIds": [
+        "v_4feb797796b9c1fce4f65734"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_damage_two",
+      "variantIds": [
+        "v_1d0e6aefc22644c1ab28d0bb",
+        "v_de7ba51666ca47d09f558c3d"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_force_extra_drink_on_reveal",
+      "variantIds": [
+        "v_dc45ad5d08f2395d257128c1"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_force_other_player_drink_now",
+      "variantIds": [
+        "v_8c85e0f4887b18cd197782b7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gain_two_fortitude",
+      "variantIds": [
+        "v_687c0eae2179484441f81299"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_hit_back_two_after_loss",
+      "variantIds": [
+        "v_46701b745714600d529c38b4"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_ignore_action_sometimes_fort_loss",
+      "variantIds": [
+        "v_17f591b70755ac5414a88766"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_ignore_drink",
+      "variantIds": [
+        "v_653d90aea02d5d27ea72819c",
+        "v_9965971eaa4000a2aa012bc2"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_negate_sometimes_counter",
+      "variantIds": [
+        "v_3c24235150cf85617c5446b8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_order_two_extra_drinks",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_split_own_drink",
+      "variantIds": [
+        "v_ca5000c074a89c2103ea5f26"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_substitute_one_gold_from_inn",
+      "variantIds": [
+        "v_0bc9f8a7293c2e7ef8d413ba",
+        "v_98367dd067e191b04c31f9fb"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_lose_one_alcohol_collect_one_each_other",
+      "variantIds": [
+        "v_f524355cbafe412b4c2db2e7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_players_drink_from_inn",
+      "variantIds": [
+        "v_8558f8f87b9d5964ce15af85"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave",
+      "variantIds": [
+        "v_8ee2d2794790d3468c78d7fb"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave_or_ignore_drink",
+      "variantIds": [
+        "v_5e895ee318bc03a1514d4762"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_control_and_eject",
+      "variantIds": [
+        "v_12420e23f4ea7535c4643706"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_take_control",
+      "variantIds": [
+        "v_3d4cb3eca12d87f11f68f704",
+        "v_49b986ea3e7d64f0bd045750",
+        "v_533efad30414e88a3521902f",
+        "v_924875a65b69fdcca05f52e9"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_collect_one_from_each_other",
+      "variantIds": [
+        "v_75c0cc6ca156cc1042385208"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_one",
+      "variantIds": [
+        "v_a36bf4261ea256a31c1269a1"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_two",
+      "variantIds": [
+        "v_755e25b7c5ea1749182f7b66"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gain_two_fortitude",
+      "variantIds": [
+        "v_10585c905f780e7107e39be8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_hit_back_two_after_loss",
+      "variantIds": [
+        "v_b3d4c0c23d4909e0cfbf9ea8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_ignore_drink",
+      "variantIds": [
+        "v_d8b3f31d6157f9ce2b4d597f",
+        "v_e02282d2236e7171a7c41c87"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_sometimes_counter",
+      "variantIds": [
+        "v_3c24235150cf85617c5446b8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_order_two_extra_drinks_free_or_waive_refill",
+      "variantIds": [
+        "v_c4e57511a2b80088614b0b30"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_rowdy_song",
+      "variantIds": [
+        "v_a6aea4bdd0941d6e471a8ec6"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_split_own_drink",
+      "variantIds": [
+        "v_17a439c9b1e9b5fb1c226edd"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_substitute_payment_from_inn",
+      "variantIds": [
+        "v_06b57b75bd6dc899d383df06",
+        "v_b1f9f131bff5ceb2903a5b5d"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_take_two_gold",
+      "variantIds": [
+        "v_4f5b297e98e91db0b4cb1e7d"
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_add_two_alcohol_to_drink",
+      "variantIds": [
+        "v_c76e3ab9427d20ba24b27777"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_cheat_control_and_eject",
+      "variantIds": [
+        "v_12420e23f4ea7535c4643706"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_cheat_take_control",
+      "variantIds": [
+        "v_3f6933565082f4373e2befc4",
+        "v_924875a65b69fdcca05f52e9",
+        "v_b731a8f5ae695074d9461a21"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_collect_one_from_each_other",
+      "variantIds": [
+        "v_6d892134b34cb4aaaf6733e7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_damage_three",
+      "variantIds": [
+        "v_62bbd319719d7348f064b966",
+        "v_df5bc1eb2750b04600039894"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_damage_two",
+      "variantIds": [
+        "v_9ead48fe2dfd2c40db88391f",
+        "v_bd47abb4af3c84c7a70852e7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_ignore_action_sometimes_fort_alcohol",
+      "variantIds": [
+        "v_c6da7191593fbc4737f36a28"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_ignore_card_all_stats_or_drink",
+      "variantIds": [
+        "v_9633245617015b1c21e021c0"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_ignore_drink",
+      "variantIds": [
+        "v_58f121571c6c5bbf392b2e64",
+        "v_c8d1f1dc8cd5efb0db5ff77d"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_negate_sometimes_counter",
+      "variantIds": [
+        "v_3c24235150cf85617c5446b8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_order_two_extra_drinks",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_steal_winners_pot",
+      "variantIds": [
+        "v_74621909e6c5839f14536ff9"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_substitute_one_gold_from_inn",
+      "variantIds": [
+        "v_0e4233e98ee91fead61575ed"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_take_one_from_pot",
+      "variantIds": [
+        "v_48f2252940dde538df3d865f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_take_one_gold",
+      "variantIds": [
+        "v_0b0fac8b0e92e6f596ac6eec",
+        "v_68d65c8e9801ad16ee61c8f5"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_anti_cheat_win_round",
+      "variantIds": [
+        "v_f0eae83c0017faa76bc42399"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_avoid_ante_leave",
+      "variantIds": [
+        "v_d0517474845d2c2a8d0a7dfd"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_avoid_ante_leave_or_ignore_drink",
+      "variantIds": [
+        "v_f9374589910ba3210b46bd75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_collect_one_from_each_other",
+      "variantIds": [
+        "v_c3346fbe7b76487e3fc9df73"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_all_others_one",
+      "variantIds": [
+        "v_be61cadbda53ff6e9c3877ad"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_four",
+      "variantIds": [
+        "v_2a8dadff9ba3db836bc2ce05"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_three_pay_inn_one",
+      "variantIds": [
+        "v_b92d1b4dd9d337013ed4399a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_two",
+      "variantIds": [
+        "v_b1a64039119b27230cd07a8c",
+        "v_cd0d9487540e29c2c21e937f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_force_extra_drink_during_other_drink_phase",
+      "variantIds": [
+        "v_c372af38c9f2e2967dee8ed0"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gain_two_fortitude",
+      "variantIds": [
+        "v_66d1d23d151d732cd03939b9"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_hit_back_two_after_loss",
+      "variantIds": [
+        "v_a8267431dd83e3e818ba394c"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_all_stats",
+      "variantIds": [
+        "v_d0382a7f6ed3ba8cf5f78cba"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_fortitude",
+      "variantIds": [
+        "v_8be4078c974b355d59fddaac"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_drink",
+      "variantIds": [
+        "v_347c45209d3239386afbfc4c"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_sometimes_counter",
+      "variantIds": [
+        "v_702199cb923d1dbab59fd20d"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_order_two_extra_drinks_paid",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_substitute_payment_from_inn",
+      "variantIds": [
+        "v_5804a521bd3cc2060ccf4d97",
+        "v_5a39e301e77ea7f66a7e28c7"
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_avoid_ante_leave_or_ignore_drink",
+      "variantIds": [
+        "v_95857453ae8f2d542b4bda8f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_avoid_ante_leave_or_ignore_drink_pay_one",
+      "variantIds": [
+        "v_c08ec28053d0338748cc6d46"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_cheat_control_and_eject",
+      "variantIds": [
+        "v_12420e23f4ea7535c4643706"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_cheat_take_control",
+      "variantIds": [
+        "v_748f2175b57aec41c18b3d4c",
+        "v_d8da081b4918fc401b949e9b",
+        "v_e44bee73bcc466da38b32c9a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_collect_one_from_each_other",
+      "variantIds": [
+        "v_f7152ca51960b81ead540ad3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_damage_all_others_one",
+      "variantIds": [
+        "v_d38d0a46a7f72c911093c401"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_damage_one",
+      "variantIds": [
+        "v_d8d16c251322233a8a8ce173"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_damage_two",
+      "variantIds": [
+        "v_089daaf7c7f3c52950dc87ff",
+        "v_1e28291bcc5fd200b60d38f3",
+        "v_65e78179305422d9ca911300"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_dump_gambling_pot_to_inn",
+      "variantIds": [
+        "v_59a6a44824141aaa8f889c75"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_force_other_player_drink_now",
+      "variantIds": [
+        "v_d786c8c352d84bd3ceaffbab"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_gambling_raise_one",
+      "variantIds": [
+        "v_177bef91587ca98ca3dc45c3"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_gambling_start_or_control",
+      "variantIds": [
+        "v_cbd9657e849b1163ef7d652f"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_gambling_winning_hand",
+      "variantIds": [
+        "v_29a04e2f90c70e26a8f41248"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_hit_back_two_after_loss",
+      "variantIds": [
+        "v_5300a1b01f5f1639bf7ee447"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_ignore_action_sometimes_fort_loss",
+      "variantIds": [
+        "v_32a4e394d947a54948fbc68e"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_ignore_card_all_stats",
+      "variantIds": [
+        "v_eea055398e7cefbedd4edcc0"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_ignore_drink",
+      "variantIds": [
+        "v_c3c64003655e329b835dd7fc"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_negate_drink_change_card",
+      "variantIds": [
+        "v_d7e57daaa056372afde9b727"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_negate_sometimes_counter",
+      "variantIds": [
+        "v_3c24235150cf85617c5446b8"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_order_two_extra_drinks",
+      "variantIds": [
+        "v_66deab5e60a389543a3be99a"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_pass_own_drink",
+      "variantIds": [
+        "v_b107eac921fd582058007932"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_substitute_one_gold_from_inn",
+      "variantIds": [
+        "v_a48fbdd74867c8f2511efd13"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_take_one_gold",
+      "variantIds": [
+        "v_a449fec84f49c6695513ec62"
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_tip_wench",
+      "variantIds": [
+        "v_0b1d63b6233a4b0b59845e49"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_add_two_alcohol_to_drink",
+      "variantId": "v_71262b80d48f996e50604311",
+      "spokenText": "Spike it with Firewater",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "8a1b2bc1ea9f9517d35d666590c304541880ed6241b47f0d58ea79b09b353a72",
+      "sha256": "8c546ff41c7e41af35bb9329b5bad7cbccc8c099bc7538c58d4704ff98ee387b",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_add_two_alcohol_to_drink/v_71262b80d48f996e50604311.mp3",
+      "generatedAt": "2026-10-08T15:04:51.200Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_alcohol_to_fortitude",
+      "variantId": "v_07b231b9119f492e2615f893",
+      "spokenText": "Uuurp! That hit the spot!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "de1f37ed091e94c0c3ae3b567b91eaad4a4504c8b1a84db85ba7b7c85cbdcc93",
+      "sha256": "2598ba49ff439ced2052ea7c278a96313eaa5d1782424c8c2e0aed06a85f4be3",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_alcohol_to_fortitude/v_07b231b9119f492e2615f893.mp3",
+      "generatedAt": "2026-10-08T15:04:51.675Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave",
+      "variantId": "v_4cc03e149a10c38d62725fa5",
+      "spokenText": "What? And part with my hard-earned money?",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "6c94374ebe4237849f10b19775016420e7d65d5f872584f8783efdf9cdeda37c",
+      "sha256": "c9bf78904fe055bd468c2e80ccbe1c40e37dd11afc114e73159242213829c4e2",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_avoid_ante_leave/v_4cc03e149a10c38d62725fa5.mp3",
+      "generatedAt": "2026-10-08T15:04:52.340Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave",
+      "variantId": "v_89db185ebab0e7dfb3d1996d",
+      "spokenText": "Thanks... but I think I'll keep my Gold.",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "f6b9b72d719f3b5493817ce5a08aa39e6bc5b60076f1c8cdd4a6b6ef035887ee",
+      "sha256": "3d65882f026fce61d33c7a9f94f87833be7b8d91e905a448d35fa95fe5cac488",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_avoid_ante_leave/v_89db185ebab0e7dfb3d1996d.mp3",
+      "generatedAt": "2026-10-08T15:04:52.906Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave_or_ignore_drink",
+      "variantId": "v_51e5dcc85b4d99f7e0a4fe18",
+      "spokenText": "Can't you see I'm talking to this pretty, bearded lass here?",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "3c34434a818cf75e18729af47150ce3d56932b674043288317532431453badfa",
+      "sha256": "f743ed70628b92d5404adbe2b2920a35a62f5f5bc479133bcd82400257038771",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_avoid_ante_leave_or_ignore_drink/v_51e5dcc85b4d99f7e0a4fe18.mp3",
+      "generatedAt": "2026-10-08T15:04:53.481Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_collect_one_from_each_other",
+      "variantId": "v_64155892458ba887a3b0b20f",
+      "spokenText": "Impressive Dwarven War Belch!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "2494fda38e4379d4e90b8020840a9297ccdc228f1f311df70f0981a839c50cde",
+      "sha256": "a2104cb4f319d4cd20eeaf9df42bcc7e940bb85d84a8e42a661fb665d81c806f",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_collect_one_from_each_other/v_64155892458ba887a3b0b20f.mp3",
+      "generatedAt": "2026-10-08T15:04:53.924Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_one",
+      "variantId": "v_0fb8616d9a210be3a0e5dadb",
+      "spokenText": "Stop using my head as a table!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "2c9982b19012914bf29e621e992e264da964651f954f40c9b8d9c7a5763f96ce",
+      "sha256": "154c9cf81009af3bffa1028d5cf4f143e20b5b802919a3e34430f6f9b6580bae",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_damage_one/v_0fb8616d9a210be3a0e5dadb.mp3",
+      "generatedAt": "2026-10-08T15:04:54.358Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_two",
+      "variantId": "v_1bc91de24d9f0121e148d3f8",
+      "spokenText": "Let's try some Dwarven wrist wrestling!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "ac84c5e66bdccdc18829b4092c15ea722f8d1a76e6326491acd2aae90bb2f193",
+      "sha256": "028a70e2382a55c71d4372a1ad7d196c7110419fd1d33ec28542777c18a2c9b4",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_damage_two/v_1bc91de24d9f0121e148d3f8.mp3",
+      "generatedAt": "2026-10-08T15:04:54.857Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_two",
+      "variantId": "v_b51a3c3afe9e85a063871799",
+      "spokenText": "Are you saying I'm grumpy?",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "eefd9cc84520da33b3c0c7a8fe18cf852501881519b67b1e4cad14704a5d34b4",
+      "sha256": "a60cbcdc107f537d752c2fb0d51cd17279035fe72c8bed51818a2b9256935027",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_damage_two/v_b51a3c3afe9e85a063871799.mp3",
+      "generatedAt": "2026-10-08T15:04:55.257Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_two",
+      "variantId": "v_c03dbeafac4a471870a17c68",
+      "spokenText": "That's it! No more short jokes!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "55d3aae83df5452b858659e965674cbe889a65fb66f202ba54f5a54330c07590",
+      "sha256": "7837770d346feaf26fc134f4811f291b8e4f35b369ccf37138379927e11f0347",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_damage_two/v_c03dbeafac4a471870a17c68.mp3",
+      "generatedAt": "2026-10-08T15:04:55.730Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_dump_gambling_pot_to_inn",
+      "variantId": "v_59a6a44824141aaa8f889c75",
+      "spokenText": "Oh, I guess the Wench thought that was her tip...",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "bbefec6dafc50a0c8dedd6ca9576ac4a8e6c559c74d197ee9814f45bb2ff50bc",
+      "sha256": "ed57410da4d99166ffb3386492eaf08f84195d9f195f33907d6dfd64d457cf47",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_dump_gambling_pot_to_inn/v_59a6a44824141aaa8f889c75.mp3",
+      "generatedAt": "2026-10-08T15:04:56.274Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_force_extra_drink_during_other_drink_phase",
+      "variantId": "v_8c85e0f4887b18cd197782b7",
+      "spokenText": "Drink up, friend!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "79dbd3858371c9b1c4c295b922b3ba4b3e344e513105dfa5640aca38a035dfcd",
+      "sha256": "e72765d2559fc43183aacde0b63a6d4801b00f4eca65f953c8d16bda7b07dd92",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_force_extra_drink_during_other_drink_phase/v_8c85e0f4887b18cd197782b7.mp3",
+      "generatedAt": "2026-10-08T15:04:56.669Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_raise_one",
+      "variantId": "v_177bef91587ca98ca3dc45c3",
+      "spokenText": "I raise!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "684cd9cc2062315358ce0b0ab86ada79015f0f4b0a9970f221ad540ea2e78e54",
+      "sha256": "a77cb74e6c16b43d031477c168d7c91361af8433ff01ed7a93780966b0c71e8c",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_gambling_raise_one/v_177bef91587ca98ca3dc45c3.mp3",
+      "generatedAt": "2026-10-08T15:04:57.063Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_start_or_control",
+      "variantId": "v_cbd9657e849b1163ef7d652f",
+      "spokenText": "Gambling? I'm in!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "e8d43fba54a6a9c7e18bb66e3657515bda8b9ae166d90d9aeab515037f33e009",
+      "sha256": "d475b7ee883d8ba08bd6d2758ec6327bc10e2499bdf8b691feb30f22096257ee",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_gambling_start_or_control/v_cbd9657e849b1163ef7d652f.mp3",
+      "generatedAt": "2026-10-08T15:04:57.466Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_winning_hand",
+      "variantId": "v_29a04e2f90c70e26a8f41248",
+      "spokenText": "Winning Hand!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "21e40a4147df5edafdf6beeeae5890660a9e5dc5921956260f6c763402dcbfdd",
+      "sha256": "c41e995781d139e5fff9e92956f5ab64988f5d48eed761a8c1b9349e3c060fb0",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_gambling_winning_hand/v_29a04e2f90c70e26a8f41248.mp3",
+      "generatedAt": "2026-10-08T15:04:57.880Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_hit_back_two_after_loss",
+      "variantId": "v_eb0b93912687016a4a0f8b86",
+      "spokenText": "Hey! You almost damaged the beard!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "8345fedc69e2ce79336b169d4700710474fb75abf9ddb9556968b5fc43dbd6ff",
+      "sha256": "bacb6309b8e4dd27ba607a28ae6f16e3a7384086c98800fcf73b68ae7593420f",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_hit_back_two_after_loss/v_eb0b93912687016a4a0f8b86.mp3",
+      "generatedAt": "2026-10-08T15:04:58.364Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_card_fortitude",
+      "variantId": "v_3f60b879a790b0787a2d42d7",
+      "spokenText": "Good thing I was wearing my great-grandfather's helmet!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "13154728155749e8539c774e719b3ca3406273f8a9788d91a5c71b51542a6aeb",
+      "sha256": "073aaf377c1156a0e37437720e365ba1f477be896a5343dc7cd0709200fe61dd",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_ignore_card_fortitude/v_3f60b879a790b0787a2d42d7.mp3",
+      "generatedAt": "2026-10-08T15:04:58.900Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_drink",
+      "variantId": "v_9ed891a81459fbbc9f10ac2b",
+      "spokenText": "I don't want this watered-down stuff!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "d9a9a938b7394d393badbff33a148207011ef053c91003ff904155232b2fcf50",
+      "sha256": "5e58c3bbcefac8278d1da34f0b8f11c80ac9df77e7ebfd80b0d5f69958d33afa",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_ignore_drink/v_9ed891a81459fbbc9f10ac2b.mp3",
+      "generatedAt": "2026-10-08T15:04:59.403Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_drink",
+      "variantId": "v_9f0e4f571b0e02b2f4501864",
+      "spokenText": "My mother gave me stronger stuff when I was a baby!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "44748fd68ea422cee4e0ab959a784c362a2661790e934e4a73bcacce56e2f2aa",
+      "sha256": "73931356884ffbd8d421f6789d1e867ce904e0fba0166f848970143f3a865775",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_ignore_drink/v_9f0e4f571b0e02b2f4501864.mp3",
+      "generatedAt": "2026-10-08T15:04:59.915Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_drink_change_card",
+      "variantId": "v_d7e57daaa056372afde9b727",
+      "spokenText": "The Wench thinks you should stop playing with the drinks.",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "2b89874a43855d9a9f3141bb86364088b10cf9adbb253d8cc6e557cb26474de0",
+      "sha256": "208f3f5eaea5c6204424182a5ae021b1808ee753e5b07c1bcf045ed718c6a431",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_negate_drink_change_card/v_d7e57daaa056372afde9b727.mp3",
+      "generatedAt": "2026-10-08T15:05:00.433Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_sometimes_counter",
+      "variantId": "v_3c24235150cf85617c5446b8",
+      "spokenText": "I don't think so!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "67887babd347975c1c0805f32464a6cdb63ff05823d959db2848d9fff43033e5",
+      "sha256": "f0ab58ed770346e251a2a734e5e729a0a2af82d2d2c6e5f47115b9cc1c9f4198",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_negate_sometimes_counter/v_3c24235150cf85617c5446b8.mp3",
+      "generatedAt": "2026-10-08T15:05:00.834Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_order_two_extra_drinks_paid",
+      "variantId": "v_66deab5e60a389543a3be99a",
+      "spokenText": "Wench, bring some drinks for my friends!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "3088a86e5c2a82b82aae562fe9e70f6f6294b718ee7f121f4acfb10103dcfd44",
+      "sha256": "c9657b18ec39074bdf04cc446a0a49221223a3d7c5f7d8607e2b98ea1f0a0f36",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_order_two_extra_drinks_paid/v_66deab5e60a389543a3be99a.mp3",
+      "generatedAt": "2026-10-08T15:05:01.311Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_pass_own_drink",
+      "variantId": "v_ef22e13aacbe2df397186d36",
+      "spokenText": "You have this. I'm waiting for the good stuff!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "2b78a99d7dd7b16ec889a4d5b62fb69d7575e959318bf5a76c0592dea0df27dc",
+      "sha256": "7354f537b790a75271753a568ca7f5485fadf747c064568beebaf53a79d24760",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_pass_own_drink/v_ef22e13aacbe2df397186d36.mp3",
+      "generatedAt": "2026-10-08T15:05:01.816Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_restart_gambling_round",
+      "variantId": "v_f5b3abc9b763002ea4dbf9da",
+      "spokenText": "Best two out of three?",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "131827e3ae7288eef60de48a4ec0fcea1a9ca762393dd19bd6b24e1a4b21917e",
+      "sha256": "77c247093140bf0aa47520afd5cfc3e2c83cd69b0171e21ed0b42d68013f1646",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_restart_gambling_round/v_f5b3abc9b763002ea4dbf9da.mp3",
+      "generatedAt": "2026-10-08T15:05:02.226Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_split_own_drink",
+      "variantId": "v_606be2e52a0e353e550cc3ef",
+      "spokenText": "Now this stuff is actually good! Try some!",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "c5336a61dec91f2fc8f80d6717f031f5e9084cb0a407c8b8d0a459ac5d39a6b4",
+      "sha256": "0669d9b4b8d25011a75de4c032c35dbebe78bc18eb130f39fd865999a08301cb",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_split_own_drink/v_606be2e52a0e353e550cc3ef.mp3",
+      "generatedAt": "2026-10-08T15:05:02.699Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_substitute_payment_from_inn",
+      "variantId": "v_c9aae5b53b6dfe3d3791dbc2",
+      "spokenText": "Lemme check the money belt...",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "7bca97b842c1446d8563e6ac8544f00bbd3f355df8e7004ad8816c2e4617c85a",
+      "sha256": "b9ecf3399abea9093233fd571cde15da1232d36d68a4437aa7156c8ac9ac053f",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_substitute_payment_from_inn/v_c9aae5b53b6dfe3d3791dbc2.mp3",
+      "generatedAt": "2026-10-08T15:05:03.097Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_substitute_payment_from_inn",
+      "variantId": "v_f43de1f3d5da90d4f0dd374a",
+      "spokenText": "Dwarves always have money.",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "3243b764cfff6ab81996a002911633677971ee7de8218c3d201397ee1603b8c4",
+      "sha256": "373f826293e727c1518ee5ad5eeef4d8f3d7ecbb6dbc45c9cc199f0d6f75cc0b",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_substitute_payment_from_inn/v_f43de1f3d5da90d4f0dd374a.mp3",
+      "generatedAt": "2026-10-08T15:05:03.519Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_tip_wench",
+      "variantId": "v_0b1d63b6233a4b0b59845e49",
+      "spokenText": "Tip the Wench.",
+      "voiceId": "iDHk3E7ojf3zi6XPDM2o",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "2b7528a436e01d8af331154282826e04709cdb3782eea93b8476b34fc382caeb",
+      "sha256": "a995646ff36b230040297b9a8d16eb61127bc690e114f7d780c26c63cd448561",
+      "assetPath": "/audio/cards/character_rdi_dimli_the_dwarf/carddef_rdi2_dimli_tip_wench/v_0b1d63b6233a4b0b59845e49.mp3",
+      "generatedAt": "2026-10-08T15:05:03.913Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_lose_one_alcohol_collect_one_each_other",
+      "variantId": "v_f524355cbafe412b4c2db2e7",
+      "spokenText": "And now I'm going to play something really sad.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "68c2714ab90a59cb3822799fd70bcb5d77297b9cf2c0bef2ed86908062bb5963",
+      "sha256": "4659587cea1abfd8f7587cb2b798e6095f6a5d6a7c9e0591935c72593c3816af",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_all_lose_one_alcohol_collect_one_each_other/v_f524355cbafe412b4c2db2e7.mp3",
+      "generatedAt": "2026-10-08T15:05:07.048Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_players_drink_from_inn",
+      "variantId": "v_8558f8f87b9d5964ce15af85",
+      "spokenText": "A toast! To my friends!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "85d2e43a1dc1edee0544c4200b5df18baf78c30a54a5af0b087881525c4ac25a",
+      "sha256": "45f019a724867f03ffe982f77511538bba58bab152076364ea6ea9ab090ca67f",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_all_players_drink_from_inn/v_8558f8f87b9d5964ce15af85.mp3",
+      "generatedAt": "2026-10-08T15:05:07.471Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave",
+      "variantId": "v_8ee2d2794790d3468c78d7fb",
+      "spokenText": "Oh, Hey! This looks like a serious game.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "0995952246d0ed69bfa0158a2c5f83a1c6299e2687748e7ec262e18a1fc60a90",
+      "sha256": "c8a21078ae11c50d112e0bed4351312422154833d324acb9a9a91267f9e8b278",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_avoid_ante_leave/v_8ee2d2794790d3468c78d7fb.mp3",
+      "generatedAt": "2026-10-08T15:05:08.056Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave_or_ignore_drink",
+      "variantId": "v_5e895ee318bc03a1514d4762",
+      "spokenText": "Leave me be! I'm trying to read lore here!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "0fdabd206c179d510adb4fae98a68c7cff1015909eb2304e7126a5455a8c661a",
+      "sha256": "5a3c1e27e27f6e2393228dc329be26b24f6da7d774bbeb079c64b67333229e72",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_avoid_ante_leave_or_ignore_drink/v_5e895ee318bc03a1514d4762.mp3",
+      "generatedAt": "2026-10-08T15:05:08.669Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_control_and_eject",
+      "variantId": "v_12420e23f4ea7535c4643706",
+      "spokenText": "What's that up your sleeve?",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "3f4e2a4cb414104f83675e57484858524cf2999416f191e637851d89d331f4e8",
+      "sha256": "02b2103845e8ba1c7bece5fdc772be2f210caec67352bd7b396c662bd164c164",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_cheat_control_and_eject/v_12420e23f4ea7535c4643706.mp3",
+      "generatedAt": "2026-10-08T15:05:09.094Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_take_control",
+      "variantId": "v_3d4cb3eca12d87f11f68f704",
+      "spokenText": "Look at these cards! This must be my lucky day!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "366ba70b1829397090cf816c805d6a3369522b4da7a2804a782bfeead547b100",
+      "sha256": "eeff90cc191523f8185d362e65b42f051f544ba899f8886c5ee06d529abde5a7",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_cheat_take_control/v_3d4cb3eca12d87f11f68f704.mp3",
+      "generatedAt": "2026-10-08T15:05:09.624Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_take_control",
+      "variantId": "v_49b986ea3e7d64f0bd045750",
+      "spokenText": "It seems that Lady Luck is smiling on me!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "352690afe9b1da06ab9f32890bd0f19eff0181d58b3404bb528d45ffa4c9d834",
+      "sha256": "1c7b95a0dd0ee98b3a200cf2d937a02dc9d670fb5929270c0f5df011b723c20e",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_cheat_take_control/v_49b986ea3e7d64f0bd045750.mp3",
+      "generatedAt": "2026-10-08T15:05:10.151Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_take_control",
+      "variantId": "v_533efad30414e88a3521902f",
+      "spokenText": "Fortunately, I had this card up my sleeve! Ha ha, just kidding!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "1088d97e2e23b80ad077a9053c338a49136fdfbd2deef58a9045699e9d9af80a",
+      "sha256": "daba5a045af283045a3e7bca3d1c86b6488b7cbc58914b32b6aa0fcce2c30b64",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_cheat_take_control/v_533efad30414e88a3521902f.mp3",
+      "generatedAt": "2026-10-08T15:05:10.781Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_take_control",
+      "variantId": "v_924875a65b69fdcca05f52e9",
+      "spokenText": "Oops... I dropped my cards...",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "66d17bae5202ef0b0c1d390866d09c7ee4b90058c408cf9f5d2a3f20878cf569",
+      "sha256": "e501a33d8250fbdd85b57a7053b74fb3392f4040f74da068eb3429f341e498a2",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_cheat_take_control/v_924875a65b69fdcca05f52e9.mp3",
+      "generatedAt": "2026-10-08T15:05:11.218Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_collect_one_from_each_other",
+      "variantId": "v_75c0cc6ca156cc1042385208",
+      "spokenText": "I've composed a poem about our most recent adventure.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "7dee8ccf94656c98d4897e3c18a9c417ed2d412ed801b29e5f92541a9062978f",
+      "sha256": "b51560875c55c74e01a7a6af9b54dc05946f549ab2d1fb8e5334bb3e0d6df6bd",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_collect_one_from_each_other/v_75c0cc6ca156cc1042385208.mp3",
+      "generatedAt": "2026-10-08T15:05:11.773Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_one",
+      "variantId": "v_a36bf4261ea256a31c1269a1",
+      "spokenText": "Excuse me... I think you're sitting on my tuning fork.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "cbb2bd08b4b1051aba0b516bee581f6ab873ffd28b060cf27e2d50cbb8c4edd9",
+      "sha256": "0b28cde91a1fe69b79b60954cd7c53930ee734752017aa8e519ab2f3b11c25ba",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_damage_one/v_a36bf4261ea256a31c1269a1.mp3",
+      "generatedAt": "2026-10-08T15:05:12.334Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_two",
+      "variantId": "v_755e25b7c5ea1749182f7b66",
+      "spokenText": "Oh, I hate it when the strings break!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "ef91c755df96d6de0e221695de84f01e9f20d2cec748ec0b1d954418c205c144",
+      "sha256": "c7d03b32e58aeb7417d9e116780f582e5da55b18bf0e8b5f520dcbc238557f43",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_damage_two/v_755e25b7c5ea1749182f7b66.mp3",
+      "generatedAt": "2026-10-08T15:05:12.829Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_dump_gambling_pot_to_inn",
+      "variantId": "v_59a6a44824141aaa8f889c75",
+      "spokenText": "Oh, I guess the Wench thought that was her tip...",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "fa43f81b7b8456a5b23fad1d3dcebba9b8dab2a6fcf49e1fe0255d1f96f86d42",
+      "sha256": "00e2b688d02523186f5ddf33f6e6c1d476e78c7b27c98dc78875051263bf7034",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_dump_gambling_pot_to_inn/v_59a6a44824141aaa8f889c75.mp3",
+      "generatedAt": "2026-10-08T15:05:13.308Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gain_two_fortitude",
+      "variantId": "v_10585c905f780e7107e39be8",
+      "spokenText": "Who knew? One of my fans is a priest!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "c33f65e8ecf139c29f4c427aebd560b83ef751f481802a471a9d58a6fc2aab87",
+      "sha256": "4d976b8eb6b2878d6e613afd3d4ca75da99c272dcb1499760afd4c876b6ad56d",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_gain_two_fortitude/v_10585c905f780e7107e39be8.mp3",
+      "generatedAt": "2026-10-08T15:05:13.818Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_raise_one",
+      "variantId": "v_177bef91587ca98ca3dc45c3",
+      "spokenText": "I raise!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "e3fb6fdcfbf118a2e386460b2d7a28b49d684b34767475fadbc958e8631a153b",
+      "sha256": "8bd246b0345714a9ef9baab8a8121e099b49a355c84f305f3dff72e071dd9763",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_gambling_raise_one/v_177bef91587ca98ca3dc45c3.mp3",
+      "generatedAt": "2026-10-08T15:05:14.230Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_start_or_control",
+      "variantId": "v_cbd9657e849b1163ef7d652f",
+      "spokenText": "Gambling? I'm in!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "235f519fc5cd788525a80b5459054173ecff8f76cf2e7edbaa3415e092454561",
+      "sha256": "6c634c84136cdf6b2522211e508eb5e796f61a3d0395b1a71461a38e4fa7ff1c",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_gambling_start_or_control/v_cbd9657e849b1163ef7d652f.mp3",
+      "generatedAt": "2026-10-08T15:05:14.663Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_winning_hand",
+      "variantId": "v_29a04e2f90c70e26a8f41248",
+      "spokenText": "Winning Hand!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "76afdd304e1572284c184a24b2b07807a3167cef965c75546cd1a481b68a085c",
+      "sha256": "e210d1341441dee7cdd26374b1c81ae79d9f076c33347c440f424bfaa63a631a",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_gambling_winning_hand/v_29a04e2f90c70e26a8f41248.mp3",
+      "generatedAt": "2026-10-08T15:05:15.066Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_hit_back_two_after_loss",
+      "variantId": "v_b3d4c0c23d4909e0cfbf9ea8",
+      "spokenText": "Allow me to introduce you to my biggest fan.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "68c5782ce152484eb7f5e6fe8852051f8a6a5ff328876e6b2d6db5723467587b",
+      "sha256": "3cad80e958124375be85e15c8fe5b522df5569829096ab15a5e27e8905ef41c5",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_hit_back_two_after_loss/v_b3d4c0c23d4909e0cfbf9ea8.mp3",
+      "generatedAt": "2026-10-08T15:05:15.574Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_ignore_drink",
+      "variantId": "v_d8b3f31d6157f9ce2b4d597f",
+      "spokenText": "You know, I should take better care of my dainty figure!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "cf077250dc58bcb3c38fadc44f52da1bd724326c4025991d7fc3f0da1e240f90",
+      "sha256": "167a2bebc9435eaac9eda0fba77912fadbb0f7033c683ea52e2378846d0ab2d5",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_ignore_drink/v_d8b3f31d6157f9ce2b4d597f.mp3",
+      "generatedAt": "2026-10-08T15:05:16.120Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_ignore_drink",
+      "variantId": "v_e02282d2236e7171a7c41c87",
+      "spokenText": "I may be a fop, but I can hold my liquor!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "6cdd67102c2f1bbd05ead2e9ff1eeaca79fe2dcbfd4930832d3e5abc79796b08",
+      "sha256": "d302e9b73d6bc09db3c26c02432893c216f6cc2acef6200fd7f680703414a5a5",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_ignore_drink/v_e02282d2236e7171a7c41c87.mp3",
+      "generatedAt": "2026-10-08T15:05:16.624Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_drink_change_card",
+      "variantId": "v_d7e57daaa056372afde9b727",
+      "spokenText": "The Wench thinks you should stop playing with the drinks.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "7365fde72c745bba0d44bde87ee01dd4d74b6f5405fe5bdf0057832a86c0c1ff",
+      "sha256": "6e6761cf2ef58b7a65a40c4496aba12da29ad928a80aadf1b2f3ca2749ae94c6",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_negate_drink_change_card/v_d7e57daaa056372afde9b727.mp3",
+      "generatedAt": "2026-10-08T15:05:17.141Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_sometimes_counter",
+      "variantId": "v_3c24235150cf85617c5446b8",
+      "spokenText": "I don't think so!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "f9d7dbeb92346fe0ee964caebbc29c79f9b1016d3b7568a8df3dd95c04d9ff86",
+      "sha256": "38be9911f8ad30596020f1f70e12b336c429ebd6d290e7b6ec51482792dee6ff",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_negate_sometimes_counter/v_3c24235150cf85617c5446b8.mp3",
+      "generatedAt": "2026-10-08T15:05:17.544Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_order_two_extra_drinks_free_or_waive_refill",
+      "variantId": "v_c4e57511a2b80088614b0b30",
+      "spokenText": "Wench, please allow me to pay for these drinks with a song!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "328186d97f5643d2c9d8cd277fed90d8ccb58a3e05e4fbe9c0d2f12e591bbed5",
+      "sha256": "0ed1ab16ebed38fd3b23a0f2d4077075e5e6c4ccdd3e5ecfc7c91e7df7e55dfb",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_order_two_extra_drinks_free_or_waive_refill/v_c4e57511a2b80088614b0b30.mp3",
+      "generatedAt": "2026-10-08T15:05:18.063Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_rowdy_song",
+      "variantId": "v_a6aea4bdd0941d6e471a8ec6",
+      "spokenText": "How about a rowdy drinking song?",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "242d9c2f5adf1fb7b1516c16f11424bdd3cd0a09173b6917b39eb9b4f4e9a610",
+      "sha256": "46da729d20414df8b6713b3bcab7b6f0fe75cd5dad0fe6adc88930416aadf898",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_rowdy_song/v_a6aea4bdd0941d6e471a8ec6.mp3",
+      "generatedAt": "2026-10-08T15:05:18.546Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_split_own_drink",
+      "variantId": "v_17a439c9b1e9b5fb1c226edd",
+      "spokenText": "I do so hate to drink alone...",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "3e012ef8c63bffd4e79ee0e80e22b60470dc48ddea4a19d24d535d24e6dac6dc",
+      "sha256": "7e15108f19127e59ceb5df712f3a2d995ea48550bc4339375b3809b6bfaf9b26",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_split_own_drink/v_17a439c9b1e9b5fb1c226edd.mp3",
+      "generatedAt": "2026-10-08T15:05:18.976Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_substitute_payment_from_inn",
+      "variantId": "v_06b57b75bd6dc899d383df06",
+      "spokenText": "I got this from playing in the Town Square.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "e7ca29172524fe6500b53b70625dc73cf4b8205cfe98ce4eb2a032ee4d4d14c5",
+      "sha256": "2fb903894377ad773f157b83770a1250869dc4a7ef1a4049de581f2b91d9c9f6",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_substitute_payment_from_inn/v_06b57b75bd6dc899d383df06.mp3",
+      "generatedAt": "2026-10-08T15:05:19.465Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_substitute_payment_from_inn",
+      "variantId": "v_b1f9f131bff5ceb2903a5b5d",
+      "spokenText": "Appreciative listeners! How nice!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "85a45831d4748fc7e75d52c615b57acbd3068676ca33d0fb3e82ac9b862a21b3",
+      "sha256": "a0851438d2043873e17a63ecea102e21186685a4f1b0581a5a27d3d5d6fbc869",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_substitute_payment_from_inn/v_b1f9f131bff5ceb2903a5b5d.mp3",
+      "generatedAt": "2026-10-08T15:05:19.946Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_take_two_gold",
+      "variantId": "v_4f5b297e98e91db0b4cb1e7d",
+      "spokenText": "This is in payment for that heroic ballad I wrote about you!",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "e948a61bffea4b41f8a2f2ef893c9b7098d42a742ff63debf94768e2d10b3c71",
+      "sha256": "0316d9fbe13608f068d93a0c47ced772bde6418d1124a18103aa08ea8bca7d54",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_take_two_gold/v_4f5b297e98e91db0b4cb1e7d.mp3",
+      "generatedAt": "2026-10-08T15:05:20.471Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_tip_wench",
+      "variantId": "v_0b1d63b6233a4b0b59845e49",
+      "spokenText": "Tip the Wench.",
+      "voiceId": "kJ1WJLsLiz0CnWmEPesT",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "6c5a516c12c1db1d4b7e6798bf5008cf93ae91462596b8973ea7e47d9fcc7476",
+      "sha256": "a727e2558a36799f957d649249d050e125628c76774105091369118db8509373",
+      "assetPath": "/audio/cards/character_rdi_fleck_the_bard/carddef_rdi2_fleck_tip_wench/v_0b1d63b6233a4b0b59845e49.mp3",
+      "generatedAt": "2026-10-08T15:05:20.877Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_anti_cheat_win_round",
+      "variantId": "v_f0eae83c0017faa76bc42399",
+      "spokenText": "Gog think you cheating! Gog no like cheaters!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "8d54e39538daf42728c8919918b73ffda2769fedb5f4564d2d40f280c7488623",
+      "sha256": "b21385c317ae7f4d267625d4542f6582eb0f81e178b67a0cb5514dc3eab810ff",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_anti_cheat_win_round/v_f0eae83c0017faa76bc42399.mp3",
+      "generatedAt": "2026-10-08T15:05:22.695Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_avoid_ante_leave",
+      "variantId": "v_d0517474845d2c2a8d0a7dfd",
+      "spokenText": "This game stupid!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "3dbe10f1f92471fa029a15a34d21f45e09344171b3a19f1746c3ec1ad44a6809",
+      "sha256": "667541ace650529a1a8a35937dff410eeefd4f2a66cf94cf3e273c40a040ebae",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_avoid_ante_leave/v_d0517474845d2c2a8d0a7dfd.mp3",
+      "generatedAt": "2026-10-08T15:05:23.130Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_avoid_ante_leave_or_ignore_drink",
+      "variantId": "v_f9374589910ba3210b46bd75",
+      "spokenText": "do not bother gog",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "c101dbe2e15faf3f7bcadf390cf78d2a88248ab4e1db3cbcc7182b9028579731",
+      "sha256": "bd129f25c845df5371953b61898a2de37570c8276ac2b9b04ab5e21295118b16",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_avoid_ante_leave_or_ignore_drink/v_f9374589910ba3210b46bd75.mp3",
+      "generatedAt": "2026-10-08T15:05:23.553Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_collect_one_from_each_other",
+      "variantId": "v_c3346fbe7b76487e3fc9df73",
+      "spokenText": "Gog crush beer stein on head",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "04b540b349beab3832c020c8f22c59f6bfa0c5b5f7323a9d4914ea80fc9eb825",
+      "sha256": "010ad1adae8e0b4ff3d64e8d81b95b7072f5489e5c0048565fcd291784e647f2",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_collect_one_from_each_other/v_c3346fbe7b76487e3fc9df73.mp3",
+      "generatedAt": "2026-10-08T15:05:24.105Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_all_others_one",
+      "variantId": "v_be61cadbda53ff6e9c3877ad",
+      "spokenText": "Gog loves everyone!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "038616aae54c258b05f338d68122fb3e81cdda146583a3e12ac2068af8835ff1",
+      "sha256": "939e23d1c75c2dc732f8522c524467cbb3daa4b4de6dc7c67bb109450df7b157",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_damage_all_others_one/v_be61cadbda53ff6e9c3877ad.mp3",
+      "generatedAt": "2026-10-08T15:05:24.517Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_four",
+      "variantId": "v_2a8dadff9ba3db836bc2ce05",
+      "spokenText": "Dance with Gog!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "d02b95d4fef4e350fd2c9015b25a79f4d243733f76a54020babfab56fb706712",
+      "sha256": "6380341da3d9787af3dd4244f3aacc6caccaa9bdc08c41907837e4513e5cc76e",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_damage_four/v_2a8dadff9ba3db836bc2ce05.mp3",
+      "generatedAt": "2026-10-08T15:05:24.913Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_three_pay_inn_one",
+      "variantId": "v_b92d1b4dd9d337013ed4399a",
+      "spokenText": "Sorry, Gog not see you sitting there...",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "f59f2b001a5b05c87031f572d77587f158fa21fda57e0eaa1a75bee9f1bf6a6c",
+      "sha256": "c14bc642ccc8868c2a03b643ead43d93c13172973970bd344df63b4733a1599a",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_damage_three_pay_inn_one/v_b92d1b4dd9d337013ed4399a.mp3",
+      "generatedAt": "2026-10-08T15:05:25.430Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_two",
+      "variantId": "v_b1a64039119b27230cd07a8c",
+      "spokenText": "Gog make funny? Why you not laugh?",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "d88e2787d7e6c83d45fde9993700732302b7d46fe5e8e05524f61bb56d4b937b",
+      "sha256": "da45596def323d8ee2ac9355db3ab4e881d1ba1236e96fa34a41066b7fffdcb4",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_damage_two/v_b1a64039119b27230cd07a8c.mp3",
+      "generatedAt": "2026-10-08T15:05:25.952Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_two",
+      "variantId": "v_cd0d9487540e29c2c21e937f",
+      "spokenText": "Why you laugh at Gog?",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "2203063643d59bf8db7bccca16119a50f2588e48231171534301610db89335c7",
+      "sha256": "7be9fa13804099463bfeb263aae9140ed4042ab54446d28e8a894eca8442a9dc",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_damage_two/v_cd0d9487540e29c2c21e937f.mp3",
+      "generatedAt": "2026-10-08T15:05:26.364Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_dump_gambling_pot_to_inn",
+      "variantId": "v_59a6a44824141aaa8f889c75",
+      "spokenText": "Oh, I guess the Wench thought that was her tip...",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "ee7cf4811098f788f86e2ac3ccffd998a0349ff2eccb3cbf90f8604adf2977fe",
+      "sha256": "034bb6555fe56d4c1eb0f8dfe79b18b6f17ca6ff5c2ffab0bce1716c98d69f34",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_dump_gambling_pot_to_inn/v_59a6a44824141aaa8f889c75.mp3",
+      "generatedAt": "2026-10-08T15:05:26.909Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_force_extra_drink_during_other_drink_phase",
+      "variantId": "v_c372af38c9f2e2967dee8ed0",
+      "spokenText": "Gog say you drink MORE!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "66474d9b23c026eb82dc6f9faa940238cd8920a78e6553f21fe2811640f32666",
+      "sha256": "960465fe7a6c28e3f4a00ed3ae141737603e58c14c8a12308b2b253d205ef712",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_force_extra_drink_during_other_drink_phase/v_c372af38c9f2e2967dee8ed0.mp3",
+      "generatedAt": "2026-10-08T15:05:27.326Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gain_two_fortitude",
+      "variantId": "v_66d1d23d151d732cd03939b9",
+      "spokenText": "Gog tough! Gog feel better now!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "b24b9925dc5ff001a56f0470c86b8e7d55b16d516b1af2c19ec9a23e62fbb203",
+      "sha256": "1ce2650f2f818f657141495105583e73bd6c332710a0a666df831f73401da1e0",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_gain_two_fortitude/v_66d1d23d151d732cd03939b9.mp3",
+      "generatedAt": "2026-10-08T15:05:27.841Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_raise_one",
+      "variantId": "v_177bef91587ca98ca3dc45c3",
+      "spokenText": "I raise!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "d209f949a52bb9be240f42a68b5d98c0490333808fd8cc4fa53049a259a00448",
+      "sha256": "3c573767ca78f29bc220b9983f4870f97c7c32e8b995f598fc4ebbb3e6978d79",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_gambling_raise_one/v_177bef91587ca98ca3dc45c3.mp3",
+      "generatedAt": "2026-10-08T15:05:28.253Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_start_or_control",
+      "variantId": "v_cbd9657e849b1163ef7d652f",
+      "spokenText": "Gambling? I'm in!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "902980108681490798476aecadf9d85a851bd72aa1a2973dce9328a775fb5e34",
+      "sha256": "160d7d0ff0bba2e20291c9c9e14b4ff73ebc903de72b14932ab1f44c9c73e0a4",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_gambling_start_or_control/v_cbd9657e849b1163ef7d652f.mp3",
+      "generatedAt": "2026-10-08T15:05:28.663Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_winning_hand",
+      "variantId": "v_29a04e2f90c70e26a8f41248",
+      "spokenText": "Winning Hand!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "c8c5c3660141867420fb9e62f1e4ec89bfadeb6ec5d58c544dde3d4031a7789a",
+      "sha256": "9a0f36de71b8d3c8ac0aca25c238572074899ed73252bba8ea9132ac26a73401",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_gambling_winning_hand/v_29a04e2f90c70e26a8f41248.mp3",
+      "generatedAt": "2026-10-08T15:05:29.048Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_hit_back_two_after_loss",
+      "variantId": "v_a8267431dd83e3e818ba394c",
+      "spokenText": "That not hurt! This hurt!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "adafc0fbe2e6b0496cf3c893e37286ff64efb333a9c251e30b7df401dd4b2518",
+      "sha256": "a6e0bd9d5480e16083ee43076ee0c044ed0805cb2c2293193dc0e9ba899349d5",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_hit_back_two_after_loss/v_a8267431dd83e3e818ba394c.mp3",
+      "generatedAt": "2026-10-08T15:05:29.484Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_all_stats",
+      "variantId": "v_d0382a7f6ed3ba8cf5f78cba",
+      "spokenText": "Shut up!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "1a18e184c3f8e1a63e5986b181c8c6eba1da2d9a1295c9a7ebb041a30a5326cf",
+      "sha256": "9963441c3c891b8faf5a698561014402333bf8ca164f2dd24a5fbad2f0f2ef40",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_ignore_card_all_stats/v_d0382a7f6ed3ba8cf5f78cba.mp3",
+      "generatedAt": "2026-10-08T15:05:29.898Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_fortitude",
+      "variantId": "v_8be4078c974b355d59fddaac",
+      "spokenText": "Stop poking Gog",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "fe55492f0e9a191f74b2aadd1a1264a053e3feabcaefa5735cecec7694d790f3",
+      "sha256": "28fde5a6ba80e4a326be75893cb47cab5f6114225f10bc36da0b1f800dd24821",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_ignore_card_fortitude/v_8be4078c974b355d59fddaac.mp3",
+      "generatedAt": "2026-10-08T15:05:30.321Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_drink",
+      "variantId": "v_347c45209d3239386afbfc4c",
+      "spokenText": "This taste yucky!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "b25a3e604a451e23e425dbfbdde7af9165e499cc12d81a25b2e59bcfff7c61f1",
+      "sha256": "1a8afe640643dc145ea655d9ffa1bb2f48d28dac727dbec13ef39be76d2fe13c",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_ignore_drink/v_347c45209d3239386afbfc4c.mp3",
+      "generatedAt": "2026-10-08T15:05:30.730Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_drink_change_card",
+      "variantId": "v_d7e57daaa056372afde9b727",
+      "spokenText": "The Wench thinks you should stop playing with the drinks.",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "795f1a7412367d1ec8f771e8fcdcc55d93b73c667e638297507ca274ed239bd6",
+      "sha256": "ac00c0ba3105241ecef769ef2bbdf473e335026214bbd4b0123879876d9fa91a",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_negate_drink_change_card/v_d7e57daaa056372afde9b727.mp3",
+      "generatedAt": "2026-10-08T15:05:31.231Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_sometimes_counter",
+      "variantId": "v_702199cb923d1dbab59fd20d",
+      "spokenText": "Gog not think so!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "114591161bfc84e83bb1c54d1841068354dc56709b4c78ecb52ef5a804d6aa08",
+      "sha256": "b8eff29c1de2f0f8873ca3cacae05aed91b5f2f5d56d915c97ccda96a89592b1",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_negate_sometimes_counter/v_702199cb923d1dbab59fd20d.mp3",
+      "generatedAt": "2026-10-08T15:05:31.614Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_order_two_extra_drinks_paid",
+      "variantId": "v_66deab5e60a389543a3be99a",
+      "spokenText": "Wench, bring some drinks for my friends!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "9378c91cb8b21e0a33189651a190eaf5df2fa90517d897ce89dc960627ff657e",
+      "sha256": "8764f62945b400525c823119e3906f8af2e34d2ab87fc24d6b85e5bd157f5dde",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_order_two_extra_drinks_paid/v_66deab5e60a389543a3be99a.mp3",
+      "generatedAt": "2026-10-08T15:05:32.149Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_substitute_payment_from_inn",
+      "variantId": "v_5804a521bd3cc2060ccf4d97",
+      "spokenText": "Gog find shiny gold! Gog pay with this!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "cdf744d789638a4a7b749852dcc6d1f7a871c1cd98c938160f0c1a2d5538abb2",
+      "sha256": "c107286163ff3ab40fde0b676afa3cca425eb4d242172f8725f76bd9455b0bb1",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_substitute_payment_from_inn/v_5804a521bd3cc2060ccf4d97.mp3",
+      "generatedAt": "2026-10-08T15:05:32.656Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_substitute_payment_from_inn",
+      "variantId": "v_5a39e301e77ea7f66a7e28c7",
+      "spokenText": "Gog find gold under table! Gog use that!",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "fb030f4ea94f13fa77dc93c9e8e507f94e624bdf39e7dd5d3f47f91df26efc59",
+      "sha256": "971312106e20cf388146fbe42eacddbe62f57fd39872bd004441c0eb0afac814",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_substitute_payment_from_inn/v_5a39e301e77ea7f66a7e28c7.mp3",
+      "generatedAt": "2026-10-08T15:05:33.146Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_tip_wench",
+      "variantId": "v_0b1d63b6233a4b0b59845e49",
+      "spokenText": "Tip the Wench.",
+      "voiceId": "LSaaFXnHBKjbbNrMtOsH",
+      "modelId": "eleven_flash_v2_5",
+      "outputFormat": "mp3_44100_128",
+      "voiceSettings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 1
+      },
+      "contentHash": "a43e2870a8131822263aa78dfc229b4613ae2a22fd8230fe22ae8eb6d8f57115",
+      "sha256": "565ddcd73bc6a111a4a8a3443c1d8bcdc1ef161c93f5313ad006729d93da4306",
+      "assetPath": "/audio/cards/character_rdi_gog_the_half_ogre/carddef_rdi2_gog_tip_wench/v_0b1d63b6233a4b0b59845e49.mp3",
+      "generatedAt": "2026-10-08T15:05:33.987Z",
+      "sourceUrl": "https://elevenlabs.io",
+      "author": "User-selected character voice; speech generated by ElevenLabs",
+      "license": "ElevenLabs Free-plan terms; attribution required; no commercial license asserted"
+    }
+  ]
 }

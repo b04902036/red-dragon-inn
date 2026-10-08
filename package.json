@@ -20,6 +20,7 @@
     "format": "prettier --write .",
     "test": "node scripts/test-projects.mjs && npm run voice:test",
     "voice:test": "node --test tests/voice/*.test.mjs",
+    "voice:titles": "node scripts/card-title-variants.mjs",
     "voice:plan": "node scripts/card-voices.mjs plan",
     "voice:generate": "node --env-file-if-exists=.env.local scripts/card-voices.mjs generate",
     "voice:verify:partial": "node scripts/card-voices.mjs partial",

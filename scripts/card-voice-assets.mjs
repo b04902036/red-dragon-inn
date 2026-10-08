@@ -30,20 +30,28 @@ export const configurationSchema = z
     'Duplicate character',
   );
 export const titlesSchema = z.strictObject({
-  schemaVersion: z.literal(1),
+  schemaVersion: z.literal(2),
   entries: z.array(
     z.strictObject({
       characterId: id,
       cardDefinitionId: id,
-      spokenText: z
-        .string()
-        .min(1)
-        .max(1000)
-        .refine(
-          (text) => text === text.trim() && !/[\r\n\p{Script=Han}]/u.test(text),
-          'Use the exact single canonical English title',
-        ),
-      evidence: z.string().min(1),
+      variants: z
+        .array(
+          z.strictObject({
+            variantId: id,
+            quantity: z.number().int().positive(),
+            spokenText: z
+              .string()
+              .min(1)
+              .max(1000)
+              .refine(
+                (text) =>
+                  text === text.trim() && !/[\r\n\p{Script=Han}]/u.test(text),
+                'Use the exact single canonical English title',
+              ),
+          }),
+        )
+        .min(1),
     }),
   ),
 });
@@ -59,6 +67,7 @@ export const sha256 = (bytes) =>
 const assetSchema = z.strictObject({
   characterId: id,
   cardDefinitionId: id,
+  variantId: id,
   spokenText: z.string().min(1),
   voiceId: mapping.shape.voiceId.unwrap(),
   modelId: mapping.shape.modelId,
@@ -74,16 +83,42 @@ const assetSchema = z.strictObject({
   sha256: z.string().regex(/^[a-f0-9]{64}$/),
   assetPath: z
     .string()
-    .regex(/^\/audio\/cards\/[a-z][a-z0-9_]*\/[a-z][a-z0-9_]*\.mp3$/),
+    .regex(
+      /^\/audio\/cards\/[a-z][a-z0-9_]*\/[a-z][a-z0-9_]*\/[a-z][a-z0-9_]*\.mp3$/,
+    ),
   generatedAt: z.iso.datetime(),
   sourceUrl: z.string().url(),
   author: z.string(),
   license: z.string(),
 });
-export const manifestSchema = z.strictObject({
-  schemaVersion: z.literal(1),
-  entries: z.array(assetSchema),
-});
+export const manifestSchema = z
+  .strictObject({
+    schemaVersion: z.literal(2),
+    families: z.array(
+      z.strictObject({
+        characterId: id,
+        cardDefinitionId: id,
+        variantIds: z.array(id).min(1),
+      }),
+    ),
+    entries: z.array(assetSchema),
+  })
+  .refine(
+    (manifest) =>
+      new Set(
+        manifest.entries.map(
+          (entry) =>
+            `${entry.characterId}:${entry.cardDefinitionId}:${entry.variantId}`,
+        ),
+      ).size === manifest.entries.length,
+    'Duplicate voice variant',
+  );
+export const titleFamilies = (titles) =>
+  titles.entries.map(({ characterId, cardDefinitionId, variants }) => ({
+    characterId,
+    cardDefinitionId,
+    variantIds: variants.map((variant) => variant.variantId),
+  }));
 export async function atomicFile(path, bytes) {
   await mkdir(join(path, '..'), { recursive: true });
   await writeFile(`${path}.tmp`, bytes);
@@ -97,7 +132,8 @@ export async function readManifest(root) {
       ),
     );
   } catch (error) {
-    if (error.code === 'ENOENT') return { schemaVersion: 1, entries: [] };
+    if (error.code === 'ENOENT')
+      return { schemaVersion: 2, families: [], entries: [] };
     throw new Error(
       'Invalid voice manifest; preserve and repair it before generation.',
       { cause: error },
@@ -143,7 +179,14 @@ export function requiredCards(pack, inputConfiguration) {
         throw new Error(
           'Character deck contains a missing or non-character card.',
         );
-      required.push({ character, cardDefinitionId, displayName: card.name });
+      required.push({
+        character,
+        cardDefinitionId,
+        quantity: records
+          .filter((record) => record.cardId === cardDefinitionId)
+          .reduce((sum, record) => sum + record.quantity, 0),
+        displayName: card.name,
+      });
     }
   }
   return required;
@@ -164,10 +207,25 @@ export function planAssets(pack, configuration, inputTitles) {
         `Unknown ownership or duplicate canonical title mapping: ${key}`,
       );
     seen.add(key);
+    const quantity = required.find(
+      (card) =>
+        `${card.character.characterId}:${card.cardDefinitionId}` === key,
+    ).quantity;
+    if (
+      title.variants.reduce((sum, variant) => sum + variant.quantity, 0) !==
+        quantity ||
+      new Set(title.variants.map((variant) => variant.variantId)).size !==
+        title.variants.length ||
+      new Set(title.variants.map((variant) => variant.spokenText)).size !==
+        title.variants.length
+    )
+      throw new Error(
+        `Invalid variant quantities or duplicate variants: ${key}`,
+      );
   }
   const missing = [];
   const assets = [];
-  for (const card of required.filter((card) => card.character.enabled)) {
+  for (const card of required) {
     const title = titles.entries.find(
       (title) =>
         title.characterId === card.character.characterId &&
@@ -181,20 +239,24 @@ export function planAssets(pack, configuration, inputTitles) {
       });
       continue;
     }
-    const inputs = {
-      characterId: card.character.characterId,
-      cardDefinitionId: card.cardDefinitionId,
-      spokenText: title.spokenText,
-      voiceId: card.character.voiceId,
-      modelId: card.character.modelId,
-      outputFormat: card.character.outputFormat,
-      voiceSettings: settings,
-    };
-    assets.push({
-      ...inputs,
-      contentHash: sha256(JSON.stringify(inputs)),
-      assetPath: `/audio/cards/${inputs.characterId}/${inputs.cardDefinitionId}.mp3`,
-    });
+    if (!card.character.enabled) continue;
+    for (const variant of title.variants) {
+      const inputs = {
+        characterId: card.character.characterId,
+        cardDefinitionId: card.cardDefinitionId,
+        variantId: variant.variantId,
+        spokenText: variant.spokenText,
+        voiceId: card.character.voiceId,
+        modelId: card.character.modelId,
+        outputFormat: card.character.outputFormat,
+        voiceSettings: settings,
+      };
+      assets.push({
+        ...inputs,
+        contentHash: sha256(JSON.stringify(inputs)),
+        assetPath: `/audio/cards/${inputs.characterId}/${inputs.cardDefinitionId}/${inputs.variantId}.mp3`,
+      });
+    }
   }
   if (missing.length) {
     const error = new Error(
@@ -277,14 +339,16 @@ export async function generateAssets({
 }) {
   const assets = planAssets(pack, configuration, titles);
   const manifest = await readManifest(root);
+  const families = titleFamilies(titles);
   const manifestKeys = new Set();
   const manifestPaths = new Set();
   for (const entry of manifest.entries) {
-    const key = `${entry.characterId}:${entry.cardDefinitionId}`;
+    const key = `${entry.characterId}:${entry.cardDefinitionId}:${entry.variantId}`;
     const planned = assets.find(
       (asset) =>
         asset.characterId === entry.characterId &&
-        asset.cardDefinitionId === entry.cardDefinitionId,
+        asset.cardDefinitionId === entry.cardDefinitionId &&
+        asset.variantId === entry.variantId,
     );
     if (
       !planned ||
@@ -297,6 +361,13 @@ export async function generateAssets({
       );
     manifestKeys.add(key);
     manifestPaths.add(entry.assetPath);
+  }
+  if (JSON.stringify(manifest.families) !== JSON.stringify(families)) {
+    manifest.families = families;
+    await atomicFile(
+      join(root, 'audio/cards/manifest.json'),
+      JSON.stringify(manifest, null, 2) + '\n',
+    );
   }
   const counts = Object.fromEntries(
     configuration.characters
@@ -317,7 +388,8 @@ export async function generateAssets({
   for (const asset of assets) {
     const key = (entry) =>
       entry.characterId === asset.characterId &&
-      entry.cardDefinitionId === asset.cardDefinitionId;
+      entry.cardDefinitionId === asset.cardDefinitionId &&
+      entry.variantId === asset.variantId;
     const matches = manifest.entries.filter(key);
     if (matches.length > 1) throw new Error('Duplicate manifest ownership.');
     if (await currentAsset(matches[0], asset, root, validateAudio)) {
@@ -357,7 +429,7 @@ export async function generateAssets({
           );
         }
         if (
-          [409, 429, 500, 502, 503, 504].includes(response.status) &&
+          [409, 500, 502, 503, 504].includes(response.status) &&
           attempt < 3
         ) {
           await wait(500 * 2 ** attempt);
@@ -404,6 +476,7 @@ export async function generateAssets({
       failures.push({
         characterId: asset.characterId,
         cardDefinitionId: asset.cardDefinitionId,
+        variantId: asset.variantId,
         reason: error instanceof Error ? error.message : 'TTS failure.',
       });
       break; // Preserve completed work; one failure never restarts the batch.
@@ -412,6 +485,12 @@ export async function generateAssets({
   return {
     counts,
     requests,
+    pending:
+      assets.length -
+      Object.values(counts).reduce(
+        (sum, count) => sum + count.generated + count.skipped,
+        0,
+      ),
     failures,
     unconfigured: configuration.characters
       .filter((c) => !c.enabled)
@@ -443,6 +522,10 @@ export async function verifyAssets({
 }) {
   const assets = planAssets(pack, configuration, titles);
   const manifest = await readManifest(root);
+  if (
+    JSON.stringify(manifest.families) !== JSON.stringify(titleFamilies(titles))
+  )
+    throw new Error('Stale or invalid voice family metadata.');
   const unconfigured = configuration.characters
     .filter((c) => !c.enabled)
     .map((c) => c.characterId);
@@ -451,11 +534,12 @@ export async function verifyAssets({
   const keys = new Set(),
     paths = new Set();
   for (const entry of manifest.entries) {
-    const key = `${entry.characterId}:${entry.cardDefinitionId}`;
+    const key = `${entry.characterId}:${entry.cardDefinitionId}:${entry.variantId}`;
     const asset = assets.find(
       (a) =>
         a.characterId === entry.characterId &&
-        a.cardDefinitionId === entry.cardDefinitionId,
+        a.cardDefinitionId === entry.cardDefinitionId &&
+        a.variantId === entry.variantId,
     );
     if (
       !asset ||

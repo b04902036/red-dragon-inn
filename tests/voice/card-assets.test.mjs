@@ -53,15 +53,18 @@ const pack = {
   })),
 };
 const titles = {
-  schemaVersion: 1,
-  entries: config.characters
-    .filter((c) => c.enabled)
-    .map((c) => ({
-      characterId: c.characterId,
-      cardDefinitionId: `carddef_${c.characterId}`,
-      spokenText: `Sample ${c.characterId}: "An exact title!"`,
-      evidence: 'Explicit test fixture title',
-    })),
+  schemaVersion: 2,
+  entries: config.characters.map((c) => ({
+    characterId: c.characterId,
+    cardDefinitionId: `carddef_${c.characterId}`,
+    variants: [
+      {
+        variantId: 'v_test',
+        quantity: 40,
+        spokenText: `Sample ${c.characterId}: "An exact title!"`,
+      },
+    ],
+  })),
 };
 const mp3 = () => {
   const bytes = Buffer.alloc(834);
@@ -154,7 +157,7 @@ test('missing canonical text fails preflight before HTTP, rather than speaking d
     generateAssets({
       pack,
       configuration: config,
-      titles: { schemaVersion: 1, entries: [] },
+      titles: { schemaVersion: 2, entries: [] },
       fetchImpl: () => {
         requests++;
         return good();
@@ -186,7 +189,15 @@ test('TTS receives exact titles, selected voice, explicit model/format; cache sk
       );
       assert.equal(call.request.headers['xi-api-key'], 'TEST_ONLY_KEY');
       const body = JSON.parse(call.request.body);
-      assert.equal(body.text, titles.entries[index].spokenText);
+      assert.equal(
+        body.text,
+        titles.entries.filter(
+          (entry) =>
+            config.characters.find(
+              (character) => character.characterId === entry.characterId,
+            ).enabled,
+        )[index].variants[0].spokenText,
+      );
       assert.equal(body.model_id, 'eleven_flash_v2_5');
       assert.equal(call.request.body.includes('rules'), false);
     }
@@ -219,7 +230,7 @@ test('TTS receives exact titles, selected voice, explicit model/format; cache sk
       /Unconfigured/,
     );
   }));
-test('rate limits and transient failures retry boundedly, then resume partial successes only', () =>
+test('rate limits stop safely, then resume partial successes only', () =>
   temporary(async (root) => {
     let calls = 0;
     const result = await generateAssets({
@@ -236,7 +247,7 @@ test('rate limits and transient failures retry boundedly, then resume partial su
           : new Response('DO NOT LOG THIS', { status: 429 });
       },
     });
-    assert.equal(result.requests, 5);
+    assert.equal(result.requests, 2);
     assert.equal(result.failures.length, 1);
     assert.equal(
       JSON.parse(
@@ -255,6 +266,24 @@ test('rate limits and transient failures retry boundedly, then resume partial su
     });
     assert.equal(resumed.requests, 2);
     assert.equal(resumed.counts.character_sample_dimli.skipped, 1);
+    const firstAsset = planAssets(pack, config, titles)[0];
+    await rm(join(root, firstAsset.assetPath.slice(1)));
+    const waits = [];
+    const unavailable = await generateAssets({
+      pack,
+      configuration: config,
+      titles,
+      root,
+      apiKey: 'TEST',
+      wait: async (delay) => {
+        waits.push(delay);
+      },
+      fetchImpl: () => new Response('DO NOT LOG THIS', { status: 503 }),
+    });
+    assert.equal(unavailable.requests, 4);
+    assert.deepEqual(waits, [500, 1000, 2000]);
+    assert.match(unavailable.failures[0].reason, /HTTP 503/);
+    assert.equal(JSON.stringify(unavailable).includes('DO NOT LOG'), false);
   }));
 test('only missing, corrupt or changed-input files regenerate', () =>
   temporary(async (root) => {
@@ -272,8 +301,16 @@ test('only missing, corrupt or changed-input files regenerate', () =>
     const changed = {
       ...titles,
       entries: titles.entries.map((entry, i) =>
-        i === 2
-          ? { ...entry, spokenText: 'Sample updated canonical title.' }
+        i === 7
+          ? {
+              ...entry,
+              variants: [
+                {
+                  ...entry.variants[0],
+                  spokenText: 'Sample updated canonical title.',
+                },
+              ],
+            }
           : entry,
       ),
     };
@@ -396,12 +433,12 @@ test('verifier rejects extra/stale files and duplicate manifest paths', () =>
           return good();
         },
       }),
-      /duplicate manifest/,
+      /Invalid voice manifest/,
     );
     assert.equal(requests, 0);
     await assert.rejects(
       verifyAssets({ pack, configuration: config, titles, root }),
-      /duplicate/,
+      /Invalid voice manifest/,
     );
     await writeFile(file, JSON.stringify(manifest));
     await writeFile(join(root, 'audio/cards/unexpected.mp3'), mp3());
@@ -409,4 +446,78 @@ test('verifier rejects extra/stale files and duplicate manifest paths', () =>
       verifyAssets({ pack, configuration: config, titles, root }),
       /Unexpected/,
     );
+  }));
+test('two printed variants under one mechanic get distinct clips, duplicate physical copies reuse clips, and corruption repairs only one', () =>
+  temporary(async (root) => {
+    const expanded = structuredClone(titles);
+    const entry = expanded.entries.find(
+      (entry) => entry.characterId === 'character_sample_dimli',
+    );
+    entry.variants = [
+      {
+        variantId: 'v_first',
+        spokenText: 'Sample exact first title!',
+        quantity: 12,
+      },
+      {
+        variantId: 'v_second',
+        spokenText: 'Sample exact SECOND title?',
+        quantity: 28,
+      },
+    ];
+    const texts = [];
+    const generated = await generateAssets({
+      pack,
+      configuration: config,
+      titles: expanded,
+      root,
+      apiKey: 'TEST',
+      fetchImpl: (_url, request) => {
+        texts.push(JSON.parse(request.body).text);
+        return good();
+      },
+    });
+    assert.equal(generated.requests, 4);
+    assert.deepEqual(
+      texts.slice(0, 2),
+      entry.variants.map((variant) => variant.spokenText),
+    );
+    const assets = planAssets(pack, config, expanded);
+    assert.notEqual(assets[0].assetPath, assets[1].assetPath);
+    await writeFile(join(root, assets[1].assetPath.slice(1)), Buffer.alloc(0));
+    const repaired = await generateAssets({
+      pack,
+      configuration: config,
+      titles: expanded,
+      root,
+      apiKey: 'TEST',
+      fetchImpl: good,
+    });
+    assert.equal(repaired.requests, 1);
+    assert.equal(repaired.counts.character_sample_dimli.skipped, 1);
+    assert.equal(
+      (
+        await verifyAssets({
+          pack,
+          configuration: config,
+          titles: expanded,
+          root,
+        })
+      ).count,
+      4,
+    );
+    const nextConfig = structuredClone(config);
+    nextConfig.characters[0].enabled = true;
+    nextConfig.characters[0].voiceId = 'bbbbbbbbbbbbbbbbbbbb';
+    const next = await generateAssets({
+      pack,
+      configuration: nextConfig,
+      titles: expanded,
+      root,
+      apiKey: 'TEST',
+      fetchImpl: good,
+    });
+    assert.equal(next.requests, 1);
+    assert.equal(next.counts.character_sample_deirdre.generated, 1);
+    assert.equal(next.counts.character_sample_dimli.skipped, 2);
   }));

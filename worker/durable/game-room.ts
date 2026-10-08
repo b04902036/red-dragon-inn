@@ -1,4 +1,5 @@
 import { DurableObject } from 'cloudflare:workers';
+import titleAssignments from '../../content/presentation/card-title-assignments.json';
 import { PublicTimeline } from './public-timeline';
 import { z } from 'zod';
 import {
@@ -651,6 +652,9 @@ export class GameRoom extends DurableObject<Env> {
           seed: room.seed,
           version: room.version,
           content,
+          ...(content.version.id === titleAssignments.contentVersionId
+            ? { presentationVariants: titleAssignments.entries }
+            : {}),
           ...(command.drinkDeckIds === undefined
             ? {}
             : { innDrinkDeckIds: command.drinkDeckIds }),

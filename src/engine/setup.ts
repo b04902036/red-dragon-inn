@@ -1,5 +1,9 @@
 import { z } from 'zod';
 import { contentPackSchema } from '../content/pack';
+import {
+  titleAssignmentsSchema,
+  physicalTitleVariants,
+} from '../content/title-variants';
 import { cardInstanceSchema } from '../content/cards';
 import type { CardInstance } from '../content/cards';
 import {
@@ -22,6 +26,7 @@ export const matchSetupSchema = z.strictObject({
   matchId: matchIdSchema,
   hostPlayerId: playerIdSchema,
   content: contentPackSchema,
+  presentationVariants: titleAssignmentsSchema.optional(),
   publicNarrationVersion: z.literal(1).optional(),
   innDrinkDeckIds: z
     .array(deckIdSchema)
@@ -53,6 +58,10 @@ export type MatchSetup = z.input<typeof matchSetupSchema>;
 export function createMatch(input: MatchSetup): CoreGameState {
   const setup = matchSetupSchema.parse(input);
   const pack = setup.content;
+  const titleVariants = physicalTitleVariants(
+    pack,
+    setup.presentationVariants ?? [],
+  );
   const namespace = matchNamespace(setup.matchId);
   const cards: Record<CardInstanceId, CardInstance> = {};
   let ordinal = 0;
@@ -65,6 +74,9 @@ export function createMatch(input: MatchSetup): CoreGameState {
     const entries = pack.deckCards
       .filter((entry) => entry.deckId === deckId)
       .sort((a, b) => compareIds(a.cardId, b.cardId));
+    const characterId = pack.decks.find(
+      (deck) => deck.id === deckId,
+    )?.characterId;
     for (const entry of entries)
       for (let copy = 0; copy < entry.quantity; copy += 1) {
         const location =
@@ -74,6 +86,14 @@ export function createMatch(input: MatchSetup): CoreGameState {
         const card = cardInstanceSchema.parse({
           id: `card_${namespace}_${ordinal++}`,
           definitionId: entry.cardId,
+          ...(titleVariants.get(`${characterId}:${entry.cardId}`)?.[copy] ===
+          undefined
+            ? {}
+            : {
+                presentationVariantId: titleVariants.get(
+                  `${characterId}:${entry.cardId}`,
+                )![copy],
+              }),
           ownerId,
           location,
         });

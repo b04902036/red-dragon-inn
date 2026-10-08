@@ -1,0 +1,1995 @@
+{
+  "contentVersionId": "content_rdi1_rdi2_mechanics_v1",
+  "entries": [
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_add_two_alcohol_to_drink",
+      "variants": [
+        {
+          "variantId": "v_848eca348a8c5e496d4c93cd",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_all_players_drink_now",
+      "variants": [
+        {
+          "variantId": "v_e3e3d3a94bff441ece25ef68",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_anti_cheat_win_round",
+      "variants": [
+        {
+          "variantId": "v_5d178562a7a636edec05b493",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_avoid_ante_leave",
+      "variants": [
+        {
+          "variantId": "v_7a3690a935854867e8bc8cc8",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_9b2d9fb6ffb03057ed75d2be",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_avoid_ante_leave_or_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_44a842e36e8e9ea64f8298d3",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_damage_one",
+      "variants": [
+        {
+          "variantId": "v_def356b88784f2e2a574587e",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_damage_two",
+      "variants": [
+        {
+          "variantId": "v_2d6f656463ea182171d0a946",
+          "quantity": 2
+        },
+        {
+          "variantId": "v_7cd2a0c13964728506b8f71a",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_9b1ec7591707a76870f9be55",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gain_two_fortitude",
+      "variants": [
+        {
+          "variantId": "v_277b064d907750b954a143ce",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_heal_all_and_collect",
+      "variants": [
+        {
+          "variantId": "v_17458817b7c698880d28d067",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_heal_other_charge_gold",
+      "variants": [
+        {
+          "variantId": "v_506dfecb6215a446822e7b49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_hit_back_two_after_loss",
+      "variants": [
+        {
+          "variantId": "v_590e41e2d9baa0d380d5b898",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_ignore_action_sometimes_fort_alcohol",
+      "variants": [
+        {
+          "variantId": "v_7c3d146de3212e6202095019",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_ignore_action_sometimes_fort_loss",
+      "variants": [
+        {
+          "variantId": "v_db8b073c40e3383ad4ebf667",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_3c24235150cf85617c5446b8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_order_two_extra_drinks",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_pass_own_drink",
+      "variants": [
+        {
+          "variantId": "v_5c18297d2138efd8b3886b54",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_reduce_drink_alcohol_two",
+      "variants": [
+        {
+          "variantId": "v_b61bc59a0066c54866c4cb2b",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_substitute_one_gold_from_inn",
+      "variants": [
+        {
+          "variantId": "v_0b05283150dfa9d0d9d02229",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_ae548c6c28f766dedfc96af1",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_deirdre_the_priestess",
+      "cardDefinitionId": "carddef_rdi1_deirdre_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_add_two_alcohol_to_drink",
+      "variants": [
+        {
+          "variantId": "v_71262b80d48f996e50604311",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_alcohol_to_fortitude",
+      "variants": [
+        {
+          "variantId": "v_07b231b9119f492e2615f893",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave",
+      "variants": [
+        {
+          "variantId": "v_4cc03e149a10c38d62725fa5",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_89db185ebab0e7dfb3d1996d",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_avoid_ante_leave_or_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_51e5dcc85b4d99f7e0a4fe18",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_64155892458ba887a3b0b20f",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_one",
+      "variants": [
+        {
+          "variantId": "v_0fb8616d9a210be3a0e5dadb",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_damage_two",
+      "variants": [
+        {
+          "variantId": "v_1bc91de24d9f0121e148d3f8",
+          "quantity": 2
+        },
+        {
+          "variantId": "v_b51a3c3afe9e85a063871799",
+          "quantity": 2
+        },
+        {
+          "variantId": "v_c03dbeafac4a471870a17c68",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_force_extra_drink_during_other_drink_phase",
+      "variants": [
+        {
+          "variantId": "v_8c85e0f4887b18cd197782b7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_hit_back_two_after_loss",
+      "variants": [
+        {
+          "variantId": "v_eb0b93912687016a4a0f8b86",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_card_fortitude",
+      "variants": [
+        {
+          "variantId": "v_3f60b879a790b0787a2d42d7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_9ed891a81459fbbc9f10ac2b",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_9f0e4f571b0e02b2f4501864",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_3c24235150cf85617c5446b8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_order_two_extra_drinks_paid",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_pass_own_drink",
+      "variants": [
+        {
+          "variantId": "v_ef22e13aacbe2df397186d36",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_restart_gambling_round",
+      "variants": [
+        {
+          "variantId": "v_f5b3abc9b763002ea4dbf9da",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_split_own_drink",
+      "variants": [
+        {
+          "variantId": "v_606be2e52a0e353e550cc3ef",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_substitute_payment_from_inn",
+      "variants": [
+        {
+          "variantId": "v_c9aae5b53b6dfe3d3791dbc2",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_f43de1f3d5da90d4f0dd374a",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_dimli_the_dwarf",
+      "cardDefinitionId": "carddef_rdi2_dimli_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_avoid_ante_leave_or_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_42c185c4aa30ee3bc6ec421a",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_cheat_control_and_eject",
+      "variants": [
+        {
+          "variantId": "v_12420e23f4ea7535c4643706",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_cheat_take_control",
+      "variants": [
+        {
+          "variantId": "v_26ede0211bfadc3e47f5d491",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_2967be7bc952b7ae654f8ffa",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_84f9f564e2187d544a1b0329",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_a1347129aa912bcf2739d2bd",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_damage_one",
+      "variants": [
+        {
+          "variantId": "v_c07e53e4224e1807d85d0752",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_damage_three",
+      "variants": [
+        {
+          "variantId": "v_615d6601ab502d635ba7bd9b",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_give_two_alcohol",
+      "variants": [
+        {
+          "variantId": "v_de0cf2485b2501ebf45afcef",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_ignore_card_all_stats",
+      "variants": [
+        {
+          "variantId": "v_7e152f55fcc07c23de52310b",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_e5b09328c79d77baf6a3cf94",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_89d2fb79c4d9b00a8057b51c",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_illusionary_payment",
+      "variants": [
+        {
+          "variantId": "v_aaed30a8311bb5a546697ba4",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_99b73aefbb382811ea641ffb",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_order_two_extra_drinks_paid",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_redirect_fortitude_loss",
+      "variants": [
+        {
+          "variantId": "v_882027c09b2a330635582998",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_replace_drink_with_four_alcohol",
+      "variants": [
+        {
+          "variantId": "v_14c1c8b6f40ab05d26199b20",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_share_pain",
+      "variants": [
+        {
+          "variantId": "v_b852d185b510049f64d5bd34",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_take_one_from_pot",
+      "variants": [
+        {
+          "variantId": "v_5d0641b11388a8043d691b66",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_take_one_gold",
+      "variants": [
+        {
+          "variantId": "v_390f45d9c72d592bb93f0c39",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_ac9d1c9492dccffb7f3aa9d4",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_eve_the_illusionist",
+      "cardDefinitionId": "carddef_rdi2_eve_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_alcohol_to_fortitude",
+      "variants": [
+        {
+          "variantId": "v_0ef972801c3160f60de0152c",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_anti_cheat_win_round",
+      "variants": [
+        {
+          "variantId": "v_28164a9e71d3be451b3a05a7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_avoid_ante_leave",
+      "variants": [
+        {
+          "variantId": "v_7741af61cc8910e4bd45399c",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_7f6e9f37010f0b6563a3b3d2",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_b24b7257605164c2236d3916",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_damage_one",
+      "variants": [
+        {
+          "variantId": "v_243861909f141d8d107c2678",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_4c9122f3c4d852cd06e79d01",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_damage_three",
+      "variants": [
+        {
+          "variantId": "v_4feb797796b9c1fce4f65734",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_damage_two",
+      "variants": [
+        {
+          "variantId": "v_1d0e6aefc22644c1ab28d0bb",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_de7ba51666ca47d09f558c3d",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_force_extra_drink_on_reveal",
+      "variants": [
+        {
+          "variantId": "v_dc45ad5d08f2395d257128c1",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_force_other_player_drink_now",
+      "variants": [
+        {
+          "variantId": "v_8c85e0f4887b18cd197782b7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gain_two_fortitude",
+      "variants": [
+        {
+          "variantId": "v_687c0eae2179484441f81299",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_hit_back_two_after_loss",
+      "variants": [
+        {
+          "variantId": "v_46701b745714600d529c38b4",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_ignore_action_sometimes_fort_loss",
+      "variants": [
+        {
+          "variantId": "v_17f591b70755ac5414a88766",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_653d90aea02d5d27ea72819c",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_9965971eaa4000a2aa012bc2",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_3c24235150cf85617c5446b8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_order_two_extra_drinks",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_split_own_drink",
+      "variants": [
+        {
+          "variantId": "v_ca5000c074a89c2103ea5f26",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_substitute_one_gold_from_inn",
+      "variants": [
+        {
+          "variantId": "v_0bc9f8a7293c2e7ef8d413ba",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_98367dd067e191b04c31f9fb",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fiona_the_volatile",
+      "cardDefinitionId": "carddef_rdi1_fiona_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_lose_one_alcohol_collect_one_each_other",
+      "variants": [
+        {
+          "variantId": "v_f524355cbafe412b4c2db2e7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_all_players_drink_from_inn",
+      "variants": [
+        {
+          "variantId": "v_8558f8f87b9d5964ce15af85",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave",
+      "variants": [
+        {
+          "variantId": "v_8ee2d2794790d3468c78d7fb",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_avoid_ante_leave_or_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_5e895ee318bc03a1514d4762",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_control_and_eject",
+      "variants": [
+        {
+          "variantId": "v_12420e23f4ea7535c4643706",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_cheat_take_control",
+      "variants": [
+        {
+          "variantId": "v_3d4cb3eca12d87f11f68f704",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_49b986ea3e7d64f0bd045750",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_533efad30414e88a3521902f",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_924875a65b69fdcca05f52e9",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_75c0cc6ca156cc1042385208",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_one",
+      "variants": [
+        {
+          "variantId": "v_a36bf4261ea256a31c1269a1",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_damage_two",
+      "variants": [
+        {
+          "variantId": "v_755e25b7c5ea1749182f7b66",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gain_two_fortitude",
+      "variants": [
+        {
+          "variantId": "v_10585c905f780e7107e39be8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_hit_back_two_after_loss",
+      "variants": [
+        {
+          "variantId": "v_b3d4c0c23d4909e0cfbf9ea8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_d8b3f31d6157f9ce2b4d597f",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_e02282d2236e7171a7c41c87",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_3c24235150cf85617c5446b8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_order_two_extra_drinks_free_or_waive_refill",
+      "variants": [
+        {
+          "variantId": "v_c4e57511a2b80088614b0b30",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_rowdy_song",
+      "variants": [
+        {
+          "variantId": "v_a6aea4bdd0941d6e471a8ec6",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_split_own_drink",
+      "variants": [
+        {
+          "variantId": "v_17a439c9b1e9b5fb1c226edd",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_substitute_payment_from_inn",
+      "variants": [
+        {
+          "variantId": "v_06b57b75bd6dc899d383df06",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_b1f9f131bff5ceb2903a5b5d",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_take_two_gold",
+      "variants": [
+        {
+          "variantId": "v_4f5b297e98e91db0b4cb1e7d",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_fleck_the_bard",
+      "cardDefinitionId": "carddef_rdi2_fleck_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_add_two_alcohol_to_drink",
+      "variants": [
+        {
+          "variantId": "v_c76e3ab9427d20ba24b27777",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_cheat_control_and_eject",
+      "variants": [
+        {
+          "variantId": "v_12420e23f4ea7535c4643706",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_cheat_take_control",
+      "variants": [
+        {
+          "variantId": "v_3f6933565082f4373e2befc4",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_924875a65b69fdcca05f52e9",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_b731a8f5ae695074d9461a21",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_6d892134b34cb4aaaf6733e7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_damage_three",
+      "variants": [
+        {
+          "variantId": "v_62bbd319719d7348f064b966",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_df5bc1eb2750b04600039894",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_damage_two",
+      "variants": [
+        {
+          "variantId": "v_9ead48fe2dfd2c40db88391f",
+          "quantity": 2
+        },
+        {
+          "variantId": "v_bd47abb4af3c84c7a70852e7",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_ignore_action_sometimes_fort_alcohol",
+      "variants": [
+        {
+          "variantId": "v_c6da7191593fbc4737f36a28",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_ignore_card_all_stats_or_drink",
+      "variants": [
+        {
+          "variantId": "v_9633245617015b1c21e021c0",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_58f121571c6c5bbf392b2e64",
+          "quantity": 2
+        },
+        {
+          "variantId": "v_c8d1f1dc8cd5efb0db5ff77d",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_3c24235150cf85617c5446b8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_order_two_extra_drinks",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_steal_winners_pot",
+      "variants": [
+        {
+          "variantId": "v_74621909e6c5839f14536ff9",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_substitute_one_gold_from_inn",
+      "variants": [
+        {
+          "variantId": "v_0e4233e98ee91fead61575ed",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_take_one_from_pot",
+      "variants": [
+        {
+          "variantId": "v_48f2252940dde538df3d865f",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_take_one_gold",
+      "variants": [
+        {
+          "variantId": "v_0b0fac8b0e92e6f596ac6eec",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_68d65c8e9801ad16ee61c8f5",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gerki_the_sneak",
+      "cardDefinitionId": "carddef_rdi1_gerki_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_anti_cheat_win_round",
+      "variants": [
+        {
+          "variantId": "v_f0eae83c0017faa76bc42399",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_avoid_ante_leave",
+      "variants": [
+        {
+          "variantId": "v_d0517474845d2c2a8d0a7dfd",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_avoid_ante_leave_or_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_f9374589910ba3210b46bd75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_c3346fbe7b76487e3fc9df73",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_all_others_one",
+      "variants": [
+        {
+          "variantId": "v_be61cadbda53ff6e9c3877ad",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_four",
+      "variants": [
+        {
+          "variantId": "v_2a8dadff9ba3db836bc2ce05",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_three_pay_inn_one",
+      "variants": [
+        {
+          "variantId": "v_b92d1b4dd9d337013ed4399a",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_damage_two",
+      "variants": [
+        {
+          "variantId": "v_b1a64039119b27230cd07a8c",
+          "quantity": 3
+        },
+        {
+          "variantId": "v_cd0d9487540e29c2c21e937f",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_force_extra_drink_during_other_drink_phase",
+      "variants": [
+        {
+          "variantId": "v_c372af38c9f2e2967dee8ed0",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gain_two_fortitude",
+      "variants": [
+        {
+          "variantId": "v_66d1d23d151d732cd03939b9",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_hit_back_two_after_loss",
+      "variants": [
+        {
+          "variantId": "v_a8267431dd83e3e818ba394c",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_all_stats",
+      "variants": [
+        {
+          "variantId": "v_d0382a7f6ed3ba8cf5f78cba",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_card_fortitude",
+      "variants": [
+        {
+          "variantId": "v_8be4078c974b355d59fddaac",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_347c45209d3239386afbfc4c",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_702199cb923d1dbab59fd20d",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_order_two_extra_drinks_paid",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_substitute_payment_from_inn",
+      "variants": [
+        {
+          "variantId": "v_5804a521bd3cc2060ccf4d97",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_5a39e301e77ea7f66a7e28c7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_gog_the_half_ogre",
+      "cardDefinitionId": "carddef_rdi2_gog_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_avoid_ante_leave_or_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_95857453ae8f2d542b4bda8f",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_avoid_ante_leave_or_ignore_drink_pay_one",
+      "variants": [
+        {
+          "variantId": "v_c08ec28053d0338748cc6d46",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_cheat_control_and_eject",
+      "variants": [
+        {
+          "variantId": "v_12420e23f4ea7535c4643706",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_cheat_take_control",
+      "variants": [
+        {
+          "variantId": "v_748f2175b57aec41c18b3d4c",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_d8da081b4918fc401b949e9b",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_e44bee73bcc466da38b32c9a",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_collect_one_from_each_other",
+      "variants": [
+        {
+          "variantId": "v_f7152ca51960b81ead540ad3",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_damage_all_others_one",
+      "variants": [
+        {
+          "variantId": "v_d38d0a46a7f72c911093c401",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_damage_one",
+      "variants": [
+        {
+          "variantId": "v_d8d16c251322233a8a8ce173",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_damage_two",
+      "variants": [
+        {
+          "variantId": "v_089daaf7c7f3c52950dc87ff",
+          "quantity": 2
+        },
+        {
+          "variantId": "v_1e28291bcc5fd200b60d38f3",
+          "quantity": 1
+        },
+        {
+          "variantId": "v_65e78179305422d9ca911300",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_dump_gambling_pot_to_inn",
+      "variants": [
+        {
+          "variantId": "v_59a6a44824141aaa8f889c75",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_force_other_player_drink_now",
+      "variants": [
+        {
+          "variantId": "v_d786c8c352d84bd3ceaffbab",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_gambling_raise_one",
+      "variants": [
+        {
+          "variantId": "v_177bef91587ca98ca3dc45c3",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_gambling_start_or_control",
+      "variants": [
+        {
+          "variantId": "v_cbd9657e849b1163ef7d652f",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_gambling_winning_hand",
+      "variants": [
+        {
+          "variantId": "v_29a04e2f90c70e26a8f41248",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_hit_back_two_after_loss",
+      "variants": [
+        {
+          "variantId": "v_5300a1b01f5f1639bf7ee447",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_ignore_action_sometimes_fort_loss",
+      "variants": [
+        {
+          "variantId": "v_32a4e394d947a54948fbc68e",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_ignore_card_all_stats",
+      "variants": [
+        {
+          "variantId": "v_eea055398e7cefbedd4edcc0",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_ignore_drink",
+      "variants": [
+        {
+          "variantId": "v_c3c64003655e329b835dd7fc",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_negate_drink_change_card",
+      "variants": [
+        {
+          "variantId": "v_d7e57daaa056372afde9b727",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_negate_sometimes_counter",
+      "variants": [
+        {
+          "variantId": "v_3c24235150cf85617c5446b8",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_order_two_extra_drinks",
+      "variants": [
+        {
+          "variantId": "v_66deab5e60a389543a3be99a",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_pass_own_drink",
+      "variants": [
+        {
+          "variantId": "v_b107eac921fd582058007932",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_substitute_one_gold_from_inn",
+      "variants": [
+        {
+          "variantId": "v_a48fbdd74867c8f2511efd13",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_take_one_gold",
+      "variants": [
+        {
+          "variantId": "v_a449fec84f49c6695513ec62",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "characterId": "character_rdi_zot_the_wizard_and_pooky",
+      "cardDefinitionId": "carddef_rdi1_zot_tip_wench",
+      "variants": [
+        {
+          "variantId": "v_0b1d63b6233a4b0b59845e49",
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}

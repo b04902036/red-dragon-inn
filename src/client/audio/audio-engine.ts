@@ -200,7 +200,9 @@ export class AudioEngine {
     if (
       !live ||
       !path ||
-      !/^\/audio\/cards\/[a-z][a-z0-9_]*\/[a-z][a-z0-9_]*\.mp3$/.test(path) ||
+      !/^\/audio\/cards\/[a-z][a-z0-9_]*\/[a-z][a-z0-9_]*(?:\/[a-z][a-z0-9_]*)?\.mp3$/.test(
+        path,
+      ) ||
       this.disposed ||
       !this.unlocked ||
       this.status !== 'ready'
