@@ -1,0 +1,1129 @@
+{
+  "name": "Fleck the Bard",
+  "type": "pile",
+  "description": "",
+  "img": "Cards/base/fleck/fleck-the-bard-back.png",
+  "data": {},
+  "cards": [
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/fleck/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/fleck/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/fleck/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/fleck/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/fleck/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/fleck/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I raise!",
+      "type": "base",
+      "description": "I raise!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I raise!",
+          "img": "Cards/base/fleck/i-raise.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">Each player (including you) antes 1 additional Gold.</div><div class=\"cardtext\">If you are unable to pay the ante, the other players do not have to ante.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I raise!",
+      "type": "base",
+      "description": "I raise!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I raise!",
+          "img": "Cards/base/fleck/i-raise.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">Each player (including you) antes 1 additional Gold.</div><div class=\"cardtext\">If you are unable to pay the ante, the other players do not have to ante.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Winning Hand!",
+      "type": "base",
+      "description": "Winning Hand!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Winning Hand!",
+          "img": "Cards/base/fleck/winning-hand.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Winning Hand!",
+      "type": "base",
+      "description": "Winning Hand!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Winning Hand!",
+          "img": "Cards/base/fleck/winning-hand.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oh, I guess the Wench thought that was her tip...",
+      "type": "base",
+      "description": "Oh, I guess the Wench thought that was her tip...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oh, I guess the Wench thought that was her tip...",
+          "img": "Cards/base/fleck/oh-i-guess-the-wench-thought-that-was-her-tip.png",
+          "text": "<div class=\"cardtext\">Play this card at any time during a Round of Gamblingto end the Round. All anted Gold goes to the Inn.</div><div class=\"cardtext\">You may play this card even if you have left the Round of Gambling. You may not play this card if the Round has already ended or in response to a card that would make players ante or would end the Round when it resolves.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Wench, please allow me to pay for these drinks with a song!",
+      "type": "base",
+      "description": "Wench, please allow me to pay for these drinks with a song!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Wench, please allow me to pay for these drinks with a song!",
+          "img": "Cards/base/fleck/wench-please-allow-me-to-pay-for-these-drinks.png",
+          "text": "<div class=\"cardtext\">Play this card during the Buy Drinks Phase of your turn. Buy 2 additional Drinks for free. You may place these Drinks face down on any players' Drink Me! Piles.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card when the Drink Deck is reshuffled. You don't have to pay.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Wench, please allow me to pay for these drinks with a song!",
+      "type": "base",
+      "description": "Wench, please allow me to pay for these drinks with a song!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Wench, please allow me to pay for these drinks with a song!",
+          "img": "Cards/base/fleck/wench-please-allow-me-to-pay-for-these-drinks.png",
+          "text": "<div class=\"cardtext\">Play this card during the Buy Drinks Phase of your turn. Buy 2 additional Drinks for free. You may place these Drinks face down on any players' Drink Me! Piles.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card when the Drink Deck is reshuffled. You don't have to pay.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "The Wench thinks you should stop playing with the drinks.",
+      "type": "base",
+      "description": "The Wench thinks you should stop playing with the drinks.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "The Wench thinks you should stop playing with the drinks.",
+          "img": "Cards/base/fleck/the-wench-thinks-you-should-stop-playing-with.png",
+          "text": "<div class=\"cardtext\">Negate a Sometimes Card that changes the effects of a Drink Card. (This includes cards that pass Drinks to other players, cards that split Drinks with other players, and cards that Negate or Ignore Drinks.)</div><div class=\"cardtext\">This card can only be affected by <b>I don't think so!</b></div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Tip the Wench.",
+      "type": "base",
+      "description": "Tip the Wench.",
+      "data": {
+        "type": "Anytime"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Tip the Wench.",
+          "img": "Cards/base/fleck/tip-the-wench.png",
+          "text": "<div class=\"cardtext\">A player of your choice must pay 1 Gold to the Inn.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I don't think so!",
+      "type": "base",
+      "description": "I don't think so!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I don't think so!",
+          "img": "Cards/base/fleck/i-dont-think-so.png",
+          "text": "<div class=\"cardtext\">Negate a Sometimes Card.</div><div class=\"cardtext\">This card can only be affected by another <b>I don't think so!</b></div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "What's that up your sleeve?",
+      "type": "base",
+      "description": "What's that up your sleeve?",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "What's that up your sleeve?",
+          "img": "Cards/base/fleck/whats-that-up-your-sleeve.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling</div><div class=\"cardtext\">-AND-</div><div class=\"cardtext\">Pick one player in the current Round of Gambling and force them to leave the Round. They may not play any more Gambling or Cheating Cards during this Round. Any Gold they have already anted stays.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oops... I dropped my cards...",
+      "type": "base",
+      "description": "Oops... I dropped my cards...",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oops... I dropped my cards...",
+          "img": "Cards/base/fleck/oops-i-dropped-my-cards.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "You know, I should take better care of my dainty figure!",
+      "type": "base",
+      "description": "You know, I should take better care of my dainty figure!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "You know, I should take better care of my dainty figure!",
+          "img": "Cards/base/fleck/you-know-i-should-take-better-care-of-my.png",
+          "text": "<div class=\"cardtext\">Ignore a Drink Card.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I may be a fop, but I can hold my liquor!",
+      "type": "base",
+      "description": "I may be a fop, but I can hold my liquor!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I may be a fop, but I can hold my liquor!",
+          "img": "Cards/base/fleck/i-may-be-a-fop-but-i-can-hold-my-liquor.png",
+          "text": "<div class=\"cardtext\">Ignore a Drink Card.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Look at these cards! This must be my lucky day!",
+      "type": "base",
+      "description": "Look at these cards! This must be my lucky day!",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Look at these cards! This must be my lucky day!",
+          "img": "Cards/base/fleck/look-at-these-cards-this-must-be-my-lucky-day.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I do so hate to drink alone...",
+      "type": "base",
+      "description": "I do so hate to drink alone...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I do so hate to drink alone...",
+          "img": "Cards/base/fleck/i-do-so-hate-to-drink-alone.png",
+          "text": "<div class=\"cardtext\">Split a Drink you are about to drink with another player. You each take half of the Drink's effects, rounded up.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I do so hate to drink alone...",
+      "type": "base",
+      "description": "I do so hate to drink alone...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I do so hate to drink alone...",
+          "img": "Cards/base/fleck/i-do-so-hate-to-drink-alone.png",
+          "text": "<div class=\"cardtext\">Split a Drink you are about to drink with another player. You each take half of the Drink's effects, rounded up.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Leave me be! I'm trying to read lore here!",
+      "type": "base",
+      "description": "Leave me be! I'm trying to read lore here!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Leave me be! I'm trying to read lore here!",
+          "img": "Cards/base/fleck/leave-me-be-im-trying-to-read-lore-here.png",
+          "text": "<div class=\"cardtext\">Play this card when you must ante to avoid paying and leave the Round of Gambling. You may not play any more Gambling or Cheating Cards during this Round. Any Gold you have already anted stays.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Ignore a Drink Card. (You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oh, Hey! This looks like a serious game.",
+      "type": "base",
+      "description": "Oh, Hey! This looks like a serious game.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oh, Hey! This looks like a serious game.",
+          "img": "Cards/base/fleck/oh-hey-this-looks-like-a-serious-game.png",
+          "text": "<div class=\"cardtext\">Play this card when you must ante to avoid paying and leave the Round of Gambling. You may not play any more Gambling or Cheating Cards during this Round. Any Gold you have already anted stays.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Fortunately, I had this card up my sleeve! Ha ha, just kidding!",
+      "type": "base",
+      "description": "Fortunately, I had this card up my sleeve! Ha ha, just kidding!",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Fortunately, I had this card up my sleeve! Ha ha, just kidding!",
+          "img": "Cards/base/fleck/fortunately-i-had-this-card-up-my-sleeve-ha.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "A toast! To my friends!",
+      "type": "base",
+      "description": "A toast! To my friends!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "A toast! To my friends!",
+          "img": "Cards/base/fleck/a-toast-to-my-friends.png",
+          "text": "<div class=\"cardtext\">Each player (including you) takes a card from the Drink Deck and drinks it now.</div><div class=\"cardtext\">If a Drink Event Card is revealed, discard it without taking its effects and keep revealing cards until a Drink Card is revealed.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Appreciative listeners! How nice!",
+      "type": "base",
+      "description": "Appreciative listeners! How nice!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Appreciative listeners! How nice!",
+          "img": "Cards/base/fleck/appreciative-listeners-how-nice.png",
+          "text": "<div class=\"cardtext\">Play this card when you would lose Gold. (This includes paying Gold, anteing Gold, or having Gold taken from you.)</div><div class=\"cardtext\">Use Gold from the Inn, rather than from your own Stash.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I got this from playing in the Town Square.",
+      "type": "base",
+      "description": "I got this from playing in the Town Square.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I got this from playing in the Town Square.",
+          "img": "Cards/base/fleck/i-got-this-from-playing-in-the-town-square.png",
+          "text": "<div class=\"cardtext\">Play this card when you would lose Gold. (This includes paying Gold, anteing Gold, or having Gold taken from you.)</div><div class=\"cardtext\">Use Gold from the Inn, rather than from your own Stash.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I've composed a poem about our most recent adventure.",
+      "type": "base",
+      "description": "I've composed a poem about our most recent adventure.",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "I've composed a poem about our most recent adventure.",
+          "img": "Cards/base/fleck/ive-composed-a-poem-about-our-most-recent.png",
+          "text": "<div class=\"cardtext\">Each other player pays you 1 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Who knew? One of my fans is a priest!",
+      "type": "base",
+      "description": "Who knew? One of my fans is a priest!",
+      "data": {
+        "type": "Anytime"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Who knew? One of my fans is a priest!",
+          "img": "Cards/base/fleck/who-knew-one-of-my-fans-is-a-priest.png",
+          "text": "<div class=\"cardtext\">Gain 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Allow me to introduce you to my biggest fan.",
+      "type": "base",
+      "description": "Allow me to introduce you to my biggest fan.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Allow me to introduce you to my biggest fan.",
+          "img": "Cards/base/fleck/allow-me-to-introduce-you-to-my-biggest-fan.png",
+          "text": "<div class=\"cardtext\">Play this card immediately after another player makes you lose Fortitude. They also lose 2 Fortitude.</div><div class=\"cardtext\">You may not play this card if you played a card to reduce or Ignore the Fortitude loss.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Excuse me... I think you're sitting on my tuning fork.",
+      "type": "base",
+      "description": "Excuse me... I think you're sitting on my tuning fork.",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Excuse me... I think you're sitting on my tuning fork.",
+          "img": "Cards/base/fleck/excuse-me-i-think-youre-sitting-on-my.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 1 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oh, I hate it when the strings break!",
+      "type": "base",
+      "description": "Oh, I hate it when the strings break!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oh, I hate it when the strings break!",
+          "img": "Cards/base/fleck/oh-i-hate-it-when-the-strings-break.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oh, I hate it when the strings break!",
+      "type": "base",
+      "description": "Oh, I hate it when the strings break!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oh, I hate it when the strings break!",
+          "img": "Cards/base/fleck/oh-i-hate-it-when-the-strings-break.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "How about a rowdy drinking song?",
+      "type": "base",
+      "description": "How about a rowdy drinking song?",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "How about a rowdy drinking song?",
+          "img": "Cards/base/fleck/how-about-a-rowdy-drinking-song.png",
+          "text": "<div class=\"cardtext\">Each other player loses 1 Fortitude.</div><div class=\"cardtext\">Each player (including you) gains 1 Alcohol Content.</div><div class=\"cardtext\">Pay 1 Gold to the Inn.<br>(...to pay for the broken furnishings)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "How about a rowdy drinking song?",
+      "type": "base",
+      "description": "How about a rowdy drinking song?",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "How about a rowdy drinking song?",
+          "img": "Cards/base/fleck/how-about-a-rowdy-drinking-song.png",
+          "text": "<div class=\"cardtext\">Each other player loses 1 Fortitude.</div><div class=\"cardtext\">Each player (including you) gains 1 Alcohol Content.</div><div class=\"cardtext\">Pay 1 Gold to the Inn.<br>(...to pay for the broken furnishings)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "And now I'm going to play something really sad.",
+      "type": "base",
+      "description": "And now I'm going to play something really sad.",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "And now I'm going to play something really sad.",
+          "img": "Cards/base/fleck/and-now-im-going-to-play-something-really-sad.png",
+          "text": "<div class=\"cardtext\">Each player (including you) loses 1 Alcohol Content.</div><div class=\"cardtext\">Each other player pays you 1 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "This is in payment for that heroic ballad I wrote about you!",
+      "type": "base",
+      "description": "This is in payment for that heroic ballad I wrote about you!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "This is in payment for that heroic ballad I wrote about you!",
+          "img": "Cards/base/fleck/this-is-in-payment-for-that-heroic-ballad-i.png",
+          "text": "<div class=\"cardtext\">Pick a player. They must pay you 2 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "It seems that Lady Luck is smiling on me!",
+      "type": "base",
+      "description": "It seems that Lady Luck is smiling on me!",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Fleck the Bard",
+        "text": "Fleck the Bard",
+        "img": "Cards/base/fleck/fleck-the-bard-back.png"
+      },
+      "faces": [
+        {
+          "name": "It seems that Lady Luck is smiling on me!",
+          "img": "Cards/base/fleck/it-seems-that-lady-luck-is-smiling-on-me.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    }
+  ]
+}

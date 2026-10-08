@@ -1,0 +1,1129 @@
+{
+  "name": "Eve the Illusionist",
+  "type": "pile",
+  "description": "",
+  "img": "Cards/base/eve/eve-the-illusionist-back.png",
+  "data": {},
+  "cards": [
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/eve/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/eve/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/eve/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/eve/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/eve/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/eve/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I raise!",
+      "type": "base",
+      "description": "I raise!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I raise!",
+          "img": "Cards/base/eve/i-raise.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">Each player (including you) antes 1 additional Gold.</div><div class=\"cardtext\">If you are unable to pay the ante, the other players do not have to ante.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I raise!",
+      "type": "base",
+      "description": "I raise!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I raise!",
+          "img": "Cards/base/eve/i-raise.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">Each player (including you) antes 1 additional Gold.</div><div class=\"cardtext\">If you are unable to pay the ante, the other players do not have to ante.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Winning Hand!",
+      "type": "base",
+      "description": "Winning Hand!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Winning Hand!",
+          "img": "Cards/base/eve/winning-hand.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Winning Hand!",
+      "type": "base",
+      "description": "Winning Hand!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Winning Hand!",
+          "img": "Cards/base/eve/winning-hand.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oh, I guess the Wench thought that was her tip...",
+      "type": "base",
+      "description": "Oh, I guess the Wench thought that was her tip...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oh, I guess the Wench thought that was her tip...",
+          "img": "Cards/base/eve/oh-i-guess-the-wench-thought-that-was-her-tip.png",
+          "text": "<div class=\"cardtext\">Play this card at any time during a Round of Gamblingto end the Round. All anted Gold goes to the Inn.</div><div class=\"cardtext\">You may play this card even if you have left the Round of Gambling. You may not play this card if the Round has already ended or in response to a card that would make players ante or would end the Round when it resolves.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Wench, bring some drinks for my friends!",
+      "type": "base",
+      "description": "Wench, bring some drinks for my friends!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Wench, bring some drinks for my friends!",
+          "img": "Cards/base/eve/wench-bring-some-drinks-for-my-friends.png",
+          "text": "<div class=\"cardtext\">Play this card during the Buy Drinks Phase of your turn.</div><div class=\"cardtext\">Pay 1 Gold to the Inn to buy 2 additional Drinks. You may place these Drinks face down on any players' Drink Me! Piles.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Wench, bring some drinks for my friends!",
+      "type": "base",
+      "description": "Wench, bring some drinks for my friends!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Wench, bring some drinks for my friends!",
+          "img": "Cards/base/eve/wench-bring-some-drinks-for-my-friends.png",
+          "text": "<div class=\"cardtext\">Play this card during the Buy Drinks Phase of your turn.</div><div class=\"cardtext\">Pay 1 Gold to the Inn to buy 2 additional Drinks. You may place these Drinks face down on any players' Drink Me! Piles.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "The Wench thinks you should stop playing with the drinks.",
+      "type": "base",
+      "description": "The Wench thinks you should stop playing with the drinks.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "The Wench thinks you should stop playing with the drinks.",
+          "img": "Cards/base/eve/the-wench-thinks-you-should-stop-playing-with.png",
+          "text": "<div class=\"cardtext\">Negate a Sometimes Card that changes the effects of a Drink Card. (This includes cards that pass Drinks to other players, cards that split Drinks with other players, and cards that Negate or Ignore Drinks.)</div><div class=\"cardtext\">This card can only be affected by <b>I don't think so!</b></div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Tip the Wench.",
+      "type": "base",
+      "description": "Tip the Wench.",
+      "data": {
+        "type": "Anytime"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Tip the Wench.",
+          "img": "Cards/base/eve/tip-the-wench.png",
+          "text": "<div class=\"cardtext\">A player of your choice must pay 1 Gold to the Inn.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I don't think so.",
+      "type": "base",
+      "description": "I don't think so.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I don't think so.",
+          "img": "Cards/base/eve/i-dont-think-so.png",
+          "text": "<div class=\"cardtext\">Negate a Sometimes Card.</div><div class=\"cardtext\">This card can only be affected by another <b>I don't think so!</b></div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "It's the disappearing coin trick, not the reappearing coin trick.",
+      "type": "base",
+      "description": "It's the disappearing coin trick, not the reappearing coin trick.",
+      "data": {
+        "type": "Anytime"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "It's the disappearing coin trick, not the reappearing coin trick.",
+          "img": "Cards/base/eve/its-the-disappearing-coin-trick-not-the.png",
+          "text": "<div class=\"cardtext\">Pick a player. They must pay you 1 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gold? What Gold?",
+      "type": "base",
+      "description": "Gold? What Gold?",
+      "data": {
+        "type": "Anytime"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gold? What Gold?",
+          "img": "Cards/base/eve/gold-what-gold.png",
+          "text": "<div class=\"cardtext\">Pick a player. They must pay you 1 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Drink what? This is empty.",
+      "type": "base",
+      "description": "Drink what? This is empty.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Drink what? This is empty.",
+          "img": "Cards/base/eve/drink-what-this-is-empty.png",
+          "text": "<div class=\"cardtext\">Ignore a Drink Card.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Drink what? This is empty.",
+      "type": "base",
+      "description": "Drink what? This is empty.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Drink what? This is empty.",
+          "img": "Cards/base/eve/drink-what-this-is-empty.png",
+          "text": "<div class=\"cardtext\">Ignore a Drink Card.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "What's that up your sleeve?",
+      "type": "base",
+      "description": "What's that up your sleeve?",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "What's that up your sleeve?",
+          "img": "Cards/base/eve/whats-that-up-your-sleeve.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling</div><div class=\"cardtext\">-AND-</div><div class=\"cardtext\">Pick one player in the current Round of Gambling and force them to leave the Round. They may not play any more Gambling or Cheating Cards during this Round. Any Gold they have already anted stays.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "My word, what could that be?",
+      "type": "base",
+      "description": "My word, what could that be?",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "My word, what could that be?",
+          "img": "Cards/base/eve/my-word-what-could-that-be.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oops, I dropped my cards...",
+      "type": "base",
+      "description": "Oops, I dropped my cards...",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oops, I dropped my cards...",
+          "img": "Cards/base/eve/oops-i-dropped-my-cards.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "This time, let's use my cards.",
+      "type": "base",
+      "description": "This time, let's use my cards.",
+      "data": {
+        "type": "Cheating"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "This time, let's use my cards.",
+          "img": "Cards/base/eve/this-time-lets-use-my-cards.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Actually, that's Dragon Breath Ale.",
+      "type": "base",
+      "description": "Actually, that's Dragon Breath Ale.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Actually, that's Dragon Breath Ale.",
+          "img": "Cards/base/eve/actually-thats-dragon-breath-ale.png",
+          "text": "<div class=\"cardtext\">Play after another player reveals a Drink (with possible Chasers).</div><div class=\"cardtext\">Instead of its usual effects, the Drink has the effect \"Gain 4 Alcohol Content.\" Any non-Drink Cards that change the Drink's effects still affect it normally.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Illusionary Coin",
+      "type": "base",
+      "description": "Illusionary Coin",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Illusionary Coin",
+          "img": "Cards/base/eve/illusionary-coin.png",
+          "text": "<div class=\"cardtext\">Play this card when you would lose Gold. (This includes paying Gold, anteing Gold, or having Gold taken from you.)</div><div class=\"cardtext\">You don't have to pay!</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Illusionary Coin",
+      "type": "base",
+      "description": "Illusionary Coin",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Illusionary Coin",
+          "img": "Cards/base/eve/illusionary-coin.png",
+          "text": "<div class=\"cardtext\">Play this card when you would lose Gold. (This includes paying Gold, anteing Gold, or having Gold taken from you.)</div><div class=\"cardtext\">You don't have to pay!</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Ha! That's just an illusion. I'm actually over here!",
+      "type": "base",
+      "description": "Ha! That's just an illusion. I'm actually over here!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Ha! That's just an illusion. I'm actually over here!",
+          "img": "Cards/base/eve/ha-thats-just-an-illusion-im-actually-over.png",
+          "text": "<div class=\"cardtext\">Ignore an Action, Sometimes or Anytime Card that affects your Fortitude, Alcohol Content or Gold.</div><div class=\"cardtext\">This card cannot be used to Ignore a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Look in to my eyes... you are getting... Drunker!",
+      "type": "base",
+      "description": "Look in to my eyes... you are getting... Drunker!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Look in to my eyes... you are getting... Drunker!",
+          "img": "Cards/base/eve/look-in-to-my-eyes-you-are-getting-drunker.png",
+          "text": "<div class=\"cardtext\">Pick another player. They gain 2 Alcohol Content.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Look in to my eyes... you are getting... Drunker!",
+      "type": "base",
+      "description": "Look in to my eyes... you are getting... Drunker!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Look in to my eyes... you are getting... Drunker!",
+          "img": "Cards/base/eve/look-in-to-my-eyes-you-are-getting-drunker.png",
+          "text": "<div class=\"cardtext\">Pick another player. They gain 2 Alcohol Content.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I cloak myself in shadow.",
+      "type": "base",
+      "description": "I cloak myself in shadow.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I cloak myself in shadow.",
+          "img": "Cards/base/eve/i-cloak-myself-in-shadow.png",
+          "text": "<div class=\"cardtext\">Play this card when you must ante to avoid paying and leave the Round of Gambling. You may not play any more Gambling or Cheating Cards during this Round. Any Gold you have already anted stays.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Ignore a Drink Card. (You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I attempt to disbelieve.",
+      "type": "base",
+      "description": "I attempt to disbelieve.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I attempt to disbelieve.",
+          "img": "Cards/base/eve/i-attempt-to-disbelieve.png",
+          "text": "<div class=\"cardtext\">Ignore an Action, Sometimes or Anytime Card that affects your Fortitude, Alcohol Content or Gold.</div><div class=\"cardtext\">This card cannot be used to Ignore a Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "That's odd. Illusions aren't supposed to actually hurt.",
+      "type": "base",
+      "description": "That's odd. Illusions aren't supposed to actually hurt.",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "That's odd. Illusions aren't supposed to actually hurt.",
+          "img": "Cards/base/eve/thats-odd-illusions-arent-supposed-to.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 1 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "That's odd. Illusions aren't supposed to actually hurt.",
+      "type": "base",
+      "description": "That's odd. Illusions aren't supposed to actually hurt.",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "That's odd. Illusions aren't supposed to actually hurt.",
+          "img": "Cards/base/eve/thats-odd-illusions-arent-supposed-to.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 1 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I've been working on a new spell. It's called Share Pain!",
+      "type": "base",
+      "description": "I've been working on a new spell. It's called Share Pain!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I've been working on a new spell. It's called Share Pain!",
+          "img": "Cards/base/eve/ive-been-working-on-a-new-spell-its-called.png",
+          "text": "<div class=\"cardtext\">Play this card when another player would make you lose Fortitude.</div><div class=\"cardtext\">Split the Fortitude loss with that player. You each take half the effect, rounded up. You may not play any other cards to reduce or Ignore this damage.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Whoa! Careful! That's real fire!",
+      "type": "base",
+      "description": "Whoa! Careful! That's real fire!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Whoa! Careful! That's real fire!",
+          "img": "Cards/base/eve/whoa-careful-thats-real-fire.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 3 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Whoa! Careful! That's real fire!",
+      "type": "base",
+      "description": "Whoa! Careful! That's real fire!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Whoa! Careful! That's real fire!",
+          "img": "Cards/base/eve/whoa-careful-thats-real-fire.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 3 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Sleight of hand...",
+      "type": "base",
+      "description": "Sleight of hand...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Sleight of hand...",
+          "img": "Cards/base/eve/sleight-of-hand.png",
+          "text": "<div class=\"cardtext\">Take 1 Gold from the pot during a Round of Gambling. This has no other effect on the Round.</div><div class=\"cardtext\">You may play this card even if you have already left the Round of Gambling.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I'm not Eve! She's over there!",
+      "type": "base",
+      "description": "I'm not Eve! She's over there!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "I'm not Eve! She's over there!",
+          "img": "Cards/base/eve/im-not-eve-shes-over-there.png",
+          "text": "<div class=\"cardtext\">Play this card when a player would make you lose Fortitude. The damage is redirected to a different player of your choise (not the player who attacked you).</div><div class=\"cardtext\">If there is only one other player in the game, Ignore an Action, Sometimes, or Anytime Card that affects your Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Tip me, I'm the Wench.",
+      "type": "base",
+      "description": "Tip me, I'm the Wench.",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Eve the Illusionist",
+        "text": "Eve the Illusionist",
+        "image": "Cards/base/eve/eve-the-illusionist-back.png"
+      },
+      "faces": [
+        {
+          "name": "Tip me, I'm the Wench.",
+          "img": "Cards/base/eve/tip-me-im-the-wench.png",
+          "text": "<div class=\"cardtext\">(You confuse the others...)</div><div class=\"cardtext\">Each other player pays you 1 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    }
+  ]
+}

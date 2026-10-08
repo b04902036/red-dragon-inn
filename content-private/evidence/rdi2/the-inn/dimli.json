@@ -1,0 +1,1129 @@
+{
+  "name": "Dimli the Dwarf",
+  "type": "pile",
+  "description": "",
+  "img": "Cards/base/dimli/dimli-the-dwarf-back.png",
+  "data": {},
+  "cards": [
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/dimli/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/dimli/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/dimli/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/dimli/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/dimli/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Gambling? I'm in!",
+      "type": "base",
+      "description": "Gambling? I'm in!",
+      "data": {
+        "type": "Action - Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Gambling? I'm in!",
+          "img": "Cards/base/dimli/gambling-im-in.png",
+          "text": "<div class=\"cardtext\">Play this card during your Action Phase to start a Round of Gambling. Each player antes 1 Gold. You are currently winning.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Play this card during a Round of Gambling to take control of the Round.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I raise!",
+      "type": "Gambling",
+      "description": "I raise!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "I raise!",
+          "img": "Cards/base/dimli/i-raise.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">Each player (including you) antes 1 additional Gold.</div><div class=\"cardtext\">If you are unable to pay the ante, the other players do not have to ante.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I raise!",
+      "type": "Gambling",
+      "description": "I raise!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "I raise!",
+          "img": "Cards/base/dimli/i-raise.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">Each player (including you) antes 1 additional Gold.</div><div class=\"cardtext\">If you are unable to pay the ante, the other players do not have to ante.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Winning Hand!",
+      "type": "Gambling",
+      "description": "Winning Hand!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Winning Hand!",
+          "img": "Cards/base/dimli/winning-hand.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Winning Hand!",
+      "type": "Gambling",
+      "description": "Winning Hand!",
+      "data": {
+        "type": "Gambling"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Winning Hand!",
+          "img": "Cards/base/dimli/winning-hand.png",
+          "text": "<div class=\"cardtext\">Take control of a Round of Gambling.</div><div class=\"cardtext\">You may not play this card if the last card to take control of the Round was <b>Winning Hand</b>.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Oh, I guess the Wench thought that was her tip...",
+      "type": "Sometimes",
+      "description": "Oh, I guess the Wench thought that was her tip...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Oh, I guess the Wench thought that was her tip...",
+          "img": "Cards/base/dimli/oh-i-guess-the-wench-thought-that-was-her-tip.png",
+          "text": "<div class=\"cardtext\">Play this card at any time during a Round of Gamblingto end the Round. All anted Gold goes to the Inn.</div><div class=\"cardtext\">You may play this card even if you have left the Round of Gambling. You may not play this card if the Round has already ended or in response to a card that would make players ante or would end the Round when it resolves.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Wench, bring some drinks for my friends!",
+      "type": "Sometimes",
+      "description": "Wench, bring some drinks for my friends!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Wench, bring some drinks for my friends!",
+          "img": "Cards/base/dimli/wench-bring-some-drinks-for-my-friends.png",
+          "text": "<div class=\"cardtext\">Play this card during the Buy Drinks Phase of your turn.</div><div class=\"cardtext\">Pay 1 Gold to the Inn to buy 2 additional Drinks. You may place these Drinks face down on any players' Drink Me! Piles.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Wench, bring some drinks for my friends!",
+      "type": "Sometimes",
+      "description": "Wench, bring some drinks for my friends!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Wench, bring some drinks for my friends!",
+          "img": "Cards/base/dimli/wench-bring-some-drinks-for-my-friends.png",
+          "text": "<div class=\"cardtext\">Play this card during the Buy Drinks Phase of your turn.</div><div class=\"cardtext\">Pay 1 Gold to the Inn to buy 2 additional Drinks. You may place these Drinks face down on any players' Drink Me! Piles.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "The Wench thinks you should stop playing with the drinks.",
+      "type": "Sometimes",
+      "description": "The Wench thinks you should stop playing with the drinks.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "The Wench thinks you should stop playing with the drinks.",
+          "img": "Cards/base/dimli/the-wench-thinks-you-should-stop-playing-with.png",
+          "text": "<div class=\"cardtext\">Negate a Sometimes Card that changes the effects of a Drink Card. (This includes cards that pass Drinks to other players, cards that split Drinks with other players, and cards that Negate or Ignore Drinks.)</div><div class=\"cardtext\">This card can only be affected by <b>I don't think so!</b></div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Tip the Wench.",
+      "type": "Anytime",
+      "description": "Tip the Wench.",
+      "data": {
+        "type": "Anytime"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Tip the Wench.",
+          "img": "Cards/base/dimli/tip-the-wench.png",
+          "text": "<div class=\"cardtext\">A player of your choice must pay 1 Gold to the Inn.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I don't think so!",
+      "type": "Sometimes",
+      "description": "I don't think so!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "I don't think so!",
+          "img": "Cards/base/dimli/i-dont-think-so.png",
+          "text": "<div class=\"cardtext\">Negate a Sometimes Card.</div><div class=\"cardtext\">This card can only be affected by another <b>I don't think so!</b></div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Dwarves always have money.",
+      "type": "Sometimes",
+      "description": "Dwarves always have money.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Dwarves always have money.",
+          "img": "Cards/base/dimli/dwarves-always-have-money.png",
+          "text": "<div class=\"cardtext\">Play this card when you would lose Gold. (This includes paying Gold, anteing Gold, or having Gold taken from you.)</div><div class=\"cardtext\">Use Gold from the Inn, rather than from your own Stash.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Lemme check the money belt...",
+      "type": "Sometimes",
+      "description": "Lemme check the money belt...",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Lemme check the money belt...",
+          "img": "Cards/base/dimli/lemme-check-the-money-belt.png",
+          "text": "<div class=\"cardtext\">Play this card when you would lose Gold. (This includes paying Gold, anteing Gold, or having Gold taken from you.)</div><div class=\"cardtext\">Use Gold from the Inn, rather than from your own Stash.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "I don't want this watered-down stuff!",
+      "type": "Sometimes",
+      "description": "I don't want this watered-down stuff!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "I don't want this watered-down stuff!",
+          "img": "Cards/base/dimli/i-dont-want-this-watereddown-stuff.png",
+          "text": "<div class=\"cardtext\">Ignore a Drink Card.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "My mother gave me stronger stuff when I was a baby!",
+      "type": "Sometimes",
+      "description": "My mother gave me stronger stuff when I was a baby!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "My mother gave me stronger stuff when I was a baby!",
+          "img": "Cards/base/dimli/my-mother-gave-me-stronger-stuff-when-i-was-a.png",
+          "text": "<div class=\"cardtext\">Ignore a Drink Card.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Uuurp! That hit the spot!",
+      "type": "Sometimes",
+      "description": "Uuurp! That hit the spot!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Uuurp! That hit the spot!",
+          "img": "Cards/base/dimli/uuurp-that-hit-the-spot.png",
+          "text": "<div class=\"cardtext\">Add the Alcohol Content of a Drink you are drinking to your Fortitude rather than your Alcohol Content.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "You have this. I'm waiting for the good stuff!",
+      "type": "Sometimes",
+      "description": "You have this. I'm waiting for the good stuff!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "You have this. I'm waiting for the good stuff!",
+          "img": "Cards/base/dimli/you-have-this-im-waiting-for-the-good-stuff.png",
+          "text": "<div class=\"cardtext\">Give the Drink you are about to drink to another player. They take the effects of the Drink instead of you.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "You have this. I'm waiting for the good stuff!",
+      "type": "Sometimes",
+      "description": "You have this. I'm waiting for the good stuff!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "You have this. I'm waiting for the good stuff!",
+          "img": "Cards/base/dimli/you-have-this-im-waiting-for-the-good-stuff.png",
+          "text": "<div class=\"cardtext\">Give the Drink you are about to drink to another player. They take the effects of the Drink instead of you.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Impressive Dwarven War Belch!",
+      "type": "Action",
+      "description": "Impressive Dwarven War Belch!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Impressive Dwarven War Belch!",
+          "img": "Cards/base/dimli/impressive-dwarven-war-belch.png",
+          "text": "<div class=\"cardtext\">(You impress the others...)</div><div class=\"cardtext\">Each other player pays you 1 Gold.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Thanks... but I think I'll keep my Gold.",
+      "type": "Sometimes",
+      "description": "Thanks... but I think I'll keep my Gold.",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Thanks... but I think I'll keep my Gold.",
+          "img": "Cards/base/dimli/thanks-but-i-think-ill-keep-my-gold.png",
+          "text": "<div class=\"cardtext\">Play this card when you must ante to avoid paying and leave the Round of Gambling. You may not play any more Gambling or Cheating Cards during this Round. Any Gold you have already anted stays.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Stop using my head as a table!",
+      "type": "Action",
+      "description": "Stop using my head as a table!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Stop using my head as a table!",
+          "img": "Cards/base/dimli/stop-using-my-head-as-a-table.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 1 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "That's it! No more short jokes!",
+      "type": "Action",
+      "description": "That's it! No more short jokes!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "That's it! No more short jokes!",
+          "img": "Cards/base/dimli/thats-it-no-more-short-jokes.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Are you saying I'm grumpy?",
+      "type": "Action",
+      "description": "Are you saying I'm grumpy?",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Are you saying I'm grumpy?",
+          "img": "Cards/base/dimli/are-you-saying-im-grumpy.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Are you saying I'm grumpy?",
+      "type": "Action",
+      "description": "Are you saying I'm grumpy?",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Are you saying I'm grumpy?",
+          "img": "Cards/base/dimli/are-you-saying-im-grumpy.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Let's try some Dwarven wrist wrestling!",
+      "type": "Action",
+      "description": "Let's try some Dwarven wrist wrestling!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Let's try some Dwarven wrist wrestling!",
+          "img": "Cards/base/dimli/lets-try-some-dwarven-wrist-wrestling.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Let's try some Dwarven wrist wrestling!",
+      "type": "Action",
+      "description": "Let's try some Dwarven wrist wrestling!",
+      "data": {
+        "type": "Action"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Let's try some Dwarven wrist wrestling!",
+          "img": "Cards/base/dimli/lets-try-some-dwarven-wrist-wrestling.png",
+          "text": "<div class=\"cardtext\">Pick another player. They lose 2 Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Hey! You almost damaged the beard!",
+      "type": "Sometimes",
+      "description": "Hey! You almost damaged the beard!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Hey! You almost damaged the beard!",
+          "img": "Cards/base/dimli/hey-you-almost-damaged-the-beard.png",
+          "text": "<div class=\"cardtext\">Play this card immediately after another player makes you lose Fortitude. They also lose 2 Fortitude.</div><div class=\"cardtext\">You may not play this card if you played a card to reduce or Ignore the Fortitude loss.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Good thing I was wearing my great-grandfather's helmet!",
+      "type": "Sometimes",
+      "description": "Good thing I was wearing my great-grandfather's helmet!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Good thing I was wearing my great-grandfather's helmet!",
+          "img": "Cards/base/dimli/good-thing-i-was-wearing-my-greatgrandfathers.png",
+          "text": "<div class=\"cardtext\">Ignore an Action, Sometimes or Anytime Card that affects your Fortitude.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Spike it with Firewater",
+      "type": "Sometimes",
+      "description": "Spike it with Firewater",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Spike it with Firewater",
+          "img": "Cards/base/dimli/spike-it-with-firewater.png",
+          "text": "<div class=\"cardtext\">Add 2 Alcohol Content to a Drink currently being drunk.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Spike it with Firewater",
+      "type": "Sometimes",
+      "description": "Spike it with Firewater",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Spike it with Firewater",
+          "img": "Cards/base/dimli/spike-it-with-firewater.png",
+          "text": "<div class=\"cardtext\">Add 2 Alcohol Content to a Drink currently being drunk.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Drink up, friend!",
+      "type": "Sometimes",
+      "description": "Drink up, friend!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Drink up, friend!",
+          "img": "Cards/base/dimli/drink-up-friend.png",
+          "text": "<div class=\"cardtext\">Play this card during another player's Drink Phase.</div><div class=\"cardtext\">That player must drink an additional Drink Card from their Drink Me! Pile.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Best two out of three?",
+      "type": "Sometimes",
+      "description": "Best two out of three?",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Best two out of three?",
+          "img": "Cards/base/dimli/best-two-out-of-three.png",
+          "text": "<div class=\"cardtext\">Play this card when another player wins a Round of Gambling. The Round is not over. All anted Gold stays in the pot. All players who had not already left the Round are still in and must ante 1 additional Gold. You are currently winning. The Round continues to your left. You may not play this card if you have already left the Round of Gambling or if <b>Um... I know you think you won, but...</b> was played.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "What? And part with my hard-earned money?",
+      "type": "Sometimes",
+      "description": "What? And part with my hard-earned money?",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "What? And part with my hard-earned money?",
+          "img": "Cards/base/dimli/what-and-part-with-my-hardearned-money.png",
+          "text": "<div class=\"cardtext\">Play this card when you must ante to avoid paying and leave the Round of Gambling. You may not play any more Gambling or Cheating Cards during this Round. Any Gold you have already anted stays.</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Now this stuff is actually good! Try some!",
+      "type": "Sometimes",
+      "description": "Now this stuff is actually good! Try some!",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Now this stuff is actually good! Try some!",
+          "img": "Cards/base/dimli/now-this-stuff-is-actually-good-try-some.png",
+          "text": "<div class=\"cardtext\">Split a Drink you are about to drink with another player. You each take half of the Drink's effects, rounded up.</div><div class=\"cardtext\">(You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    },
+    {
+      "name": "Can't you see I'm talking to this pretty, bearded lass here?",
+      "type": "Sometimes",
+      "description": "Can't you see I'm talking to this pretty, bearded lass here?",
+      "data": {
+        "type": "Sometimes"
+      },
+      "suit": "",
+      "value": 0,
+      "back": {
+        "name": "Dimli the Dwarf",
+        "text": "Dimli the Dwarf",
+        "img": "Cards/base/dimli/dimli-the-dwarf-back.png"
+      },
+      "faces": [
+        {
+          "name": "Can't you see I'm talking to this pretty, bearded lass here?",
+          "img": "Cards/base/dimli/cant-you-see-im-talking-to-this-pretty.png",
+          "text": "<div class=\"cardtext\">Play this card when you must ante to avoid paying and leave the Round of Gambling. You may not play any more Gambling or Cheating Cards during this Round. Any Gold you have already anted stays.</div><div class=\"cardtext\">-OR-</div><div class=\"cardtext\">Ignore a Drink Card. (You may look at the Drink Card before deciding to play this card.)</div>"
+        }
+      ],
+      "face": 0,
+      "drawn": false,
+      "width": 2,
+      "height": 3,
+      "rotation": 0,
+      "flags": {}
+    }
+  ]
+}

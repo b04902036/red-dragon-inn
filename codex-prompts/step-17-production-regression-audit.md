@@ -81,7 +81,7 @@ It is acceptable for sample strings/imports to remain under tests, fixture tooli
 Confirm:
 - no newly scraped complete proprietary card text was committed
 - no copyrighted artwork was fetched without authorization
-- private content stays ignored
+- authorized project content under `content-private/` may be tracked; credentials and local workspace remain ignored
 - audio license/provenance file exists
 - translation provenance/status is stored
 

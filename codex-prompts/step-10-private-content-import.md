@@ -18,9 +18,9 @@ content-private/
   imports/
 ```
 
-`content-private/` must be ignored by Git except for an optional `.gitkeep` or non-content instructions if desired.
+Authorized project content under `content-private/` may be Git-tracked under the current repository policy. Credentials and API secrets must remain outside Git; `.tools/` stays ignored. Public redistribution requires the user's separate confirmation of rights.
 
-CI must use only `content/samples`.
+Original importer tests use `content/samples`. Later RDI1/RDI2 release tests also require the tracked authorized project inputs; missing required content must fail validation.
 
 ## Import formats
 
@@ -111,8 +111,8 @@ Test:
 9. dry run writes nothing
 10. content version created correctly
 11. same card definition + quantity imports correctly
-12. private content path ignored by Git
-13. CI/sample build does not depend on private content
+12. authorized project content may be tracked; credentials and local workspace remain ignored
+13. sample fixture builds stay isolated; milestone release tests use tracked authorized inputs
 14. compatibility report counts are correct
 
 If the user later supplies real owned content, add separate local-only verification without committing it.

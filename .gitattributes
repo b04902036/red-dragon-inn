@@ -1,6 +1,8 @@
 # Source-lock hashes describe exact evidence bytes; preserve committed line endings.
 reference/** -text
 content-private/** -text
+# Exact upstream evidence uses CRLF; recognize it without disabling whitespace checks.
+content-private/evidence/rdi2/the-inn/*.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 codex-prompts/** -text
 # These older evidence hashes were recorded from CRLF originals.
 codex-prompts/step-24a-final-source-lock-resolution.md text eol=crlf
