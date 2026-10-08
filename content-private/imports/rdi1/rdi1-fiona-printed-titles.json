@@ -1,0 +1,200 @@
+{
+  "characterId": "fiona",
+  "characterName": "Fiona the Volatile",
+  "game": "RDI1",
+  "status": "COMPLETE_40_OF_40",
+  "evidenceTier": "SECONDARY_COMPLETE_CARD_LIST_CROSS_CHECKED",
+  "source": {
+    "primaryTitleList": {
+      "name": "RDI Card list",
+      "note": "The Fiona section lists all 40 physical printed card titles."
+    },
+    "gameplayMapping": {
+      "name": "Verified RDI1 mechanics matrix / source-normalized.json",
+      "note": "Used for gameplay row identities and physical quantities."
+    },
+    "crossCheckNote": "Official/combined rules examples and published play logs were used to cross-check ambiguous title-to-effect mappings, especially Fiona's attack cards."
+  },
+  "physicalCardCount": 40,
+  "gameplayRowCount": 23,
+  "rows": [
+    {
+      "cardKey": "fiona.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "fiona.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
+    },
+    {
+      "cardKey": "fiona.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
+    },
+    {
+      "cardKey": "fiona.anti_cheat_win_round",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I do believe that you're cheating. At this point, you have two options..."
+      ]
+    },
+    {
+      "cardKey": "fiona.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
+    },
+    {
+      "cardKey": "fiona.substitute_one_gold_from_inn",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I like this town. They give me a discount on armor repair",
+        "Oh, that's what was rattling around in my armor!"
+      ]
+    },
+    {
+      "cardKey": "fiona.avoid_ante_leave",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Go away! I'm arranging my weapons by size.",
+        "Go away! I'm polishing my arsenal."
+      ]
+    },
+    {
+      "cardKey": "fiona.ignore_action_sometimes_fort_loss",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Luckily for me, I was wearing my armor!",
+        "Luckily for me, I was wearing my armor!"
+      ]
+    },
+    {
+      "cardKey": "fiona.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I don't think so!"
+      ]
+    },
+    {
+      "cardKey": "fiona.ignore_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "This is just the thing to get the blood off my sword!",
+        "This is just the thing to get the rust off my armor!"
+      ]
+    },
+    {
+      "cardKey": "fiona.order_two_extra_drinks",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ]
+    },
+    {
+      "cardKey": "fiona.force_extra_drink_on_reveal",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "We're at an inn, and you're not drinking. What's wrong with you!?"
+      ]
+    },
+    {
+      "cardKey": "fiona.force_other_player_drink_now",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Drink up, friend!"
+      ]
+    },
+    {
+      "cardKey": "fiona.split_own_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Come, my friend, sit and drink with me!"
+      ]
+    },
+    {
+      "cardKey": "fiona.alcohol_to_fortitude",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Nothing like a little belt of liquid courage!"
+      ]
+    },
+    {
+      "cardKey": "fiona.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "fiona.damage_one",
+      "quantity": 3,
+      "canonicalCardTitles": [
+        "It'll hurt more if you do it like this!",
+        "It'll hurt more if you do it like this!",
+        "You wanna arm wrestle?"
+      ]
+    },
+    {
+      "cardKey": "fiona.damage_two",
+      "quantity": 3,
+      "canonicalCardTitles": [
+        "Hey! No more chain mail bikini jokes!",
+        "Hey! No more chain mail bikini jokes!",
+        "Who says I'm not a lady?"
+      ]
+    },
+    {
+      "cardKey": "fiona.damage_three",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "So then I got the ogre in a headlock like this!"
+      ]
+    },
+    {
+      "cardKey": "fiona.hit_back_two_after_loss",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Sorry about that, I just instinctively aim for the head...",
+        "Sorry about that, I just instinctively aim for the head..."
+      ]
+    },
+    {
+      "cardKey": "fiona.gain_two_fortitude",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I'm a quick healer."
+      ]
+    },
+    {
+      "cardKey": "fiona.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Hey guys... Can I borrow some gold? Armor repair isn't cheap, ya' know."
+      ]
+    },
+    {
+      "cardKey": "fiona.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ]
+}

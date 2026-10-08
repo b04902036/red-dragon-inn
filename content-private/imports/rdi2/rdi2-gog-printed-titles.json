@@ -1,0 +1,548 @@
+{
+  "characterId": "gog",
+  "characterName": "Gog the Half-Ogre",
+  "game": "RDI2",
+  "status": "COMPLETE_40_OF_40",
+  "physicalCardCount": 40,
+  "gameplayRowCount": 23,
+  "purpose": "Canonical/project-approved title mapping for text-to-speech generation.",
+  "overridePolicy": {
+    "note": "Most titles are source-locked. Where exact printed titles could not be recovered, user-approved project overrides are retained and explicitly labeled.",
+    "userApprovedOverrides": [
+      {
+        "cardKey": "gog.avoid_ante_leave_or_ignore_drink",
+        "titles": [
+          "do not bother gog"
+        ]
+      },
+      {
+        "cardKey": "gog.avoid_ante_leave",
+        "titles": [
+          "This game stupid!",
+          "This game stupid!"
+        ],
+        "note": "User fixed duplicate quantity."
+      },
+      {
+        "cardKey": "gog.damage_two",
+        "titles": [
+          "Gog make funny? Why you not laugh?",
+          "Gog make funny? Why you not laugh?",
+          "Gog make funny? Why you not laugh?",
+          "Why you laugh at Gog?",
+          "Why you laugh at Gog?"
+        ],
+        "note": "User fixed 3/2 copy distribution."
+      },
+      {
+        "cardKey": "gog.substitute_payment_from_inn",
+        "titles": [
+          "Gog find shiny gold! Gog pay with this!",
+          "Gog find gold under table! Gog use that!"
+        ],
+        "note": "Assistant-generated Gog-persona lines at user's request."
+      },
+      {
+        "cardKey": "gog.gain_two_fortitude",
+        "titles": [
+          "Gog tough! Gog feel better now!"
+        ],
+        "note": "Assistant-generated Gog-persona line at user's request."
+      }
+    ]
+  },
+  "rows": [
+    {
+      "cardKey": "gog.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.anti_cheat_win_round",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Gog think you cheating! Gog no like cheaters!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.substitute_payment_from_inn",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Gog find shiny gold! Gog pay with this!",
+        "Gog find gold under table! Gog use that!"
+      ],
+      "provenance": "PROJECT_OVERRIDE_ASSISTANT_GENERATED_FOR_GOG_PERSONA",
+      "overrideReason": "Exact physical printed titles unavailable; user explicitly requested Gog-persona replacement lines."
+    },
+    {
+      "cardKey": "gog.avoid_ante_leave",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "This game stupid!",
+        "This game stupid!"
+      ],
+      "provenance": "USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "cardKey": "gog.avoid_ante_leave_or_ignore_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "do not bother gog"
+      ],
+      "provenance": "USER_ACCEPTED_TITLE_OVERRIDE"
+    },
+    {
+      "cardKey": "gog.ignore_card_all_stats",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Shut up!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.ignore_action_sometimes_fort_loss",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Stop poking Gog",
+        "Stop poking Gog"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Gog not think so!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.ignore_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "This taste yucky!",
+        "This taste yucky!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.order_two_extra_drinks",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.force_extra_drink_during_other_drink_phase",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Gog say you drink MORE!",
+        "Gog say you drink MORE!"
+      ],
+      "provenance": "SOURCE_LOCKED_PLUS_EXISTING_M21_USER_OVERRIDE_FOR_DUPLICATE_COUNT"
+    },
+    {
+      "cardKey": "gog.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.damage_two",
+      "quantity": 5,
+      "canonicalCardTitles": [
+        "Gog make funny? Why you not laugh?",
+        "Gog make funny? Why you not laugh?",
+        "Gog make funny? Why you not laugh?",
+        "Why you laugh at Gog?",
+        "Why you laugh at Gog?"
+      ],
+      "provenance": "SOURCE_LOCKED_TITLES_WITH_USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "cardKey": "gog.damage_three_pay_inn_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Sorry, Gog not see you sitting there..."
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.damage_four",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Dance with Gog!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.damage_all_others_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Gog loves everyone!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.hit_back_two_after_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "That not hurt! This hurt!"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.gain_two_fortitude",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Gog tough! Gog feel better now!"
+      ],
+      "provenance": "PROJECT_OVERRIDE_ASSISTANT_GENERATED_FOR_GOG_PERSONA",
+      "overrideReason": "Exact physical printed title unavailable; user explicitly requested a Gog-persona replacement line."
+    },
+    {
+      "cardKey": "gog.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Gog crush beer stein on head"
+      ],
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "cardKey": "gog.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ],
+      "provenance": "SOURCE_LOCKED"
+    }
+  ],
+  "physicalCards": [
+    {
+      "physicalCardIndex": 1,
+      "cardKey": "gog.gambling_start_or_control",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gambling? I'm in!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 2,
+      "cardKey": "gog.gambling_start_or_control",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gambling? I'm in!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 3,
+      "cardKey": "gog.gambling_start_or_control",
+      "copyIndexWithinCardKey": 3,
+      "title": "Gambling? I'm in!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 4,
+      "cardKey": "gog.gambling_start_or_control",
+      "copyIndexWithinCardKey": 4,
+      "title": "Gambling? I'm in!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 5,
+      "cardKey": "gog.gambling_start_or_control",
+      "copyIndexWithinCardKey": 5,
+      "title": "Gambling? I'm in!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 6,
+      "cardKey": "gog.gambling_start_or_control",
+      "copyIndexWithinCardKey": 6,
+      "title": "Gambling? I'm in!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 7,
+      "cardKey": "gog.gambling_raise_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "I raise!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 8,
+      "cardKey": "gog.gambling_raise_one",
+      "copyIndexWithinCardKey": 2,
+      "title": "I raise!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 9,
+      "cardKey": "gog.gambling_winning_hand",
+      "copyIndexWithinCardKey": 1,
+      "title": "Winning Hand!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 10,
+      "cardKey": "gog.gambling_winning_hand",
+      "copyIndexWithinCardKey": 2,
+      "title": "Winning Hand!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 11,
+      "cardKey": "gog.anti_cheat_win_round",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog think you cheating! Gog no like cheaters!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 12,
+      "cardKey": "gog.dump_gambling_pot_to_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oh, I guess the Wench thought that was her tip...",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 13,
+      "cardKey": "gog.substitute_payment_from_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog find shiny gold! Gog pay with this!",
+      "provenance": "PROJECT_OVERRIDE_ASSISTANT_GENERATED_FOR_GOG_PERSONA"
+    },
+    {
+      "physicalCardIndex": 14,
+      "cardKey": "gog.substitute_payment_from_inn",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gog find gold under table! Gog use that!",
+      "provenance": "PROJECT_OVERRIDE_ASSISTANT_GENERATED_FOR_GOG_PERSONA"
+    },
+    {
+      "physicalCardIndex": 15,
+      "cardKey": "gog.avoid_ante_leave",
+      "copyIndexWithinCardKey": 1,
+      "title": "This game stupid!",
+      "provenance": "USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 16,
+      "cardKey": "gog.avoid_ante_leave",
+      "copyIndexWithinCardKey": 2,
+      "title": "This game stupid!",
+      "provenance": "USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 17,
+      "cardKey": "gog.avoid_ante_leave_or_ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "do not bother gog",
+      "provenance": "USER_ACCEPTED_TITLE_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 18,
+      "cardKey": "gog.ignore_card_all_stats",
+      "copyIndexWithinCardKey": 1,
+      "title": "Shut up!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 19,
+      "cardKey": "gog.ignore_action_sometimes_fort_loss",
+      "copyIndexWithinCardKey": 1,
+      "title": "Stop poking Gog",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 20,
+      "cardKey": "gog.ignore_action_sometimes_fort_loss",
+      "copyIndexWithinCardKey": 2,
+      "title": "Stop poking Gog",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 21,
+      "cardKey": "gog.negate_sometimes_counter",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog not think so!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 22,
+      "cardKey": "gog.ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "This taste yucky!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 23,
+      "cardKey": "gog.ignore_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "This taste yucky!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 24,
+      "cardKey": "gog.order_two_extra_drinks",
+      "copyIndexWithinCardKey": 1,
+      "title": "Wench, bring some drinks for my friends!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 25,
+      "cardKey": "gog.order_two_extra_drinks",
+      "copyIndexWithinCardKey": 2,
+      "title": "Wench, bring some drinks for my friends!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 26,
+      "cardKey": "gog.force_extra_drink_during_other_drink_phase",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog say you drink MORE!",
+      "provenance": "SOURCE_LOCKED_PLUS_EXISTING_M21_USER_OVERRIDE_FOR_DUPLICATE_COUNT"
+    },
+    {
+      "physicalCardIndex": 27,
+      "cardKey": "gog.force_extra_drink_during_other_drink_phase",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gog say you drink MORE!",
+      "provenance": "SOURCE_LOCKED_PLUS_EXISTING_M21_USER_OVERRIDE_FOR_DUPLICATE_COUNT"
+    },
+    {
+      "physicalCardIndex": 28,
+      "cardKey": "gog.negate_drink_change_card",
+      "copyIndexWithinCardKey": 1,
+      "title": "The Wench thinks you should stop playing with the drinks.",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 29,
+      "cardKey": "gog.damage_two",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog make funny? Why you not laugh?",
+      "provenance": "SOURCE_LOCKED_TITLES_WITH_USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 30,
+      "cardKey": "gog.damage_two",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gog make funny? Why you not laugh?",
+      "provenance": "SOURCE_LOCKED_TITLES_WITH_USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 31,
+      "cardKey": "gog.damage_two",
+      "copyIndexWithinCardKey": 3,
+      "title": "Gog make funny? Why you not laugh?",
+      "provenance": "SOURCE_LOCKED_TITLES_WITH_USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 32,
+      "cardKey": "gog.damage_two",
+      "copyIndexWithinCardKey": 4,
+      "title": "Why you laugh at Gog?",
+      "provenance": "SOURCE_LOCKED_TITLES_WITH_USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 33,
+      "cardKey": "gog.damage_two",
+      "copyIndexWithinCardKey": 5,
+      "title": "Why you laugh at Gog?",
+      "provenance": "SOURCE_LOCKED_TITLES_WITH_USER_QUANTITY_OVERRIDE"
+    },
+    {
+      "physicalCardIndex": 34,
+      "cardKey": "gog.damage_three_pay_inn_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "Sorry, Gog not see you sitting there...",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 35,
+      "cardKey": "gog.damage_four",
+      "copyIndexWithinCardKey": 1,
+      "title": "Dance with Gog!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 36,
+      "cardKey": "gog.damage_all_others_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog loves everyone!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 37,
+      "cardKey": "gog.hit_back_two_after_loss",
+      "copyIndexWithinCardKey": 1,
+      "title": "That not hurt! This hurt!",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 38,
+      "cardKey": "gog.gain_two_fortitude",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog tough! Gog feel better now!",
+      "provenance": "PROJECT_OVERRIDE_ASSISTANT_GENERATED_FOR_GOG_PERSONA"
+    },
+    {
+      "physicalCardIndex": 39,
+      "cardKey": "gog.collect_one_from_each_other",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gog crush beer stein on head",
+      "provenance": "SOURCE_LOCKED"
+    },
+    {
+      "physicalCardIndex": 40,
+      "cardKey": "gog.tip_wench",
+      "copyIndexWithinCardKey": 1,
+      "title": "Tip the Wench.",
+      "provenance": "SOURCE_LOCKED"
+    }
+  ],
+  "validation": {
+    "sumRowQuantity": 40,
+    "sumCanonicalTitleCount": 40,
+    "flatPhysicalCardCount": 40,
+    "allRowsTitleCountMatchesQuantity": true,
+    "complete": true
+  }
+}

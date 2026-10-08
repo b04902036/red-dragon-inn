@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 1,
+  "version": {
+    "id": "content_cli_localized_fixture",
+    "name": "Original sample pack v1",
+    "createdAt": "2026-10-03T04:55:13.537Z"
+  },
+  "products": [
+    {
+      "id": "product_sample",
+      "slug": "original-sample-pack",
+      "name": "Original Fictional Sample Pack",
+      "releaseYear": 2026
+    }
+  ],
+  "characters": [
+    {
+      "id": "character_sample_0",
+      "productId": "product_sample",
+      "slug": "sample-grovekeeper",
+      "name": "Sample Grovekeeper",
+      "villain": false,
+      "complexity": 1,
+      "specialRuleKey": null,
+      "rules": {
+        "resources": {},
+        "sideDeckKeys": []
+      }
+    },
+    {
+      "id": "character_sample_1",
+      "productId": "product_sample",
+      "slug": "sample-clocksmith",
+      "name": "Sample Clocksmith",
+      "villain": false,
+      "complexity": 2,
+      "specialRuleKey": "sample.resources",
+      "rules": {
+        "resources": {
+          "tokens": {
+            "initialValue": 0,
+            "visibility": "PUBLIC"
+          }
+        },
+        "sideDeckKeys": [
+          "tokens"
+        ]
+      }
+    },
+    {
+      "id": "character_sample_2",
+      "productId": "product_sample",
+      "slug": "sample-mapmaker",
+      "name": "Sample Mapmaker",
+      "villain": false,
+      "complexity": 1,
+      "specialRuleKey": null,
+      "rules": {
+        "resources": {},
+        "sideDeckKeys": []
+      }
+    },
+    {
+      "id": "character_sample_3",
+      "productId": "product_sample",
+      "slug": "sample-cloudrunner",
+      "name": "Sample Cloudrunner",
+      "villain": false,
+      "complexity": 1,
+      "specialRuleKey": null,
+      "rules": {
+        "resources": {},
+        "sideDeckKeys": []
+      }
+    }
+  ],
+  "decks": [
+    {
+      "id": "deck_sample_0",
+      "characterId": "character_sample_0",
+      "type": "CHARACTER",
+      "slug": "sample-character-0",
+      "name": "Sample Grovekeeper test deck"
+    },
+    {
+      "id": "deck_sample_1",
+      "characterId": "character_sample_1",
+      "type": "CHARACTER",
+      "slug": "sample-character-1",
+      "name": "Sample Clocksmith test deck"
+    },
+    {
+      "id": "deck_sample_2",
+      "characterId": "character_sample_2",
+      "type": "CHARACTER",
+      "slug": "sample-character-2",
+      "name": "Sample Mapmaker test deck"
+    },
+    {
+      "id": "deck_sample_3",
+      "characterId": "character_sample_3",
+      "type": "CHARACTER",
+      "slug": "sample-character-3",
+      "name": "Sample Cloudrunner test deck"
+    },
+    {
+      "id": "deck_sample_inn",
+      "characterId": null,
+      "type": "INN_DRINK",
+      "slug": "sample-inn",
+      "name": "Sample Inn Drinks"
+    },
+    {
+      "id": "deck_sample_tokens",
+      "characterId": "character_sample_1",
+      "type": "SPECIAL",
+      "slug": "sample-tokens",
+      "name": "Sample Token Side Deck"
+    }
+  ],
+  "cards": [
+    {
+      "id": "carddef_sample_shove",
+      "name": "Sample Friendly Shove",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "CHOSEN_PLAYER",
+          "stat": "FORTITUDE",
+          "delta": -2
+        }
+      ],
+      "type": "ACTION"
+    },
+    {
+      "id": "carddef_sample_ignore",
+      "name": "Sample Brush It Off",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [
+        {
+          "op": "IGNORE",
+          "scope": "CURRENT_EFFECT"
+        }
+      ],
+      "type": "SOMETIMES",
+      "responseKind": "IGNORE"
+    },
+    {
+      "id": "carddef_sample_negate",
+      "name": "Sample Cancel That",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [
+        {
+          "op": "NEGATE",
+          "scope": "TOP_STACK"
+        }
+      ],
+      "type": "SOMETIMES",
+      "responseKind": "NEGATE"
+    },
+    {
+      "id": "carddef_sample_breather",
+      "name": "Sample Quiet Breather",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [
+        {
+          "op": "CHANGE_STAT",
+          "target": "SELF",
+          "stat": "FORTITUDE",
+          "delta": 1
+        }
+      ],
+      "type": "ANYTIME"
+    },
+    {
+      "id": "carddef_sample_gamble",
+      "name": "Sample Raise the Stakes",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [],
+      "type": "GAMBLING"
+    },
+    {
+      "id": "carddef_sample_cheat",
+      "name": "Sample Sleeve Trick",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [],
+      "type": "CHEATING"
+    },
+    {
+      "id": "carddef_sample_fizz",
+      "name": "Sample Berry Fizz",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [],
+      "type": "DRINK",
+      "alcoholContent": 2,
+      "fortitudeChange": 0,
+      "chaser": false
+    },
+    {
+      "id": "carddef_sample_tea",
+      "name": "Sample Spiced Tea",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [],
+      "type": "DRINK",
+      "alcoholContent": 1,
+      "fortitudeChange": 1,
+      "chaser": true
+    },
+    {
+      "id": "carddef_sample_toast",
+      "name": "Sample House Toast",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "effects": [],
+      "type": "DRINK_EVENT"
+    },
+    {
+      "id": "carddef_sample_token",
+      "name": "Sample Spare Token",
+      "rulesText": "Original fictional test content; not an official game card.",
+      "source": "SAMPLE",
+      "characterId": "character_sample_1",
+      "effects": [
+        {
+          "op": "CUSTOM",
+          "target": "SELF",
+          "effect_key": "sample.adjust-resource",
+          "params": {
+            "resource": "tokens",
+            "delta": 1
+          }
+        }
+      ],
+      "type": "SPECIAL",
+      "sideDeckKey": "tokens"
+    }
+  ],
+  "deckCards": [
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_0",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_1",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_2",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_shove",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_ignore",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_negate",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_breather",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_gamble",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_3",
+      "cardId": "carddef_sample_cheat",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_inn",
+      "cardId": "carddef_sample_fizz",
+      "quantity": 3
+    },
+    {
+      "deckId": "deck_sample_inn",
+      "cardId": "carddef_sample_tea",
+      "quantity": 2
+    },
+    {
+      "deckId": "deck_sample_inn",
+      "cardId": "carddef_sample_toast",
+      "quantity": 1
+    },
+    {
+      "deckId": "deck_sample_tokens",
+      "cardId": "carddef_sample_token",
+      "quantity": 3
+    }
+  ],
+  "ruleModules": [
+    {
+      "id": "rule_sample_core",
+      "ruleKey": "sample_core",
+      "summary": "Fictional fixture module; gameplay handlers are future work.",
+      "rules": {
+        "kind": "SAMPLE_CORE",
+        "notes": "Original sample data only. No official rule text or artwork."
+      }
+    }
+  ],
+  "assets": [],
+  "translations": [
+    {
+      "entityType": "PRODUCT",
+      "entityId": "product_sample",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "原創虛構示範牌組",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CHARACTER",
+      "entityId": "character_sample_0",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範林地守護者",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CHARACTER",
+      "entityId": "character_sample_1",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範鐘錶匠",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CHARACTER",
+      "entityId": "character_sample_2",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範地圖師",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CHARACTER",
+      "entityId": "character_sample_3",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範逐雲者",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_shove",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範友善推擠",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_shove",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_ignore",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範輕鬆化解",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_ignore",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_negate",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範取消效果",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_negate",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_breather",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範安靜休息",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_breather",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_gamble",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範提高賭注",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_gamble",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_cheat",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範作弊奪權",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_cheat",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_fizz",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範氣泡飲料",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_fizz",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_tea",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範溫熱茶飲",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_tea",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_toast",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範共同乾杯",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_toast",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_token",
+      "field": "name",
+      "locale": "zh-TW",
+      "text": "示範資源標記",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "CARD",
+      "entityId": "carddef_sample_token",
+      "field": "rulesText",
+      "locale": "zh-TW",
+      "text": "原創虛構測試內容；此牌並非官方遊戲卡牌。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "RULE_MODULE",
+      "entityId": "rule_sample_core",
+      "field": "summary",
+      "locale": "zh-TW",
+      "text": "原創虛構測試規則模組。",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    },
+    {
+      "entityType": "MECHANIC",
+      "entityId": "tokens",
+      "field": "label",
+      "locale": "zh-TW",
+      "text": "資源標記",
+      "sourceKind": "MANUAL",
+      "sourceRef": "Original repository fixture translation; glossary: reference/zh-TW-glossary.md",
+      "status": "MANUAL_REVIEWED"
+    }
+  ]
+}

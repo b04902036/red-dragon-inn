@@ -1,0 +1,514 @@
+{
+  "characterId": "fleck",
+  "characterName": "Fleck the Bard",
+  "game": "RDI2",
+  "status": "COMPLETE_40_OF_40",
+  "physicalCardCount": 40,
+  "gameplayRowCount": 24,
+  "evidenceTier": "SECONDARY_COMPLETE_DECK_EXPORT_CROSSCHECKED_WITH_PROJECT_GAMEPLAY_ROWS",
+  "source": {
+    "repository": "HaxxonHax/the-inn",
+    "path": "Cards/base/fleck/fleck.json",
+    "note": "Printed titles and full card text come from the complete 40-card deck JSON. Gameplay row identities and quantities come from the current project content-private/imports/rdi2/source-normalized.json."
+  },
+  "overridesUsed": false,
+  "rows": [
+    {
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "fleck.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
+    },
+    {
+      "cardKey": "fleck.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
+    },
+    {
+      "cardKey": "fleck.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_take_control",
+      "quantity": 4,
+      "canonicalCardTitles": [
+        "Oops... I dropped my cards...",
+        "Look at these cards! This must be my lucky day!",
+        "Fortunately, I had this card up my sleeve! Ha ha, just kidding!",
+        "It seems that Lady Luck is smiling on me!"
+      ]
+    },
+    {
+      "cardKey": "fleck.cheat_control_and_eject",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_control_and_eject",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "What's that up your sleeve?"
+      ]
+    },
+    {
+      "cardKey": "fleck.dump_gambling_pot_to_inn",
+      "repoGameplayCardKey": "rdi2.fleck.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
+    },
+    {
+      "cardKey": "fleck.substitute_payment_from_inn",
+      "repoGameplayCardKey": "rdi2.fleck.substitute_payment_from_inn",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Appreciative listeners! How nice!",
+        "I got this from playing in the Town Square."
+      ]
+    },
+    {
+      "cardKey": "fleck.avoid_ante_leave",
+      "repoGameplayCardKey": "rdi2.fleck.avoid_ante_leave",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, Hey! This looks like a serious game."
+      ]
+    },
+    {
+      "cardKey": "fleck.avoid_ante_leave_or_ignore_drink",
+      "repoGameplayCardKey": "rdi2.fleck.avoid_ante_leave_or_ignore_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Leave me be! I'm trying to read lore here!"
+      ]
+    },
+    {
+      "cardKey": "fleck.negate_sometimes_counter",
+      "repoGameplayCardKey": "rdi2.fleck.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I don't think so!"
+      ]
+    },
+    {
+      "cardKey": "fleck.ignore_drink",
+      "repoGameplayCardKey": "rdi2.fleck.ignore_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "You know, I should take better care of my dainty figure!",
+        "I may be a fop, but I can hold my liquor!"
+      ]
+    },
+    {
+      "cardKey": "fleck.order_two_extra_drinks_free_or_waive_refill",
+      "repoGameplayCardKey": "rdi2.fleck.order_two_extra_drinks_free_or_waive_refill",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, please allow me to pay for these drinks with a song!",
+        "Wench, please allow me to pay for these drinks with a song!"
+      ]
+    },
+    {
+      "cardKey": "fleck.all_players_drink_from_inn",
+      "repoGameplayCardKey": "rdi2.fleck.all_players_drink_from_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "A toast! To my friends!"
+      ]
+    },
+    {
+      "cardKey": "fleck.split_own_drink",
+      "repoGameplayCardKey": "rdi2.fleck.split_own_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I do so hate to drink alone...",
+        "I do so hate to drink alone..."
+      ]
+    },
+    {
+      "cardKey": "fleck.negate_drink_change_card",
+      "repoGameplayCardKey": "rdi2.fleck.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "fleck.all_lose_one_alcohol_collect_one_each_other",
+      "repoGameplayCardKey": "rdi2.fleck.all_lose_one_alcohol_collect_one_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "And now I'm going to play something really sad."
+      ]
+    },
+    {
+      "cardKey": "fleck.damage_one",
+      "repoGameplayCardKey": "rdi2.fleck.damage_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Excuse me... I think you're sitting on my tuning fork."
+      ]
+    },
+    {
+      "cardKey": "fleck.damage_two",
+      "repoGameplayCardKey": "rdi2.fleck.damage_two",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Oh, I hate it when the strings break!",
+        "Oh, I hate it when the strings break!"
+      ]
+    },
+    {
+      "cardKey": "fleck.rowdy_song",
+      "repoGameplayCardKey": "rdi2.fleck.rowdy_song",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "How about a rowdy drinking song?",
+        "How about a rowdy drinking song?"
+      ]
+    },
+    {
+      "cardKey": "fleck.hit_back_two_after_loss",
+      "repoGameplayCardKey": "rdi2.fleck.hit_back_two_after_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Allow me to introduce you to my biggest fan."
+      ]
+    },
+    {
+      "cardKey": "fleck.gain_two_fortitude",
+      "repoGameplayCardKey": "rdi2.fleck.gain_two_fortitude",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Who knew? One of my fans is a priest!"
+      ]
+    },
+    {
+      "cardKey": "fleck.collect_one_from_each_other",
+      "repoGameplayCardKey": "rdi2.fleck.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I've composed a poem about our most recent adventure."
+      ]
+    },
+    {
+      "cardKey": "fleck.take_two_gold",
+      "repoGameplayCardKey": "rdi2.fleck.take_two_gold",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "This is in payment for that heroic ballad I wrote about you!"
+      ]
+    },
+    {
+      "cardKey": "fleck.tip_wench",
+      "repoGameplayCardKey": "rdi2.fleck.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ],
+  "physicalCards": [
+    {
+      "physicalCardIndex": 1,
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 2,
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 3,
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "copyIndexWithinCardKey": 3,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 4,
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "copyIndexWithinCardKey": 4,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 5,
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "copyIndexWithinCardKey": 5,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 6,
+      "cardKey": "fleck.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_start_or_control",
+      "copyIndexWithinCardKey": 6,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 7,
+      "cardKey": "fleck.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_raise_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "I raise!"
+    },
+    {
+      "physicalCardIndex": 8,
+      "cardKey": "fleck.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_raise_one",
+      "copyIndexWithinCardKey": 2,
+      "title": "I raise!"
+    },
+    {
+      "physicalCardIndex": 9,
+      "cardKey": "fleck.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_winning_hand",
+      "copyIndexWithinCardKey": 1,
+      "title": "Winning Hand!"
+    },
+    {
+      "physicalCardIndex": 10,
+      "cardKey": "fleck.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.fleck.gambling_winning_hand",
+      "copyIndexWithinCardKey": 2,
+      "title": "Winning Hand!"
+    },
+    {
+      "physicalCardIndex": 11,
+      "cardKey": "fleck.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_take_control",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oops... I dropped my cards..."
+    },
+    {
+      "physicalCardIndex": 12,
+      "cardKey": "fleck.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_take_control",
+      "copyIndexWithinCardKey": 2,
+      "title": "Look at these cards! This must be my lucky day!"
+    },
+    {
+      "physicalCardIndex": 13,
+      "cardKey": "fleck.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_take_control",
+      "copyIndexWithinCardKey": 3,
+      "title": "Fortunately, I had this card up my sleeve! Ha ha, just kidding!"
+    },
+    {
+      "physicalCardIndex": 14,
+      "cardKey": "fleck.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_take_control",
+      "copyIndexWithinCardKey": 4,
+      "title": "It seems that Lady Luck is smiling on me!"
+    },
+    {
+      "physicalCardIndex": 15,
+      "cardKey": "fleck.cheat_control_and_eject",
+      "repoGameplayCardKey": "rdi2.fleck.cheat_control_and_eject",
+      "copyIndexWithinCardKey": 1,
+      "title": "What's that up your sleeve?"
+    },
+    {
+      "physicalCardIndex": 16,
+      "cardKey": "fleck.dump_gambling_pot_to_inn",
+      "repoGameplayCardKey": "rdi2.fleck.dump_gambling_pot_to_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oh, I guess the Wench thought that was her tip..."
+    },
+    {
+      "physicalCardIndex": 17,
+      "cardKey": "fleck.substitute_payment_from_inn",
+      "repoGameplayCardKey": "rdi2.fleck.substitute_payment_from_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Appreciative listeners! How nice!"
+    },
+    {
+      "physicalCardIndex": 18,
+      "cardKey": "fleck.substitute_payment_from_inn",
+      "repoGameplayCardKey": "rdi2.fleck.substitute_payment_from_inn",
+      "copyIndexWithinCardKey": 2,
+      "title": "I got this from playing in the Town Square."
+    },
+    {
+      "physicalCardIndex": 19,
+      "cardKey": "fleck.avoid_ante_leave",
+      "repoGameplayCardKey": "rdi2.fleck.avoid_ante_leave",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oh, Hey! This looks like a serious game."
+    },
+    {
+      "physicalCardIndex": 20,
+      "cardKey": "fleck.avoid_ante_leave_or_ignore_drink",
+      "repoGameplayCardKey": "rdi2.fleck.avoid_ante_leave_or_ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "Leave me be! I'm trying to read lore here!"
+    },
+    {
+      "physicalCardIndex": 21,
+      "cardKey": "fleck.negate_sometimes_counter",
+      "repoGameplayCardKey": "rdi2.fleck.negate_sometimes_counter",
+      "copyIndexWithinCardKey": 1,
+      "title": "I don't think so!"
+    },
+    {
+      "physicalCardIndex": 22,
+      "cardKey": "fleck.ignore_drink",
+      "repoGameplayCardKey": "rdi2.fleck.ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "You know, I should take better care of my dainty figure!"
+    },
+    {
+      "physicalCardIndex": 23,
+      "cardKey": "fleck.ignore_drink",
+      "repoGameplayCardKey": "rdi2.fleck.ignore_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "I may be a fop, but I can hold my liquor!"
+    },
+    {
+      "physicalCardIndex": 24,
+      "cardKey": "fleck.order_two_extra_drinks_free_or_waive_refill",
+      "repoGameplayCardKey": "rdi2.fleck.order_two_extra_drinks_free_or_waive_refill",
+      "copyIndexWithinCardKey": 1,
+      "title": "Wench, please allow me to pay for these drinks with a song!"
+    },
+    {
+      "physicalCardIndex": 25,
+      "cardKey": "fleck.order_two_extra_drinks_free_or_waive_refill",
+      "repoGameplayCardKey": "rdi2.fleck.order_two_extra_drinks_free_or_waive_refill",
+      "copyIndexWithinCardKey": 2,
+      "title": "Wench, please allow me to pay for these drinks with a song!"
+    },
+    {
+      "physicalCardIndex": 26,
+      "cardKey": "fleck.all_players_drink_from_inn",
+      "repoGameplayCardKey": "rdi2.fleck.all_players_drink_from_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "A toast! To my friends!"
+    },
+    {
+      "physicalCardIndex": 27,
+      "cardKey": "fleck.split_own_drink",
+      "repoGameplayCardKey": "rdi2.fleck.split_own_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "I do so hate to drink alone..."
+    },
+    {
+      "physicalCardIndex": 28,
+      "cardKey": "fleck.split_own_drink",
+      "repoGameplayCardKey": "rdi2.fleck.split_own_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "I do so hate to drink alone..."
+    },
+    {
+      "physicalCardIndex": 29,
+      "cardKey": "fleck.negate_drink_change_card",
+      "repoGameplayCardKey": "rdi2.fleck.negate_drink_change_card",
+      "copyIndexWithinCardKey": 1,
+      "title": "The Wench thinks you should stop playing with the drinks."
+    },
+    {
+      "physicalCardIndex": 30,
+      "cardKey": "fleck.all_lose_one_alcohol_collect_one_each_other",
+      "repoGameplayCardKey": "rdi2.fleck.all_lose_one_alcohol_collect_one_each_other",
+      "copyIndexWithinCardKey": 1,
+      "title": "And now I'm going to play something really sad."
+    },
+    {
+      "physicalCardIndex": 31,
+      "cardKey": "fleck.damage_one",
+      "repoGameplayCardKey": "rdi2.fleck.damage_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "Excuse me... I think you're sitting on my tuning fork."
+    },
+    {
+      "physicalCardIndex": 32,
+      "cardKey": "fleck.damage_two",
+      "repoGameplayCardKey": "rdi2.fleck.damage_two",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oh, I hate it when the strings break!"
+    },
+    {
+      "physicalCardIndex": 33,
+      "cardKey": "fleck.damage_two",
+      "repoGameplayCardKey": "rdi2.fleck.damage_two",
+      "copyIndexWithinCardKey": 2,
+      "title": "Oh, I hate it when the strings break!"
+    },
+    {
+      "physicalCardIndex": 34,
+      "cardKey": "fleck.rowdy_song",
+      "repoGameplayCardKey": "rdi2.fleck.rowdy_song",
+      "copyIndexWithinCardKey": 1,
+      "title": "How about a rowdy drinking song?"
+    },
+    {
+      "physicalCardIndex": 35,
+      "cardKey": "fleck.rowdy_song",
+      "repoGameplayCardKey": "rdi2.fleck.rowdy_song",
+      "copyIndexWithinCardKey": 2,
+      "title": "How about a rowdy drinking song?"
+    },
+    {
+      "physicalCardIndex": 36,
+      "cardKey": "fleck.hit_back_two_after_loss",
+      "repoGameplayCardKey": "rdi2.fleck.hit_back_two_after_loss",
+      "copyIndexWithinCardKey": 1,
+      "title": "Allow me to introduce you to my biggest fan."
+    },
+    {
+      "physicalCardIndex": 37,
+      "cardKey": "fleck.gain_two_fortitude",
+      "repoGameplayCardKey": "rdi2.fleck.gain_two_fortitude",
+      "copyIndexWithinCardKey": 1,
+      "title": "Who knew? One of my fans is a priest!"
+    },
+    {
+      "physicalCardIndex": 38,
+      "cardKey": "fleck.collect_one_from_each_other",
+      "repoGameplayCardKey": "rdi2.fleck.collect_one_from_each_other",
+      "copyIndexWithinCardKey": 1,
+      "title": "I've composed a poem about our most recent adventure."
+    },
+    {
+      "physicalCardIndex": 39,
+      "cardKey": "fleck.take_two_gold",
+      "repoGameplayCardKey": "rdi2.fleck.take_two_gold",
+      "copyIndexWithinCardKey": 1,
+      "title": "This is in payment for that heroic ballad I wrote about you!"
+    },
+    {
+      "physicalCardIndex": 40,
+      "cardKey": "fleck.tip_wench",
+      "repoGameplayCardKey": "rdi2.fleck.tip_wench",
+      "copyIndexWithinCardKey": 1,
+      "title": "Tip the Wench."
+    }
+  ],
+  "validation": {
+    "sumRowQuantity": 40,
+    "sumCanonicalTitleCount": 40,
+    "flatPhysicalCardCount": 40,
+    "allRowsTitleCountMatchesQuantity": true,
+    "complete": true
+  }
+}

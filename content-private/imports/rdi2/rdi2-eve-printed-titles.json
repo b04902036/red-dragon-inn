@@ -1,0 +1,507 @@
+{
+  "characterId": "eve",
+  "characterName": "Eve the Illusionist",
+  "game": "RDI2",
+  "status": "COMPLETE_40_OF_40",
+  "physicalCardCount": 40,
+  "gameplayRowCount": 23,
+  "evidenceTier": "SECONDARY_COMPLETE_DECK_EXPORT_CROSSCHECKED_WITH_PROJECT_GAMEPLAY_ROWS",
+  "source": {
+    "repository": "HaxxonHax/the-inn",
+    "path": "Cards/base/eve/eve.json",
+    "note": "Printed titles and full card text come from the complete 40-card deck JSON. Gameplay row identities and quantities come from the current project content-private/imports/rdi2/source-normalized.json."
+  },
+  "overridesUsed": false,
+  "rows": [
+    {
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "eve.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.eve.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
+    },
+    {
+      "cardKey": "eve.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.eve.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
+    },
+    {
+      "cardKey": "eve.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.eve.cheat_take_control",
+      "quantity": 3,
+      "canonicalCardTitles": [
+        "My word, what could that be?",
+        "Oops, I dropped my cards...",
+        "This time, let's use my cards."
+      ]
+    },
+    {
+      "cardKey": "eve.cheat_control_and_eject",
+      "repoGameplayCardKey": "rdi2.eve.cheat_control_and_eject",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "What's that up your sleeve?"
+      ]
+    },
+    {
+      "cardKey": "eve.dump_gambling_pot_to_inn",
+      "repoGameplayCardKey": "rdi2.eve.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
+    },
+    {
+      "cardKey": "eve.illusionary_payment",
+      "repoGameplayCardKey": "rdi2.eve.illusionary_payment",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Illusionary Coin",
+        "Illusionary Coin"
+      ]
+    },
+    {
+      "cardKey": "eve.take_one_from_pot",
+      "repoGameplayCardKey": "rdi2.eve.take_one_from_pot",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Sleight of hand..."
+      ]
+    },
+    {
+      "cardKey": "eve.avoid_ante_leave_or_ignore_drink",
+      "repoGameplayCardKey": "rdi2.eve.avoid_ante_leave_or_ignore_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I cloak myself in shadow."
+      ]
+    },
+    {
+      "cardKey": "eve.ignore_card_all_stats",
+      "repoGameplayCardKey": "rdi2.eve.ignore_card_all_stats",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Ha! That's just an illusion. I'm actually over here!",
+        "I attempt to disbelieve."
+      ]
+    },
+    {
+      "cardKey": "eve.negate_sometimes_counter",
+      "repoGameplayCardKey": "rdi2.eve.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I don't think so."
+      ]
+    },
+    {
+      "cardKey": "eve.ignore_drink",
+      "repoGameplayCardKey": "rdi2.eve.ignore_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Drink what? This is empty.",
+        "Drink what? This is empty."
+      ]
+    },
+    {
+      "cardKey": "eve.order_two_extra_drinks_paid",
+      "repoGameplayCardKey": "rdi2.eve.order_two_extra_drinks_paid",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ]
+    },
+    {
+      "cardKey": "eve.replace_drink_with_four_alcohol",
+      "repoGameplayCardKey": "rdi2.eve.replace_drink_with_four_alcohol",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Actually, that's Dragon Breath Ale."
+      ]
+    },
+    {
+      "cardKey": "eve.negate_drink_change_card",
+      "repoGameplayCardKey": "rdi2.eve.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "eve.give_two_alcohol",
+      "repoGameplayCardKey": "rdi2.eve.give_two_alcohol",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Look in to my eyes... you are getting... Drunker!",
+        "Look in to my eyes... you are getting... Drunker!"
+      ]
+    },
+    {
+      "cardKey": "eve.damage_one",
+      "repoGameplayCardKey": "rdi2.eve.damage_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "That's odd. Illusions aren't supposed to actually hurt.",
+        "That's odd. Illusions aren't supposed to actually hurt."
+      ]
+    },
+    {
+      "cardKey": "eve.damage_three",
+      "repoGameplayCardKey": "rdi2.eve.damage_three",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Whoa! Careful! That's real fire!",
+        "Whoa! Careful! That's real fire!"
+      ]
+    },
+    {
+      "cardKey": "eve.share_pain",
+      "repoGameplayCardKey": "rdi2.eve.share_pain",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I've been working on a new spell. It's called Share Pain!"
+      ]
+    },
+    {
+      "cardKey": "eve.redirect_fortitude_loss",
+      "repoGameplayCardKey": "rdi2.eve.redirect_fortitude_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I'm not Eve! She's over there!"
+      ]
+    },
+    {
+      "cardKey": "eve.collect_one_from_each_other",
+      "repoGameplayCardKey": "rdi2.eve.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip me, I'm the Wench."
+      ]
+    },
+    {
+      "cardKey": "eve.take_one_gold",
+      "repoGameplayCardKey": "rdi2.eve.take_one_gold",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "It's the disappearing coin trick, not the reappearing coin trick.",
+        "Gold? What Gold?"
+      ]
+    },
+    {
+      "cardKey": "eve.tip_wench",
+      "repoGameplayCardKey": "rdi2.eve.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ],
+  "physicalCards": [
+    {
+      "physicalCardIndex": 1,
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 2,
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 3,
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "copyIndexWithinCardKey": 3,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 4,
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "copyIndexWithinCardKey": 4,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 5,
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "copyIndexWithinCardKey": 5,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 6,
+      "cardKey": "eve.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.eve.gambling_start_or_control",
+      "copyIndexWithinCardKey": 6,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 7,
+      "cardKey": "eve.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.eve.gambling_raise_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "I raise!"
+    },
+    {
+      "physicalCardIndex": 8,
+      "cardKey": "eve.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.eve.gambling_raise_one",
+      "copyIndexWithinCardKey": 2,
+      "title": "I raise!"
+    },
+    {
+      "physicalCardIndex": 9,
+      "cardKey": "eve.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.eve.gambling_winning_hand",
+      "copyIndexWithinCardKey": 1,
+      "title": "Winning Hand!"
+    },
+    {
+      "physicalCardIndex": 10,
+      "cardKey": "eve.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.eve.gambling_winning_hand",
+      "copyIndexWithinCardKey": 2,
+      "title": "Winning Hand!"
+    },
+    {
+      "physicalCardIndex": 11,
+      "cardKey": "eve.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.eve.cheat_take_control",
+      "copyIndexWithinCardKey": 1,
+      "title": "My word, what could that be?"
+    },
+    {
+      "physicalCardIndex": 12,
+      "cardKey": "eve.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.eve.cheat_take_control",
+      "copyIndexWithinCardKey": 2,
+      "title": "Oops, I dropped my cards..."
+    },
+    {
+      "physicalCardIndex": 13,
+      "cardKey": "eve.cheat_take_control",
+      "repoGameplayCardKey": "rdi2.eve.cheat_take_control",
+      "copyIndexWithinCardKey": 3,
+      "title": "This time, let's use my cards."
+    },
+    {
+      "physicalCardIndex": 14,
+      "cardKey": "eve.cheat_control_and_eject",
+      "repoGameplayCardKey": "rdi2.eve.cheat_control_and_eject",
+      "copyIndexWithinCardKey": 1,
+      "title": "What's that up your sleeve?"
+    },
+    {
+      "physicalCardIndex": 15,
+      "cardKey": "eve.dump_gambling_pot_to_inn",
+      "repoGameplayCardKey": "rdi2.eve.dump_gambling_pot_to_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oh, I guess the Wench thought that was her tip..."
+    },
+    {
+      "physicalCardIndex": 16,
+      "cardKey": "eve.illusionary_payment",
+      "repoGameplayCardKey": "rdi2.eve.illusionary_payment",
+      "copyIndexWithinCardKey": 1,
+      "title": "Illusionary Coin"
+    },
+    {
+      "physicalCardIndex": 17,
+      "cardKey": "eve.illusionary_payment",
+      "repoGameplayCardKey": "rdi2.eve.illusionary_payment",
+      "copyIndexWithinCardKey": 2,
+      "title": "Illusionary Coin"
+    },
+    {
+      "physicalCardIndex": 18,
+      "cardKey": "eve.take_one_from_pot",
+      "repoGameplayCardKey": "rdi2.eve.take_one_from_pot",
+      "copyIndexWithinCardKey": 1,
+      "title": "Sleight of hand..."
+    },
+    {
+      "physicalCardIndex": 19,
+      "cardKey": "eve.avoid_ante_leave_or_ignore_drink",
+      "repoGameplayCardKey": "rdi2.eve.avoid_ante_leave_or_ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "I cloak myself in shadow."
+    },
+    {
+      "physicalCardIndex": 20,
+      "cardKey": "eve.ignore_card_all_stats",
+      "repoGameplayCardKey": "rdi2.eve.ignore_card_all_stats",
+      "copyIndexWithinCardKey": 1,
+      "title": "Ha! That's just an illusion. I'm actually over here!"
+    },
+    {
+      "physicalCardIndex": 21,
+      "cardKey": "eve.ignore_card_all_stats",
+      "repoGameplayCardKey": "rdi2.eve.ignore_card_all_stats",
+      "copyIndexWithinCardKey": 2,
+      "title": "I attempt to disbelieve."
+    },
+    {
+      "physicalCardIndex": 22,
+      "cardKey": "eve.negate_sometimes_counter",
+      "repoGameplayCardKey": "rdi2.eve.negate_sometimes_counter",
+      "copyIndexWithinCardKey": 1,
+      "title": "I don't think so."
+    },
+    {
+      "physicalCardIndex": 23,
+      "cardKey": "eve.ignore_drink",
+      "repoGameplayCardKey": "rdi2.eve.ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "Drink what? This is empty."
+    },
+    {
+      "physicalCardIndex": 24,
+      "cardKey": "eve.ignore_drink",
+      "repoGameplayCardKey": "rdi2.eve.ignore_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "Drink what? This is empty."
+    },
+    {
+      "physicalCardIndex": 25,
+      "cardKey": "eve.order_two_extra_drinks_paid",
+      "repoGameplayCardKey": "rdi2.eve.order_two_extra_drinks_paid",
+      "copyIndexWithinCardKey": 1,
+      "title": "Wench, bring some drinks for my friends!"
+    },
+    {
+      "physicalCardIndex": 26,
+      "cardKey": "eve.order_two_extra_drinks_paid",
+      "repoGameplayCardKey": "rdi2.eve.order_two_extra_drinks_paid",
+      "copyIndexWithinCardKey": 2,
+      "title": "Wench, bring some drinks for my friends!"
+    },
+    {
+      "physicalCardIndex": 27,
+      "cardKey": "eve.replace_drink_with_four_alcohol",
+      "repoGameplayCardKey": "rdi2.eve.replace_drink_with_four_alcohol",
+      "copyIndexWithinCardKey": 1,
+      "title": "Actually, that's Dragon Breath Ale."
+    },
+    {
+      "physicalCardIndex": 28,
+      "cardKey": "eve.negate_drink_change_card",
+      "repoGameplayCardKey": "rdi2.eve.negate_drink_change_card",
+      "copyIndexWithinCardKey": 1,
+      "title": "The Wench thinks you should stop playing with the drinks."
+    },
+    {
+      "physicalCardIndex": 29,
+      "cardKey": "eve.give_two_alcohol",
+      "repoGameplayCardKey": "rdi2.eve.give_two_alcohol",
+      "copyIndexWithinCardKey": 1,
+      "title": "Look in to my eyes... you are getting... Drunker!"
+    },
+    {
+      "physicalCardIndex": 30,
+      "cardKey": "eve.give_two_alcohol",
+      "repoGameplayCardKey": "rdi2.eve.give_two_alcohol",
+      "copyIndexWithinCardKey": 2,
+      "title": "Look in to my eyes... you are getting... Drunker!"
+    },
+    {
+      "physicalCardIndex": 31,
+      "cardKey": "eve.damage_one",
+      "repoGameplayCardKey": "rdi2.eve.damage_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "That's odd. Illusions aren't supposed to actually hurt."
+    },
+    {
+      "physicalCardIndex": 32,
+      "cardKey": "eve.damage_one",
+      "repoGameplayCardKey": "rdi2.eve.damage_one",
+      "copyIndexWithinCardKey": 2,
+      "title": "That's odd. Illusions aren't supposed to actually hurt."
+    },
+    {
+      "physicalCardIndex": 33,
+      "cardKey": "eve.damage_three",
+      "repoGameplayCardKey": "rdi2.eve.damage_three",
+      "copyIndexWithinCardKey": 1,
+      "title": "Whoa! Careful! That's real fire!"
+    },
+    {
+      "physicalCardIndex": 34,
+      "cardKey": "eve.damage_three",
+      "repoGameplayCardKey": "rdi2.eve.damage_three",
+      "copyIndexWithinCardKey": 2,
+      "title": "Whoa! Careful! That's real fire!"
+    },
+    {
+      "physicalCardIndex": 35,
+      "cardKey": "eve.share_pain",
+      "repoGameplayCardKey": "rdi2.eve.share_pain",
+      "copyIndexWithinCardKey": 1,
+      "title": "I've been working on a new spell. It's called Share Pain!"
+    },
+    {
+      "physicalCardIndex": 36,
+      "cardKey": "eve.redirect_fortitude_loss",
+      "repoGameplayCardKey": "rdi2.eve.redirect_fortitude_loss",
+      "copyIndexWithinCardKey": 1,
+      "title": "I'm not Eve! She's over there!"
+    },
+    {
+      "physicalCardIndex": 37,
+      "cardKey": "eve.collect_one_from_each_other",
+      "repoGameplayCardKey": "rdi2.eve.collect_one_from_each_other",
+      "copyIndexWithinCardKey": 1,
+      "title": "Tip me, I'm the Wench."
+    },
+    {
+      "physicalCardIndex": 38,
+      "cardKey": "eve.take_one_gold",
+      "repoGameplayCardKey": "rdi2.eve.take_one_gold",
+      "copyIndexWithinCardKey": 1,
+      "title": "It's the disappearing coin trick, not the reappearing coin trick."
+    },
+    {
+      "physicalCardIndex": 39,
+      "cardKey": "eve.take_one_gold",
+      "repoGameplayCardKey": "rdi2.eve.take_one_gold",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gold? What Gold?"
+    },
+    {
+      "physicalCardIndex": 40,
+      "cardKey": "eve.tip_wench",
+      "repoGameplayCardKey": "rdi2.eve.tip_wench",
+      "copyIndexWithinCardKey": 1,
+      "title": "Tip the Wench."
+    }
+  ],
+  "validation": {
+    "sumRowQuantity": 40,
+    "sumCanonicalTitleCount": 40,
+    "flatPhysicalCardCount": 40,
+    "allRowsTitleCountMatchesQuantity": true,
+    "complete": true
+  }
+}

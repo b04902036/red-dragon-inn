@@ -27,12 +27,18 @@
     {
       "cardKey": "gerki.gambling_raise_one",
       "quantity": 2,
-      "canonicalCardTitles": ["I raise!", "I raise!"]
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
     },
     {
       "cardKey": "gerki.gambling_winning_hand",
       "quantity": 2,
-      "canonicalCardTitles": ["Winning Hand!", "Winning Hand!"]
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
     },
     {
       "cardKey": "gerki.cheat_take_control",
@@ -46,42 +52,59 @@
     {
       "cardKey": "gerki.cheat_control_and_eject",
       "quantity": 1,
-      "canonicalCardTitles": ["What's that up your sleeve?"]
+      "canonicalCardTitles": [
+        "What's that up your sleeve?"
+      ]
     },
     {
       "cardKey": "gerki.dump_gambling_pot_to_inn",
       "quantity": 1,
-      "canonicalCardTitles": ["Oh, I guess the Wench thought that was her tip..."]
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
     },
     {
       "cardKey": "gerki.steal_winners_pot",
       "quantity": 1,
-      "canonicalCardTitles": ["Um... I know you think you won, but..."]
+      "canonicalCardTitles": [
+        "Um... I know you think you won, but..."
+      ]
     },
     {
       "cardKey": "gerki.substitute_one_gold_from_inn",
       "quantity": 2,
-      "canonicalCardTitles": ["Swipe the tip!", "Swipe the tip!"]
+      "canonicalCardTitles": [
+        "Swipe the tip!",
+        "Swipe the tip!"
+      ]
     },
     {
       "cardKey": "gerki.take_one_from_pot",
       "quantity": 1,
-      "canonicalCardTitles": ["Grab a coin while no one's lookin'!"]
+      "canonicalCardTitles": [
+        "Grab a coin while no one's lookin'!"
+      ]
     },
     {
       "cardKey": "gerki.ignore_card_all_stats_or_drink",
       "quantity": 1,
-      "canonicalCardTitles": ["Hey! Where'd the little guy go?"]
+      "canonicalCardTitles": [
+        "Hey! Where'd the little guy go?"
+      ]
     },
     {
       "cardKey": "gerki.ignore_action_sometimes_fort_alcohol",
       "quantity": 1,
-      "canonicalCardTitles": ["Hide in shadows"]
+      "canonicalCardTitles": [
+        "Hide in shadows"
+      ]
     },
     {
       "cardKey": "gerki.negate_sometimes_counter",
       "quantity": 1,
-      "canonicalCardTitles": ["I don't think so!"]
+      "canonicalCardTitles": [
+        "I don't think so!"
+      ]
     },
     {
       "cardKey": "gerki.ignore_drink",
@@ -94,3 +117,66 @@
     },
     {
       "cardKey": "gerki.order_two_extra_drinks",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ]
+    },
+    {
+      "cardKey": "gerki.add_two_alcohol_to_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "A little somethin' extra",
+        "A little somethin' extra"
+      ]
+    },
+    {
+      "cardKey": "gerki.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "gerki.damage_two",
+      "quantity": 4,
+      "canonicalCardTitles": [
+        "That's not healing salve! It's contact poison!",
+        "That's not healing salve! It's contact poison!",
+        "How did this get stuck in your back?",
+        "How did this get stuck in your back?"
+      ]
+    },
+    {
+      "cardKey": "gerki.damage_three",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Have you seen my poison? I left it in a mug right here...",
+        "Uh oh! I forgot to disarm one of the traps!"
+      ]
+    },
+    {
+      "cardKey": "gerki.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Um, guys... I think there was a miscalculation during treasure division..."
+      ]
+    },
+    {
+      "cardKey": "gerki.take_one_gold",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Oh, this gold piece? Um... I found it... under your chair...",
+        "Well... I don't see your name on it!"
+      ]
+    },
+    {
+      "cardKey": "gerki.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ]
+}

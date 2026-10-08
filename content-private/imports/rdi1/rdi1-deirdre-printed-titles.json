@@ -1,3 +1,67 @@
+{
+  "characterId": "deirdre",
+  "characterName": "Deirdre the Priestess",
+  "game": "RDI1",
+  "status": "COMPLETE_40_OF_40",
+  "evidenceTier": "SECONDARY_COMPLETE_DECK_EXPORT",
+  "source": {
+    "repository": "HaxxonHax/the-inn",
+    "path": "Cards/base/deirdre/deirdre.json",
+    "note": "Printed titles are taken from the deck JSON card name fields. Keep title provenance separate from gameplay/source-lock provenance."
+  },
+  "physicalCardCount": 40,
+  "gameplayRowCount": 24,
+  "rows": [
+    {
+      "cardKey": "deirdre.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.anti_cheat_win_round",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "They might not know you're cheating, but my Goddess does!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
+    },
+    {
+      "cardKey": "deirdre.substitute_one_gold_from_inn",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "My Goddess provides!",
+        "A priestess can make money just about anywhere!"
+      ]
+    },
     {
       "cardKey": "deirdre.avoid_ante_leave",
       "quantity": 2,
@@ -126,3 +190,11 @@
       ]
     },
     {
+      "cardKey": "deirdre.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,507 @@
+{
+  "characterId": "dimli",
+  "characterName": "Dimli the Dwarf",
+  "game": "RDI2",
+  "status": "COMPLETE_40_OF_40",
+  "physicalCardCount": 40,
+  "gameplayRowCount": 23,
+  "evidenceTier": "SECONDARY_COMPLETE_DECK_EXPORT_CROSSCHECKED_WITH_PROJECT_GAMEPLAY_ROWS",
+  "source": {
+    "repository": "HaxxonHax/the-inn",
+    "path": "Cards/base/dimli/dimli.json",
+    "note": "Printed titles and full card text come from the complete 40-card Dimli deck JSON. Gameplay row identities and quantities come from the current project's RDI2 normalized source."
+  },
+  "overridesUsed": false,
+  "rows": [
+    {
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "dimli.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
+    },
+    {
+      "cardKey": "dimli.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
+    },
+    {
+      "cardKey": "dimli.dump_gambling_pot_to_inn",
+      "repoGameplayCardKey": "rdi2.dimli.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
+    },
+    {
+      "cardKey": "dimli.restart_gambling_round",
+      "repoGameplayCardKey": "rdi2.dimli.restart_gambling_round",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Best two out of three?"
+      ]
+    },
+    {
+      "cardKey": "dimli.substitute_payment_from_inn",
+      "repoGameplayCardKey": "rdi2.dimli.substitute_payment_from_inn",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Dwarves always have money.",
+        "Lemme check the money belt..."
+      ]
+    },
+    {
+      "cardKey": "dimli.avoid_ante_leave",
+      "repoGameplayCardKey": "rdi2.dimli.avoid_ante_leave",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Thanks... but I think I'll keep my Gold.",
+        "What? And part with my hard-earned money?"
+      ]
+    },
+    {
+      "cardKey": "dimli.avoid_ante_leave_or_ignore_drink",
+      "repoGameplayCardKey": "rdi2.dimli.avoid_ante_leave_or_ignore_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Can't you see I'm talking to this pretty, bearded lass here?"
+      ]
+    },
+    {
+      "cardKey": "dimli.ignore_card_fortitude",
+      "repoGameplayCardKey": "rdi2.dimli.ignore_card_fortitude",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Good thing I was wearing my great-grandfather's helmet!"
+      ]
+    },
+    {
+      "cardKey": "dimli.negate_sometimes_counter",
+      "repoGameplayCardKey": "rdi2.dimli.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I don't think so!"
+      ]
+    },
+    {
+      "cardKey": "dimli.ignore_drink",
+      "repoGameplayCardKey": "rdi2.dimli.ignore_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I don't want this watered-down stuff!",
+        "My mother gave me stronger stuff when I was a baby!"
+      ]
+    },
+    {
+      "cardKey": "dimli.order_two_extra_drinks_paid",
+      "repoGameplayCardKey": "rdi2.dimli.order_two_extra_drinks_paid",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ]
+    },
+    {
+      "cardKey": "dimli.force_extra_drink_during_other_drink_phase",
+      "repoGameplayCardKey": "rdi2.dimli.force_extra_drink_during_other_drink_phase",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Drink up, friend!"
+      ]
+    },
+    {
+      "cardKey": "dimli.pass_own_drink",
+      "repoGameplayCardKey": "rdi2.dimli.pass_own_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "You have this. I'm waiting for the good stuff!",
+        "You have this. I'm waiting for the good stuff!"
+      ]
+    },
+    {
+      "cardKey": "dimli.split_own_drink",
+      "repoGameplayCardKey": "rdi2.dimli.split_own_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Now this stuff is actually good! Try some!"
+      ]
+    },
+    {
+      "cardKey": "dimli.alcohol_to_fortitude",
+      "repoGameplayCardKey": "rdi2.dimli.alcohol_to_fortitude",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Uuurp! That hit the spot!"
+      ]
+    },
+    {
+      "cardKey": "dimli.add_two_alcohol_to_drink",
+      "repoGameplayCardKey": "rdi2.dimli.add_two_alcohol_to_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Spike it with Firewater",
+        "Spike it with Firewater"
+      ]
+    },
+    {
+      "cardKey": "dimli.negate_drink_change_card",
+      "repoGameplayCardKey": "rdi2.dimli.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "dimli.damage_one",
+      "repoGameplayCardKey": "rdi2.dimli.damage_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Stop using my head as a table!"
+      ]
+    },
+    {
+      "cardKey": "dimli.damage_two",
+      "repoGameplayCardKey": "rdi2.dimli.damage_two",
+      "quantity": 5,
+      "canonicalCardTitles": [
+        "That's it! No more short jokes!",
+        "Are you saying I'm grumpy?",
+        "Are you saying I'm grumpy?",
+        "Let's try some Dwarven wrist wrestling!",
+        "Let's try some Dwarven wrist wrestling!"
+      ]
+    },
+    {
+      "cardKey": "dimli.hit_back_two_after_loss",
+      "repoGameplayCardKey": "rdi2.dimli.hit_back_two_after_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Hey! You almost damaged the beard!"
+      ]
+    },
+    {
+      "cardKey": "dimli.collect_one_from_each_other",
+      "repoGameplayCardKey": "rdi2.dimli.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Impressive Dwarven War Belch!"
+      ]
+    },
+    {
+      "cardKey": "dimli.tip_wench",
+      "repoGameplayCardKey": "rdi2.dimli.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ],
+  "physicalCards": [
+    {
+      "physicalCardIndex": 1,
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "copyIndexWithinCardKey": 1,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 2,
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "copyIndexWithinCardKey": 2,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 3,
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "copyIndexWithinCardKey": 3,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 4,
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "copyIndexWithinCardKey": 4,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 5,
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "copyIndexWithinCardKey": 5,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 6,
+      "cardKey": "dimli.gambling_start_or_control",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_start_or_control",
+      "copyIndexWithinCardKey": 6,
+      "title": "Gambling? I'm in!"
+    },
+    {
+      "physicalCardIndex": 7,
+      "cardKey": "dimli.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_raise_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "I raise!"
+    },
+    {
+      "physicalCardIndex": 8,
+      "cardKey": "dimli.gambling_raise_one",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_raise_one",
+      "copyIndexWithinCardKey": 2,
+      "title": "I raise!"
+    },
+    {
+      "physicalCardIndex": 9,
+      "cardKey": "dimli.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_winning_hand",
+      "copyIndexWithinCardKey": 1,
+      "title": "Winning Hand!"
+    },
+    {
+      "physicalCardIndex": 10,
+      "cardKey": "dimli.gambling_winning_hand",
+      "repoGameplayCardKey": "rdi2.dimli.gambling_winning_hand",
+      "copyIndexWithinCardKey": 2,
+      "title": "Winning Hand!"
+    },
+    {
+      "physicalCardIndex": 11,
+      "cardKey": "dimli.dump_gambling_pot_to_inn",
+      "repoGameplayCardKey": "rdi2.dimli.dump_gambling_pot_to_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Oh, I guess the Wench thought that was her tip..."
+    },
+    {
+      "physicalCardIndex": 12,
+      "cardKey": "dimli.restart_gambling_round",
+      "repoGameplayCardKey": "rdi2.dimli.restart_gambling_round",
+      "copyIndexWithinCardKey": 1,
+      "title": "Best two out of three?"
+    },
+    {
+      "physicalCardIndex": 13,
+      "cardKey": "dimli.substitute_payment_from_inn",
+      "repoGameplayCardKey": "rdi2.dimli.substitute_payment_from_inn",
+      "copyIndexWithinCardKey": 1,
+      "title": "Dwarves always have money."
+    },
+    {
+      "physicalCardIndex": 14,
+      "cardKey": "dimli.substitute_payment_from_inn",
+      "repoGameplayCardKey": "rdi2.dimli.substitute_payment_from_inn",
+      "copyIndexWithinCardKey": 2,
+      "title": "Lemme check the money belt..."
+    },
+    {
+      "physicalCardIndex": 15,
+      "cardKey": "dimli.avoid_ante_leave",
+      "repoGameplayCardKey": "rdi2.dimli.avoid_ante_leave",
+      "copyIndexWithinCardKey": 1,
+      "title": "Thanks... but I think I'll keep my Gold."
+    },
+    {
+      "physicalCardIndex": 16,
+      "cardKey": "dimli.avoid_ante_leave",
+      "repoGameplayCardKey": "rdi2.dimli.avoid_ante_leave",
+      "copyIndexWithinCardKey": 2,
+      "title": "What? And part with my hard-earned money?"
+    },
+    {
+      "physicalCardIndex": 17,
+      "cardKey": "dimli.avoid_ante_leave_or_ignore_drink",
+      "repoGameplayCardKey": "rdi2.dimli.avoid_ante_leave_or_ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "Can't you see I'm talking to this pretty, bearded lass here?"
+    },
+    {
+      "physicalCardIndex": 18,
+      "cardKey": "dimli.ignore_card_fortitude",
+      "repoGameplayCardKey": "rdi2.dimli.ignore_card_fortitude",
+      "copyIndexWithinCardKey": 1,
+      "title": "Good thing I was wearing my great-grandfather's helmet!"
+    },
+    {
+      "physicalCardIndex": 19,
+      "cardKey": "dimli.negate_sometimes_counter",
+      "repoGameplayCardKey": "rdi2.dimli.negate_sometimes_counter",
+      "copyIndexWithinCardKey": 1,
+      "title": "I don't think so!"
+    },
+    {
+      "physicalCardIndex": 20,
+      "cardKey": "dimli.ignore_drink",
+      "repoGameplayCardKey": "rdi2.dimli.ignore_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "I don't want this watered-down stuff!"
+    },
+    {
+      "physicalCardIndex": 21,
+      "cardKey": "dimli.ignore_drink",
+      "repoGameplayCardKey": "rdi2.dimli.ignore_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "My mother gave me stronger stuff when I was a baby!"
+    },
+    {
+      "physicalCardIndex": 22,
+      "cardKey": "dimli.order_two_extra_drinks_paid",
+      "repoGameplayCardKey": "rdi2.dimli.order_two_extra_drinks_paid",
+      "copyIndexWithinCardKey": 1,
+      "title": "Wench, bring some drinks for my friends!"
+    },
+    {
+      "physicalCardIndex": 23,
+      "cardKey": "dimli.order_two_extra_drinks_paid",
+      "repoGameplayCardKey": "rdi2.dimli.order_two_extra_drinks_paid",
+      "copyIndexWithinCardKey": 2,
+      "title": "Wench, bring some drinks for my friends!"
+    },
+    {
+      "physicalCardIndex": 24,
+      "cardKey": "dimli.force_extra_drink_during_other_drink_phase",
+      "repoGameplayCardKey": "rdi2.dimli.force_extra_drink_during_other_drink_phase",
+      "copyIndexWithinCardKey": 1,
+      "title": "Drink up, friend!"
+    },
+    {
+      "physicalCardIndex": 25,
+      "cardKey": "dimli.pass_own_drink",
+      "repoGameplayCardKey": "rdi2.dimli.pass_own_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "You have this. I'm waiting for the good stuff!"
+    },
+    {
+      "physicalCardIndex": 26,
+      "cardKey": "dimli.pass_own_drink",
+      "repoGameplayCardKey": "rdi2.dimli.pass_own_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "You have this. I'm waiting for the good stuff!"
+    },
+    {
+      "physicalCardIndex": 27,
+      "cardKey": "dimli.split_own_drink",
+      "repoGameplayCardKey": "rdi2.dimli.split_own_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "Now this stuff is actually good! Try some!"
+    },
+    {
+      "physicalCardIndex": 28,
+      "cardKey": "dimli.alcohol_to_fortitude",
+      "repoGameplayCardKey": "rdi2.dimli.alcohol_to_fortitude",
+      "copyIndexWithinCardKey": 1,
+      "title": "Uuurp! That hit the spot!"
+    },
+    {
+      "physicalCardIndex": 29,
+      "cardKey": "dimli.add_two_alcohol_to_drink",
+      "repoGameplayCardKey": "rdi2.dimli.add_two_alcohol_to_drink",
+      "copyIndexWithinCardKey": 1,
+      "title": "Spike it with Firewater"
+    },
+    {
+      "physicalCardIndex": 30,
+      "cardKey": "dimli.add_two_alcohol_to_drink",
+      "repoGameplayCardKey": "rdi2.dimli.add_two_alcohol_to_drink",
+      "copyIndexWithinCardKey": 2,
+      "title": "Spike it with Firewater"
+    },
+    {
+      "physicalCardIndex": 31,
+      "cardKey": "dimli.negate_drink_change_card",
+      "repoGameplayCardKey": "rdi2.dimli.negate_drink_change_card",
+      "copyIndexWithinCardKey": 1,
+      "title": "The Wench thinks you should stop playing with the drinks."
+    },
+    {
+      "physicalCardIndex": 32,
+      "cardKey": "dimli.damage_one",
+      "repoGameplayCardKey": "rdi2.dimli.damage_one",
+      "copyIndexWithinCardKey": 1,
+      "title": "Stop using my head as a table!"
+    },
+    {
+      "physicalCardIndex": 33,
+      "cardKey": "dimli.damage_two",
+      "repoGameplayCardKey": "rdi2.dimli.damage_two",
+      "copyIndexWithinCardKey": 1,
+      "title": "That's it! No more short jokes!"
+    },
+    {
+      "physicalCardIndex": 34,
+      "cardKey": "dimli.damage_two",
+      "repoGameplayCardKey": "rdi2.dimli.damage_two",
+      "copyIndexWithinCardKey": 2,
+      "title": "Are you saying I'm grumpy?"
+    },
+    {
+      "physicalCardIndex": 35,
+      "cardKey": "dimli.damage_two",
+      "repoGameplayCardKey": "rdi2.dimli.damage_two",
+      "copyIndexWithinCardKey": 3,
+      "title": "Are you saying I'm grumpy?"
+    },
+    {
+      "physicalCardIndex": 36,
+      "cardKey": "dimli.damage_two",
+      "repoGameplayCardKey": "rdi2.dimli.damage_two",
+      "copyIndexWithinCardKey": 4,
+      "title": "Let's try some Dwarven wrist wrestling!"
+    },
+    {
+      "physicalCardIndex": 37,
+      "cardKey": "dimli.damage_two",
+      "repoGameplayCardKey": "rdi2.dimli.damage_two",
+      "copyIndexWithinCardKey": 5,
+      "title": "Let's try some Dwarven wrist wrestling!"
+    },
+    {
+      "physicalCardIndex": 38,
+      "cardKey": "dimli.hit_back_two_after_loss",
+      "repoGameplayCardKey": "rdi2.dimli.hit_back_two_after_loss",
+      "copyIndexWithinCardKey": 1,
+      "title": "Hey! You almost damaged the beard!"
+    },
+    {
+      "physicalCardIndex": 39,
+      "cardKey": "dimli.collect_one_from_each_other",
+      "repoGameplayCardKey": "rdi2.dimli.collect_one_from_each_other",
+      "copyIndexWithinCardKey": 1,
+      "title": "Impressive Dwarven War Belch!"
+    },
+    {
+      "physicalCardIndex": 40,
+      "cardKey": "dimli.tip_wench",
+      "repoGameplayCardKey": "rdi2.dimli.tip_wench",
+      "copyIndexWithinCardKey": 1,
+      "title": "Tip the Wench."
+    }
+  ],
+  "validation": {
+    "sumRowQuantity": 40,
+    "sumCanonicalTitleCount": 40,
+    "flatPhysicalCardCount": 40,
+    "allRowsTitleCountMatchesQuantity": true,
+    "complete": true
+  }
+}

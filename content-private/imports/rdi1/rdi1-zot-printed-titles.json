@@ -94,3 +94,107 @@
     },
     {
       "cardKey": "zot.ignore_action_sometimes_fort_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Now you see me... Now you don't!"
+      ]
+    },
+    {
+      "cardKey": "zot.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I don't think so!"
+      ]
+    },
+    {
+      "cardKey": "zot.ignore_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Bad Pooky! Don't drink that!"
+      ]
+    },
+    {
+      "cardKey": "zot.order_two_extra_drinks",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ]
+    },
+    {
+      "cardKey": "zot.force_other_player_drink_now",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Pooky thinks you look thirsty..."
+      ]
+    },
+    {
+      "cardKey": "zot.pass_own_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Teleport beverage!"
+      ]
+    },
+    {
+      "cardKey": "zot.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "zot.damage_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Down Pooky!"
+      ]
+    },
+    {
+      "cardKey": "zot.damage_two",
+      "quantity": 5,
+      "canonicalCardTitles": [
+        "I told you not to distract me!",
+        "I told you not to distract me!",
+        "How many times have I told you? Keep your hands off my wand!",
+        "How many times have I told you? Keep your hands off my wand!",
+        "Watch Out! Don't step on Pooky!"
+      ]
+    },
+    {
+      "cardKey": "zot.damage_all_others_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Oh no! Not again! Pooky's on a drunken rampage!",
+        "Oh no! Not again! Pooky's on a drunken rampage!"
+      ]
+    },
+    {
+      "cardKey": "zot.hit_back_two_after_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "No, Pooky! That's my friend!"
+      ]
+    },
+    {
+      "cardKey": "zot.collect_one_from_each_other",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Behold my impressive power as I... pull this rabbit out of my hat!"
+      ]
+    },
+    {
+      "cardKey": "zot.take_one_gold",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Nothing up my sleeve! Presto! What's that behind your ear?"
+      ]
+    },
+    {
+      "cardKey": "zot.tip_wench",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Tip the Wench."
+      ]
+    }
+  ]
+}
