@@ -1,0 +1,128 @@
+    {
+      "cardKey": "deirdre.avoid_ante_leave",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I'm saving this money for the poor.",
+        "Sorry, I have to pray now..."
+      ]
+    },
+    {
+      "cardKey": "deirdre.avoid_ante_leave_or_ignore_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Not now! These men are interested in my religion."
+      ]
+    },
+    {
+      "cardKey": "deirdre.ignore_action_sometimes_fort_alcohol",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Stop being silly!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.ignore_action_sometimes_fort_loss",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "My Goddess protects me!",
+        "My Goddess protects me!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "I don't think so!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.order_two_extra_drinks",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Wench, bring some drinks for my friends!",
+        "Wench, bring some drinks for my friends!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.all_players_drink_now",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Let's toast the Goddess!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.pass_own_drink",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "You look like you need this more than I do!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.add_two_alcohol_to_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Water into Wine",
+        "Water into Wine"
+      ]
+    },
+    {
+      "cardKey": "deirdre.reduce_drink_alcohol_two",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Wine into Water"
+      ]
+    },
+    {
+      "cardKey": "deirdre.negate_drink_change_card",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The Wench thinks you should stop playing with the drinks."
+      ]
+    },
+    {
+      "cardKey": "deirdre.damage_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Sorry, sometimes my healing spells just wear off."
+      ]
+    },
+    {
+      "cardKey": "deirdre.damage_two",
+      "quantity": 4,
+      "canonicalCardTitles": [
+        "I'm not that kind of priestess!",
+        "My Goddess made me do it!",
+        "My Goddess made me do it!",
+        "Oh no! I think that growth on your arm might be Mummy Rot!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.hit_back_two_after_loss",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "My Goddess doesn't like that!"
+      ]
+    },
+    {
+      "cardKey": "deirdre.gain_two_fortitude",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "My Goddess heals me.",
+        "My Goddess heals me."
+      ]
+    },
+    {
+      "cardKey": "deirdre.heal_other_charge_gold",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Prayer of Healing"
+      ]
+    },
+    {
+      "cardKey": "deirdre.heal_all_and_collect",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Mass Heal!"
+      ]
+    },
+    {

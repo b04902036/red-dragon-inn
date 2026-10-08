@@ -1,0 +1,96 @@
+{
+  "characterId": "gerki",
+  "characterName": "Gerki the Sneak",
+  "game": "RDI1",
+  "status": "COMPLETE_40_OF_40",
+  "evidenceTier": "SECONDARY_COMPLETE_DECK_EXPORT",
+  "source": {
+    "repository": "HaxxonHax/the-inn",
+    "path": "Cards/base/gerki/gerki.json",
+    "note": "Printed titles are taken from the complete 40-card deck JSON card name fields. Title provenance is kept separate from gameplay/source-lock provenance. One exported rules-text line for 'Uh oh! I forgot to disarm one of the traps!' incorrectly says 2 Fortitude; independent play-log evidence and the existing verified RDI1 mechanic matrix place that physical title in the 3-Fortitude row. The title itself is unaffected."
+  },
+  "physicalCardCount": 40,
+  "gameplayRowCount": 21,
+  "rows": [
+    {
+      "cardKey": "gerki.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "gerki.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": ["I raise!", "I raise!"]
+    },
+    {
+      "cardKey": "gerki.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": ["Winning Hand!", "Winning Hand!"]
+    },
+    {
+      "cardKey": "gerki.cheat_take_control",
+      "quantity": 3,
+      "canonicalCardTitles": [
+        "I'm winning... Honestly!",
+        "Oops... I dropped my cards...",
+        "Five of a kind! Does this mean I win?"
+      ]
+    },
+    {
+      "cardKey": "gerki.cheat_control_and_eject",
+      "quantity": 1,
+      "canonicalCardTitles": ["What's that up your sleeve?"]
+    },
+    {
+      "cardKey": "gerki.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": ["Oh, I guess the Wench thought that was her tip..."]
+    },
+    {
+      "cardKey": "gerki.steal_winners_pot",
+      "quantity": 1,
+      "canonicalCardTitles": ["Um... I know you think you won, but..."]
+    },
+    {
+      "cardKey": "gerki.substitute_one_gold_from_inn",
+      "quantity": 2,
+      "canonicalCardTitles": ["Swipe the tip!", "Swipe the tip!"]
+    },
+    {
+      "cardKey": "gerki.take_one_from_pot",
+      "quantity": 1,
+      "canonicalCardTitles": ["Grab a coin while no one's lookin'!"]
+    },
+    {
+      "cardKey": "gerki.ignore_card_all_stats_or_drink",
+      "quantity": 1,
+      "canonicalCardTitles": ["Hey! Where'd the little guy go?"]
+    },
+    {
+      "cardKey": "gerki.ignore_action_sometimes_fort_alcohol",
+      "quantity": 1,
+      "canonicalCardTitles": ["Hide in shadows"]
+    },
+    {
+      "cardKey": "gerki.negate_sometimes_counter",
+      "quantity": 1,
+      "canonicalCardTitles": ["I don't think so!"]
+    },
+    {
+      "cardKey": "gerki.ignore_drink",
+      "quantity": 3,
+      "canonicalCardTitles": [
+        "Dump it on the floor",
+        "Dump it on the floor",
+        "Luckily for me I had this antidote brewed up!"
+      ]
+    },
+    {
+      "cardKey": "gerki.order_two_extra_drinks",

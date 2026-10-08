@@ -1,0 +1,96 @@
+{
+  "characterId": "zot",
+  "characterName": "Zot the Wizard and Pooky",
+  "game": "RDI1",
+  "status": "COMPLETE_40_OF_40",
+  "evidenceTier": "SECONDARY_COMPLETE_DECK_EXPORT",
+  "source": {
+    "repository": "HaxxonHax/the-inn",
+    "path": "Cards/base/zot/zot.json",
+    "note": "Printed titles are taken from the complete 40-card deck JSON card name fields. Title provenance is kept separate from gameplay/source-lock provenance."
+  },
+  "physicalCardCount": 40,
+  "gameplayRowCount": 24,
+  "rows": [
+    {
+      "cardKey": "zot.gambling_start_or_control",
+      "quantity": 6,
+      "canonicalCardTitles": [
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!",
+        "Gambling? I'm in!"
+      ]
+    },
+    {
+      "cardKey": "zot.gambling_raise_one",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "I raise!",
+        "I raise!"
+      ]
+    },
+    {
+      "cardKey": "zot.gambling_winning_hand",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Winning Hand!",
+        "Winning Hand!"
+      ]
+    },
+    {
+      "cardKey": "zot.cheat_take_control",
+      "quantity": 3,
+      "canonicalCardTitles": [
+        "Pooky! Stop looking at everyone's cards!",
+        "Look over there! It's the Lich King!",
+        "This time, we'll use my dice."
+      ]
+    },
+    {
+      "cardKey": "zot.cheat_control_and_eject",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "What's that up your sleeve?"
+      ]
+    },
+    {
+      "cardKey": "zot.dump_gambling_pot_to_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, I guess the Wench thought that was her tip..."
+      ]
+    },
+    {
+      "cardKey": "zot.substitute_one_gold_from_inn",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Transmute peanuts to gold"
+      ]
+    },
+    {
+      "cardKey": "zot.avoid_ante_leave_or_ignore_drink",
+      "quantity": 2,
+      "canonicalCardTitles": [
+        "Not now, I'm meditating.",
+        "Not now, I'm meditating."
+      ]
+    },
+    {
+      "cardKey": "zot.avoid_ante_leave_or_ignore_drink_pay_one",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "Oh, Barmaid! I think Pooky had an accident!"
+      ]
+    },
+    {
+      "cardKey": "zot.ignore_card_all_stats",
+      "quantity": 1,
+      "canonicalCardTitles": [
+        "The stars say, \"No!\""
+      ]
+    },
+    {
+      "cardKey": "zot.ignore_action_sometimes_fort_loss",
